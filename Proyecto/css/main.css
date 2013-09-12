@@ -52,14 +52,17 @@ footer {
 section {
 }
 
-section#login-box {
-    margin: 10% 35% 10% 35%;
-    text-align: justify;
-    padding: 1em;
-}
-
 table {
     width: 100%;
+}
+
+table.login-table {
+    width: 41%;
+    border: 2px solid #000000;
+    border-collapse: collapse;
+    margin: 10% 30% 10% 30%;
+    text-align: justify;
+    padding: 1em;
 }
 
 th {
@@ -76,11 +79,17 @@ th, td {
 
 td.login-left {
     text-align: right;
+    width: 30%;
 }
 
 td.login-right {
     text-align: left;
     padding-left: 5.5%;
+    width: 60%;
+}
+
+.table-input-text {
+    width: 90%;
 }
 
 /*
