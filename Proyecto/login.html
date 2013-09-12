@@ -6,8 +6,10 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
+        <title>Iniciar Sesión</title>
         <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="keywords" content="">
         <meta name="viewport" content="width=device-width">
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -22,7 +24,62 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate.</p>
+        <header>
+            Header
+        </header>
+        
+        <section id="login-box">
+            <table>
+                <caption></caption>
+                <thead>
+                    <tr>
+                        <th class="two-field-table" colspan="2">
+                            <strong>Iniciar sesión</strong>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="login-left">
+                            <label for="login-codigo">
+                                Codigo:
+                            </label>
+                        </td>
+                        <td class="login-right">
+                            <input type="text" id="codigo-text" name="login-codigo" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="login-left">
+                            <label for="login-pass">
+                                Contraseña:
+                            </label>
+                        </td>
+                        <td class="login-right">
+                            <input type="pass" id="pass-pass" name="login-pass" />
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="login-left">
+                            <button type="button">
+                                Entrar
+                            </button>
+                        </td>
+                        <td class="login-right">
+                            <button type="button">
+                                Reestablecer contraseña
+                            </button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+        
+        <footer>
+            Footer
+        </footer>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
