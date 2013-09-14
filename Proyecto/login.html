@@ -28,52 +28,31 @@
             Header
         </header>
         
-        <table class="login-table">
-            <caption></caption>
-            <thead>
-                <tr>
-                    <th class="two-field-table" colspan="2">
-                        <strong>Iniciar sesión</strong>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="login-left">
-                        <label for="login-codigo">
-                            Codigo:
-                        </label>
-                    </td>
-                    <td class="login-right">
-                        <input type="text" class="table-input-text" name="login-codigo" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="login-left">
-                        <label for="login-pass">
-                            Contraseña:
-                        </label>
-                    </td>
-                    <td class="login-right">
-                        <input type="pass" class="table-input-text" name="login-pass" />
-                    </td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td class="login-left">
-                        <button type="button">
-                            Entrar
-                        </button>
-                    </td>
-                    <td class="login-right">
-                        <button type="button">
-                            Reestablecer contraseña
-                        </button>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
+        <div class="login-div">
+            <form method="get" action="">
+                <div class="form-div">
+                    <p>
+                        Iniciar sesión
+                    </p>
+                </div>
+                <div class="form-div">
+                    <label for="login-code">
+                        Código:
+                    </label>
+                    <input type="text" id="login-code" name="login-code" />
+                </div>
+                <div class="form-div">
+                    <label for="login-pass">
+                        Contraseña:
+                    </label>
+                    <input type="pass" id="login-pass" name="login-pass" />
+                </div>
+                <div class="form-div">
+                    <button class="login-button" type="button">Ingresar</button>
+                    <a href="">Reestablecer contraseña</a>
+                </div>
+            </form>
+        </div>
         
         <footer>
             Footer
