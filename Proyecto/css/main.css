@@ -45,11 +45,26 @@ header {
 
 footer {
     text-align: center;
-    margin-left: 1.5%;
-    margin-right: 1.5%;
+    margin: 0% 1.5%;
 }
 
 section {
+}
+
+section.main-section {
+    width: 80%;
+    margin: 1% 1.6%;
+    float: left;
+}
+
+aside.right-aside {
+    width: 13%;
+    margin: 1% 0%;
+    float: left;
+}
+
+nav.main-nav {
+    margin: 0% 1.6%;
 }
 
 div.login-div {
@@ -64,7 +79,7 @@ div.login-div {
 }
 
 div.form-div {
-    margin: 2% 0%;
+    margin: 3% 0%;
 }
 
 div.form-div p {
@@ -80,6 +95,14 @@ label {
 
 .login-button {
     margin: 0% 3%;
+}
+
+.clear-div {
+    clear: both;
+}
+
+.separate {
+    padding: 3%;
 }
 
 /*
