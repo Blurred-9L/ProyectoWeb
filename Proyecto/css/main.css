@@ -28,7 +28,7 @@ body {
     font-family: "Arial Verdana sans-serif";
 }
 
-header, section, aside, footer {
+header, section, aside, nav, footer {
     border: 2px solid #000000;
     border-radius: 25px;
     -moz-border-radius: 25px;
@@ -63,15 +63,30 @@ aside.right-aside {
     float: left;
 }
 
+nav ul{
+    list-style-type: none;
+}
+
 nav.main-nav {
+    width: 96.5%;
     margin: 0% 1.6%;
 }
 
-nav.aside-nav {
+nav.main-nav ul {
+    width: 100;
 }
 
-nav ul{
-    list-style-type: none;
+nav.main-nav ul li {
+    float: left;
+    padding: 0% 4%;
+    font-weight: bold;
+}
+
+nav.main-nav ul a {
+}
+
+nav.aside-nav {
+    border-style: none;
 }
 
 nav.aside-nav ul {
