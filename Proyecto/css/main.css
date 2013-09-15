@@ -154,6 +154,50 @@ label {
     margin: 0% 1%;
 }
 
+div.table-div {
+    margin: 2% 2%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table.roll-call-table {
+    font-size: .8em;
+}
+
+table.roll-call-table caption {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 2%;
+}
+
+tr:nth-child(odd) {
+    background: #EEEEEE;
+}
+
+th {
+    text-align: center;
+    background: #FFFFFF;
+}
+
+th, td {
+    border: 1px solid #000000;
+}
+
+.name-cell {
+    width: 30%;
+}
+
+.code-cell {
+    width: 8%;
+}
+
+.roll-cell {
+    width: 2%;
+}
+
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
  * These selection rule sets have to be separate.
