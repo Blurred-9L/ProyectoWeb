@@ -133,6 +133,10 @@ label {
     text-align: right;
 }
 
+[type=file] {
+    padding: 0% 2%;
+}
+
 .login-button {
     margin: 0% 3%;
 }
