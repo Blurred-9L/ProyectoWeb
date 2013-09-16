@@ -122,6 +122,10 @@ div.form-div {
     margin: 0% 0% 3% 0%;
 }
 
+div.content-div {
+    padding: 0.1% 2%;
+}
+
 div.form-div p {
     font-size: 1.1em;
     font-weight: bold;
