@@ -45,7 +45,7 @@ header {
 
 footer {
     text-align: center;
-    margin: 0% 1.5%;
+    margin: 1% 1.5%;
 }
 
 section {
@@ -124,6 +124,11 @@ div.form-div {
 
 div.content-div {
     padding: 0.1% 2%;
+}
+
+div.select-div {
+    padding-top: 2%;
+    text-align: center;
 }
 
 div.form-div p {
