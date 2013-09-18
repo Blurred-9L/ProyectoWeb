@@ -97,7 +97,7 @@ nav.aside-nav ul {
 nav.aside-nav ul li {
     width: 100%;
     padding: 2% 2%;
-    font-size: 1.5em;
+    font-size: 1.2em;
     text-align: left;
     font-weight: bold;
 }
@@ -153,6 +153,10 @@ label {
 .submit-button {
     margin-left: 5.1%;
     margin-right: 0.5%
+}
+
+.load-button {
+    margin-left: 7%;
 }
 
 .clear-div {

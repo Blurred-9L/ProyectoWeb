@@ -31,21 +31,19 @@
         <nav class="main-nav">
             <ul>
                 <li>
-                    <a href="#">Principal</a>
+                    <a href="./profesoresMain.html">Principal</a>
                 </li>
                 <li>
-                    <a href="#">Cursos</a>
+                    <a href="./listaAlumnos.html">Cursos</a>
+                </li>
+                <li>
+                    <a href="#">Salir</a>
                 </li>
                 <div class="clear-div"></div>
             </ul>
         </nav>
         
         <section class="main-section">
-            <div class="select-div">
-                <select>
-                    <option selected value="0">Seleccione un curso...</option>
-                </select>
-            </div>
             <form method="get" action="">
                 <div class="form-div">
                     <p>
@@ -57,8 +55,38 @@
                     <input type="file" id="upload-file" name="upload-file" />
                 </div>
                 <div class="form-div">
-                    <button class="submit-button" type="submit">Registrar</button>
-                    <button type="reset">Limpiar</button>
+                    <label for="load-student-class">
+                        Curso:
+                    </label>
+                    <select id="load-student-class" name="load-student-class">
+                        <option selected value="0">Seleccione un curso...</option>
+                    </select>
+                </div>
+                <div class="form-div">
+                    <button class="load-button" type="button">Cargar</button>
+                </div>
+                <div class="table-div">
+                    <table>
+                        <caption>
+                            Alumnos:
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Codigo</th>
+                                <th>Carrera</th>
+                                <th>Email</th>
+                                <th>Celular</th>
+                                <th>URL</th>
+                                <th>Github</th>
+                                <th>Añadir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
                 </div>
             </form>
         </section>
@@ -70,10 +98,16 @@
                         <a href="./listaAlumnos.html">Lista</a>
                     </li>
                     <li>
-                        <a href="./alumnosNuevo.html">Registrar</a>
+                        <a href="./alumnosNuevo.html">Registrar alumno</a>
                     </li>
                     <li>
-                        <a href="./cargarAlumnos.html">Cargar</a>
+                        <a href="./cargarAlumnos.html">Cargar alumnos</a>
+                    </li>
+                    <li>
+                        <a href="./verAsistencias.html">Asistencias</a>
+                    </li>
+                    <li>
+                        <a href="#">Evaluacion</a>
                     </li>
                     <div class="clear-div"></div>
                 </ul>

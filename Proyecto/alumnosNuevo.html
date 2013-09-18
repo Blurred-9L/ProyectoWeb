@@ -31,21 +31,19 @@
         <nav class="main-nav">
             <ul>
                 <li>
-                    <a href="#">Principal</a>
+                    <a href="./profesoresMain.html">Principal</a>
                 </li>
                 <li>
-                    <a href="#">Cursos</a>
+                    <a href="./listaAlumnos.html">Cursos</a>
+                </li>
+                <li>
+                    <a href="#">Salir</a>
                 </li>
                 <div class="clear-div"></div>
             </ul>
         </nav>
         
         <section class="main-section">
-            <div class="select-div">
-                <select>
-                    <option selected value="0">Seleccione un curso...</option>
-                </select>
-            </div>
             <form method="get" action="">
                 <div class="form-div">
                     <p>
@@ -57,6 +55,9 @@
                         Código:
                     </label>
                     <input type="text" id="reg-student-code" name="reg-student-code" required />
+                    <button type="button" id="search-code-button" name=search-code-button>
+                        Buscar
+                    </button>
                 </div>
                 <div class="form-div">
                     <label for="reg-student-name">
@@ -116,6 +117,14 @@
                     <input class="form-checkbox" type="checkbox" name="checkbox-github" />
                 </div>
                 <div class="form-div">
+                    <label for="reg-student-class">
+                        Curso:
+                    </label>
+                    <select id="reg-student-class" name="reg-student-class">
+                        <option selected value="0">Seleccione un curso...</option>
+                    </select>
+                </div>
+                <div class="form-div">
                     <button class="submit-button" type="submit">Registrar</button>
                     <button type="reset">Limpiar</button>
                 </div>
@@ -129,10 +138,16 @@
                         <a href="./listaAlumnos.html">Lista</a>
                     </li>
                     <li>
-                        <a href="./alumnosNuevo.html">Registrar</a>
+                        <a href="./alumnosNuevo.html">Registrar alumno</a>
                     </li>
                     <li>
-                        <a href="./cargarAlumnos.html">Cargar</a>
+                        <a href="./cargarAlumnos.html">Cargar alumnos</a>
+                    </li>
+                    <li>
+                        <a href="./verAsistencias.html">Asistencias</a>
+                    </li>
+                    <li>
+                        <a href="#">Evaluacion</a>
                     </li>
                     <div class="clear-div"></div>
                 </ul>
