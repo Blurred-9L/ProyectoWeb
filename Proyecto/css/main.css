@@ -180,6 +180,11 @@ table {
     border-collapse: collapse;
 }
 
+table#free-days-table {
+    margin: 0% 30%;
+    width: 40%;
+}
+
 table caption {
     font-size: 1.2em;
     font-weight: bold;
@@ -228,6 +233,10 @@ th, td {
 
 .roll-name-cell {
     padding: 0% 2%;
+}
+
+.date-cell {
+    width: 70%;
 }
 
 /*

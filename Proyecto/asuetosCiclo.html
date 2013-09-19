@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Admin - Profesores</title>
+        <title>Admin - Ciclos</title>
         <meta name="description" content="">
         <meta name="author" content="">
         <meta name="keywords" content="">
@@ -56,44 +56,46 @@
             <form method="get" action="">
                 <div class="form-div">
                     <p>
-                        <h2><span class="separate">Registrar profesor</span></h2>
+                        <h2><span class="separate">Asuetos:</span></h2>
                     </p>
                 </div>
                 <div class="form-div">
-                    <label for="reg-teacher-code">
-                        Código:
+                    <label for="cycle">
+                        Ciclo Escolar:
                     </label>
-                    <input type="text" id="reg-teacher-code" name="reg-teacher-code" required />
+                    <select id="cycle" name="cycle">
+                        <option selected value="0">Ciclo...</option>
+                    </select>
                 </div>
                 <div class="form-div">
-                    <label for="reg-teacher-name">
-                        Nombre:
+                    <label for="new-free-day">
+                        Fecha:
                     </label>
-                    <input type="text" id="reg-teacher-name" name="reg-teacher-name" required />
+                    <input type="date" id="new-free-day" name="new-free-day" required />
                 </div>
                 <div class="form-div">
-                    <label for="reg-teacher-last1">
-                        Apellido paterno:
-                    </label>
-                    <input type="text" id="reg-teacher-last1" name="reg-teacher-last1" required />
+                    <button class="submit-button" type="button">Agregar</button>
                 </div>
-                <div class="form-div">
-                    <label for="reg-teacher-last2">
-                        Apellido materno:
-                    </label>
-                    <input type="text" id="reg-teacher-last2" name="reg-teacher-last2" required />
-                </div>
-                <div class="form-div">
-                    <label for="reg-teacher-email">
-                        E-mail:
-                    </label>
-                    <input type="email" id="reg-teacher-email" name="reg-teacher-email" />
-                </div>
-                <div class="form-div">
-                    <label for="reg-teacher-phone">
-                        Celular:
-                    </label>
-                    <input type="tel" id="reg-teacher-phone" name="reg-teacher-phone" />
+                <div class="table-div">
+                    <table id="free-days-table">
+                        <caption>
+                            Dias de asueto:
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th class="date-cell">Fecha</th>
+                                <th>Añadir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="date-cell">.</td>
+                                <td>.</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
                 </div>
                 <div class="form-div">
                     <button class="submit-button" type="submit">Registrar</button>
@@ -106,10 +108,10 @@
             <nav class="aside-nav">
                 <ul>
                     <li>
-                        <a href="./verProfesores.html">Todos</a>
+                        <a href="./nuevoCiclo.html">Nuevo ciclo</a>
                     </li>
                     <li>
-                        <a href="./profesorNuevo.html">Registrar profesor</a>
+                        <a href="./asuetosCiclo.html">Asuetos</a>
                     </li>
                     <div class="clear-div"></div>
                 </ul>

@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Admin - Profesores</title>
+        <title>Admin - Alumnos</title>
         <meta name="description" content="">
         <meta name="author" content="">
         <meta name="keywords" content="">
@@ -56,44 +56,71 @@
             <form method="get" action="">
                 <div class="form-div">
                     <p>
-                        <h2><span class="separate">Registrar profesor</span></h2>
+                        <h2><span class="separate">Registrar alumno</span></h2>
                     </p>
                 </div>
                 <div class="form-div">
-                    <label for="reg-teacher-code">
+                    <label for="reg-student-code">
                         Código:
                     </label>
-                    <input type="text" id="reg-teacher-code" name="reg-teacher-code" required />
+                    <input type="text" id="reg-student-code" name="reg-student-code" required />
                 </div>
                 <div class="form-div">
-                    <label for="reg-teacher-name">
+                    <label for="reg-student-name">
                         Nombre:
                     </label>
-                    <input type="text" id="reg-teacher-name" name="reg-teacher-name" required />
+                    <input type="text" id="reg-student-name" name="reg-student-name" required />
                 </div>
                 <div class="form-div">
-                    <label for="reg-teacher-last1">
+                    <label for="reg-student-last1">
                         Apellido paterno:
                     </label>
-                    <input type="text" id="reg-teacher-last1" name="reg-teacher-last1" required />
+                    <input type="text" id="reg-student-last1" name="reg-student-last1" required />
                 </div>
                 <div class="form-div">
-                    <label for="reg-teacher-last2">
+                    <label for="reg-student-last2">
                         Apellido materno:
                     </label>
-                    <input type="text" id="reg-teacher-last2" name="reg-teacher-last2" required />
+                    <input type="text" id="reg-student-last2" name="reg-student-last2" required />
                 </div>
                 <div class="form-div">
-                    <label for="reg-teacher-email">
+                    <label for="reg-student-email">
                         E-mail:
                     </label>
-                    <input type="email" id="reg-teacher-email" name="reg-teacher-email" />
+                    <input type="email" id="reg-student-email" name="reg-student-email" required />
                 </div>
                 <div class="form-div">
-                    <label for="reg-teacher-phone">
+                    <label for="reg-student-major">
+                        Carrera:
+                    </label>
+                    <select id="reg-student-major" name="reg-student-major">
+                        <option selected value="0">Elija una carrera...</option>
+                        <option value="1">Ingenieria en Computacion (COM)</option>
+                        <option value="2">Licenciatura en Informatica (INF)</option>
+                        <option value="3">Licenciatura en Matematicas (MAT)</option>
+                        <option value="4">Ingenieria Química (IQ)</option>
+                    </select>
+                </div>
+                <div class="form-div">
+                    <label for="reg-student-phone">
                         Celular:
                     </label>
-                    <input type="tel" id="reg-teacher-phone" name="reg-teacher-phone" />
+                    <input type="tel" id="reg-student-phone" name="reg-student-phone" disabled />
+                    <input class="form-checkbox" type="checkbox" name="checkbox-tel" />
+                </div>
+                <div class="form-div">
+                    <label for="reg-student-url">
+                        Pagina web:
+                    </label>
+                    <input type="url" id="reg-student-url" name="reg-student-url" disabled />
+                    <input class="form-checkbox" type="checkbox" name="checkbox-url" />
+                </div>
+                <div class="form-div">
+                    <label for="reg-student-github">
+                        Github:
+                    </label>
+                    <input type="url" id="reg-student-github" name="reg-student-github" disabled />
+                    <input class="form-checkbox" type="checkbox" name="checkbox-github" />
                 </div>
                 <div class="form-div">
                     <button class="submit-button" type="submit">Registrar</button>
@@ -106,10 +133,10 @@
             <nav class="aside-nav">
                 <ul>
                     <li>
-                        <a href="./verProfesores.html">Todos</a>
+                        <a href="./adminVerAlumnos.html">Todos</a>
                     </li>
                     <li>
-                        <a href="./profesorNuevo.html">Registrar profesor</a>
+                        <a href="./adminAlumnosNuevo.html">Registrar alumnos</a>
                     </li>
                     <div class="clear-div"></div>
                 </ul>

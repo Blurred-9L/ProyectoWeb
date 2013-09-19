@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Admin - Profesores</title>
+        <title>Admin - Ciclos</title>
         <meta name="description" content="">
         <meta name="author" content="">
         <meta name="keywords" content="">
@@ -56,44 +56,36 @@
             <form method="get" action="">
                 <div class="form-div">
                     <p>
-                        <h2><span class="separate">Registrar profesor</span></h2>
+                        <h2><span class="separate">Nuevo ciclo</span></h2>
                     </p>
                 </div>
                 <div class="form-div">
-                    <label for="reg-teacher-code">
-                        Código:
+                    <label for="new-cycle-year">
+                        Año:
                     </label>
-                    <input type="text" id="reg-teacher-code" name="reg-teacher-code" required />
+                    <input type="text" id="new-cycle-year" name="new-cycle-year" required />
                 </div>
                 <div class="form-div">
-                    <label for="reg-teacher-name">
-                        Nombre:
+                    <label for="new-cycle-half">
+                        Calendario:
                     </label>
-                    <input type="text" id="reg-teacher-name" name="reg-teacher-name" required />
+                    <select id="new-cycle-half" name="new-cycle-half">
+                        <option selected value="0">--</option>
+                        <option>A</option>
+                        <option>B</option>
+                    </select>
                 </div>
                 <div class="form-div">
-                    <label for="reg-teacher-last1">
-                        Apellido paterno:
+                    <label for="new-cycle-start">
+                        Inicio:
                     </label>
-                    <input type="text" id="reg-teacher-last1" name="reg-teacher-last1" required />
+                    <input type="date" id="new-cycle-start" name="new-cycle-start" required />
                 </div>
                 <div class="form-div">
-                    <label for="reg-teacher-last2">
-                        Apellido materno:
+                    <label for="new-cycle-end">
+                        Fin:
                     </label>
-                    <input type="text" id="reg-teacher-last2" name="reg-teacher-last2" required />
-                </div>
-                <div class="form-div">
-                    <label for="reg-teacher-email">
-                        E-mail:
-                    </label>
-                    <input type="email" id="reg-teacher-email" name="reg-teacher-email" />
-                </div>
-                <div class="form-div">
-                    <label for="reg-teacher-phone">
-                        Celular:
-                    </label>
-                    <input type="tel" id="reg-teacher-phone" name="reg-teacher-phone" />
+                    <input type="date" id="new-cycle-end" name="new-cycle-end" required />
                 </div>
                 <div class="form-div">
                     <button class="submit-button" type="submit">Registrar</button>
@@ -106,10 +98,10 @@
             <nav class="aside-nav">
                 <ul>
                     <li>
-                        <a href="./verProfesores.html">Todos</a>
+                        <a href="./nuevoCiclo.html">Nuevo ciclo</a>
                     </li>
                     <li>
-                        <a href="./profesorNuevo.html">Registrar profesor</a>
+                        <a href="./asuetosCiclo.html">Asuetos</a>
                     </li>
                     <div class="clear-div"></div>
                 </ul>
