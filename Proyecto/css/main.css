@@ -255,6 +255,41 @@ th, td {
     width: 70%;
 }
 
+@media screen and (min-width: 0px) and ( max-width: 320px) {
+    header, section, aside, nav, footer {
+        border: 2px solid #000000;
+        border-radius: 0%;
+        -moz-border-radius: 0%;
+        -ms-border-radius: 0%;
+        -o-border-radius: 0%;
+        -webkit-border-raidus: 0%;
+        padding: .3em;
+    }
+    
+    header {
+        display: none;
+    }
+    
+    footer {
+        display: none;
+    }
+    
+    div.login-div {
+        margin: 30% 5%;
+        width: 90%;
+    }
+    
+    label {
+        width: 70%;
+        text-align: left;
+    }
+    
+    .login-button {
+        display: block;
+        margin: 0% 35%;
+    }
+}
+
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
  * These selection rule sets have to be separate.
