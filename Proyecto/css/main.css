@@ -43,6 +43,11 @@ header {
     margin: 1% 0.8%;
 }
 
+header h1 {
+    padding-left: 1%;
+    float: left;
+}
+
 footer {
     text-align: center;
     margin: 1% 1.5%;
@@ -61,6 +66,10 @@ aside.right-aside {
     width: 13%;
     margin: 1% 0%;
     float: left;
+}
+
+a:hover {
+    color: #6F6F6F;
 }
 
 nav ul{
@@ -102,9 +111,16 @@ nav.aside-nav ul li {
     font-weight: bold;
 }
 
-nav ul a{
+nav ul a {
     text-decoration: none;
     color: #000000;
+    display: block;
+}
+
+img.header-img {
+    padding-top: 0.6%;
+    padding-left: 2.5%;
+    float: left;
 }
 
 div.login-div {
