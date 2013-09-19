@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Admin - Profesores</title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <header>
+            Header
+        </header>
+        
+        <nav class="main-nav">
+            <ul>
+                <li>
+                    <a href="./adminMain.html">Principal</a>
+                </li>
+                <li>
+                    <a href="./verProfesores.html">Profesores</a>
+                </li>
+                <li>
+                    <a href="#">Alumnos</a>
+                </li>
+                <li>
+                    <a href="#">Ciclos escolares</a>
+                </li>
+                <li>
+                    <a href="#">Cursos</a>
+                </li>
+                <li>
+                    <a href="#">Salir</a>
+                </li>
+                <div class="clear-div"></div>
+            </ul>
+        </nav>
+        
+        <section class="main-section">
+            <form method="get" action="">
+                <div class="form-div">
+                    <p>
+                        <h2><span class="separate">Registrar profesor</span></h2>
+                    </p>
+                </div>
+                <div class="form-div">
+                    <label for="reg-teacher-code">
+                        Código:
+                    </label>
+                    <input type="text" id="reg-teacher-code" name="reg-teacher-code" required />
+                </div>
+                <div class="form-div">
+                    <label for="reg-teacher-name">
+                        Nombre:
+                    </label>
+                    <input type="text" id="reg-teacher-name" name="reg-teacher-name" required />
+                </div>
+                <div class="form-div">
+                    <label for="reg-teacher-last1">
+                        Apellido paterno:
+                    </label>
+                    <input type="text" id="reg-teacher-last1" name="reg-teacher-last1" required />
+                </div>
+                <div class="form-div">
+                    <label for="reg-teacher-last2">
+                        Apellido materno:
+                    </label>
+                    <input type="text" id="reg-teacher-last2" name="reg-teacher-last2" required />
+                </div>
+                <div class="form-div">
+                    <label for="reg-teacher-email">
+                        E-mail:
+                    </label>
+                    <input type="email" id="reg-teacher-email" name="reg-teacher-email" />
+                </div>
+                <div class="form-div">
+                    <label for="reg-teacher-phone">
+                        Celular:
+                    </label>
+                    <input type="tel" id="reg-teacher-phone" name="reg-teacher-phone" />
+                </div>
+                <div class="form-div">
+                    <button class="submit-button" type="submit">Registrar</button>
+                    <button type="reset">Limpiar</button>
+                </div>
+            </form>
+        </section>
+        
+        <aside class="right-aside">
+            <nav class="aside-nav">
+                <ul>
+                    <li>
+                        <a href="./verProfesores.html">Todos</a>
+                    </li>
+                    <li>
+                        <a href="./profesorNuevo.html">Registrar profesor</a>
+                    </li>
+                    <div class="clear-div"></div>
+                </ul>
+            </nav>
+        </aside>
+        <div class="clear-div"></div>
+        
+        <footer>
+            Footer
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src='//www.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>
