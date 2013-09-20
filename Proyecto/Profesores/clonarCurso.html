@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Profesor - Cursos - Asistencias</title>
+        <title>Profesor - Cursos</title>
         <meta name="description" content="">
         <meta name="author" content="">
         <meta name="keywords" content="">
@@ -46,66 +46,36 @@
         </nav>
         
         <section class="main-section">
-            <div class="select-div">
-                <select>
-                    <option selected value="0">Seleccione un curso...</option>
-                </select>
-            </div>
-            <div class="table-div">
-                <table class="roll-call-table">
-                    <caption>
-                        Asistencias
-                    </caption>
-                    <thead>
-                        <tr>
-                            <th class="name-cell">Alumno</th>
-                            <th class="code-cell">Codigo</th>
-                            <th class="roll-cell">C1</th>
-                            <th class="roll-cell">C2</th>
-                            <th class="total-cell">Total</th>
-                            <th class="roll-cell">%</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="name-cell">Alumno Apellido Apellido</td>
-                            <td class="code-cell">000000000</td>
-                            <td class="roll-cell">0</td>
-                            <td class="roll-cell">0</td>
-                            <td class="total-cell">0</td>
-                            <td class="roll-cell">0</td>
-                        </tr>
-                        <tr>
-                            <td class="name-cell">Alumno Apellido Apellido</td>
-                            <td class="code-cell">000000000</td>
-                            <td class="roll-cell">0</td>
-                            <td class="roll-cell">0</td>
-                            <td class="total-cell">0</td>
-                            <td class="roll-cell">0</td>
-                        </tr>
-                        <tr>
-                            <td class="name-cell">Alumno Apellido Apellido</td>
-                            <td class="code-cell">000000000</td>
-                            <td class="roll-cell">0</td>
-                            <td class="roll-cell">0</td>
-                            <td class="total-cell">0</td>
-                            <td class="roll-cell">0</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                    </tfoot>
-                </table>
-            </div>
+            <form method="get" action="">
+                <div class="form-div">
+                    <p>
+                        <h2><span class="separate">Clonar curso</span></h2>
+                    </p>
+                    <p class="info-text">
+                        Aqui puede crear un nuevo curso a partir de un curso existente. Al clonar un curso se copiaran las configuraciones establecidas previamente en el curso elegido, a excepción de los alumnos inscritos en él. <br /><br />Por favor escriba el NRC del curso a clonar:
+                    </p>
+                </div>
+                <div class="form-div">
+                    <label for="new-class-nrc">
+                        NRC:
+                    </label>
+                    <input type="text" id="new-class-nrc" name="new-class-nrc" required />
+                </div>
+                <div class="form-div">
+                    <button class="submit-button" type="submit">Clonar</button>
+                    <button type="reset">Limpiar</button>
+                </div>
+            </form>
         </section>
         
         <aside class="right-aside">
             <nav class="aside-nav">
                 <ul>
                     <li>
-                        <a href="./verAsistencias.html">Ver</a>
+                        <a href="./nuevoCurso.html">Nuevo curso</a>
                     </li>
                     <li>
-                        <a href="./tomarAsistencias.html">Pasar lista</a>
+                        <a href="./clonarCurso.html">Clonar curso</a>
                     </li>
                     <li>
                         <a href="./verCursos.html">Cursos</a>
