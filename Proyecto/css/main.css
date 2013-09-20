@@ -260,6 +260,7 @@ th {
 th, td {
     border-right: 2px solid #000000;
     border-left: 2px solid #000000;
+    padding: 0.3% 0%;
 }
 
 .name-cell {
