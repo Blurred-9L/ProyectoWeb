@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Profesor - Cursos</title>
+        <title>Profesor - Cursos - Evaluacion</title>
         <meta name="description" content="">
         <meta name="author" content="">
         <meta name="keywords" content="">
@@ -46,45 +46,80 @@
         </nav>
         
         <section class="main-section">
-            <div class="table-div">
+            <form method="get" action="">
                 <div class="form-div">
                     <p>
-                        <h2><span class="separate">Cursos</span></h2>
+                        <h2><span class="separate">Evaluacion de cursos</span></h2>
                     </p>
                     <p class="info-text">
-                        Lista de cursos que imparte.
+                        Elija un curso, un rubro y un alumno y después introduzca la calificación de 0 a 10. Se aceptan tambien un decimal de precisión, así como los valores NP (No presento) y SD (Sin derecho) para los rubros en que apliquen estos valores. En el caso de que un rubro se haya definido con un subrubro, entonces aparecera un cuadro de texto para escribir el número de elemento (practica, examen, tarea) a calificar.
                     </p>
                 </div>
-                <table>
-                    <caption>
-                        Cursos
-                    </caption>
-                    <thead>
-                        <tr>
-                            <th>NRC</th>
-                            <th>Nombre</th>
-                            <th>Seccion</th>
-                            <th>Academia</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                        </tr>
-                        <tr>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                    </tfoot>
-                </table>
-            </div>
+                <div class="form-div">
+                    <label for="select-class">
+                        Curso:
+                    </label>
+                    <select name="select-class" id="select-class" required >
+                        <option selected value="0">Elija un curso...</option>
+                    </select>
+                </div>
+                <div class="table-div">
+                    <table>
+                        <caption>
+                            Alumnos
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th class="edit-cell">Elegir</th>
+                                <th>Nombre</th>
+                                <th>Codigo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="edit-cell">
+                                    <input type="radio" name="poor-soul" />
+                                </td>
+                                <td>.</td>
+                                <td>.</td>
+                            </tr>
+                            <tr>
+                                <td class="edit-cell">
+                                    <input type="radio" name="poor-soul" />
+                                </td>
+                                <td>.</td>
+                                <td>.</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="form-div">
+                    <label for="select-eval">
+                        Rubro:
+                    </label>
+                    <select name="select-eval" id="select-eval" required >
+                        <option selected value="0">Elija un rubro...</option>
+                    </select>
+                </div>
+                <div class="form-div">
+                    <label for="select-sub-eval">
+                        No. Elemento:
+                    </label>
+                    <input type="number" name="select-sub-eval" id="select-sub-eval" required />
+                </div>
+                <div class="form-div">
+                    <label for="grade">
+                        Calificacion:
+                    </label>
+                    <input type="text" name="grade" id="grade" required />
+                </div>
+                <div class="form-div">
+                    <button type="submit" class="submit-button" id="eval-button" name="eval-button">Calificar</button>
+                    <button type="reset">Limpiar</button>
+                </div>
+            </form>
         </section>
         
         <aside class="right-aside">
