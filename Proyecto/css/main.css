@@ -154,8 +154,12 @@ div.form-div p {
 
 label {
     display: inline-block;
-    width: 150px;
+    width: 140px;
     text-align: right;
+}
+
+.pass-label{
+    width: 180px;
 }
 
 [type=file] {
@@ -167,7 +171,7 @@ label {
 }
 
 .submit-button {
-    margin-left: 5.1%;
+    margin-left: 6.1%;
     margin-right: 0.5%
 }
 

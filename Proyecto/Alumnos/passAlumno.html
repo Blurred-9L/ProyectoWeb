@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Alumno - Mis datos</title>
+        <title>Alumno - Contraseña</title>
         <meta name="description" content="">
         <meta name="author" content="">
         <meta name="keywords" content="">
@@ -47,74 +47,35 @@
         
         <section class="main-section">
             <form method="get" action="">
+                <div>
+                    <fieldset>
+                        <div class="form-div">
+                            <p>
+                                <h2><span class="separate">Cambiar contraseña</span></h2>
+                            </p>
+                        </div>
+                        <div class="form-div">
+                            <label class="pass-label" for="student-old-pass">
+                                Vieja contraseña:
+                            </label>
+                            <input type="text" id="student-old-pass" name="student-old-pass" required />
+                        </div>
+                        <div class="form-div">
+                            <label class="pass-label" for="student-new-pass">
+                                Nueva contraseña:
+                            </label>
+                            <input type="text" id="student-new-pass" name="student-new-pass" required />
+                        </div>
+                        <div class="form-div">
+                            <label class="pass-label" for="student-new-pass">
+                                Verificar contraseña:
+                            </label>
+                            <input type="text" id="student-new-pass" name="student-new-pass" required />
+                        </div>
+                    </fieldset>
+                <div>
                 <div class="form-div">
-                    <p>
-                        <h2><span class="separate">Alumno</span></h2>
-                    </p>
-                </div>
-                <div class="form-div">
-                    <label for="student-code">
-                        Código:
-                    </label>
-                    <input type="text" id="student-code" name="student-code" disabled />
-                </div>
-                <div class="form-div">
-                    <label for="student-name">
-                        Nombre:
-                    </label>
-                    <input type="text" id="student-name" name="student-name" disabled />
-                </div>
-                <div class="form-div">
-                    <label for="student-last1">
-                        Apellido paterno:
-                    </label>
-                    <input type="text" id="student-last1" name="student-last1" disabled />
-                </div>
-                <div class="form-div">
-                    <label for="student-last2">
-                        Apellido materno:
-                    </label>
-                    <input type="text" id="student-last2" name="student-last2" disabled />
-                </div>
-                <div class="form-div">
-                    <label for="student-email">
-                        E-mail:
-                    </label>
-                    <input type="email" id="student-email" name="student-email" />
-                </div>
-                <div class="form-div">
-                    <label for="student-major">
-                        Carrera:
-                    </label>
-                    <select id="student-major" name="student-major" disabled>
-                        <option selected value="0">Elija una carrera...</option>
-                        <option value="1">Ingenieria en Computacion (COM)</option>
-                        <option value="2">Licenciatura en Informatica (INF)</option>
-                        <option value="3">Licenciatura en Matematicas (MAT)</option>
-                        <option value="4">Ingenieria Química (IQ)</option>
-                    </select>
-                </div>
-                <div class="form-div">
-                    <label for="student-phone">
-                        Celular:
-                    </label>
-                    <input type="tel" id="student-phone" name="student-phone" />
-                </div>
-                <div class="form-div">
-                    <label for="student-url">
-                        Pagina web:
-                    </label>
-                    <input type="url" id="student-url" name="student-url" />
-                </div>
-                <div class="form-div">
-                    <label for="student-github">
-                        Github:
-                    </label>
-                    <input type="url" id="student-github" name="student-github" />
-                </div>
-                <div class="form-div">
-                    <button class="submit-button" type="submit">Actualizar</button>
-                    <button type="reset">Limpiar</button>
+                    <button class="submit-button" type="submit">Aceptar</button>
                 </div>
             </form>
         </section>
