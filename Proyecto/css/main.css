@@ -10,6 +10,13 @@
    Base styles: opinionated defaults
    ========================================================================== */
 
+/*
+    Background: #086FA1
+    Background elem: #3CA0D0
+    Background table: 
+    Links: #00733C    
+*/
+
 html,
 button,
 input,
@@ -19,17 +26,18 @@ textarea {
 }
 
 html {
-    background-color: #FFFFFF;
+    background-color: #086FA1;
 }
 
 body {
     font-size: 1em;
     line-height: 1.4;
     font-family: "Arial Verdana sans-serif";
+    font-weight: 600;
 }
 
 header, section, aside, nav, footer {
-    border: 2px solid #000000;
+    background-color: #3CA0D0;
     border-radius: 25px;
     -moz-border-radius: 25px;
     -ms-border-radius: 25px;
@@ -68,8 +76,12 @@ aside.right-aside {
     float: left;
 }
 
+a {
+    color: #00532C;
+}
+
 a:hover {
-    color: #6F6F6F;
+    color: #00733C;
 }
 
 nav ul{
@@ -132,6 +144,7 @@ div.login-div {
     -ms-border-radius: 25px;
     -o-border-radius: 25px;
     -webkit-border-raidus: 25px;
+    background-color: #3CA0D0;
 }
 
 div.form-div {
@@ -153,13 +166,14 @@ div.form-div p {
 }
 
 label {
+    margin: 0% 2% 0% 0%;
     display: inline-block;
     width: 140px;
     text-align: right;
 }
 
 .pass-label{
-    width: 180px;
+    width: 200px;
 }
 
 [type=file] {
@@ -222,16 +236,30 @@ table.roll-call-table caption {
 }
 
 tr:nth-child(odd) {
-    background: #EEEEEE;
+    background-color: #539DC0;
+}
+
+tr:nth-child(even) {
+    background-color: #63ADD0;
+}
+
+tr td:first-child, tr th:first-child{
+    border-left: none;
+}
+
+tr td:last-child, tr th:last-child{
+    border-right: none;
 }
 
 th {
     text-align: center;
-    background: #FFFFFF;
+    background-color: #63ADD0;
+    border-bottom: 2px solid #000000;
 }
 
 th, td {
-    border: 1px solid #000000;
+    border-right: 2px solid #000000;
+    border-left: 2px solid #000000;
 }
 
 .name-cell {
