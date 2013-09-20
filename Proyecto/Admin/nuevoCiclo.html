@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Admin - Profesores</title>
+        <title>Admin - Ciclos</title>
         <meta name="description" content="">
         <meta name="author" content="">
         <meta name="keywords" content="">
@@ -14,9 +14,9 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
-        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        <link rel="stylesheet" href="../css/normalize.css">
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -25,7 +25,7 @@
 
         <!-- Add your site or application content here -->
         <header>
-            <img class="header-img" src="./img/logoUdg.jpg" width="50" height="68" />
+            <img class="header-img" src="../img/logoUdg.jpg" width="50" height="68" />
             <h1>Universidad de Guadalajara</h1>
             <div class="clear-div"></div>
         </header>
@@ -55,47 +55,55 @@
         </nav>
         
         <section class="main-section">
-            <div class="table-div">
-                <table>
-                    <caption>
-                        Profesores
-                    </caption>
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Codigo</th>
-                            <th>Email</th>
-                            <th>Celular</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                        </tr>
-                        <tr>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                    </tfoot>
-                </table>
-            </div>
+            <form method="get" action="">
+                <div class="form-div">
+                    <p>
+                        <h2><span class="separate">Nuevo ciclo</span></h2>
+                    </p>
+                </div>
+                <div class="form-div">
+                    <label for="new-cycle-year">
+                        Año:
+                    </label>
+                    <input type="text" id="new-cycle-year" name="new-cycle-year" required />
+                </div>
+                <div class="form-div">
+                    <label for="new-cycle-half">
+                        Calendario:
+                    </label>
+                    <select id="new-cycle-half" name="new-cycle-half">
+                        <option selected value="0">--</option>
+                        <option>A</option>
+                        <option>B</option>
+                    </select>
+                </div>
+                <div class="form-div">
+                    <label for="new-cycle-start">
+                        Inicio:
+                    </label>
+                    <input type="date" id="new-cycle-start" name="new-cycle-start" required />
+                </div>
+                <div class="form-div">
+                    <label for="new-cycle-end">
+                        Fin:
+                    </label>
+                    <input type="date" id="new-cycle-end" name="new-cycle-end" required />
+                </div>
+                <div class="form-div">
+                    <button class="submit-button" type="submit">Registrar</button>
+                    <button type="reset">Limpiar</button>
+                </div>
+            </form>
         </section>
         
         <aside class="right-aside">
             <nav class="aside-nav">
                 <ul>
                     <li>
-                        <a href="./verProfesores.html">Todos</a>
+                        <a href="./nuevoCiclo.html">Nuevo ciclo</a>
                     </li>
                     <li>
-                        <a href="./profesorNuevo.html">Registrar profesor</a>
+                        <a href="./asuetosCiclo.html">Asuetos</a>
                     </li>
                     <div class="clear-div"></div>
                 </ul>
@@ -108,9 +116,9 @@
         </footer>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
+        <script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="../js/plugins.js"></script>
+        <script src="../js/main.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
