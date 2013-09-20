@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Admin - Alumnos</title>
+        <title>Admin - Profesores</title>
         <meta name="description" content="">
         <meta name="author" content="">
         <meta name="keywords" content="">
@@ -58,83 +58,56 @@
             <form method="get" action="">
                 <div class="form-div">
                     <p>
-                        <h2><span class="separate">Registrar alumno</span></h2>
+                        <h2><span class="separate">Editar profesor</span></h2>
                     </p>
                     <p class="info-text">
-                        Por favor rellene los siguientes campos para poder dar de alta a un nuevo alumno.
+                        Puede modificar la información de contacto del profesor elegido, así como reestablecer su contraseña.
                     </p>
                 </div>
                 <div class="form-div">
-                    <label for="reg-student-code">
+                    <label for="edit-teacher-code">
                         Código:
                     </label>
-                    <input type="text" id="reg-student-code" name="reg-student-code" required />
+                    <input type="text" id="edit-teacher-code" name="edit-teacher-code" disabled />
                 </div>
                 <div class="form-div">
-                    <label for="reg-student-name">
+                    <label for="edit-teacher-name">
                         Nombre:
                     </label>
-                    <input type="text" id="reg-student-name" name="reg-student-name" required />
+                    <input type="text" id="edit-teacher-name" name="edit-teacher-name" disabled />
                 </div>
                 <div class="form-div">
-                    <label for="reg-student-last1">
+                    <label for="edit-teacher-last1">
                         Apellido paterno:
                     </label>
-                    <input type="text" id="reg-student-last1" name="reg-student-last1" required />
+                    <input type="text" id="edit-teacher-last1" name="edit-teacher-last1" disabled />
                 </div>
                 <div class="form-div">
-                    <label for="reg-student-last2">
+                    <label for="edit-teacher-last2">
                         Apellido materno:
                     </label>
-                    <input type="text" id="reg-student-last2" name="reg-student-last2" required />
+                    <input type="text" id="edit-teacher-last2" name="edit-teacher-last2" disabled />
                 </div>
                 <div class="form-div">
-                    <label for="reg-student-pass">
+                    <label for="edit-teacher-pass">
                         Contraseña:
                     </label>
-                    <input type="text" id="reg-student-pass" name="reg-student-pass" required />
+                    <input type="text" id="edit-teacher-pass" name="edit-teacher-pass" />
                 </div>
                 <div class="form-div">
-                    <label for="reg-student-email">
+                    <label for="edit-teacher-email">
                         E-mail:
                     </label>
-                    <input type="email" id="reg-student-email" name="reg-student-email" required />
+                    <input type="email" id="edit-teacher-email" name="edit-teacher-email" />
                 </div>
                 <div class="form-div">
-                    <label for="reg-student-major">
-                        Carrera:
-                    </label>
-                    <select id="reg-student-major" name="reg-student-major">
-                        <option selected value="0">Elija una carrera...</option>
-                        <option value="1">Ingenieria en Computacion (COM)</option>
-                        <option value="2">Licenciatura en Informatica (INF)</option>
-                        <option value="3">Licenciatura en Matematicas (MAT)</option>
-                        <option value="4">Ingenieria Química (IQ)</option>
-                    </select>
-                </div>
-                <div class="form-div">
-                    <label for="reg-student-phone">
+                    <label for="edit-teacher-phone">
                         Celular:
                     </label>
-                    <input type="tel" id="reg-student-phone" name="reg-student-phone" disabled />
-                    <input class="form-checkbox" type="checkbox" name="checkbox-tel" />
+                    <input type="tel" id="edit-teacher-phone" name="edit-teacher-phone" />
                 </div>
                 <div class="form-div">
-                    <label for="reg-student-url">
-                        Pagina web:
-                    </label>
-                    <input type="url" id="reg-student-url" name="reg-student-url" disabled />
-                    <input class="form-checkbox" type="checkbox" name="checkbox-url" />
-                </div>
-                <div class="form-div">
-                    <label for="reg-student-github">
-                        Github:
-                    </label>
-                    <input type="url" id="reg-student-github" name="reg-student-github" disabled />
-                    <input class="form-checkbox" type="checkbox" name="checkbox-github" />
-                </div>
-                <div class="form-div">
-                    <button class="submit-button" type="submit">Registrar</button>
+                    <button class="submit-button" type="submit">Actualizar</button>
                     <button type="reset">Limpiar</button>
                 </div>
             </form>
@@ -144,10 +117,10 @@
             <nav class="aside-nav">
                 <ul>
                     <li>
-                        <a href="./adminAlumnosNuevo.html">Registrar alumnos</a>
+                        <a href="./profesorNuevo.html">Registrar profesor</a>
                     </li>
                     <li>
-                        <a href="./adminVerAlumnos.html">Alumnos</a>
+                        <a href="./verProfesores.html">Profesores</a>
                     </li>
                     <div class="clear-div"></div>
                 </ul>

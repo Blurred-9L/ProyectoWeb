@@ -55,56 +55,69 @@
         </nav>
         
         <section class="main-section">
-            <div class="table-div">
-                <table>
-                    <caption>
-                        Alumnos
-                    </caption>
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Codigo</th>
-                            <th>Carrera</th>
-                            <th>Email</th>
-                            <th>Celular</th>
-                            <th>URL</th>
-                            <th>Github</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                        </tr>
-                        <tr>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                    </tfoot>
-                </table>
-            </div>
+            <form method="get" action="./editarAlumno.html">
+                <div class="form-div">
+                    <p>
+                        <h2><span class="separate">Alumnos</span></h2>
+                    </p>
+                    <p class="info-text">
+                        Aqui puede ver todos los alumnos que estan inscritos en el sistema. Si desea revisar la información relacionada a algún alumno en particular, seleccione el alumno correspondiente en la tabla y despues haga clic sobre el boton de "Editar seleccion".
+                    </p>
+                </div>
+                <div class="edit-button-div">
+                    <button type="action" class="edit-button">
+                        Editar selección
+                    </button>
+                </div>
+                <div class="table-div">
+                    <table>
+                        <caption>
+                            Alumnos
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th class="edit-cell">Editar</th>
+                                <th>Nombre</th>
+                                <th>Codigo</th>
+                                <th>Carrera</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="edit-cell">
+                                    <input type="radio" name="edit-teacher" id="edit-teacher" />
+                                </td>
+                                <td>.</td>
+                                <td>.</td>
+                                <td>.</td>
+                                <td>.</td>
+                            </tr>
+                            <tr>
+                                <td class="edit-cell">
+                                    <input type="radio" name="edit-teacher" id="edit-teacher" />
+                                </td>
+                                <td>.</td>
+                                <td>.</td>
+                                <td>.</td>
+                                <td>.</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
+            </form>
         </section>
         
         <aside class="right-aside">
             <nav class="aside-nav">
                 <ul>
                     <li>
-                        <a href="./adminVerAlumnos.html">Todos</a>
+                        <a href="./adminAlumnosNuevo.html">Registrar alumnos</a>
                     </li>
                     <li>
-                        <a href="./adminAlumnosNuevo.html">Registrar alumnos</a>
+                        <a href="./adminVerAlumnos.html">Alumnos</a>
                     </li>
                     <div class="clear-div"></div>
                 </ul>

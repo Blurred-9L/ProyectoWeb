@@ -58,53 +58,53 @@
             <form method="get" action="">
                 <div class="form-div">
                     <p>
-                        <h2><span class="separate">Registrar alumno</span></h2>
+                        <h2><span class="separate">Editar alumno</span></h2>
                     </p>
                     <p class="info-text">
-                        Por favor rellene los siguientes campos para poder dar de alta a un nuevo alumno.
+                        Puede modificar los siguientes campos del alumno seleccionado.
                     </p>
                 </div>
                 <div class="form-div">
-                    <label for="reg-student-code">
+                    <label for="edit-student-code">
                         Código:
                     </label>
-                    <input type="text" id="reg-student-code" name="reg-student-code" required />
+                    <input type="text" id="edit-student-code" name="edit-student-code" disabled />
                 </div>
                 <div class="form-div">
-                    <label for="reg-student-name">
+                    <label for="edit-student-name">
                         Nombre:
                     </label>
-                    <input type="text" id="reg-student-name" name="reg-student-name" required />
+                    <input type="text" id="edit-student-name" name="edit-student-name" disabled />
                 </div>
                 <div class="form-div">
-                    <label for="reg-student-last1">
+                    <label for="edit-student-last1">
                         Apellido paterno:
                     </label>
-                    <input type="text" id="reg-student-last1" name="reg-student-last1" required />
+                    <input type="text" id="edit-student-last1" name="edit-student-last1" disabled />
                 </div>
                 <div class="form-div">
-                    <label for="reg-student-last2">
+                    <label for="edit-student-last2">
                         Apellido materno:
                     </label>
-                    <input type="text" id="reg-student-last2" name="reg-student-last2" required />
+                    <input type="text" id="edit-student-last2" name="edit-student-last2" disabled />
                 </div>
                 <div class="form-div">
-                    <label for="reg-student-pass">
+                    <label for="edit-student-pass">
                         Contraseña:
                     </label>
-                    <input type="text" id="reg-student-pass" name="reg-student-pass" required />
+                    <input type="text" id="edit-student-pass" name="edit-student-pass" />
                 </div>
                 <div class="form-div">
-                    <label for="reg-student-email">
+                    <label for="edit-student-email">
                         E-mail:
                     </label>
-                    <input type="email" id="reg-student-email" name="reg-student-email" required />
+                    <input type="email" id="edit-student-email" name="edit-student-email" />
                 </div>
                 <div class="form-div">
-                    <label for="reg-student-major">
+                    <label for="edit-student-major">
                         Carrera:
                     </label>
-                    <select id="reg-student-major" name="reg-student-major">
+                    <select id="edit-student-major" name="edit-student-major" disabled>
                         <option selected value="0">Elija una carrera...</option>
                         <option value="1">Ingenieria en Computacion (COM)</option>
                         <option value="2">Licenciatura en Informatica (INF)</option>
@@ -113,28 +113,25 @@
                     </select>
                 </div>
                 <div class="form-div">
-                    <label for="reg-student-phone">
+                    <label for="edit-student-phone">
                         Celular:
                     </label>
-                    <input type="tel" id="reg-student-phone" name="reg-student-phone" disabled />
-                    <input class="form-checkbox" type="checkbox" name="checkbox-tel" />
+                    <input type="tel" id="edit-student-phone" name="edit-student-phone" />
                 </div>
                 <div class="form-div">
-                    <label for="reg-student-url">
+                    <label for="edit-student-url">
                         Pagina web:
                     </label>
-                    <input type="url" id="reg-student-url" name="reg-student-url" disabled />
-                    <input class="form-checkbox" type="checkbox" name="checkbox-url" />
+                    <input type="url" id="edit-student-url" name="edit-student-url" />
                 </div>
                 <div class="form-div">
-                    <label for="reg-student-github">
+                    <label for="edit-student-github">
                         Github:
                     </label>
-                    <input type="url" id="reg-student-github" name="reg-student-github" disabled />
-                    <input class="form-checkbox" type="checkbox" name="checkbox-github" />
+                    <input type="url" id="edit-student-github" name="edit-student-github" />
                 </div>
                 <div class="form-div">
-                    <button class="submit-button" type="submit">Registrar</button>
+                    <button class="submit-button" type="submit">Actualizar</button>
                     <button type="reset">Limpiar</button>
                 </div>
             </form>
