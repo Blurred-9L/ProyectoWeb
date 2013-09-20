@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Admin - Alumnos</title>
+        <title>Admin - Ciclos</title>
         <meta name="description" content="">
         <meta name="author" content="">
         <meta name="keywords" content="">
@@ -52,38 +52,38 @@
         </nav>
         
         <section class="main-section">
-            <form method="get" action="./editarAlumno.html">
+            <form method="get" action="./asuetosCiclo.html">
                 <div class="form-div">
                     <p>
-                        <h2><span class="separate">Alumnos</span></h2>
+                        <h2><span class="separate">Ciclos Escolares</span></h2>
                     </p>
                     <p class="info-text">
-                        Aqui puede ver todos los alumnos que estan inscritos en el sistema. Si desea revisar la información relacionada a algún alumno en particular, seleccione el alumno correspondiente en la tabla y despues haga clic sobre el boton de "Editar seleccion".
+                        Estos son los ciclos escolares registrados en el sistema. Si desea modificar las fechas de asuetos relacionadas a alguno de estos ciclos, selecciones el ciclo escolar deseado y después haga clic en "Agregar asuetos".
                     </p>
                 </div>
                 <div class="edit-button-div">
-                    <button type="submit" class="edit-button">
-                        Editar selección
+                    <button type="action" class="edit-button">
+                        Agregar asuetos
                     </button>
                 </div>
                 <div class="table-div">
                     <table>
                         <caption>
-                            Alumnos
+                            Ciclos Escolares
                         </caption>
                         <thead>
                             <tr>
                                 <th class="edit-cell">Editar</th>
-                                <th>Nombre</th>
-                                <th>Codigo</th>
-                                <th>Carrera</th>
-                                <th>Email</th>
+                                <th>Año</th>
+                                <th>Calendario</th>
+                                <th>Inicio</th>
+                                <th>Fin</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td class="edit-cell">
-                                    <input type="radio" name="edit-student" id="edit-student" />
+                                    <input type="radio" name="edit-cycle" id="edit-cycle" />
                                 </td>
                                 <td>.</td>
                                 <td>.</td>
@@ -92,7 +92,7 @@
                             </tr>
                             <tr>
                                 <td class="edit-cell">
-                                    <input type="radio" name="edit-student" id="edit-student" />
+                                    <input type="radio" name="edit-cycle" id="edit-cycle" />
                                 </td>
                                 <td>.</td>
                                 <td>.</td>
@@ -111,10 +111,10 @@
             <nav class="aside-nav">
                 <ul>
                     <li>
-                        <a href="./adminAlumnosNuevo.html">Registrar alumnos</a>
+                        <a href="./nuevoCiclo.html">Nuevo ciclo</a>
                     </li>
                     <li>
-                        <a href="./adminVerAlumnos.html">Alumnos</a>
+                        <a href="./ciclosEscolares.html">Ciclos escolares</a>
                     </li>
                     <div class="clear-div"></div>
                 </ul>

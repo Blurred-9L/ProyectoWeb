@@ -198,6 +198,10 @@ label {
     margin-left: 7%;
 }
 
+.free-day-button {
+    margin-left: 1%;
+}
+
 .clear-div {
     clear: both;
 }
@@ -287,7 +291,7 @@ th, td {
 
 .checkbox-cell {
     text-align: center;
-    width: 4%;
+    width: 5%;
 }
 
 .roll-name-cell {
