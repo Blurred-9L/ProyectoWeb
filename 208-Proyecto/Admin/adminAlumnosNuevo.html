@@ -17,6 +17,20 @@
         <link rel="stylesheet" href="../css/normalize.css">
         <link rel="stylesheet" href="../css/main.css">
         <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
+        <script>
+            window.onload = function() {
+                var name = document.getElementById( "reg-student-name" );
+                
+                name.onkeyup = changeString;
+            }
+            
+            function changeString( ev ){
+                var event = ev || window.event;
+                var name = document.getElementById( "reg-student-name" );
+                
+                name.value = name.value.toUpperCase();
+            }
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -52,7 +66,7 @@
         </nav>
         
         <section class="main-section">
-            <form method="get" action="">
+            <form id="formulario" method="get" action="">
                 <div class="form-div">
                     <p>
                         <h2><span class="separate">Registrar alumno</span></h2>
