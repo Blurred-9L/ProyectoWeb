@@ -17,6 +17,39 @@
         <link rel="stylesheet" href="../css/normalize.css">
         <link rel="stylesheet" href="../css/main.css">
         <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
+        <script>
+            window.onload = function(){
+                button = document.getElementById( "submit-reg-student" );
+                
+                button.onclick = validar;
+            }
+            
+            function validar(){
+                var form = document.regStudent;
+                
+                validarCodigo( form );
+            }
+            
+            function validarCodigo( form ){
+                var ok = true;
+                var name = document.getElementById( "reg-student-name" );
+                var regex = /^([A-Za-z]\s*)+$/gi;
+                var str = name.value;
+                var div;
+                var message;
+                
+                if( !regex.test( str ) ){
+                    message = document.createTextNode( "Formato de nombre incorrecto." );                  
+                    name.parentNode.appendChild( message );
+                }
+                else{
+                    message = name.parentNode.lastChild;
+                    name.parentNode.removeChild( message );
+                }
+                
+                return ok;
+            }
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -46,7 +79,7 @@
         </nav>
         
         <section class="main-section">
-            <form method="get" action="">
+            <form name="regStudent" id="regStudent" method="get" action="">
                 <div class="form-div">
                     <p>
                         <h2><span class="separate">Registrar alumno</span></h2>
@@ -130,7 +163,7 @@
                     </select>
                 </div>
                 <div class="form-div">
-                    <button class="submit-button" type="submit">Registrar</button>
+                    <button id="submit-reg-student" class="submit-button" type="button">Registrar</button>
                     <button type="reset">Limpiar</button>
                 </div>
             </form>
