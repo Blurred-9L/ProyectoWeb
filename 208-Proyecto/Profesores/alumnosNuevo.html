@@ -19,36 +19,52 @@
         <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
         <script>
             window.onload = function(){
-                button = document.getElementById( "submit-reg-student" );
+                var button = document.getElementById( "submit-reg-student" );
+                var phone = document.getElementById( "checkbox-tel" );
+                var url = document.getElementById( "checkbox-url" );
+                var github = document.getElementById( "checkbox-github" );
                 
-                button.onclick = validar;
-            }
-            
-            function validar(){
-                var form = document.regStudent;
-                
-                validarCodigo( form );
-            }
-            
-            function validarCodigo( form ){
-                var ok = true;
-                var name = document.getElementById( "reg-student-name" );
-                var regex = /^([A-Za-z]\s*)+$/gi;
-                var str = name.value;
-                var div;
-                var message;
-                
-                if( !regex.test( str ) ){
-                    message = document.createTextNode( "Formato de nombre incorrecto." );                  
-                    name.parentNode.appendChild( message );
-                }
-                else{
-                    message = name.parentNode.lastChild;
-                    name.parentNode.removeChild( message );
+                button.onclick = checkRegStudent;
+                phone.onclick = function(){
+                    var elem = document.getElementById( "reg-student-phone" );
+                    
+                    if( elem.disabled ){
+                        elem.disabled = false;
+                    }
+                    else{
+                        elem.disabled = true;
+                        elem.value = "";
+                        elem.parentNode.replaceChild( document.createTextNode( "" ), elem.parentNode.lastChild );
+                    }
                 }
                 
-                return ok;
+                url.onclick = function(){
+                    var elem = document.getElementById( "reg-student-url" );
+                    
+                    if( elem.disabled ){
+                        elem.disabled = false;
+                    }
+                    else{
+                        elem.disabled = true;
+                        elem.value = "";
+                        elem.parentNode.replaceChild( document.createTextNode( "" ), elem.parentNode.lastChild );
+                    }
+                }
+                
+                github.onclick = function(){
+                    var elem = document.getElementById( "reg-student-github" );
+                    
+                    if( elem.disabled ){
+                        elem.disabled = false;
+                    }
+                    else{
+                        elem.disabled = true;
+                        elem.value = "";
+                        elem.parentNode.replaceChild( document.createTextNode( "" ), elem.parentNode.lastChild );
+                    }
+                }
             }
+            
         </script>
     </head>
     <body>
@@ -79,7 +95,7 @@
         </nav>
         
         <section class="main-section">
-            <form name="regStudent" id="regStudent" method="get" action="">
+            <form name="regStudent" id="regStudent" method="post" action="">
                 <div class="form-div">
                     <p>
                         <h2><span class="separate">Registrar alumno</span></h2>
@@ -138,21 +154,21 @@
                         Celular:
                     </label>
                     <input type="tel" id="reg-student-phone" name="reg-student-phone" disabled />
-                    <input class="form-checkbox" type="checkbox" name="checkbox-tel" />
+                    <input id="checkbox-tel" class="form-checkbox" type="checkbox" name="checkbox-tel" />
                 </div>
                 <div class="form-div">
                     <label for="reg-student-url">
                         Pagina web:
                     </label>
                     <input type="url" id="reg-student-url" name="reg-student-url" disabled />
-                    <input class="form-checkbox" type="checkbox" name="checkbox-url" />
+                    <input id="checkbox-url" class="form-checkbox" type="checkbox" name="checkbox-url" />
                 </div>
                 <div class="form-div">
                     <label for="reg-student-github">
                         Github:
                     </label>
                     <input type="url" id="reg-student-github" name="reg-student-github" disabled />
-                    <input class="form-checkbox" type="checkbox" name="checkbox-github" />
+                    <input id="checkbox-github" class="form-checkbox" type="checkbox" name="checkbox-github" />
                 </div>
                 <div class="form-div">
                     <label for="reg-student-class">
