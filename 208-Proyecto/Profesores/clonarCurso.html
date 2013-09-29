@@ -17,6 +17,13 @@
         <link rel="stylesheet" href="../css/normalize.css">
         <link rel="stylesheet" href="../css/main.css">
         <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
+        <script>
+            window.onload = function(){
+                var button = document.getElementById( "clone-submit" );
+                
+                button.onclick = checkCloneClass;
+            }
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -46,15 +53,15 @@
         </nav>
         
         <section class="main-section">
-            <form method="get" action="">
-                <div class="form-div">
-                    <p>
-                        <h2><span class="separate">Clonar curso</span></h2>
-                    </p>
-                    <p class="info-text">
-                        Aqui puede crear un nuevo curso a partir de un curso existente. Al clonar un curso se copiaran las configuraciones establecidas previamente en el curso elegido, a excepción de los alumnos inscritos en él. <br /><br />Por favor escriba el NRC del curso a clonar:
-                    </p>
-                </div>
+            <div class="form-div">
+                <p>
+                    <h2><span class="separate">Clonar curso</span></h2>
+                </p>
+                <p class="info-text">
+                    Aqui puede crear un nuevo curso a partir de un curso existente. Al clonar un curso se copiaran las configuraciones establecidas previamente en el curso elegido, a excepción de los alumnos inscritos en él. <br /><br />Por favor escriba el NRC, año y calendario del curso a clonar:
+                </p>
+            </div>
+            <form name="cloneClassCourse" method="get" action="">
                 <div class="form-div">
                     <label for="new-class-nrc">
                         NRC:
@@ -62,7 +69,23 @@
                     <input type="text" id="new-class-nrc" name="new-class-nrc" required />
                 </div>
                 <div class="form-div">
-                    <button class="submit-button" type="submit">Clonar</button>
+                    <label for="new-class-year">
+                        Año:
+                    </label>
+                    <input type="text" id="new-class-year" name="new-class-year" required />
+                </div>
+                <div class="form-div">
+                    <label for="new-class-half">
+                        Calendario:
+                    </label>
+                    <select id="new-class-half" name="new-class-half">
+                        <option selected value="0">--</option>
+                        <option>A</option>
+                        <option>B</option>
+                    </select>
+                </div>
+                <div class="form-div">
+                    <button id="clone-submit" class="submit-button" type="button">Clonar</button>
                     <button type="reset">Limpiar</button>
                 </div>
             </form>

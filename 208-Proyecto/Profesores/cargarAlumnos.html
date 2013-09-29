@@ -17,6 +17,19 @@
         <link rel="stylesheet" href="../css/normalize.css">
         <link rel="stylesheet" href="../css/main.css">
         <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
+        <script>
+            window.onload = function(){
+                var loadButton = document.getElementById( "file-load-button" );
+                var submitButton = document.getElementById( "submit-load-students" );
+                
+                loadButton.onclick = checkLoadFile;
+                submitButton.onclick = function(){
+                    var form = document.loadStudents;
+                    
+                    form.submit();
+                }
+            }
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -46,18 +59,59 @@
         </nav>
         
         <section class="main-section">
-            <form method="get" action="">
-                <div class="form-div">
-                    <p>
-                        <h2><span class="separate">Cargar alumnos</span></h2>
-                    </p>
-                    <p class="info-text">
-                        Se puede cargar un archivo de alumnos. El formato del archivo es el de un archivo separado por comas (.csv), donde los valores de cada campo especifico estan separados por comas. Una vez se haya seleccionado el archivo y elegido el curso al cual se buscan agregar los alumnos, se puede hacer clic sobre el botón "Cargar" para cargar el archivo, haciendo las validaciones correspondientes. Se mostrarán la información de los alumnos que se busca añadir, donde será posible seleccionar aquellos que se quieran agregar, de ser el caso. Una vez se haya elegido, se puede presionar el botón "Registrar" para ingresar toda la información de los alumnos al sistema.
-                    </p>
-                </div>
+            <div class="form-div">
+                <p>
+                    <h2><span class="separate">Cargar alumnos</span></h2>
+                </p>
+                <p class="info-text">
+                    Se puede cargar un archivo de alumnos. El formato del archivo es el de un archivo separado por comas (.csv), donde los valores de cada campo especifico estan separados por comas. Una vez se haya seleccionado el archivo y elegido el curso al cual se buscan agregar los alumnos, se puede hacer clic sobre el botón "Cargar" para cargar el archivo, haciendo las validaciones correspondientes. Se mostrarán la información de los alumnos que se busca añadir, donde será posible seleccionar aquellos que se quieran agregar, de ser el caso. Una vez se haya elegido, se puede presionar el botón "Registrar" para ingresar toda la información de los alumnos al sistema.
+                </p>
+            </div>
+            <form name="loadStudents" method="post" action="">
                 <div class="form-div">
                     <label>Cargar archivo:</label>
                     <input type="file" id="upload-file" name="upload-file" />
+                </div>
+                <div class="form-div">
+                    <button id="file-load-button" class="load-button" type="button">Cargar</button>
+                </div>
+                <div class="table-div">
+                    <table>
+                        <caption>
+                            Alumnos:
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th class="checkbox-cell"></th>
+                                <th>Nombre</th>
+                                <th>Codigo</th>
+                                <th>Carrera</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="checkbox-cell">
+                                    <input id="add-student-checkbox-0" type="checkbox" name="add-student-checkbox-0" checked />
+                                </td>
+                                <td>.</td>
+                                <td>.</td>
+                                <td>.</td>
+                                <td>.</td>
+                            </tr>
+                            <tr>
+                                <td class="checkbox-cell">
+                                    <input id="add-student-checkbox-0" type="checkbox" name="add-student-checkbox-0" checked />
+                                </td>
+                                <td>.</td>
+                                <td>.</td>
+                                <td>.</td>
+                                <td>.</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
                 </div>
                 <div class="form-div">
                     <label for="load-student-class">
@@ -68,30 +122,7 @@
                     </select>
                 </div>
                 <div class="form-div">
-                    <button class="load-button" type="button">Cargar</button>
-                </div>
-                <div class="table-div">
-                    <table>
-                        <caption>
-                            Alumnos:
-                        </caption>
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Codigo</th>
-                                <th>Carrera</th>
-                                <th>Email</th>
-                                <th>Añadir</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                        <tfoot>
-                        </tfoot>
-                    </table>
-                </div>
-                <div class="form-div">
-                    <button class="submit-button" type="submit">Registrar</button>
+                    <button id="submit-load-students" class="submit-button" type="submit" disabled >Registrar</button>
                     <button type="reset">Limpiar</button>
                 </div>
             </form>

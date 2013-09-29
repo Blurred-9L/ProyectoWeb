@@ -299,6 +299,11 @@ th, td {
     width: 5%;
 }
 
+.checkbox-cell2 {
+    text-align: center;
+    width: 8%;
+}
+
 .roll-name-cell {
     padding: 0% 2%;
 }

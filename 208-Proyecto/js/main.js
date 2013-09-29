@@ -32,6 +32,50 @@ function checkRegStudent(){
     }
 }
 
+function checkLoadFile(){
+    var fileElem = document.getElementById( "upload-file" );
+    var submitButton = document.getElementById( "submit-load-students" );
+    var str = fileElem.value;
+    var message;
+    var ok = true;
+    
+    if( !str.endsWith( ".csv" ) ){
+        message = document.createTextNode( " Elija un archivo .csv." );
+        fileElem.parentNode.replaceChild( message, fileElem.parentNode.lastChild );
+        ok = false;
+    }
+    else{
+        message = document.createTextNode( "" );
+        fileElem.parentNode.replaceChild( message, fileElem.parentNode.lastChild );
+    }
+    
+    if( ok ){
+        submitButton.disabled = false;
+        //loadCSV;
+    }
+}
+
+function checkCloneClass(){
+    var form = document.cloneClassCourse;
+    var boolArray = [];
+    var ok;
+    
+    boolArray[0] = checkNrc( form, document.getElementById( "new-class-nrc" ) );
+    boolArray[1] = checkYear( form, document.getElementById( "new-class-year" ) );
+    boolArray[2] = checkHalfYear( form, document.getElementById( "new-class-half" ) );
+    
+    ok = true;
+    for( var i = 0; i < boolArray.length && ok; i++ ){
+        if( !boolArray[i] ){
+            ok = false;
+        }
+    }
+    
+    if( ok ){
+        form.submit();
+    }
+}
+
 function checkCode( form, code ){
     var ok = true;
     var regex = /^.+$/gi;
@@ -177,6 +221,62 @@ function checkUrl( form, url ){
     else{
         mesage = document.createTextNode( "" );
         url.parentNode.replaceChild( message, url.parentNode.lastChild );
+    }
+    
+    return ok;
+}
+
+function checkNrc( form, nrc ){
+    var ok = true;
+    var regex = /^\d{5}$/gi;
+    var str = nrc.value;
+    var message;
+    
+    if( !regex.test( str ) ){
+        message = document.createTextNode( " Formato de NRC incorrecto." );
+        nrc.parentNode.replaceChild( message, nrc.parentNode.lastChild );
+        ok = false;
+    }
+    else{
+        message = document.createTextNode( "" );
+        nrc.parentNode.replaceChild( message, nrc.parentNode.lastChild );
+    }
+    
+    return ok;
+}
+
+function checkYear( form, year ){
+    var ok = true;
+    var regex = /^\d+$/gi;
+    var str = year.value;
+    var message;
+    
+    if( !regex.test( str ) ){
+        message = document.createTextNode( " Formato de año incorrecto." );
+        year.parentNode.replaceChild( message, year.parentNode.lastChild );
+        ok = false;
+    }
+    else{
+        message = document.createTextNode( "" );
+        year.parentNode.replaceChild( message, year.parentNode.lastChild );
+    }
+    
+    return ok;
+}
+
+function checkHalfYear( form, half ){
+    var ok = true;
+    var index = half.selectedIndex;
+    var message;
+    
+    if( index == 0 ){
+        message = document.createTextNode( " Seleccione un calendario." );
+        half.parentNode.replaceChild( message, half.parentNode.lastChild );
+        ok = false;
+    }
+    else{
+        message = document.createTextNode( "" );
+        half.parentNode.replaceChild( message, half.parentNode.lastChild );
     }
     
     return ok;
