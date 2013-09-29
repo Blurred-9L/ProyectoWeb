@@ -17,6 +17,13 @@
         <link rel="stylesheet" href="../css/normalize.css">
         <link rel="stylesheet" href="../css/main.css">
         <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
+        <script>
+            window.onload = function(){
+                button = document.getElementById( "eval-button" );
+                
+                button.onclick = checkEvalParams;
+            }
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -46,15 +53,15 @@
         </nav>
         
         <section class="main-section">
-            <form method="get" action="">
-                <div class="form-div">
-                    <p>
-                        <h2><span class="separate">Evaluacion de cursos</span></h2>
-                    </p>
-                    <p class="info-text">
-                        Elija un curso, un rubro y un alumno y después introduzca la calificación de 0 a 10. Se aceptan tambien un decimal de precisión, así como los valores NP (No presento) y SD (Sin derecho) para los rubros en que apliquen estos valores. En el caso de que un rubro se haya definido con un subrubro, entonces aparecera un cuadro de texto para escribir el número de elemento (practica, examen, tarea) a calificar.
-                    </p>
-                </div>
+            <div class="form-div">
+                <p>
+                    <h2><span class="separate">Evaluacion de cursos</span></h2>
+                </p>
+                <p class="info-text">
+                    Elija un curso, un rubro y un alumno y después introduzca la calificación de 0 a 10. Se aceptan tambien un decimal de precisión, así como los valores NP (No presento) y SD (Sin derecho) para los rubros en que apliquen estos valores. En el caso de que un rubro se haya definido con un subrubro, entonces aparecera un cuadro de texto para escribir el número de elemento (practica, examen, tarea) a calificar.
+                </p>
+            </div>
+            <form name="evalStudent" method="post" action="">
                 <div class="form-div">
                     <label for="select-class">
                         Curso:
@@ -63,7 +70,7 @@
                         <option selected value="0">Elija un curso...</option>
                     </select>
                 </div>
-                <div class="table-div">
+                <div id="evalTable" class="table-div">
                     <table>
                         <caption>
                             Alumnos
@@ -116,7 +123,7 @@
                     <input type="text" name="grade" id="grade" required />
                 </div>
                 <div class="form-div">
-                    <button type="submit" class="submit-button" id="eval-button" name="eval-button">Calificar</button>
+                    <button type="button" class="submit-button" id="eval-button" name="eval-button">Calificar</button>
                     <button type="reset">Limpiar</button>
                 </div>
             </form>

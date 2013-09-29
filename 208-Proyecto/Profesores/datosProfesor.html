@@ -17,6 +17,13 @@
         <link rel="stylesheet" href="../css/normalize.css">
         <link rel="stylesheet" href="../css/main.css">
         <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
+        <script>
+            window.onload = function(){
+                button = document.getElementById( "submit-teacher-data" );
+                
+                button.onclick = checkTeacherData;
+            }
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -46,15 +53,15 @@
         </nav>
         
         <section class="main-section">
-            <form method="get" action="">
-                <div class="form-div">
-                    <p>
-                        <h2><span class="separate">Profesor</span></h2>
-                    </p>
-                    <p class="info-text">
-                        Aquí puede ver su información en el sistema. Puede actualizar algunos de estos campos.
-                    </p>
-                </div>
+            <div class="form-div">
+                <p>
+                    <h2><span class="separate">Profesor</span></h2>
+                </p>
+                <p class="info-text">
+                    Aquí puede ver su información en el sistema. Puede actualizar algunos de estos campos.
+                </p>
+            </div>
+            <form name="teacherData" method="post" action="">
                 <div class="form-div">
                     <label for="teacher-code">
                         Código:
@@ -92,7 +99,7 @@
                     <input type="tel" id="teacher-phone" name="teacher-phone" />
                 </div>
                 <div class="form-div">
-                    <button class="submit-button" type="submit">Actualizar</button>
+                    <button id="submit-teacher-data" class="submit-button" type="button">Actualizar</button>
                     <button type="reset">Limpiar</button>
                 </div>
             </form>

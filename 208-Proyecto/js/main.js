@@ -76,6 +76,54 @@ function checkCloneClass(){
     }
 }
 
+function checkNewClass(){
+    var form = document.newClass;
+    var boolArray = [];
+    var ok;
+}
+
+function checkTeacherData(){
+    var form = document.teacherData;
+    var boolArray = [];
+    var ok;
+    
+    boolArray[0] = checkMail( form, document.getElementById( "teacher-email" ) );
+    boolArray[1] = checkCellPhone( form, document.getElementById( "teacher-phone" ) );
+    
+    ok = true;
+    for( var i = 0; i < boolArray.length && ok; i++ ){
+        if( !boolArray[i] ){
+            ok = false;
+        }
+    }
+    
+    if( ok ){
+        form.submit();
+    }
+}
+
+function checkEvalParams(){
+    var form = document.evalStudent;
+    var boolArray = [];
+    var ok;
+    
+    boolArray[0] = checkClass( form, document.getElementById( "select-class" ) );
+    boolArray[1] = checkSelected( form, document.getElementsByTagName( "input" ) );
+    boolArray[2] = checkEvalParam( form, document.getElementById( "select-eval" ) );
+    boolArray[3] = checkEvalElem( form, document.getElementById( "select-sub-eval" ) );
+    boolArray[4] = checkGrade( form, document.getElementById( "grade" ) );
+    
+    for( var i = 0; i < boolArray.length && ok; i++ ){
+        if( !boolArray[i] ){
+            ok = false;
+        }
+    }
+    
+    if( ok ){
+        form.submit();
+    }
+}
+
 function checkCode( form, code ){
     var ok = true;
     var regex = /^.+$/gi;
@@ -280,4 +328,222 @@ function checkHalfYear( form, half ){
     }
     
     return ok;
+}
+
+function checkEvalParam( form, evalParam ){
+    var ok = true;
+    var index = evalParam.selectedIndex;
+    var message;
+    
+    if( index == 0 ){
+        message = document.createTextNode( " Seleccione un rubro de evaluacion." );
+        evalParam.parentNode.replaceChild( message, evalParam.parentNode.lastChild );
+        ok = false;
+    }
+    else{
+        message = document.createTextNode( "" );
+        evalParam.parentNode.replaceChild( message, evalParam.parentNode.lastChild );
+    }
+    
+    return ok;
+}
+
+function checkEvalElem( form, evalNo ){
+    var ok = true;
+    var regex = /^\d+$/gi;
+    var message;
+    var str = evalNo.value;
+    
+    if( !regex.test( str ) ){
+        message = document.createTextNode( " Escriba un numero." );
+        evalNo.parentNode.replaceChild( message, evalNo.parentNode.lastChild );
+        ok = false;
+    }
+    else{
+        message = document.createTextNode( "" );
+        evalNo.parentNode.replaceChild( message, evalNo.parentNode.lastChild );
+    }
+    
+    return ok;
+}
+
+function checkGrade( form, grade ){
+    var ok = true;
+    var regex = /^(\d{1,2}|\d{1,2}[.]\d|NP|SD)$/gi;
+    var message;
+    var str = grade.value;
+    var nums;
+    
+    if( !regex.test( str ) ){
+        message = document.createTextNode( " Formato de calificacion incorrecto." );
+        grade.parentNode.replaceChild( message, grade.parentNode.lastChild );
+        ok = false;
+    }
+    else{
+        if( str != "SD" && str != "NP" ){
+            if( str > 10.0 ){
+                message = document.createTextNode( " Rango valido [0.0-10.0]." );
+                grade.parentNode.replaceChild( message, grade.parentNode.lastChild );
+                ok = false;
+            }
+            else{
+                message = document.createTextNode( "" );
+                grade.parentNode.replaceChild( message, grade.parentNode.lastChild );
+            }
+        }
+        else{
+            message = document.createTextNode( "" );
+            grade.parentNode.replaceChild( message, grade.parentNode.lastChild );
+        }
+    }
+    
+    return ok;
+}
+
+function checkSelected( form, inputArray ){
+    var ok = false;
+    var message;
+    var i;
+    var table = document.getElementById( "evalTable" );
+    
+    for( i = 0; i < inputArray.length && !ok; i++ ){
+        if( inputArray[i].type == "radio" ){
+            if( inputArray[i].checked ){
+                ok = true;
+            }
+        }
+    }
+    if( !ok ){
+        message = document.createTextNode( "Seleccione un alumno." );
+        table.replaceChild( message, table.lastChild );
+    }
+    else{
+        message = document.createTextNode( "" );
+        table.replaceChild( message, table.lastChild );
+    }
+    
+    return ok;
+}
+
+function addTime(){
+    var div = document.createElement( "div" );
+    var dayLabel = document.createElement( "label" );
+    var daySelect = document.createElement( "select" );
+    var timeLabel = document.createElement( "label" );
+    var timeSelect = document.createElement( "select" );
+    var lenLabel = document.createElement( "label" );
+    var lenInput = document.createElement( "input" );
+    var otherDiv = document.getElementById( "eval1" );
+    var button = document.getElementById( "add-time" );
+    
+    div.className = "form-div";
+    dayLabel.HTMLfor = "new-class-day";
+    dayLabel.innerHTML = document.getElementById( "day-label1" ).innerHTML;
+    div.appendChild( dayLabel );
+    
+    daySelect.name = "new-class-day";
+    daySelect.innerHTML = document.getElementById( "new-class-day1" ).innerHTML;
+    div.appendChild( daySelect );
+    
+    div.appendChild( document.createElement( "br" ) );
+    div.appendChild( document.createElement( "br" ) );
+    
+    timeLabel.HTMLfor = "new-class-start";
+    timeLabel.innerHTML = document.getElementById( "time-label1" ).innerHTML;
+    div.appendChild( timeLabel );
+    
+    timeSelect.name = "new-class-start";
+    timeSelect.innerHTML = document.getElementById( "new-class-start1" ).innerHTML;
+    div.appendChild( timeSelect );
+    
+    div.appendChild( document.createElement( "br" ) );
+    div.appendChild( document.createElement( "br" ) );
+    
+    lenLabel.HTMLfor = "new-class-duration";
+    lenLabel.innerHTML = document.getElementById( "len-label1" ).innerHTML;
+    div.appendChild( lenLabel );
+    
+    lenInput.name = "new-class-duration";
+    lenInput.type = "number";
+    lenInput.min = "1";
+    lenInput.max = "4";
+    div.appendChild( lenInput );
+    
+    div.appendChild( button );
+    
+    document.newClass.insertBefore( div, otherDiv );
+    document.newClass.insertBefore( document.createElement( "br" ), otherDiv );
+}
+
+function addEval(){
+    var div = document.createElement( "div" );
+    var actLabel = document.createElement( "label" );
+    var actInput = document.createElement( "input" );
+    var valLabel = document.createElement( "label" );
+    var valInput = document.createElement( "input" );
+    var pageLabel = document.createElement( "label" );
+    var pageInput = document.createElement( "input" );
+    var columnLabel = document.createElement( "label" );
+    var columnInput = document.createElement( "input" );
+    var otherDiv = document.getElementById( "submit-div" );
+    var button = document.getElementById( "add-eval" );
+    
+    div.className = "form-div";
+    actLabel.HTMLfor = "new-class-act";
+    actLabel.innerHTML = document.getElementById( "class-act-label1" ).innerHTML;
+    div.appendChild( actLabel );
+    
+    actInput.type = "text";
+    actInput.name = "new-class-act";
+    div.appendChild( actInput );
+    
+    div.appendChild( document.createElement( "br" ) );
+    div.appendChild( document.createElement( "br" ) );
+    
+    valLabel.HTMLfor = "new-class-val";
+    valLabel.innerHTML = document.getElementById( "class-val-label1" ).innerHTML;
+    div.appendChild( valLabel );
+    
+    valInput.type = "number";
+    valInput.name = "new-class-val";
+    div.appendChild( valInput );
+    
+    div.appendChild( document.createElement( "br" ) );
+    div.appendChild( document.createElement( "br" ) );
+    
+    pageLabel.HTMLfor = "eval-page";
+    pageLabel.innerHTML = document.getElementById( "page-label1" ).innerHTML;
+    div.appendChild( pageLabel );
+    
+    pageInput.type = "checkbox";
+    pageInput.name = "eval-page";
+    div.appendChild( pageInput );
+    
+    div.appendChild( document.createElement( "br" ) );
+    div.appendChild( document.createElement( "br" ) );
+    
+    columnLabel.HTMLfor = "page-columns";
+    columnLabel.innerHTML = document.getElementById( "columns-label1" ).innerHTML;
+    div.appendChild( columnLabel );
+    
+    columnInput.type = "number";
+    columnInput.name = "page-columns";
+    columnInput.disabled = true;
+    div.appendChild( columnInput );
+    
+    div.appendChild( button );
+    
+    pageInput.onclick = function(){
+        if( columnInput.disabled ){
+            columnInput.disabled = false;
+        }
+        else{
+            columnInput.disabled = true;
+            columnInput.value = "";
+            //elem.parentNode.replaceChild( document.createTextNode( "" ), elem.parentNode.lastChild );
+        }
+    }
+    
+    document.newClass.insertBefore( div, otherDiv );
+    document.newClass.insertBefore( document.createElement( "br" ), otherDiv );
 }

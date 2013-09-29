@@ -17,6 +17,30 @@
         <link rel="stylesheet" href="../css/normalize.css">
         <link rel="stylesheet" href="../css/main.css">
         <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
+        <script>
+            window.onload = function(){
+                addTimeButton = document.getElementById( "add-time" );
+                addEvalButton = document.getElementById( "add-eval" );
+                checkbox = document.getElementById( "eval-page1" );
+                button = document.getElementById( "submit-new-class" );
+                
+                button.onclick = checkNewClass;
+                addTimeButton.onclick = addTime;
+                addEvalButton.onclick = addEval;
+                checkbox.onclick = function(){
+                    var elem = document.getElementById( "page-columns1" );
+                    
+                    if( elem.disabled ){
+                        elem.disabled = false;
+                    }
+                    else{
+                        elem.disabled = true;
+                        elem.value = "";
+                        //elem.parentNode.replaceChild( document.createTextNode( "" ), elem.parentNode.lastChild );
+                    }
+                }
+            }
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -46,16 +70,16 @@
         </nav>
         
         <section class="main-section">
-            <form method="get" action="">
-                <div class="form-div">
-                    <p>
-                        <h2><span class="separate">Nuevo curso</span></h2>
-                    </p>
-                    <p class="info-text">
-                        Aqui puede crear un nuevo curso y establecer sus parametros para su evaluación.<br /><br />
-                        Al estar definiendo los parametros para la evaluación del curso, cabe destacar que se estan capturando porcentajes, por lo cual es necesario que los valores provistos esten entre 1 y 100. Cada rubro de la evaluación puede una evaluación independiente, por lo cual se puede indicar si se quiere o no tener una hoja extra de evaluación.
-                    </p>
-                </div>
+            <div class="form-div">
+                <p>
+                    <h2><span class="separate">Nuevo curso</span></h2>
+                </p>
+                <p class="info-text">
+                    Aqui puede crear un nuevo curso y establecer sus parametros para su evaluación.<br /><br />
+                    Al estar definiendo los parametros para la evaluación del curso, cabe destacar que se estan capturando porcentajes, por lo cual es necesario que los valores provistos esten entre 1 y 100. Cada rubro de la evaluación puede una evaluación independiente, por lo cual se puede indicar si se quiere o no tener una hoja extra de evaluación.
+                </p>
+            </div>
+            <form name="newClass" method="post" action="">
                 <div class="form-div">
                     <label for="new-class-name">
                         Nombre:
@@ -89,19 +113,19 @@
                     <p class="info-text">
                         <strong>Horario del curso:</strong>
                     </p>
-                    <label for="new-class-day1">
+                    <label id="day-label1" for="new-class-day1">
                         Día:
                     </label>
                     <select name="new-class-day1" id="new-class-day1">
                         <option selected value="0">Dia...</option>
                         <option value="1">Lunes</option>
                         <option value="2">Martes</option>
-                        <optino value="3">Miercoles</option>
+                        <option value="3">Miercoles</option>
                         <option value="4">Jueves</option>
                         <option value="5">Viernes</option>
                         <option value="6">Sabado</option>
                     </select> <br /><br />
-                    <label for="new-class-start1">
+                    <label id="time-label1" for="new-class-start1">
                         Inicio:
                     </label>
                     <select name="new-class-start1" id="new-class-start1">
@@ -120,7 +144,7 @@
                         <option value="18">18:00</option>
                         <option value="19">19:00</option>
                     </select> <br /><br />
-                    <label for="new-class-duration1">
+                    <label id="len-label1" for="new-class-duration1">
                         Duración:                        
                     </label>
                     <input type="number" name="new-class-duration1" id="new-class-duration1" min="1" max="4" />
@@ -130,29 +154,29 @@
                     <p class="info-text">
                         <strong>Porcentajes de evaluacion:</strong>
                     </p>
-                    <label for="new-class-act1">
+                    <label id="class-act-label1" for="new-class-act1">
                         Actividad:
                     </label>
                     <input type="text" name="new-class-act1" id="new-class-act1" />
                     <br /><br />
-                    <label for="new-class-val1">
+                    <label id="class-val-label1" for="new-class-val1">
                         Valor:
                     </label>
                     <input type="number" name="new-class-val1" id="new-class-val1" min="1" max="100" />
                     <br /><br />
-                    <label for="eval-page1">
+                    <label id="page-label1" for="eval-page1">
                         Hoja extra:
                     </label>
                     <input type="checkbox" name="eval-page1" id="eval-page1" />
                     <br /><br />
-                    <label for="page-colums1">
+                    <label id="columns-label1" for="page-colums1">
                         Columnas:
                     </label>
                     <input type="number" name="page-columns1" id="page-columns1" disabled />
                     <button class="free-day-button" id="add-eval" type="button">Agregar</button>
                 </div>
-                <div class="form-div">
-                    <button class="submit-button" type="submit">Registrar</button>
+                <div class="form-div" id="submit-div">
+                    <button id="submit-new-class" class="submit-button" type="button">Registrar</button>
                     <button type="reset">Limpiar</button>
                 </div>
             </form>
