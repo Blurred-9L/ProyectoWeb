@@ -17,6 +17,13 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        <script>
+            window.onload = function(){
+                button = document.getElementById( "login" );
+                
+                button.onclick = checkLogin;
+            }
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -31,12 +38,12 @@
         </header>
 
         <div class="login-div">
-            <form method="get" action="">
-                <div class="form-div">
-                    <p>
-                        <h3>Iniciar sesión</h3>
-                    </p>
-                </div>
+            <div class="form-div">
+                <p>
+                    <h3>Iniciar sesión</h3>
+                </p>
+            </div>
+            <form name="loginForm" method="post" action="">
                 <div class="form-div">
                     <label for="login-code">
                         Código:
@@ -50,7 +57,7 @@
                     <input type="password" id="login-pass" name="login-pass" />
                 </div>
                 <div class="form-div">
-                    <button class="login-button" type="submit">Ingresar</button>
+                    <button id="login" class="login-button" type="button">Ingresar</button>
                     <a href="./lostPass.html">Recuperar contraseña</a>
                 </div>
             </form>

@@ -17,6 +17,20 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        <script>
+            window.onload = function(){
+                button = document.getElementById( "recover" );
+                
+                recover.onclick = function(){
+                    var ok;
+                    ok = checkCode( document.recoverPass, document.getElementById( "lost-pass-code" ) );
+                    
+                    if( ok ){
+                        document.recoverPass.submit();
+                    }
+                }
+            }
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -31,15 +45,15 @@
         </header>
 
         <section class="lost-pass-section">
-            <form method="get" action="">
-                <div class="form-div">
-                    <p>
-                        <h2><span class="separate">Recuperar contraseña</span></h2>
-                    </p>
-                    <p class="info-text">
-                        Para recuperar tu contraseña escribe tu código en el campo de texto a continuación y presiona el boton "Recuperar". Deberás recibir un correo electrónico con tu contraseña.
-                    </p>
-                </div>
+            <div class="form-div">
+                <p>
+                    <h2><span class="separate">Recuperar contraseña</span></h2>
+                </p>
+                <p class="info-text">
+                    Para recuperar tu contraseña escribe tu código en el campo de texto a continuación y presiona el boton "Recuperar". Deberás recibir un correo electrónico con tu contraseña.
+                </p>
+            </div>
+            <form name="recoverPass" method="post" action="">
                 <div class="form-div">
                     <label for="lost-pass-code">
                         Código:
@@ -47,7 +61,7 @@
                     <input type="text" id="lost-pass-code" name="lost-pass-code" required/>
                 </div>
                 <div class="form-div">
-                    <button class="submit-button" type="submit">Recuperar</button>
+                    <button id="recover" class="submit-button" type="button">Recuperar</button>
                 </div>
             </form>
         </section>

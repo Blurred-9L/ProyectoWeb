@@ -413,6 +413,25 @@ function checkNewCycle(){
     }
 }
 
+function checkLogin(){
+    var form = document.loginForm;
+    var ok = false;
+    var code = document.getElementById( "login-code" ).value;
+    var pass = document.getElementById( "login-pass" ).value;
+    var div = document.createElement( "div" );
+    
+    //ok = checkPair( code, pass );
+    if( !ok ){
+        div.appendChild( document.createTextNode( "Codigo y contraseña incorrectos." ) );
+        form.replaceChild( div, form.lastChild );
+    }
+    else{
+        div.appendChild( document.createTextNode( "" ) );
+        form.replaceChild( div, form.lastChild );
+        form.submit();
+    }
+}
+
 function checkCode( form, code ){
     var ok = true;
     var regex = /^.+$/gi;
