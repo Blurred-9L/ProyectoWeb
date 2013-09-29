@@ -17,6 +17,13 @@
         <link rel="stylesheet" href="../css/normalize.css">
         <link rel="stylesheet" href="../css/main.css">
         <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
+        <script>
+            window.onload = function(){
+                button = document.getElementById( "to-edit-button" );
+                
+                button.onclick = checkSelected4;
+            }
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -52,21 +59,21 @@
         </nav>
         
         <section class="main-section">
-            <form method="get" action="./editarProfesor.html">
-                <div class="form-div">
-                    <p>
-                        <h2><span class="separate">Profesores</span></h2>
-                    </p>
-                    <p class="info-text">
-                        Aqui puede ver todos los profesores que han sido de alta en el sistema. Si desea revisar la información relacionada a algún profesor en particular, seleccione el profesor indicado y despues haga clic sobre el boton de "Editar seleccion".
-                    </p>
-                </div>
+            <div class="form-div">
+                <p>
+                    <h2><span class="separate">Profesores</span></h2>
+                </p>
+                <p class="info-text">
+                    Aqui puede ver todos los profesores que han sido de alta en el sistema. Si desea revisar la información relacionada a algún profesor en particular, seleccione el profesor indicado y despues haga clic sobre el boton de "Editar seleccion".
+                </p>
+            </div>
+            <form name="allTeachers" method="post" action="./editarProfesor.html">
                 <div class="edit-button-div">
-                    <button type="submit" class="edit-button">
+                    <button id="to-edit-button" type="button" class="edit-button">
                         Editar selección
                     </button>
                 </div>
-                <div class="table-div">
+                <div id="teacher-table-div" class="table-div">
                     <table>
                         <caption>
                             Profesores

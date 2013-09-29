@@ -17,6 +17,15 @@
         <link rel="stylesheet" href="../css/normalize.css">
         <link rel="stylesheet" href="../css/main.css">
         <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
+        <script>
+            window.onload = function(){
+                addButton = document.getElementById( "free-day-button" );
+                button = document.getElementById( "add-free-days" );
+                
+                addButton.onclick = addFreeDay;
+                button.onclick = checkFreeDays;
+            }
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -52,26 +61,23 @@
         </nav>
         
         <section class="main-section">
-            <form method="get" action="">
+            <div class="form-div">
+                <p>
+                    <h2><span class="separate">Asuetos</span></h2>
+                </p>
+                <p class="info-text">
+                    Especifique las fechas que deben de tomarse como días libres. Agregue las fechas escribiendolas en los campos de texto. Si necesita más fechas, presione el botón "Otro más" para agregar otro campo de texto.
+                </p>
+            </div>
+            <form name="freeDays" method="post" action="">
                 <div class="form-div">
-                    <p>
-                        <h2><span class="separate">Asuetos</span></h2>
-                    </p>
-                    <p class="info-text">
-                        Especifique las fechas que deben de tomarse como días libres. Agregue las fechas escribiendolas en los campos de texto. Si necesita más fechas, presione el botón "Otro más" para agregar otro campo de texto.<br /><br />En la parte inferior se mostrará una tabla con los días libre ya registrados, ademas de aquellos que usted haya agregado. Seleccione aquellos que quiere registrar y luego haga clic en el botón "Registrar".
-                    </p>
-                </div>
-                <div class="form-div">
-                    <label for="new-free-day">
+                    <label id="free-day-label1" for="new-free-day">
                         Fecha:
                     </label>
                     <input type="date" id="new-free-day" name="new-free-day" required />
-                    <button class="free-day-button" type="button">Otro mas</button>
+                    <button id="free-day-button" class="free-day-button" type="button">Agregar</button>
                 </div>
-                <div class="form-div">
-                    <button class="submit-button" type="button">Agregar</button>
-                </div>
-                <div class="table-div">
+                <!-- <div class="table-div">
                     <table id="free-days-table">
                         <caption>
                             Dias de asueto:
@@ -93,9 +99,9 @@
                         <tfoot>
                         </tfoot>
                     </table>
-                </div>
-                <div class="form-div">
-                    <button class="submit-button" type="submit">Registrar</button>
+                </div> -->
+                <div id="add-button-div" class="form-div">
+                    <button id="add-free-days" class="submit-button" type="button">Registrar</button>
                 </div>
             </form>
         </section>

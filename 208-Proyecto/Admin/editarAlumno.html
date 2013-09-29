@@ -17,6 +17,13 @@
         <link rel="stylesheet" href="../css/normalize.css">
         <link rel="stylesheet" href="../css/main.css">
         <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
+        <script>
+            window.onload = function(){
+                button = document.getElementById( "submit-student-ch" );
+                
+                button.onclick = checkStudent;
+            }
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -52,15 +59,15 @@
         </nav>
         
         <section class="main-section">
-            <form method="get" action="">
-                <div class="form-div">
-                    <p>
-                        <h2><span class="separate">Editar alumno</span></h2>
-                    </p>
-                    <p class="info-text">
-                        Puede modificar los siguientes campos del alumno seleccionado.
-                    </p>
-                </div>
+            <div class="form-div">
+                <p>
+                    <h2><span class="separate">Editar alumno</span></h2>
+                </p>
+                <p class="info-text">
+                    Puede modificar los siguientes campos del alumno seleccionado.
+                </p>
+            </div>
+            <form name="editStudent" method="post" action="">
                 <div class="form-div">
                     <label for="edit-student-code">
                         Código:
@@ -128,7 +135,7 @@
                     <input type="url" id="edit-student-github" name="edit-student-github" />
                 </div>
                 <div class="form-div">
-                    <button class="submit-button" type="submit">Actualizar</button>
+                    <button id="submit-student-ch" class="submit-button" type="button">Actualizar</button>
                     <button type="reset">Limpiar</button>
                 </div>
             </form>

@@ -17,6 +17,13 @@
         <link rel="stylesheet" href="../css/normalize.css">
         <link rel="stylesheet" href="../css/main.css">
         <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
+        <script>
+            window.onload = function(){
+                button = document.getElementById( "see-student" );
+                
+                button.onclick = checkSelected2;
+            }
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -52,21 +59,21 @@
         </nav>
         
         <section class="main-section">
-            <form method="get" action="./editarAlumno.html">
-                <div class="form-div">
-                    <p>
-                        <h2><span class="separate">Alumnos</span></h2>
-                    </p>
-                    <p class="info-text">
-                        Aqui puede ver todos los alumnos que estan inscritos en el sistema. Si desea revisar la información relacionada a algún alumno en particular, seleccione el alumno correspondiente en la tabla y despues haga clic sobre el boton de "Editar seleccion".
-                    </p>
-                </div>
+            <div class="form-div">
+                <p>
+                    <h2><span class="separate">Alumnos</span></h2>
+                </p>
+                <p class="info-text">
+                    Aqui puede ver todos los alumnos que estan inscritos en el sistema. Si desea revisar la información relacionada a algún alumno en particular, seleccione el alumno correspondiente en la tabla y despues haga clic sobre el boton de "Editar seleccion".
+                </p>
+            </div>
+            <form name="allStudents" method="post" action="./editarAlumno.html">
                 <div class="edit-button-div">
-                    <button type="submit" class="edit-button">
+                    <button id="see-student" type="button" class="edit-button">
                         Editar selección
                     </button>
                 </div>
-                <div class="table-div">
+                <div id="student-table" class="table-div">
                     <table>
                         <caption>
                             Alumnos

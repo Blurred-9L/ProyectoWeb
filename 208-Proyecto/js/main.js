@@ -12,16 +12,112 @@ function checkRegStudent(){
     if( document.getElementById( "checkbox-tel" ).checked ){
         boolArray[6] = checkCellPhone( form, document.getElementById( "reg-student-phone" ) );
     }
+    else{
+        boolArray[6] = true;
+    }
     if( document.getElementById( "checkbox-url" ).checked ){
         boolArray[7] = checkUrl( form, document.getElementById( "reg-student-url" ) );
     }
+    else{
+        boolArray[7] = true;
+    }
     if( document.getElementById( "checkbox-github" ).checked ){
         boolArray[8] = checkUrl( form, document.getElementById( "reg-student-github" ) );
+    }
+    else{
+        boolArray[8] = true;
     }
     boolArray[9] = checkClass( form, document.getElementById( "reg-student-class" ) );
     
     ok = true;
     for( var i = 0; i < boolArray.length && ok; i++ ){
+        if( !boolArray[i] ){
+            ok = false;
+        }
+    }
+    
+    if( ok ){
+        form.submit();
+    }
+}
+
+function checkRegStudent2(){
+    var form = document.adminNewStudent;
+    var boolArray = [];
+    var ok;
+    
+    boolArray[0] = checkCode( form, document.getElementById( "reg-student-code" ) );
+    boolArray[1] = checkName( form, document.getElementById( "reg-student-name" ) );
+    boolArray[2] = checkLastName( form, document.getElementById( "reg-student-last1" ) );
+    boolArray[3] = checkLastName( form, document.getElementById( "reg-student-last2" ) );
+    boolArray[4] = checkMail( form, document.getElementById( "reg-student-email" ) );
+    boolArray[5] = checkMajor( form, document.getElementById( "reg-student-major" ) );
+    if( document.getElementById( "checkbox-tel" ).checked ){
+        boolArray[6] = checkCellPhone( form, document.getElementById( "reg-student-phone" ) );
+    }
+    else{
+        boolArray[6] = true;
+    }
+    if( document.getElementById( "checkbox-url" ).checked ){
+        boolArray[7] = checkUrl( form, document.getElementById( "reg-student-url" ) );
+    }
+    else{
+        boolArray[7] = true;
+    }
+    if( document.getElementById( "checkbox-github" ).checked ){
+        boolArray[8] = checkUrl( form, document.getElementById( "reg-student-github" ) );
+    }
+    else{
+        boolArray[8] = true;
+    }
+    boolArray[9] = checkPass( form, document.getElementById( "reg-student-pass" ) );
+    
+    ok = true;
+    for( var i = 0; i < boolArray.length && ok; i++ ){
+        if( !boolArray[i] ){
+            ok = false;
+        }
+    }
+    
+    if( ok ){
+        form.submit();
+    }
+}
+
+function checkStudent(){
+    var form = document.editStudent;
+    var boolArray = [];
+    var ok;
+    var cell = document.getElementById( "edit-student-phone" );
+    var url = document.getElementById( "edit-student-url" );
+    var github = document.getElementById( "edit-student-github" );
+    
+    boolArray[0] = checkMail( form, document.getElementById( "edit-student-email" ) );
+    if( cell.value != "" ){
+        boolArray[1] = checkCellPhone( form, cell );
+    }
+    else{
+        boolArray[1] = true;
+        cell.parentNode.replaceChild( document.createTextNode( "" ), cell.parentNode.lastChild );
+    }
+    if( url.value != "" ){
+        boolArray[2] = checkUrl( form, url );
+    }
+    else{
+        boolArray[2] = true;
+        url.parentNode.replaceChild( document.createTextNode( "" ), url.parentNode.lastChild );
+    }
+    if( github.value != "" ){
+        boolArray[3] = checkUrl( form, github );
+    }
+    else{
+        boolArray[3] = true;
+        github.parentNode.replaceChild( document.createTextNode( "" ), github.parentNode.lastChild );
+    }
+    boolArray[4] = checkPass( form, document.getElementById( "edit-student-pass" ) );
+    
+    ok = true;
+    for( var i = 0; i < boolArray.length; i++ ){
         if( !boolArray[i] ){
             ok = false;
         }
@@ -82,6 +178,37 @@ function checkNewClass(){
     var ok;
 }
 
+function checkFreeDays(){
+    var form = document.freeDays;
+    var boolArray = [];
+    var ok;
+}
+
+function checkNewTeacher(){
+    var form = document.newTeacher;
+    var boolArray = [];
+    var ok;
+    
+    boolArray[0] = checkCode( form, document.getElementById( "reg-teacher-code" ) );
+    boolArray[1] = checkName( form, document.getElementById( "reg-teacher-name" ) );
+    boolArray[2] = checkLastName( form, document.getElementById( "reg-teacher-last1" ) );
+    boolArray[3] = checkLastName( form, document.getElementById( "reg-teacher-last2" ) );
+    boolArray[4] = checkLastName( form, document.getElementById( "reg-teacher-pass" ) );
+    boolArray[5] = checkMail( form, document.getElementById( "reg-teacher-email" ) );
+    boolArray[6] = checkCellPhone( form, document.getElementById( "reg-teacher-phone" ) );
+    
+    ok = true;
+    for( var i = 0; i < boolArray.length; i++ ){
+        if( !boolArray[i] ){
+            ok = false;
+        }
+    }
+    
+    if( ok ){
+        form.submit();
+    }
+}
+
 function checkTeacherData(){
     var form = document.teacherData;
     var boolArray = [];
@@ -89,6 +216,27 @@ function checkTeacherData(){
     
     boolArray[0] = checkMail( form, document.getElementById( "teacher-email" ) );
     boolArray[1] = checkCellPhone( form, document.getElementById( "teacher-phone" ) );
+    
+    ok = true;
+    for( var i = 0; i < boolArray.length && ok; i++ ){
+        if( !boolArray[i] ){
+            ok = false;
+        }
+    }
+    
+    if( ok ){
+        form.submit();
+    }
+}
+
+function checkEditTeacher(){
+    var form = document.editTeacher;
+    var boolArray = [];
+    var ok;
+    
+    boolArray[0] = checkMail( form, document.getElementById( "edit-teacher-email" ) );
+    boolArray[1] = checkCellPhone( form, document.getElementById( "edit-teacher-phone" ) );
+    boolArray[2] = checkPass( form, document.getElementById( "edit-teacher-pass" ) );
     
     ok = true;
     for( var i = 0; i < boolArray.length && ok; i++ ){
@@ -123,14 +271,14 @@ function checkStudentData(){
     }
     else{
         boolArray[2] = true;
-        cell.parentNode.replaceChild( document.createTextNode( "" ), cell.parentNode.lastChild );
+        url.parentNode.replaceChild( document.createTextNode( "" ), url.parentNode.lastChild );
     }
     if( github.value != "" ){
         boolArray[3] = checkUrl( form, github );
     }
     else{
         boolArray[3] = true;
-        cell.parentNode.replaceChild( document.createTextNode( "" ), cell.parentNode.lastChild );
+        github.parentNode.replaceChild( document.createTextNode( "" ), github.parentNode.lastChild );
     }
     
     ok = true;
@@ -233,6 +381,28 @@ function checkEvalParams(){
     boolArray[4] = checkGrade( form, document.getElementById( "grade" ) );
     
     for( var i = 0; i < boolArray.length && ok; i++ ){
+        if( !boolArray[i] ){
+            ok = false;
+        }
+    }
+    
+    if( ok ){
+        form.submit();
+    }
+}
+
+function checkNewCycle(){
+    var form = document.newCycle;
+    var boolArray = [];
+    var ok;
+    
+    boolArray[0] = checkYear( form, document.getElementById( "new-cycle-year" ) );
+    boolArray[1] = checkHalfYear( form, document.getElementById( "new-cycle-half" ) );
+    boolArray[2] = true;
+    boolArray[3] = true;
+    
+    ok = true;
+    for( var i = 0; i < boolArray.length; i++ ){
         if( !boolArray[i] ){
             ok = false;
         }
@@ -544,6 +714,81 @@ function checkSelected( form, inputArray ){
     return ok;
 }
 
+function checkSelected2(){
+    var ok = false;
+    var message;
+    var table = document.getElementById( "student-table" );
+    var form = document.allStudents;
+    var inputArray = document.getElementsByTagName( "input" );
+    
+    for( var i = 0; i < inputArray.length && !ok; i++ ){
+        if( inputArray[i].type == "radio" ){
+            if( inputArray[i].checked ){
+                ok = true;
+            }
+        }
+    }
+    if( !ok ){
+        message = document.createTextNode( "Seleccione un alumno." );
+        table.replaceChild( message, table.lastChild );
+    }
+    else{
+        message = document.createTextNode( "" );
+        table.replaceChild( message, table.lastChild );
+        form.submit();
+    }
+}
+
+function checkSelected3(){
+    var ok = false;
+    var message;
+    var table = document.getElementById( "cycle-table-div" );
+    var form = document.allCycles;
+    var inputArray = document.getElementsByTagName( "input" );
+    
+    for( var i = 0; i < inputArray.length && !ok; i++ ){
+        if( inputArray[i].type == "radio" ){
+            if( inputArray[i].checked ){
+                ok = true;
+            }
+        }
+    }
+    if( !ok ){
+        message = document.createTextNode( "Seleccione un ciclo." );
+        table.replaceChild( message, table.lastChild );
+    }
+    else{
+        message = document.createTextNode( "" );
+        table.replaceChild( message, table.lastChild );
+        form.submit();
+    }
+}
+
+function checkSelected4(){
+    var ok = false;
+    var message;
+    var table = document.getElementById( "teacher-table-div" );
+    var form = document.allTeachers;
+    var inputArray = document.getElementsByTagName( "input" );
+    
+    for( var i = 0; i < inputArray.length && !ok; i++ ){
+        if( inputArray[i].type == "radio" ){
+            if( inputArray[i].checked ){
+                ok = true;
+            }
+        }
+    }
+    if( !ok ){
+        message = document.createTextNode( "Seleccione un profesor." );
+        table.replaceChild( message, table.lastChild );
+    }
+    else{
+        message = document.createTextNode( "" );
+        table.replaceChild( message, table.lastChild );
+        form.submit();
+    }
+}
+
 function checkPass( form, pass ){
     var ok = true;
     var regex = /^.+$/gi;
@@ -719,4 +964,45 @@ function addEval(){
     
     document.newClass.insertBefore( div, otherDiv );
     document.newClass.insertBefore( document.createElement( "br" ), otherDiv );
+}
+
+function addFreeDay(){
+    var div = document.createElement( "div" );
+    var label = document.createElement( "label" );
+    var input = document.createElement( "input" );
+    var otherDiv = document.getElementById( "add-button-div" );
+    var button = document.getElementById( "free-day-button" );
+    
+    div.className = "form-div";
+    label.HTMLfor = "new-free-day";
+    label.innerHTML = document.getElementById( "free-day-label1" ).innerHTML;
+    div.appendChild( label );
+    
+    input.name = "new-free-day";
+    input.type = "date";
+    input.required = true;
+    div.appendChild( input );
+    
+    div.appendChild( button );
+    document.freeDays.insertBefore( div, otherDiv );
+}
+
+function addFreeDay2(){
+    var div = document.createElement( "div" );
+    var label = document.createElement( "label" );
+    var input = document.createElement( "input" );
+    var otherDiv = document.getElementById( "submit-div" );
+    var button = document.getElementById( "add-free-day" );
+    
+    div.className = "form-div";
+    label.HTMLfor = "free-day";
+    label.innerHTML = document.getElementById( "free-day-label1" ).innerHTML;
+    div.appendChild( label );
+    
+    input.name = "free-day";
+    input.type = "date";
+    div.appendChild( input );
+    
+    div.appendChild( button );
+    document.newCycle.insertBefore( div, otherDiv );
 }

@@ -17,6 +17,13 @@
         <link rel="stylesheet" href="../css/normalize.css">
         <link rel="stylesheet" href="../css/main.css">
         <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
+        <script>
+            window.onload = function(){
+                button = document.getElementById( "free-day-edit" );
+                
+                button.onclick = checkSelected3;
+            }
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -52,21 +59,21 @@
         </nav>
         
         <section class="main-section">
-            <form method="get" action="./asuetosCiclo.html">
-                <div class="form-div">
-                    <p>
-                        <h2><span class="separate">Ciclos Escolares</span></h2>
-                    </p>
-                    <p class="info-text">
-                        Estos son los ciclos escolares registrados en el sistema. Si desea modificar las fechas de asuetos relacionadas a alguno de estos ciclos, selecciones el ciclo escolar deseado y después haga clic en "Agregar asuetos".
-                    </p>
-                </div>
+            <div class="form-div">
+                <p>
+                    <h2><span class="separate">Ciclos Escolares</span></h2>
+                </p>
+                <p class="info-text">
+                    Estos son los ciclos escolares registrados en el sistema. Si desea modificar las fechas de asuetos relacionadas a alguno de estos ciclos, selecciones el ciclo escolar deseado y después haga clic en "Agregar asuetos".
+                </p>
+            </div>
+            <form name="allCycles" method="post" action="./asuetosCiclo.html">
                 <div class="edit-button-div">
-                    <button type="action" class="edit-button">
+                    <button id="free-day-edit" type="button" class="edit-button">
                         Agregar asuetos
                     </button>
                 </div>
-                <div class="table-div">
+                <div id="cycle-table-div" class="table-div">
                     <table>
                         <caption>
                             Ciclos Escolares

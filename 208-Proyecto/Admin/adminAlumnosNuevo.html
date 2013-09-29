@@ -19,16 +19,51 @@
         <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
         <script>
             window.onload = function() {
-                var name = document.getElementById( "reg-student-name" );
+                button = document.getElementById( "submit-new-student" );
+                var phone = document.getElementById( "checkbox-tel" );
+                var url = document.getElementById( "checkbox-url" );
+                var github = document.getElementById( "checkbox-github" );
                 
-                name.onkeyup = changeString;
-            }
-            
-            function changeString( ev ){
-                var event = ev || window.event;
-                var name = document.getElementById( "reg-student-name" );
+                button.onclick = checkRegStudent2;
                 
-                name.value = name.value.toUpperCase();
+                phone.onclick = function(){
+                    var elem = document.getElementById( "reg-student-phone" );
+                    
+                    if( elem.disabled ){
+                        elem.disabled = false;
+                    }
+                    else{
+                        elem.disabled = true;
+                        elem.value = "";
+                        elem.parentNode.replaceChild( document.createTextNode( "" ), elem.parentNode.lastChild );
+                    }
+                }
+                
+                url.onclick = function(){
+                    var elem = document.getElementById( "reg-student-url" );
+                    
+                    if( elem.disabled ){
+                        elem.disabled = false;
+                    }
+                    else{
+                        elem.disabled = true;
+                        elem.value = "";
+                        elem.parentNode.replaceChild( document.createTextNode( "" ), elem.parentNode.lastChild );
+                    }
+                }
+                
+                github.onclick = function(){
+                    var elem = document.getElementById( "reg-student-github" );
+                    
+                    if( elem.disabled ){
+                        elem.disabled = false;
+                    }
+                    else{
+                        elem.disabled = true;
+                        elem.value = "";
+                        elem.parentNode.replaceChild( document.createTextNode( "" ), elem.parentNode.lastChild );
+                    }
+                }
             }
         </script>
     </head>
@@ -66,15 +101,15 @@
         </nav>
         
         <section class="main-section">
-            <form id="formulario" method="get" action="">
-                <div class="form-div">
-                    <p>
-                        <h2><span class="separate">Registrar alumno</span></h2>
-                    </p>
-                    <p class="info-text">
-                        Por favor rellene los siguientes campos para poder dar de alta a un nuevo alumno.
-                    </p>
-                </div>
+            <div class="form-div">
+                <p>
+                    <h2><span class="separate">Registrar alumno</span></h2>
+                </p>
+                <p class="info-text">
+                    Por favor rellene los siguientes campos para poder dar de alta a un nuevo alumno.
+                </p>
+            </div>
+            <form name="adminNewStudent" id="formulario" method="get" action="">
                 <div class="form-div">
                     <label for="reg-student-code">
                         Código:
@@ -128,24 +163,24 @@
                         Celular:
                     </label>
                     <input type="tel" id="reg-student-phone" name="reg-student-phone" disabled />
-                    <input class="form-checkbox" type="checkbox" name="checkbox-tel" />
+                    <input id="checkbox-tel" class="form-checkbox" type="checkbox" name="checkbox-tel" />
                 </div>
                 <div class="form-div">
                     <label for="reg-student-url">
                         Pagina web:
                     </label>
                     <input type="url" id="reg-student-url" name="reg-student-url" disabled />
-                    <input class="form-checkbox" type="checkbox" name="checkbox-url" />
+                    <input id="checkbox-url" class="form-checkbox" type="checkbox" name="checkbox-url" />
                 </div>
                 <div class="form-div">
                     <label for="reg-student-github">
                         Github:
                     </label>
                     <input type="url" id="reg-student-github" name="reg-student-github" disabled />
-                    <input class="form-checkbox" type="checkbox" name="checkbox-github" />
+                    <input id="checkbox-github" class="form-checkbox" type="checkbox" name="checkbox-github" />
                 </div>
                 <div class="form-div">
-                    <button class="submit-button" type="submit">Registrar</button>
+                    <button id="submit-new-student" class="submit-button" type="button">Registrar</button>
                     <button type="reset">Limpiar</button>
                 </div>
             </form>

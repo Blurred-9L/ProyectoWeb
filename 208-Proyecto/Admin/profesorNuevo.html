@@ -17,6 +17,13 @@
         <link rel="stylesheet" href="../css/normalize.css">
         <link rel="stylesheet" href="../css/main.css">
         <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
+        <script>
+            window.onload = function(){
+                button = document.getElementById( "submit-teacher" );
+                
+                button.onclick = checkNewTeacher;
+            }
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -52,15 +59,15 @@
         </nav>
         
         <section class="main-section">
-            <form method="get" action="">
-                <div class="form-div">
-                    <p>
-                        <h2><span class="separate">Registrar profesor</span></h2>
-                    </p>
-                    <p class="info-text">
-                        Por favor rellene los siguientes campos para poder dar de alta a un nuevo profesor.
-                    </p>
-                </div>
+            <div class="form-div">
+                <p>
+                    <h2><span class="separate">Registrar profesor</span></h2>
+                </p>
+                <p class="info-text">
+                    Por favor rellene los siguientes campos para poder dar de alta a un nuevo profesor.
+                </p>
+            </div>
+            <form name="newTeacher" method="post" action="">
                 <div class="form-div">
                     <label for="reg-teacher-code">
                         Código:
@@ -104,7 +111,7 @@
                     <input type="tel" id="reg-teacher-phone" name="reg-teacher-phone" />
                 </div>
                 <div class="form-div">
-                    <button class="submit-button" type="submit">Registrar</button>
+                    <button id="submit-teacher" class="submit-button" type="button">Registrar</button>
                     <button type="reset">Limpiar</button>
                 </div>
             </form>
