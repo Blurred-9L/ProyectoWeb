@@ -102,6 +102,44 @@ function checkTeacherData(){
     }
 }
 
+function checkTeacherPass(){
+    var form = document.teacherPassCh;
+    var teacherPass = document.getElementById( "teacher-old-pass" );
+    var newPass = document.getElementById( "teacher-new-pass" );
+    var newPass2 = document.getElementById( "teacher-new-pass2" );
+    var boolArray = [];
+    var ok;
+    
+    boolArray[0] = checkPass( form, teacherPass );
+    boolArray[1] = checkPass( form, newPass );
+    boolArray[2] = checkPass( form, newPass2 );
+    
+    if( boolArray[0] ){
+        boolArray[3] = checkTeacherPassword( form, teacherPass );
+    }
+    else{
+        boolArray[3] = false;
+    }
+    
+    if( boolArray[1] && boolArray[2] ){
+        boolArray[4] = checkNewTeacherPass( form, newPass, newPass2 );
+    }
+    else{
+        boolArray[4] = false;
+    }
+    
+    ok = true;
+    for( var i = 0; i < boolArray.length; i++ ){
+        if( !boolArray[i] ){
+            ok = false;
+        }
+    }
+    
+    if( ok ){
+        form.submit();
+    }
+}
+
 function checkEvalParams(){
     var form = document.evalStudent;
     var boolArray = [];
@@ -420,6 +458,52 @@ function checkSelected( form, inputArray ){
     else{
         message = document.createTextNode( "" );
         table.replaceChild( message, table.lastChild );
+    }
+    
+    return ok;
+}
+
+function checkPass( form, pass ){
+    var ok = true;
+    var regex = /^.+$/gi;
+    var message;
+    var str = pass.value;
+    
+    if( !regex.test( str ) ){
+        message = document.createTextNode( " Campo vacio." );
+        pass.parentNode.replaceChild( message, pass.parentNode.lastChild );
+        ok = false;
+    }
+    else{
+        message = document.createTextNode( "" );
+        pass.parentNode.replaceChild( message, pass.parentNode.lastChild );
+    }
+    
+    return ok;
+}
+
+function checkTeacherPassword( form, teacherPass ){
+    var ok = true;
+    
+    //Check password here... somehow.
+    
+    return ok;
+}
+
+function checkNewTeacherPass( form, newPass1, newPass2 ){
+    var ok = true;
+    var str1 = newPass1.value;
+    var str2 = newPass2.value;
+    var message;
+    
+    if( str1 != str2 ){
+        message = document.createTextNode( " Las contraseñas no coinciden." );
+        newPass2.parentNode.replaceChild( message, newPass2.parentNode.lastChild );
+        ok = false;
+    }
+    else{
+        message = document.createTextNode( "" );
+        newPass2.parentNode.replaceChild( message, newPass2.parentNode.lastChild );
     }
     
     return ok;
