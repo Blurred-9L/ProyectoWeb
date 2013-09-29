@@ -102,6 +102,49 @@ function checkTeacherData(){
     }
 }
 
+function checkStudentData(){
+    var form = document.studentData;
+    var boolArray = [];
+    var ok;
+    var cell = document.getElementById( "student-phone" );
+    var url = document.getElementById( "student-url" );
+    var github = document.getElementById( "student-github" );
+    
+    boolArray[0] = checkMail( form, document.getElementById( "student-email" ) );
+    if( cell.value != "" ){
+        boolArray[1] = checkCellPhone( form, cell );
+    }
+    else{
+        boolArray[1] = true;
+        cell.parentNode.replaceChild( document.createTextNode( "" ), cell.parentNode.lastChild );
+    }
+    if( url.value != "" ){
+        boolArray[2] = checkUrl( form, url );
+    }
+    else{
+        boolArray[2] = true;
+        cell.parentNode.replaceChild( document.createTextNode( "" ), cell.parentNode.lastChild );
+    }
+    if( github.value != "" ){
+        boolArray[3] = checkUrl( form, github );
+    }
+    else{
+        boolArray[3] = true;
+        cell.parentNode.replaceChild( document.createTextNode( "" ), cell.parentNode.lastChild );
+    }
+    
+    ok = true;
+    for( var i = 0; i < boolArray.length; i++ ){
+        if( !boolArray[i] ){
+            ok = false;
+        }
+    }
+    
+    if( ok ){
+        form.submit();
+    }
+}
+
 function checkTeacherPass(){
     var form = document.teacherPassCh;
     var teacherPass = document.getElementById( "teacher-old-pass" );
@@ -122,7 +165,45 @@ function checkTeacherPass(){
     }
     
     if( boolArray[1] && boolArray[2] ){
-        boolArray[4] = checkNewTeacherPass( form, newPass, newPass2 );
+        boolArray[4] = checkNewPass( form, newPass, newPass2 );
+    }
+    else{
+        boolArray[4] = false;
+    }
+    
+    ok = true;
+    for( var i = 0; i < boolArray.length; i++ ){
+        if( !boolArray[i] ){
+            ok = false;
+        }
+    }
+    
+    if( ok ){
+        form.submit();
+    }
+}
+
+function checkStudentPass(){
+    var form = document.studentPassCh;
+    var studentPass = document.getElementById( "student-old-pass" );
+    var newPass1 = document.getElementById( "student-new-pass" );
+    var newPass2 = document.getElementById( "student-new-pass2" );
+    var boolArray = [];
+    var ok;
+    
+    boolArray[0] = checkPass( form, studentPass );
+    boolArray[1] = checkPass( form, newPass1 );
+    boolArray[2] = checkPass( form, newPass2 );
+    
+    if( boolArray[0] ){
+        boolArray[3] = checkStudentPassword( form, studentPass );
+    }
+    else{
+        boolArray[3] = false;
+    }
+    
+    if( boolArray[1] && boolArray[2] ){
+        boolArray[4] = checkNewPass( form, newPass1, newPass2 );
     }
     else{
         boolArray[4] = false;
@@ -305,7 +386,7 @@ function checkUrl( form, url ){
         ok = false;
     }
     else{
-        mesage = document.createTextNode( "" );
+        message = document.createTextNode( "" );
         url.parentNode.replaceChild( message, url.parentNode.lastChild );
     }
     
@@ -490,7 +571,15 @@ function checkTeacherPassword( form, teacherPass ){
     return ok;
 }
 
-function checkNewTeacherPass( form, newPass1, newPass2 ){
+function checkStudentPassword( form, studentPass ){
+    var ok = true;
+    
+    //Check password here... queries...
+    
+    return ok;
+}
+
+function checkNewPass( form, newPass1, newPass2 ){
     var ok = true;
     var str1 = newPass1.value;
     var str2 = newPass2.value;

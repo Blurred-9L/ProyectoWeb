@@ -17,6 +17,13 @@
         <link rel="stylesheet" href="../css/normalize.css">
         <link rel="stylesheet" href="../css/main.css">
         <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
+        <script>
+            window.onload = function(){
+                button = document.getElementById( "pass-submit" );
+                
+                button.onclick = checkStudentPass;
+            }
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -46,7 +53,7 @@
         </nav>
         
         <section class="main-section">
-            <form method="get" action="">
+            <form name="studentPassCh" method="post" action="">
                 <div>
                     <fieldset>
                         <div class="form-div">
@@ -58,24 +65,24 @@
                             <label class="pass-label" for="student-old-pass">
                                 Vieja contraseña:
                             </label>
-                            <input type="text" id="student-old-pass" name="student-old-pass" required />
+                            <input type="password" id="student-old-pass" name="student-old-pass" required />
                         </div>
                         <div class="form-div">
                             <label class="pass-label" for="student-new-pass">
                                 Nueva contraseña:
                             </label>
-                            <input type="text" id="student-new-pass" name="student-new-pass" required />
+                            <input type="password" id="student-new-pass" name="student-new-pass" required />
                         </div>
                         <div class="form-div">
                             <label class="pass-label" for="student-new-pass2">
                                 Verificar contraseña:
                             </label>
-                            <input type="text" id="student-new-pass2" name="student-new-pass2" required />
+                            <input type="password" id="student-new-pass2" name="student-new-pass2" required />
                         </div>
                     </fieldset>
                 <div>
                 <div class="form-div">
-                    <button class="submit-button" id="pass-submit" type="submit">Aceptar</button>
+                    <button class="submit-button" id="pass-submit" type="button">Aceptar</button>
                 </div>
             </form>
         </section>
