@@ -36,7 +36,7 @@
                     else{
                         elem.disabled = true;
                         elem.value = "";
-                        //elem.parentNode.replaceChild( document.createTextNode( "" ), elem.parentNode.lastChild );
+                        elem.parentNode.replaceChild( document.createTextNode( "" ), elem.parentNode.lastChild );
                     }
                 }
             }
@@ -86,12 +86,12 @@
                     </label>
                     <input type="text" id="new-class-name" name="new-class-name" required />
                 </div>
-                <div class="form-div">
+                <!-- <div class="form-div">
                     <label for="new-class-sec">
                         Seccion:
                     </label>
                     <input type="text" id="new-class-sec" name="new-class-sec" required />
-                </div>
+                </div> -->
                 <div class="form-div">
                     <label for="new-class-nrc">
                         NRC:
@@ -116,7 +116,7 @@
                     <label id="day-label1" for="new-class-day1">
                         Día:
                     </label>
-                    <select name="new-class-day1" id="new-class-day1">
+                    <select name="new-class-day" id="new-class-day1">
                         <option selected value="0">Dia...</option>
                         <option value="1">Lunes</option>
                         <option value="2">Martes</option>
@@ -128,7 +128,7 @@
                     <label id="time-label1" for="new-class-start1">
                         Inicio:
                     </label>
-                    <select name="new-class-start1" id="new-class-start1">
+                    <select name="new-class-start" id="new-class-start1">
                         <option selected value="0">Hora inicio...</option>
                         <option value="7">7:00</option>
                         <option value="8">8:00</option>
@@ -147,7 +147,7 @@
                     <label id="len-label1" for="new-class-duration1">
                         Duración:                        
                     </label>
-                    <input type="number" name="new-class-duration1" id="new-class-duration1" min="1" max="4" />
+                    <input type="number" name="new-class-duration" id="new-class-duration1" min="1" max="4" />
                     <button class="free-day-button" id="add-time" type="button">Agregar</button>
                 </div>
                 <div class="form-div" id="eval1">
@@ -157,22 +157,22 @@
                     <label id="class-act-label1" for="new-class-act1">
                         Actividad:
                     </label>
-                    <input type="text" name="new-class-act1" id="new-class-act1" />
+                    <input type="text" name="new-class-act" id="new-class-act1" />
                     <br /><br />
                     <label id="class-val-label1" for="new-class-val1">
                         Valor:
                     </label>
-                    <input type="number" name="new-class-val1" id="new-class-val1" min="1" max="100" />
+                    <input type="number" name="new-class-val" id="new-class-val1" min="1" max="100" />
                     <br /><br />
                     <label id="page-label1" for="eval-page1">
                         Hoja extra:
                     </label>
-                    <input type="checkbox" name="eval-page1" id="eval-page1" />
+                    <input type="checkbox" name="eval-page" id="eval-page1" />
                     <br /><br />
                     <label id="columns-label1" for="page-colums1">
                         Columnas:
                     </label>
-                    <input type="number" name="page-columns1" id="page-columns1" disabled />
+                    <input type="number" name="page-columns" id="page-columns1" disabled />
                     <button class="free-day-button" id="add-eval" type="button">Agregar</button>
                 </div>
                 <div class="form-div" id="submit-div">
