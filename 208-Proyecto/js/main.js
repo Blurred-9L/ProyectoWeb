@@ -181,7 +181,24 @@ function checkNewClass(){
 function checkFreeDays(){
     var form = document.freeDays;
     var boolArray = [];
+    var freeDays;
     var ok;
+    
+    //2013-10-09
+    //AAAA-MM-DD
+    freeDays = document.getElementsByTagName( "input" );
+    for( var i = 0; i < freeDays.length; i++ ){
+        boolArray[i] = checkDate( form, freeDays[i] );
+    }
+    ok = true;
+    for( var i = 0; i < freeDays.length; i++ ){
+        if( !boolArray[i] ){
+            ok = false;
+        }
+    }
+    if( ok ){
+        form.submit();
+    }
 }
 
 function checkNewTeacher(){
@@ -708,6 +725,52 @@ function checkGrade( form, grade ){
     return ok;
 }
 
+function checkDate( form, date ){
+    var ok;
+    var regex = /^\d{1,4}-[01]\d-[0-3]\d$/gi;
+    var message;
+    var str = date.value;
+    var dateElems;
+    var validDays = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    
+    if( regex.test( str ) ){
+        dateElems = str.split( "-" );
+        if( dateElems[1] > 0 && dateElems[1] <= 12 ){
+            if( dateElems[2] > 0 && dateElems[2] <= validDays[ parseInt( dateElems[1] ) ] ){
+                ok = true;
+            }
+            else if( ( dateElems[0] % 4 == 0 ) && ( dateElems[0] % 100 != 0 ) || ( dateElems[0] % 400 == 0 ) ){
+                if( dateElems[1] == 2 && dateElems[2] > 0 && dateElems[2] <= 29 ){
+                        ok = true;
+                }
+                else{
+                    ok = false;
+                }
+            }
+            else{
+                ok = false;
+            }
+        }
+        else{
+            ok = false;
+        }
+    }
+    else{
+        ok = false;
+    }
+    
+    if( ok ){
+        message = document.createTextNode( "" );
+        date.parentNode.replaceChild( message, date.parentNode.lastChild );
+    }
+    else{
+        message = document.createTextNode( " Formato de fecha es AAAA-MM-DD." );
+        date.parentNode.replaceChild( message, date.parentNode.lastChild );
+    }
+    
+    return ok;
+}
+
 function checkSelected( form, inputArray ){
     var ok = false;
     var message;
@@ -1003,6 +1066,7 @@ function addFreeDay(){
     div.appendChild( input );
     
     div.appendChild( button );
+    div.appendChild( document.createTextNode( "" ) );
     document.freeDays.insertBefore( div, otherDiv );
 }
 
