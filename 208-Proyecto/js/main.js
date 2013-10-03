@@ -411,12 +411,24 @@ function checkEvalParams(){
 function checkNewCycle(){
     var form = document.newCycle;
     var boolArray = [];
+    var freeDays = [];
+    var elems = [];
     var ok;
     
     boolArray[0] = checkYear( form, document.getElementById( "new-cycle-year" ) );
     boolArray[1] = checkHalfYear( form, document.getElementById( "new-cycle-half" ) );
-    boolArray[2] = true;
-    boolArray[3] = true;
+    boolArray[2] = checkDate( form, document.getElementById( "new-cycle-start" ) );
+    boolArray[3] = checkDate( form, document.getElementById( "new-cycle-end" ) );
+    
+    elems = document.getElementsByTagName( "input" );
+    for( var i = 0; i < elems.length; i++ ){
+        if( elems[i].name == "free-day" ){
+            freeDays.push( elems[i] );
+        }
+    }
+    for( var i = 0; i < freeDays.length; i++ ){
+        boolArray.push( checkDate( form, freeDays[i] ) );
+    }
     
     ok = true;
     for( var i = 0; i < boolArray.length; i++ ){
@@ -1087,5 +1099,6 @@ function addFreeDay2(){
     div.appendChild( input );
     
     div.appendChild( button );
+    div.appendChild( document.createTextNode( "" ) );
     document.newCycle.insertBefore( div, otherDiv );
 }
