@@ -70,6 +70,11 @@ section.main-section {
     float: left;
 }
 
+section.index {
+    width: 90%;
+    margin: 0% 5%;
+}
+
 section.lost-pass-section {
     width: 80%;
     margin: 1% 10%;
@@ -99,7 +104,7 @@ nav.main-nav {
 }
 
 nav.main-nav ul {
-    width: 100;
+    width: 100%;
 }
 
 nav.main-nav ul li {
@@ -168,6 +173,20 @@ div.select-div {
 div.edit-button-div {
     margin: 1% 0%;
     text-align: center;
+}
+
+div.index-title {
+    text-align: center;
+}
+
+div.content {
+    text-align: justify;
+    padding: 0% 3%;
+}
+
+div.links {
+    font-size: 1.2em;
+    display: block;
 }
 
 label {
@@ -317,6 +336,7 @@ th, td {
     text-align: center;
 }
 
+/*320 x 480*/
 @media screen and (min-width: 0px) and ( max-width: 320px) {
     header, section, aside, nav, footer {
         border: 2px solid #000000;
@@ -330,6 +350,11 @@ th, td {
     
     header {
         display: none;
+    }
+    
+    section.index {
+        width: 85%;
+        margin: 5% 5%;
     }
     
     footer {
@@ -349,6 +374,68 @@ th, td {
     .login-button {
         display: block;
         margin: 0% 35%;
+    }
+}
+
+/* 480 x 320*/
+@media screen and (min-width: 321px) and ( max-width: 480px) {
+    header, section, aside, nav, footer {
+        border: 2px solid #000000;
+        border-radius: 0%;
+        -moz-border-radius: 0%;
+        -ms-border-radius: 0%;
+        -o-border-radius: 0%;
+        -webkit-border-raidus: 0%;
+        padding: .3em;
+    }
+    
+    header {
+        display: none;
+    }
+    
+    section.index {
+        width: 90%;
+        margin: 1% 5%;
+        padding: 0%;
+    }
+    
+    footer {
+        display: none;
+    }
+    
+    div.links {
+        font-size: 1em;
+    }
+}
+
+/*768 x 1024*/
+@media screen and (min-width: 481px) and ( max-width: 768px) {
+    header, section, aside, nav, footer {
+        border-radius: 25px;
+        -moz-border-radius: 25px;
+        -ms-border-radius: 25px;
+        -o-border-radius: 25px;
+        -webkit-border-raidus: 25px;
+        padding: .3em;
+    }
+    
+    header {
+    }
+    
+    header img {
+        display: none;
+    }
+    
+    section.index {
+        width: 90%;
+        margin: 1% 5%;
+    }
+    
+    footer {
+    }
+    
+    div.links {
+        font-size: 1.2em;
     }
 }
 
