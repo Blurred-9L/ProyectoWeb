@@ -416,6 +416,14 @@ th, td {
         margin: 0% 35% 3% 35%;
     }
     
+    select {
+        font-size: .8em;
+    }
+    
+    form div.form-div {
+        padding-left: 5%;
+    }
+    
     div.form-div h2 {
         margin: 0% 0% 0% 1%;
     }
@@ -504,8 +512,20 @@ th, td {
         margin: 5% 10%;
     }
     
+    form div.form-div label {
+        margin: 0% 0% 0% 7.5%;
+    }
+    
     label {
         text-align: left;
+    }
+    
+    .pass-label {
+        width: 140px;
+    }
+    
+    select {
+        font-size: .8em;
     }
     
     .login-button {
