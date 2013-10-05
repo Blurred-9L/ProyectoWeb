@@ -357,6 +357,11 @@ th, td {
         margin: 5% 5%;
     }
     
+    section.lost-pass-section {
+        margin: 8% 8%;
+        padding: 0% 0% 0% 5%;
+    }
+    
     footer {
         display: none;
     }
@@ -373,7 +378,15 @@ th, td {
     
     .login-button {
         display: block;
-        margin: 0% 35%;
+        margin: 0% 35% 3% 35%;
+    }
+    
+    div.form-div h2 {
+        margin: 0% 0% 0% 1%;
+    }
+    
+    p.info-text {
+        margin: 0% 1%;
     }
 }
 
@@ -399,12 +412,35 @@ th, td {
         padding: 0%;
     }
     
+    section.lost-pass-section {
+        margin: 2.5% 8.5%;
+        padding: 0% 5% 0% 2%;
+    }
+    
+    section.lost-pass-section label{
+        width: 85px;
+        margin: 0% 0% 0% 10%;
+    }
+    
     footer {
         display: none;
     }
     
     div.links {
         font-size: 1em;
+    }
+    
+    div.login-div {
+        margin: 5% 10%;
+    }
+    
+    label {
+        text-align: left;
+    }
+    
+    .login-button {
+        display: block;
+        margin: 3% 35%;
     }
 }
 
@@ -437,6 +473,15 @@ th, td {
     div.links {
         font-size: 1.2em;
     }
+    
+    div.login-div {
+        margin: 10% 24%;
+    }
+    
+    label {
+        float: left;
+    }
+
 }
 
 /*
