@@ -431,6 +431,14 @@ th, td {
     p.info-text {
         margin: 0% 1%;
     }
+    
+    table {
+        font-size: .8em;
+    }
+    
+    th.optional, td.optional {
+        display: none;
+    }
 }
 
 /* 480 x 320*/
@@ -531,6 +539,30 @@ th, td {
     .login-button {
         display: block;
         margin: 3% 35%;
+    }
+    
+    table {
+        font-size: .8em;
+    }
+    
+    table.list-table .optional {
+        display: none;
+    }
+    
+    table.load-student-table .optional {
+        display: none;
+    }
+    
+    table.roll-call-table .optional {
+        display: none;
+    }
+    
+    table.teacher-table .optional {
+        display: none;
+    }
+    
+    table.students-table .optional {
+        display: none;
     }
 }
 
