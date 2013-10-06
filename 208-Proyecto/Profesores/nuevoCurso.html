@@ -49,7 +49,7 @@
 
         <!-- Add your site or application content here -->
         <header>
-            <img class="header-img" src="../img/logoUdg.png" width="50" height="68" />
+            <img alt="udg.png" class="header-img" src="../img/logoUdg.png" width="50" height="68" />
             <h1>Universidad de Guadalajara - Calificaciones</h1>
             <div class="clear-div"></div>
         </header>
@@ -71,15 +71,13 @@
         
         <section class="main-section">
             <div class="form-div">
-                <p>
-                    <h2><span class="separate">Nuevo curso</span></h2>
-                </p>
+                <h2><span class="separate">Nuevo curso</span></h2>
                 <p class="info-text">
                     Aqui puede crear un nuevo curso y establecer sus parametros para su evaluación.<br /><br />
                     Al estar definiendo los parametros para la evaluación del curso, cabe destacar que se estan capturando porcentajes, por lo cual es necesario que los valores provistos esten entre 1 y 100. Cada rubro de la evaluación puede una evaluación independiente, por lo cual se puede indicar si se quiere o no tener una hoja extra de evaluación.
                 </p>
             </div>
-            <form name="newClass" method="post" action="">
+            <form name="newClass" method="post" action="#">
                 <div class="form-div">
                     <label for="new-class-name">
                         Nombre:
@@ -102,7 +100,7 @@
                     <label for="new-class-academy">
                         Academia:
                     </label>
-                    <select name="new-class-academy" id="new-class-academy" required />
+                    <select name="new-class-academy" id="new-class-academy">
                         <option selected value="0">Academia...</option>
                         <option value="1">Electronica y Computación</option>
                         <option value="2">Ciencias básicas</option>
@@ -169,7 +167,7 @@
                     </label>
                     <input type="checkbox" name="eval-page" id="eval-page1" />
                     <br /><br />
-                    <label id="columns-label1" for="page-colums1">
+                    <label id="columns-label1" for="page-columns1">
                         Columnas:
                     </label>
                     <input type="number" name="page-columns" id="page-columns1" disabled />

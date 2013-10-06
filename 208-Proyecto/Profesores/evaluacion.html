@@ -32,7 +32,7 @@
 
         <!-- Add your site or application content here -->
         <header>
-            <img class="header-img" src="../img/logoUdg.png" width="50" height="68" />
+            <img alt="udg.png" class="header-img" src="../img/logoUdg.png" width="50" height="68" />
             <h1>Universidad de Guadalajara - Calificaciones</h1>
             <div class="clear-div"></div>
         </header>
@@ -54,19 +54,17 @@
         
         <section class="main-section">
             <div class="form-div">
-                <p>
-                    <h2><span class="separate">Evaluacion de cursos</span></h2>
-                </p>
+                <h2><span class="separate">Evaluacion de cursos</span></h2>
                 <p class="info-text">
                     Elija un curso, un rubro y un alumno y después introduzca la calificación de 0 a 10. Se aceptan tambien un decimal de precisión, así como los valores NP (No presento) y SD (Sin derecho) para los rubros en que apliquen estos valores. En el caso de que un rubro se haya definido con un subrubro, entonces aparecera un cuadro de texto para escribir el número de elemento (practica, examen, tarea) a calificar.
                 </p>
             </div>
-            <form name="evalStudent" method="post" action="">
+            <form name="evalStudent" method="post" action="#">
                 <div class="form-div">
                     <label for="select-class">
                         Curso:
                     </label>
-                    <select name="select-class" id="select-class" required >
+                    <select name="select-class" id="select-class">
                         <option selected value="0">Elija un curso...</option>
                     </select>
                 </div>
@@ -106,7 +104,7 @@
                     <label for="select-eval">
                         Rubro:
                     </label>
-                    <select name="select-eval" id="select-eval" required >
+                    <select name="select-eval" id="select-eval">
                         <option selected value="0">Elija un rubro...</option>
                     </select>
                 </div>

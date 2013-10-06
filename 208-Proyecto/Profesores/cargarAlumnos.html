@@ -38,7 +38,7 @@
 
         <!-- Add your site or application content here -->
         <header>
-            <img class="header-img" src="../img/logoUdg.png" width="50" height="68" />
+            <img alt="udg.png" class="header-img" src="../img/logoUdg.png" width="50" height="68" />
             <h1>Universidad de Guadalajara - Calificaciones</h1>
             <div class="clear-div"></div>
         </header>
@@ -60,14 +60,12 @@
         
         <section class="main-section">
             <div class="form-div">
-                <p>
-                    <h2><span class="separate">Cargar alumnos</span></h2>
-                </p>
+                <h2><span class="separate">Cargar alumnos</span></h2>
                 <p class="info-text">
                     Se puede cargar un archivo de alumnos. El formato del archivo es el de un archivo separado por comas (.csv), donde los valores de cada campo especifico estan separados por comas. Una vez se haya seleccionado el archivo y elegido el curso al cual se buscan agregar los alumnos, se puede hacer clic sobre el botón "Cargar" para cargar el archivo, haciendo las validaciones correspondientes. Se mostrarán la información de los alumnos que se busca añadir, donde será posible seleccionar aquellos que se quieran agregar, de ser el caso. Una vez se haya elegido, se puede presionar el botón "Registrar" para ingresar toda la información de los alumnos al sistema.
                 </p>
             </div>
-            <form name="loadStudents" method="post" action="">
+            <form name="loadStudents" method="post" action="#">
                 <div class="form-div">
                     <label>Cargar archivo:</label>
                     <input type="file" id="upload-file" name="upload-file" />
@@ -101,7 +99,7 @@
                             </tr>
                             <tr>
                                 <td class="checkbox-cell">
-                                    <input id="add-student-checkbox-0" type="checkbox" name="add-student-checkbox-0" checked />
+                                    <input id="add-student-checkbox-1" type="checkbox" name="add-student-checkbox-0" checked />
                                 </td>
                                 <td>.</td>
                                 <td>.</td>

@@ -34,7 +34,7 @@
 
         <!-- Add your site or application content here -->
         <header>
-            <img class="header-img" src="../img/logoUdg.png" width="50" height="68" />
+            <img alt="udg.png" class="header-img" src="../img/logoUdg.png" width="50" height="68" />
             <h1>Universidad de Guadalajara - Calificaciones</h1>
             <div class="clear-div"></div>
         </header>
@@ -62,14 +62,12 @@
         
         <section class="main-section">
             <div class="form-div">
-                <p>
-                    <h2><span class="separate">Nuevo ciclo</span></h2>
-                </p>
+                <h2><span class="separate">Nuevo ciclo</span></h2>
                 <p class="info-text">
                     Establezca los parámetros para agregar un nuevo ciclo escolar al sistema. Debe de establecer el año y el calendario que se estará utilizando, así como la fecha de inicio y de fin.<br /><br />Además, puede especificar cuales serán los días de asueto contemplados durante el ciclo escolar.
                 </p>
             </div>
-            <form name="newCycle" method="post" action="">
+            <form name="newCycle" method="post" action="#">
                 <div class="form-div">
                     <label for="new-cycle-year">
                         Año:
@@ -99,7 +97,7 @@
                     <input type="date" id="new-cycle-end" name="new-cycle-end" required />
                 </div>
                 <div class="form-div" id="free-days1">
-                    <label id="free-day-label1" for="free-day1">
+                    <label id="free-day-label1" for="free-day">
                         Asueto:
                     </label>
                     <input type="date" id="free-day" name="free-day" />
