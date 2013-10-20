@@ -857,12 +857,12 @@ function checkColumns( form, columns ){
     
     if( !regex.test( str ) ){
         message = document.createTextNode( " Formato de columnas incorrecto." );
-        columns.parentNode.replaceChild( message, columns.parentNode.lastChild );
+        columns.parentNode.replaceChild( message, columns.parentNode.lastChild.previousSibling.previousSibling );
         ok = false;
     }
     else{
         message = document.createTextNode( "" );
-        columns.parentNode.replaceChild( message, columns.parentNode.lastChild );
+        columns.parentNode.replaceChild( message, columns.parentNode.lastChild.previousSibling.previousSibling );
     }
     
     return ok;
@@ -957,17 +957,17 @@ function checkSchedules( form ){
     var boolArray = [];
     
     for( var i = 0; i < selects.length; i++ ){
-        if( selects[i].name == "new-class-day" ){
+        if( selects[i].name.substring( 0, 13 ) == "new-class-day" ){
             days.push( selects[i] );
         }
     }
     for( var i = 0; i < selects.length; i++ ){
-        if( selects[i].name == "new-class-start" ){
+        if( selects[i].name.substring( 0, 15 ) == "new-class-start" ){
             starts.push( selects[i] );
         }
     }
     for( var i = 0; i < inputs.length; i++ ){
-        if( inputs[i].name == "new-class-duration" ){
+        if( inputs[i].name.substring( 0, 18 ) == "new-class-duration" ){
             durations.push( inputs[i] );
         }
     }
@@ -1002,27 +1002,21 @@ function checkEvals( form ){
     var inputs = document.getElementsByTagName( "input" );
     var activities = [];
     var values = [];
-    var pages = [];
     var columns = [];
     var boolArray = [];
     
     for( var i = 0; i < inputs.length; i++ ){
-        if( inputs[i].name == "new-class-act" ){
+        if( inputs[i].name.substring( 0, 13 ) == "new-class-act" ){
             activities.push( inputs[i] );
         }
     }
     for( var i = 0; i < inputs.length; i++ ){
-        if( inputs[i].name == "new-class-val" ){
+        if( inputs[i].name.substring( 0, 13 ) == "new-class-val" ){
             values.push( inputs[i] );
         }
     }
     for( var i = 0; i < inputs.length; i++ ){
-        if( inputs[i].name == "eval-page" ){
-            pages.push( inputs[i] );
-        }
-    }
-    for( var i = 0; i < inputs.length; i++ ){
-        if( inputs[i].name == "page-columns" ){
+        if( inputs[i].name.substring( 0, 12 ) == "page-columns" ){
             columns.push( inputs[i] );
         }
     }
@@ -1038,9 +1032,7 @@ function checkEvals( form ){
     }
     boolArray[2] = true;
     for( var i = 0; i < columns.length; i++ ){
-        if( pages[i].checked ){
-            boolArray[2] = checkColumns( form, columns[i] ) && boolArray[2];
-        }
+        boolArray[2] = checkColumns( form, columns[i] ) && boolArray[2];
     }
     
     ok = true;
@@ -1216,39 +1208,40 @@ function addTime(){
     var timeSelect = document.createElement( "select" );
     var lenLabel = document.createElement( "label" );
     var lenInput = document.createElement( "input" );
-    var otherDiv = document.getElementById( "eval1" );
+    var otherDiv = document.getElementById( "eval0" );
     var button = document.getElementById( "add-time" );
     
     div.className = "form-div";
-    dayLabel.HTMLfor = "new-class-day";
-    dayLabel.innerHTML = document.getElementById( "day-label1" ).innerHTML;
+    div.id = "schedule" + nSchedules.toString();
+    dayLabel.HTMLfor = "new-class-day" + nSchedules.toString();
+    dayLabel.innerHTML = document.getElementById( "day-label0" ).innerHTML;
     div.appendChild( dayLabel );
     
-    daySelect.name = "new-class-day";
-    daySelect.innerHTML = document.getElementById( "new-class-day1" ).innerHTML;
+    daySelect.name = "new-class-day" + nSchedules.toString();
+    daySelect.innerHTML = document.getElementById( "new-class-day0" ).innerHTML;
     div.appendChild( daySelect );
     
     div.appendChild( document.createTextNode( "" ) );
     div.appendChild( document.createElement( "br" ) );
     div.appendChild( document.createElement( "br" ) );
     
-    timeLabel.HTMLfor = "new-class-start";
-    timeLabel.innerHTML = document.getElementById( "time-label1" ).innerHTML;
+    timeLabel.HTMLfor = "new-class-start" + nSchedules.toString();
+    timeLabel.innerHTML = document.getElementById( "time-label0" ).innerHTML;
     div.appendChild( timeLabel );
     
-    timeSelect.name = "new-class-start";
-    timeSelect.innerHTML = document.getElementById( "new-class-start1" ).innerHTML;
+    timeSelect.name = "new-class-start" + nSchedules.toString();
+    timeSelect.innerHTML = document.getElementById( "new-class-start0" ).innerHTML;
     div.appendChild( timeSelect );
     
     div.appendChild( document.createTextNode( "" ) );
     div.appendChild( document.createElement( "br" ) );
     div.appendChild( document.createElement( "br" ) );
     
-    lenLabel.HTMLfor = "new-class-duration";
-    lenLabel.innerHTML = document.getElementById( "len-label1" ).innerHTML;
+    lenLabel.HTMLfor = "new-class-duration" + nSchedules.toString();
+    lenLabel.innerHTML = document.getElementById( "len-label0" ).innerHTML;
     div.appendChild( lenLabel );
     
-    lenInput.name = "new-class-duration";
+    lenInput.name = "new-class-duration" + nSchedules.toString();
     lenInput.type = "number";
     lenInput.min = "1";
     lenInput.max = "4";
@@ -1259,6 +1252,8 @@ function addTime(){
     
     document.newClass.insertBefore( div, otherDiv );
     document.newClass.insertBefore( document.createElement( "br" ), otherDiv );
+    
+    nSchedules += 1;
 }
 
 function addEval(){
@@ -1271,71 +1266,59 @@ function addEval(){
     var pageInput = document.createElement( "input" );
     var columnLabel = document.createElement( "label" );
     var columnInput = document.createElement( "input" );
-    var otherDiv = document.getElementById( "submit-div" );
+    var otherDiv = document.getElementById( "add-eval-button-div" );
     var button = document.getElementById( "add-eval" );
     
     div.className = "form-div";
-    actLabel.HTMLfor = "new-class-act";
-    actLabel.innerHTML = document.getElementById( "class-act-label1" ).innerHTML;
+    div.id = "eval" + nEvals.toString();
+    actLabel.HTMLfor = "new-class-act" + nEvals.toString();
+    actLabel.innerHTML = document.getElementById( "class-act-label0" ).innerHTML;
     div.appendChild( actLabel );
     
     actInput.type = "text";
-    actInput.name = "new-class-act";
+    actInput.name = "new-class-act" + nEvals.toString();
     div.appendChild( actInput );
     
     div.appendChild( document.createTextNode( "" ) );
     div.appendChild( document.createElement( "br" ) );
     div.appendChild( document.createElement( "br" ) );
     
-    valLabel.HTMLfor = "new-class-val";
-    valLabel.innerHTML = document.getElementById( "class-val-label1" ).innerHTML;
+    valLabel.HTMLfor = "new-class-val" + nEvals.toString();
+    valLabel.innerHTML = document.getElementById( "class-val-label0" ).innerHTML;
     div.appendChild( valLabel );
     
     valInput.type = "number";
-    valInput.name = "new-class-val";
+    valInput.name = "new-class-val" + nEvals.toString();
     div.appendChild( valInput );
     
     div.appendChild( document.createTextNode( "" ) );
     div.appendChild( document.createElement( "br" ) );
     div.appendChild( document.createElement( "br" ) );
     
-    pageLabel.HTMLfor = "eval-page";
-    pageLabel.innerHTML = document.getElementById( "page-label1" ).innerHTML;
+    pageLabel.HTMLfor = "eval-page" + nEvals.toString();
+    pageLabel.innerHTML = document.getElementById( "page-label0" ).innerHTML;
     div.appendChild( pageLabel );
     
     pageInput.type = "checkbox";
-    pageInput.name = "eval-page";
+    pageInput.name = "eval-page" + nEvals.toString();
     div.appendChild( pageInput );
     
     div.appendChild( document.createTextNode( "" ) );
     div.appendChild( document.createElement( "br" ) );
     div.appendChild( document.createElement( "br" ) );
     
-    columnLabel.HTMLfor = "page-columns";
-    columnLabel.innerHTML = document.getElementById( "columns-label1" ).innerHTML;
-    div.appendChild( columnLabel );
-    
-    columnInput.type = "number";
-    columnInput.name = "page-columns";
-    columnInput.disabled = true;
-    div.appendChild( columnInput );
-    
-    div.appendChild( button );
-    div.appendChild( document.createTextNode( "" ) );
+    document.newClass.insertBefore( div, otherDiv );
     
     pageInput.onclick = function(){
-        if( columnInput.disabled ){
-            columnInput.disabled = false;
+        if( pageInput.checked ){
+            showColumnInput( div );
         }
         else{
-            columnInput.disabled = true;
-            columnInput.value = "";
-            //elem.parentNode.replaceChild( document.createTextNode( "" ), elem.parentNode.lastChild );
+            hideColumnInput( div );
         }
     }
     
-    document.newClass.insertBefore( div, otherDiv );
-    document.newClass.insertBefore( document.createElement( "br" ), otherDiv );
+    nEvals += 1;
 }
 
 function addFreeDay(){
@@ -1397,4 +1380,34 @@ function hideStudentInput( id ){
     
     input.parentNode.replaceChild( message, input.parentNode.lastChild );
     input.parentNode.removeChild( input );
+}
+
+function showColumnInput( div ){
+    var label = document.createElement( "label" );
+    var input = document.createElement( "input" );
+    var num = div.id.substring( 4 );
+    
+    label.id = "columns-label" + num;
+    label.innerHTML = "Columnas:";
+    label.HTMLfor = "page-columns" + num;
+    
+    input.type = "number";
+    input.name = "page-columns" + num;
+    input.id = "page-columns" + num;
+    
+    div.appendChild( label );
+    div.appendChild( input );
+    div.appendChild( document.createTextNode( "" ) );
+    div.appendChild( document.createElement( "br" ) );
+    div.appendChild( document.createElement( "br" ) );
+}
+
+function hideColumnInput( div ){
+    var num = div.id.substring( 4 );
+    
+    div.removeChild( document.getElementById( "columns-label" + num ) );
+    div.removeChild( document.getElementById( "page-columns" + num ) );
+    for( var i = 0; i < 3; i++ ){
+        div.removeChild( div.lastChild );
+    }
 }
