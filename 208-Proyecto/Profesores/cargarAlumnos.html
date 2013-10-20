@@ -21,8 +21,10 @@
             window.onload = function(){
                 var loadButton = document.getElementById( "file-load-button" );
                 var submitButton = document.getElementById( "submit-load-students" );
+                var selectAll = document.getElementById( "select-all" );
                 
                 loadButton.onclick = checkLoadFile;
+                selectAll.onclick = selectAllFunc;
                 submitButton.onclick = function(){
                     var form = document.loadStudents;
                     
@@ -80,7 +82,9 @@
                         </caption>
                         <thead>
                             <tr>
-                                <th class="checkbox-cell"></th>
+                                <th class="checkbox-cell">
+                                    <input id="select-all" type="checkbox" name="select-all" />
+                                </th>
                                 <th>Nombre</th>
                                 <th>Codigo</th>
                                 <th class="optional">Carrera</th>
@@ -90,7 +94,7 @@
                         <tbody>
                             <tr>
                                 <td class="checkbox-cell">
-                                    <input id="add-student-checkbox-0" type="checkbox" name="add-student-checkbox-0" checked />
+                                    <input id="add-student-checkbox-0" type="checkbox" name="add-student-checkbox-0" />
                                 </td>
                                 <td>.</td>
                                 <td>.</td>
@@ -99,7 +103,7 @@
                             </tr>
                             <tr>
                                 <td class="checkbox-cell">
-                                    <input id="add-student-checkbox-1" type="checkbox" name="add-student-checkbox-0" checked />
+                                    <input id="add-student-checkbox-1" type="checkbox" name="add-student-checkbox-1" />
                                 </td>
                                 <td>.</td>
                                 <td>.</td>

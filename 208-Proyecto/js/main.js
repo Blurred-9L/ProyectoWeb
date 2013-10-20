@@ -1411,3 +1411,19 @@ function hideColumnInput( div ){
         div.removeChild( div.lastChild );
     }
 }
+
+function selectAllFunc(){
+    var inputs = document.getElementsByTagName( "input" );
+    var selectAll = document.getElementById( "select-all" );
+    
+    for( var i = 0; i < inputs.length; i++ ){
+        if( inputs[i].id.substring( 0, 20 ) == "add-student-checkbox" ){
+            if( selectAll.checked ){
+                inputs[i].checked = true;
+            }
+            else{
+                inputs[i].checked = false;
+            }
+        }
+    }
+}
