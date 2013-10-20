@@ -70,7 +70,6 @@ function checkRegStudent2(){
     else{
         boolArray[8] = true;
     }
-    boolArray[9] = checkPass( form, document.getElementById( "reg-student-pass" ) );
     
     ok = true;
     for( var i = 0; i < boolArray.length && ok; i++ ){
@@ -480,7 +479,7 @@ function checkLogin(){
 
 function checkCode( form, code ){
     var ok = true;
-    var regex = /^.+$/gi;
+    var regex = /^\w+$/gi;
     var str = code.value;
     var message;
     
@@ -537,7 +536,7 @@ function checkLastName( form, lastName ){
 
 function checkMail( form, mail ){
     var ok = true;
-    var regex = /^.+@.+$/gi
+    var regex = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/gi
     var str = mail.value;
     var message;
     
@@ -611,7 +610,7 @@ function checkCellPhone( form, cellphone ){
 
 function checkUrl( form, url ){
     var ok = true;
-    var regex = /^.+$/gi
+    var regex = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/gi;
     var str = url.value;
     var message;
     
@@ -1380,4 +1379,22 @@ function addFreeDay2(){
     div.appendChild( button );
     div.appendChild( document.createTextNode( "" ) );
     document.newCycle.insertBefore( div, otherDiv );
+}
+
+function showStudentInput( checkbox, type, id, name ){
+    var input = document.createElement( "input" );
+    
+    input.type = type;
+    input.id = id;
+    input.name = name;
+    
+    checkbox.parentNode.insertBefore( input, checkbox );
+}
+
+function hideStudentInput( id ){
+    var input = document.getElementById( id );
+    var message = document.createTextNode( "" );
+    
+    input.parentNode.replaceChild( message, input.parentNode.lastChild );
+    input.parentNode.removeChild( input );
 }
