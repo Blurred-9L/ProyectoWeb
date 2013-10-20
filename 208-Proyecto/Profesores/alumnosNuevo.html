@@ -26,41 +26,29 @@
                 
                 button.onclick = checkRegStudent;
                 phone.onclick = function(){
-                    var elem = document.getElementById( "reg-student-phone" );
-                    
-                    if( elem.disabled ){
-                        elem.disabled = false;
+                    if( phone.checked ){
+                        showStudentInput( phone, "tel", "reg-student-phone", "reg-student-phone" );
                     }
                     else{
-                        elem.disabled = true;
-                        elem.value = "";
-                        elem.parentNode.replaceChild( document.createTextNode( "" ), elem.parentNode.lastChild );
+                        hideStudentInput( "reg-student-phone" );
                     }
                 }
                 
                 url.onclick = function(){
-                    var elem = document.getElementById( "reg-student-url" );
-                    
-                    if( elem.disabled ){
-                        elem.disabled = false;
+                    if( url.checked ){
+                        showStudentInput( url, "url", "reg-student-url", "reg-student-url" );
                     }
                     else{
-                        elem.disabled = true;
-                        elem.value = "";
-                        elem.parentNode.replaceChild( document.createTextNode( "" ), elem.parentNode.lastChild );
+                        hideStudentInput( "reg-student-url" );
                     }
                 }
                 
                 github.onclick = function(){
-                    var elem = document.getElementById( "reg-student-github" );
-                    
-                    if( elem.disabled ){
-                        elem.disabled = false;
+                    if( github.checked ){
+                        showStudentInput( github, "url", "reg-student-github", "reg-student-github" );
                     }
                     else{
-                        elem.disabled = true;
-                        elem.value = "";
-                        elem.parentNode.replaceChild( document.createTextNode( "" ), elem.parentNode.lastChild );
+                        hideStudentInput( "reg-student-github" );
                     }
                 }
             }
@@ -151,21 +139,18 @@
                     <label for="reg-student-phone">
                         Celular:
                     </label>
-                    <input type="tel" id="reg-student-phone" name="reg-student-phone" disabled />
                     <input id="checkbox-tel" class="form-checkbox" type="checkbox" name="checkbox-tel" />
                 </div>
                 <div class="form-div">
                     <label for="reg-student-url">
                         Pagina web:
                     </label>
-                    <input type="url" id="reg-student-url" name="reg-student-url" disabled />
                     <input id="checkbox-url" class="form-checkbox" type="checkbox" name="checkbox-url" />
                 </div>
                 <div class="form-div">
                     <label for="reg-student-github">
                         Github:
                     </label>
-                    <input type="url" id="reg-student-github" name="reg-student-github" disabled />
                     <input id="checkbox-github" class="form-checkbox" type="checkbox" name="checkbox-github" />
                 </div>
                 <div class="form-div">
