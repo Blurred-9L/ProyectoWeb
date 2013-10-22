@@ -955,6 +955,8 @@ function checkSchedules( form ){
     var starts = [];
     var durations = [];
     var boolArray = [];
+    var schedules = [];
+    var curSchedule;
     
     for( var i = 0; i < selects.length; i++ ){
         if( selects[i].name.substring( 0, 13 ) == "new-class-day" ){
@@ -972,18 +974,12 @@ function checkSchedules( form ){
         }
     }
     
-    boolArray[0] = true;
+    boolArray[0] = boolArray[1] = boolArray[2] = true;
     for( var i = 0; i < days.length; i++ ){
+        curSchedule = new Schedule( days[i].value, starts[i].value, durations[i].value );
+        addSchedule( form, schedules, curSchedule );
         boolArray[0] = checkDay( form, days[i] ) && boolArray[0];
-    }
-    
-    boolArray[1] = true;
-    for( var i = 0; i < starts.length; i++ ){
         boolArray[1] = checkStartTime( form, starts[i] ) && boolArray[1];
-    }
-    
-    boolArray[2] = true;
-    for( var i = 0; i < durations.length; i++ ){
         boolArray[2] = checkDuration( form, durations[i] ) && boolArray[2];
     }
     
@@ -1425,5 +1421,24 @@ function selectAllFunc(){
                 inputs[i].checked = false;
             }
         }
+    }
+}
+
+function addSchedule( form, schedules, curSchedule ){
+    var okToAdd = true;
+    var i;
+    
+    for( i = 0; i < schedules.length; i++ ){
+        if( curSchedule.equals( schedules[i] ) ){
+            okToAdd = false;
+        }
+    }
+    
+    if( okToAdd ){
+        schedules.push( curSchedule );
+        form.replaceChild( document.createTextNode( "" ), form.lastChild );
+    }
+    else{
+        form.replaceChild( document.createTextNode( " Horario repetido." ), form.lastChild );
     }
 }
