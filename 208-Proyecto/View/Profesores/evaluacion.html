@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Profesor - Cursos - Evaluacion</title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="../../Resources/css/normalize.css">
+        <link rel="stylesheet" href="../../Resources/css/main.css">
+        <script src="../../Resources/js/vendor/modernizr-2.6.2.min.js"></script>
+        <script>
+            window.onload = function(){
+                button = document.getElementById( "eval-button" );
+                
+                button.onclick = checkEvalParams;
+            }
+        </script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <header>
+            <img alt="udg.png" class="header-img" src="../../Resources/img/logoUdg.png" width="50" height="68" />
+            <h1>Universidad de Guadalajara - Calificaciones</h1>
+            <div class="clear-div"></div>
+        </header>
+        
+        <nav class="main-nav">
+            <ul>
+                <li>
+                    <a href="./profesoresMain.html">Principal</a>
+                </li>
+                <li>
+                    <a href="./verCursos.html">Cursos</a>
+                </li>
+                <li>
+                    <a href="#">Salir</a>
+                </li>
+                <div class="clear-div"></div>
+            </ul>
+        </nav>
+        
+        <section class="main-section">
+            <div class="form-div">
+                <h2><span class="separate">Evaluacion de cursos</span></h2>
+                <p class="info-text">
+                    Elija un curso, un rubro y un alumno y después introduzca la calificación de 0 a 10. Se aceptan tambien un decimal de precisión, así como los valores NP (No presento) y SD (Sin derecho) para los rubros en que apliquen estos valores. En el caso de que un rubro se haya definido con un subrubro, entonces aparecera un cuadro de texto para escribir el número de elemento (practica, examen, tarea) a calificar.
+                </p>
+            </div>
+            <form name="evalStudent" method="post" action="#">
+                <div class="form-div">
+                    <label for="select-class">
+                        Curso:
+                    </label>
+                    <select name="select-class" id="select-class">
+                        <option selected value="0">Elija un curso...</option>
+                    </select>
+                </div>
+                <div id="evalTable" class="table-div">
+                    <table>
+                        <caption>
+                            Alumnos
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th class="edit-cell">Elegir</th>
+                                <th>Nombre</th>
+                                <th>Codigo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="edit-cell">
+                                    <input type="radio" name="poor-soul" />
+                                </td>
+                                <td>.</td>
+                                <td>.</td>
+                            </tr>
+                            <tr>
+                                <td class="edit-cell">
+                                    <input type="radio" name="poor-soul" />
+                                </td>
+                                <td>.</td>
+                                <td>.</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="form-div">
+                    <label for="select-eval">
+                        Rubro:
+                    </label>
+                    <select name="select-eval" id="select-eval">
+                        <option selected value="0">Elija un rubro...</option>
+                    </select>
+                </div>
+                <div class="form-div">
+                    <label for="select-sub-eval">
+                        No. Elemento:
+                    </label>
+                    <input type="number" name="select-sub-eval" id="select-sub-eval" required />
+                </div>
+                <div class="form-div">
+                    <label for="grade">
+                        Calificacion:
+                    </label>
+                    <input type="text" name="grade" id="grade" required />
+                </div>
+                <div class="form-div">
+                    <button type="button" class="submit-button" id="eval-button" name="eval-button">Calificar</button>
+                    <button type="reset">Limpiar</button>
+                </div>
+            </form>
+        </section>
+        
+        <aside class="right-aside">
+            <nav class="aside-nav">
+                <ul>
+                    <li>
+                        <a href="./nuevoCurso.html">Nuevo curso</a>
+                    </li>
+                    <li>
+                        <a href="./listaAlumnos.html">Listas</a>
+                    </li>
+                    <li>
+                        <a href="./alumnosNuevo.html">Alumnos</a>
+                    </li>
+                    <li>
+                        <a href="./verAsistencias.html">Asistencias</a>
+                    </li>
+                    <li>
+                        <a href="./evaluacion.html">Evaluacion</a>
+                    </li>
+                    <li>
+                        <a href="./verCursos.html">Cursos</a>
+                    </li>
+                    <div class="clear-div"></div>
+                </ul>
+            </nav>
+        </aside>
+        <div class="clear-div"></div>
+        
+        <footer>
+            <h4>Universidad de Guadalajara</h4>
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="../../Resources/js/plugins.js"></script>
+        <script src="../../Resources/js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src='//www.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>

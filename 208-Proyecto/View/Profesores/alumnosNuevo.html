@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Profesor - Cursos - Alumnos</title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="../../Resources/css/normalize.css">
+        <link rel="stylesheet" href="../../Resources/css/main.css">
+        <script src="../../Resources/js/vendor/modernizr-2.6.2.min.js"></script>
+        <script>
+            window.onload = function(){
+                var button = document.getElementById( "submit-reg-student" );
+                var phone = document.getElementById( "checkbox-tel" );
+                var url = document.getElementById( "checkbox-url" );
+                var github = document.getElementById( "checkbox-github" );
+                
+                button.onclick = checkRegStudent;
+                phone.onclick = function(){
+                    if( phone.checked ){
+                        showStudentInput( phone, "tel", "reg-student-phone", "reg-student-phone" );
+                    }
+                    else{
+                        hideStudentInput( "reg-student-phone" );
+                    }
+                }
+                
+                url.onclick = function(){
+                    if( url.checked ){
+                        showStudentInput( url, "url", "reg-student-url", "reg-student-url" );
+                    }
+                    else{
+                        hideStudentInput( "reg-student-url" );
+                    }
+                }
+                
+                github.onclick = function(){
+                    if( github.checked ){
+                        showStudentInput( github, "url", "reg-student-github", "reg-student-github" );
+                    }
+                    else{
+                        hideStudentInput( "reg-student-github" );
+                    }
+                }
+            }
+            
+        </script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <header>
+            <img alt="udg.png" class="header-img" src="../../Resources/img/logoUdg.png" width="50" height="68" />
+            <h1>Universidad de Guadalajara - Calificaciones</h1>
+            <div class="clear-div"></div>
+        </header>
+        
+        <nav class="main-nav">
+            <ul>
+                <li>
+                    <a href="./profesoresMain.html">Principal</a>
+                </li>
+                <li>
+                    <a href="./verCursos.html">Cursos</a>
+                </li>
+                <li>
+                    <a href="#">Salir</a>
+                </li>
+                <div class="clear-div"></div>
+            </ul>
+        </nav>
+        
+        <section class="main-section">
+            <div class="form-div">
+                <h2><span class="separate">Registrar alumno</span></h2>
+                <p class="info-text">
+                    Puede registrar un alumno manualmente aqui. Debido a que diversos profesores usan el sistema, algun alumno que usted quiera dar de alta en alguno de sus cursos puede ya estar incluido en el sistema, por lo cual, se tiene un botón de "Buscar" al lado del campo de texto del código del alumno. Si el alumno ya se encuentra registrado en el sistema, los datos relacionados se obtendran.<br /><br />Además, los campos de "Celular", "Pagina web" y "Github" son campos opcionales, por lo cual si desea activarlos debe seleccionar que así lo desea en los checkboxes a la derecha de cada campo respectivamente.
+                </p>
+            </div>
+            <form name="regStudent" id="regStudent" method="post" action="#">
+                <div class="form-div">
+                    <label for="reg-student-code">
+                        Código:
+                    </label>
+                    <input type="text" id="reg-student-code" name="reg-student-code" required />
+                    <button type="button" id="search-code-button" name=search-code-button>
+                        Buscar
+                    </button>
+                </div>
+                <div class="form-div">
+                    <label for="reg-student-name">
+                        Nombre:
+                    </label>
+                    <input type="text" id="reg-student-name" name="reg-student-name" required />
+                </div>
+                <div class="form-div">
+                    <label for="reg-student-last1">
+                        Apellido paterno:
+                    </label>
+                    <input type="text" id="reg-student-last1" name="reg-student-last1" required />
+                </div>
+                <div class="form-div">
+                    <label for="reg-student-last2">
+                        Apellido materno:
+                    </label>
+                    <input type="text" id="reg-student-last2" name="reg-student-last2" required />
+                </div>
+                <div class="form-div">
+                    <label for="reg-student-email">
+                        E-mail:
+                    </label>
+                    <input type="email" id="reg-student-email" name="reg-student-email" required />
+                </div>
+                <div class="form-div">
+                    <label for="reg-student-major">
+                        Carrera:
+                    </label>
+                    <select id="reg-student-major" name="reg-student-major">
+                        <option selected value="0">Elija una carrera...</option>
+                        <option value="1">Ingenieria en Computacion (COM)</option>
+                        <option value="2">Licenciatura en Informatica (INF)</option>
+                        <option value="3">Licenciatura en Matematicas (MAT)</option>
+                        <option value="4">Ingenieria Química (IQ)</option>
+                    </select>
+                </div>
+                <div class="form-div">
+                    <label for="reg-student-phone">
+                        Celular:
+                    </label>
+                    <input id="checkbox-tel" class="form-checkbox" type="checkbox" name="checkbox-tel" />
+                </div>
+                <div class="form-div">
+                    <label for="reg-student-url">
+                        Pagina web:
+                    </label>
+                    <input id="checkbox-url" class="form-checkbox" type="checkbox" name="checkbox-url" />
+                </div>
+                <div class="form-div">
+                    <label for="reg-student-github">
+                        Github:
+                    </label>
+                    <input id="checkbox-github" class="form-checkbox" type="checkbox" name="checkbox-github" />
+                </div>
+                <div class="form-div">
+                    <label for="reg-student-class">
+                        Curso:
+                    </label>
+                    <select id="reg-student-class" name="reg-student-class">
+                        <option selected value="0">Seleccione un curso...</option>
+                    </select>
+                </div>
+                <div class="form-div">
+                    <button id="submit-reg-student" class="submit-button" type="button">Registrar</button>
+                    <button type="reset">Limpiar</button>
+                </div>
+            </form>
+        </section>
+        
+        <aside class="right-aside">
+            <nav class="aside-nav">
+                <ul>
+                    <li>
+                        <a href="./alumnosNuevo.html">Registrar alumno</a>
+                    </li>
+                    <li>
+                        <a href="./cargarAlumnos.html">Cargar alumnos</a>
+                    </li>
+                    <li>
+                        <a href="./verCursos.html">Cursos</a>
+                    </li>
+                    <div class="clear-div"></div>
+                </ul>
+            </nav>
+        </aside>
+        <div class="clear-div"></div>
+        
+        <footer>
+            <h4>Universidad de Guadalajara</h4>
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="../../Resources/js/plugins.js"></script>
+        <script src="../../Resources/js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src='//www.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>
