@@ -55,6 +55,7 @@ class StudentMdl{
         
         $result = $this -> dbCon -> query( $query );
         
+        $rows = NULL;
         while( $row = $result -> fetch_assoc() ){
             $rows[] = $row;
         }

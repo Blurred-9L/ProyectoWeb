@@ -65,7 +65,7 @@
                     Por favor rellene los siguientes campos para poder dar de alta a un nuevo profesor.
                 </p>
             </div>
-            <form name="newTeacher" method="post" action="#">
+            <form name="newTeacher" method="post" action="./index.php?ctrl=teacher&action=new">
                 <div class="form-div">
                     <label for="reg-teacher-code">
                         Código:
@@ -89,12 +89,6 @@
                         Apellido materno:
                     </label>
                     <input type="text" id="reg-teacher-last2" name="reg-teacher-last2" required />
-                </div>
-                <div class="form-div">
-                    <label for="reg-teacher-pass">
-                        Contraseña:
-                    </label>
-                    <input type="text" id="reg-teacher-pass" name="reg-teacher-pass" required />
                 </div>
                 <div class="form-div">
                     <label for="reg-teacher-email">

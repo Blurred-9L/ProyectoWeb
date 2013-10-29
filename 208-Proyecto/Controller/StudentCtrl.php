@@ -11,7 +11,7 @@ class StudentCtrl{
     public function execute(){
         switch( $_GET['action'] ){
             case 'anew':
-                $this -> adminNew();
+                $this -> adminNewStudent();
                 break;
             case 'edit':
                 $this -> edit();
@@ -98,7 +98,7 @@ class StudentCtrl{
         echo $view;                       
     }
     
-    private function adminNew(){
+    private function adminNewStudent(){
         if( empty( $_POST ) ){
             require_once( 'View/Admin/adminAlumnosNuevo.html' );
         }
@@ -170,16 +170,18 @@ class StudentCtrl{
         $students = $this -> model -> getAll();
         $rows = '';
         $count = 0;
-        foreach( $students as $row ){
-            $newTableRow = $tableRow;
-            $name = $row['nombre'] . ' ' . $row['apellidoP'] . ' ' . $row['apellidoM'];
-            $dict = array( '*name*' => $name, '*code*' => $row['codigo'], '*major*' => $row['nombreCarrera'], '*mail*' => $row['email'],
-                           '*count*' => $count );
-            $newTableRow = strtr( $newTableRow, $dict );
-            $rows .= $newTableRow;
-            $count += 1;
+        if( isset( $students ) ){
+            foreach( $students as $row ){
+                $newTableRow = $tableRow;
+                $name = $row['nombre'] . ' ' . $row['apellidoP'] . ' ' . $row['apellidoM'];
+                $dict = array( '*name*' => $name, '*code*' => $row['codigo'], '*major*' => $row['nombreCarrera'], '*mail*' => $row['email'],
+                               '*count*' => $count );
+                $newTableRow = strtr( $newTableRow, $dict );
+                $rows .= $newTableRow;
+                $count += 1;
+            }
         }
-        
+            
         $view = str_replace( $tableRow, $rows, $view );
         
         echo $view;
