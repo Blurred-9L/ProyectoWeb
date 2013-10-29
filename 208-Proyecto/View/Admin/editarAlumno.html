@@ -65,14 +65,12 @@
                     Puede modificar los siguientes campos del alumno seleccionado.
                 </p>
             </div>
-            <form name="editStudent" method="post" action="#">
+            <form name="editStudent" method="post" action="./index.php?ctrl=student&action=edit">
                 <div class="form-div">
                     <label for="edit-student-code">
                         Código:
                     </label>
-                    <strong>
-                        *code*
-                    </strong>
+                    <input type="text" id="edit-student-code" name="edit-student-code" required />
                 </div>
                 <div class="form-div">
                     <label for="edit-student-name">

@@ -23,14 +23,43 @@ class StudentMdl{
         return $result;
     }
     
+    public function update( $code, $mail, $phone, $url, $github ){
+        $query = "update Alumno set email=\"$mail\", celular=\"$phone\", paginaWeb=\"$url\", github=\"$github\" 
+                  where codigo=\"$code\";";
+                  
+        $result = $this -> dbCon -> query( $query );
+        
+        return $result;
+    }
+    
     public function getMajorStr( $major ){
         $query = "select nombreCarrera from Carrera where idCarrera = $major;";
         
         $result = $this -> dbCon -> query( $query );
-        
         $row = $result -> fetch_assoc();
         
         return $row;
+    }
+    
+    public function getStudent( $code ){
+        $query = "select * from Alumno join Carrera on Alumno.idCarrera=Carrera.idCarrera and codigo=\"$code\";";
+        
+        $result = $this -> dbCon -> query( $query );
+        $row = $result -> fetch_assoc();
+        
+        return $row;
+    }
+    
+    public function getAll(){
+        $query = 'select * from Alumno join Carrera on Alumno.idCarrera=Carrera.idCarrera;';
+        
+        $result = $this -> dbCon -> query( $query );
+        
+        while( $row = $result -> fetch_assoc() ){
+            $rows[] = $row;
+        }
+        
+        return $rows;
     }
 }
 

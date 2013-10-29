@@ -113,7 +113,8 @@ function checkStudent(){
         boolArray[3] = true;
         github.parentNode.replaceChild( document.createTextNode( "" ), github.parentNode.lastChild );
     }
-    boolArray[4] = checkPass( form, document.getElementById( "edit-student-pass" ) );
+    boolArray[4] = checkCode( form, document.getElementById( "edit-student-code" ) );
+    /*boolArray[4] = checkPass( form, document.getElementById( "edit-student-pass" ) );*/
     
     ok = true;
     for( var i = 0; i < boolArray.length; i++ ){
@@ -1068,27 +1069,46 @@ function checkSelected( form, inputArray ){
 }
 
 function checkSelected2(){
-    var ok = false;
+    var count = 0;
     var message;
     var table = document.getElementById( "student-table" );
     var form = document.allStudents;
     var inputArray = document.getElementsByTagName( "input" );
+    var index;
+    var codeTd;
+    var newInput;
     
-    for( var i = 0; i < inputArray.length && !ok; i++ ){
-        if( inputArray[i].type == "radio" ){
+    for( var i = 0; i < inputArray.length; i++ ){
+        if( inputArray[i].type == "checkbox" ){
             if( inputArray[i].checked ){
-                ok = true;
+                count += 1;
+                checkbox = inputArray[i];
             }
         }
     }
-    if( !ok ){
+    if( count == 0 ){
         message = document.createTextNode( "Seleccione un alumno." );
+        table.replaceChild( message, table.lastChild );
+    }
+    else if( count > 1 ){
+        message = document.createTextNode( "Seleccione SOLO un alumno." );
         table.replaceChild( message, table.lastChild );
     }
     else{
         message = document.createTextNode( "" );
         table.replaceChild( message, table.lastChild );
+
+        index = checkbox.id.substring( 13 );
+        codeTd = document.getElementById( "student-code-" + index );
+        // Que feo u.u
+        newInput = document.createElement( "input" );
+        newInput.type = "hidden";
+        newInput.name = "code";
+        newInput.value = codeTd.firstChild.nodeValue;
+        form.appendChild( newInput );
+        
         form.submit();
+        form.removeChild( newInput );
     }
 }
 
