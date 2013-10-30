@@ -17,6 +17,36 @@ class TeacherMdl{
         
         return $result;
     }
+    
+    public function update( $code, $mail, $phone ){
+        $query = "update Profesor set email=\"$mail\", celular=\"$phone\" where codigo=\"$code\";";
+        
+        $result = $this -> dbCon -> query( $query );
+        
+        return $result;
+    }
+    
+    public function getTeacher( $code ){
+        $query = "select * from Profesor where codigo=\"$code\";";
+        
+        $result = $this -> dbCon -> query( $query );
+        $row = $result -> fetch_assoc();
+        
+        return $row;
+    }
+    
+    public function getAll(){
+        $query = 'select * from Profesor;';
+        
+        $result = $this -> dbCon -> query( $query );
+        
+        $rows = NULL;
+        while( $row = $result -> fetch_assoc() ){
+            $rows[] = $row;
+        }
+        
+        return $rows;
+    }
 }
 
 ?>

@@ -227,9 +227,8 @@ function checkNewTeacher(){
     boolArray[1] = checkName( form, document.getElementById( "reg-teacher-name" ) );
     boolArray[2] = checkLastName( form, document.getElementById( "reg-teacher-last1" ) );
     boolArray[3] = checkLastName( form, document.getElementById( "reg-teacher-last2" ) );
-    boolArray[4] = checkLastName( form, document.getElementById( "reg-teacher-pass" ) );
-    boolArray[5] = checkMail( form, document.getElementById( "reg-teacher-email" ) );
-    boolArray[6] = checkCellPhone( form, document.getElementById( "reg-teacher-phone" ) );
+    boolArray[4] = checkMail( form, document.getElementById( "reg-teacher-email" ) );
+    boolArray[5] = checkCellPhone( form, document.getElementById( "reg-teacher-phone" ) );
     
     ok = true;
     for( var i = 0; i < boolArray.length; i++ ){
@@ -270,7 +269,7 @@ function checkEditTeacher(){
     
     boolArray[0] = checkMail( form, document.getElementById( "edit-teacher-email" ) );
     boolArray[1] = checkCellPhone( form, document.getElementById( "edit-teacher-phone" ) );
-    boolArray[2] = checkPass( form, document.getElementById( "edit-teacher-pass" ) );
+    boolArray[2] = checkCode( form, document.getElementById( "edit-teacher-code" ) );
     
     ok = true;
     for( var i = 0; i < boolArray.length && ok; i++ ){
@@ -1143,22 +1142,43 @@ function checkSelected4(){
     var table = document.getElementById( "teacher-table-div" );
     var form = document.allTeachers;
     var inputArray = document.getElementsByTagName( "input" );
+    var count = 0;
+    var checkbox;
+    var index;
+    var codeTd;
+    var newInput;
     
-    for( var i = 0; i < inputArray.length && !ok; i++ ){
-        if( inputArray[i].type == "radio" ){
+    for( var i = 0; i < inputArray.length; i++ ){
+        if( inputArray[i].type == "checkbox" ){
             if( inputArray[i].checked ){
-                ok = true;
+                count += 1;
+                checkbox = inputArray[i];
             }
         }
     }
-    if( !ok ){
+    if( count == 0 ){
         message = document.createTextNode( "Seleccione un profesor." );
+        table.replaceChild( message, table.lastChild );
+    }
+    else if( count > 1 ){
+        message = document.createTextNode( "Seleccione SOLO un profesor." );
         table.replaceChild( message, table.lastChild );
     }
     else{
         message = document.createTextNode( "" );
         table.replaceChild( message, table.lastChild );
+        
+        index = checkbox.id.substring( 13 );
+        codeTd = document.getElementById( "teacher-code-" + index );
+        // Que feo u.u
+        newInput = document.createElement( "input" );
+        newInput.type = "hidden";
+        newInput.name = "code";
+        newInput.value = codeTd.firstChild.nodeValue;
+        form.appendChild( newInput );
+        
         form.submit();
+        form.removeChild( newInput );
     }
 }
 

@@ -8,6 +8,7 @@ switch( $_GET['ctrl'] ){
     case 'teacher':
         require_once( 'Controller/TeacherCtrl.php' );
         $ctrl = new TeacherCtrl();
+        break;
     default:
         echo "Error";
         break;

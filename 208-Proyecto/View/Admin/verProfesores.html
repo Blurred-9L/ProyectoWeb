@@ -65,7 +65,7 @@
                     Aqui puede ver todos los profesores que han sido de alta en el sistema. Si desea revisar la información relacionada a algún profesor en particular, seleccione el profesor indicado y despues haga clic sobre el boton de "Editar seleccion".
                 </p>
             </div>
-            <form name="allTeachers" method="post" action="./editarProfesor.html">
+            <form name="allTeachers" method="post" action="./index.php?ctrl=teacher&action=show">
                 <div class="edit-button-div">
                     <button id="to-edit-button" type="button" class="edit-button">
                         Editar selección
@@ -88,21 +88,12 @@
                         <tbody>
                             <tr>
                                 <td class="edit-cell">
-                                    <input type="radio" name="edit-teacher" id="edit-teacher0" checked />
+                                    <input type="checkbox" name="edit-teacher-*count*" id="edit-teacher-*count*" />
                                 </td>
-                                <td>.</td>
-                                <td>.</td>
-                                <td class="optional">.</td>
-                                <td class="optional">.</td>
-                            </tr>
-                            <tr>
-                                <td class="edit-cell">
-                                    <input type="radio" name="edit-teacher" id="edit-teacher1" />
-                                </td>
-                                <td>.</td>
-                                <td>.</td>
-                                <td class="optional">.</td>
-                                <td class="optional">.</td>
+                                <td id="teacher-name-*count*">*name*</td>
+                                <td id="teacher-code-*count*">*code*</td>
+                                <td id="teacher-email-*count*" class="optional">*mail*</td>
+                                <td id="teacher-phone-*count*" class="optional">*phone*</td>
                             </tr>
                         </tbody>
                         <tfoot>
