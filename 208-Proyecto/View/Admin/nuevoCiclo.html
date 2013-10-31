@@ -19,6 +19,7 @@
         <script src="../../Resources/js/vendor/modernizr-2.6.2.min.js"></script>
         <script>
             window.onload = function(){
+                countFreeDays = 0;
                 addButton = document.getElementById( "add-free-day" );
                 button = document.getElementById( "new-cycle-button" );
                 
@@ -96,12 +97,16 @@
                     </label>
                     <input type="date" id="new-cycle-end" name="new-cycle-end" required />
                 </div>
+                <!--
                 <div class="form-div" id="free-days1">
                     <label id="free-day-label1" for="free-day">
                         Asueto:
                     </label>
                     <input type="date" id="free-day" name="free-day" />
-                    <button id="add-free-day" class="free-day-button" type="button">Otro mas</button>
+                </div>
+                -->
+                <div class="form-div" id="free-days-button">
+                    <button id="add-free-day" class="free-day-button3" type="button">Otro mas</button>
                 </div>
                 <div id="submit-div" class="form-div">
                     <button id="new-cycle-button" class="submit-button" type="button">Registrar</button>

@@ -19,6 +19,7 @@
         <script src="../../Resources/js/vendor/modernizr-2.6.2.min.js"></script>
         <script>
             window.onload = function(){
+                countFreeDays = 1;
                 addButton = document.getElementById( "free-day-button" );
                 button = document.getElementById( "add-free-days" );
                 
@@ -68,12 +69,14 @@
                 </p>
             </div>
             <form name="freeDays" method="post" action="#">
-                <div class="form-div">
-                    <label id="free-day-label1" for="new-free-day">
+                <div class="form-div" id="free-days-0">
+                    <label id="free-day-label-0" for="new-free-day-0">
                         Fecha:
                     </label>
-                    <input type="date" id="new-free-day" name="new-free-day" required />
-                    <button id="free-day-button" class="free-day-button" type="button">Agregar</button>
+                    <input type="date" id="new-free-day-0" name="new-free-day-0" required />
+                </div>
+                <div class="form-div" id="free-days-button">
+                    <button id="free-day-button" class="free-day-button2" type="button">Agregar</button>
                 </div>
                 <!-- <div class="table-div">
                     <table id="free-days-table">
