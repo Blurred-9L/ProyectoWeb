@@ -9,6 +9,10 @@ switch( $_GET['ctrl'] ){
         require_once( 'Controller/TeacherCtrl.php' );
         $ctrl = new TeacherCtrl();
         break;
+    case 'cycle':
+        require_once( 'Controller/CycleCtrl.php' );
+        $ctrl = new CycleCtrl();
+        break;
     default:
         echo "Error";
         break;
