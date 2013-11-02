@@ -34,3 +34,12 @@ function newClassLoad(){
         }
     });
 }
+
+function newCycleLoad(){
+    countFreeDays = 0;
+    addButton = document.getElementById( "add-free-day" );
+    button = document.getElementById( "new-cycle-button" );
+    
+    addButton.onclick = addFreeDay2;
+    button.onclick = checkNewCycle;
+}

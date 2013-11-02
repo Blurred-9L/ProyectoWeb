@@ -430,11 +430,16 @@ function checkNewCycle(){
     var freeDays = [];
     var elems = [];
     var ok;
+    var date1 = document.getElementById( "new-cycle-start" );
+    var date2 = document.getElementById( "new-cycle-end" );
     
     boolArray[0] = checkYear( form, document.getElementById( "new-cycle-year" ) );
     boolArray[1] = checkHalfYear( form, document.getElementById( "new-cycle-half" ) );
-    boolArray[2] = checkDate( form, document.getElementById( "new-cycle-start" ) );
-    boolArray[3] = checkDate( form, document.getElementById( "new-cycle-end" ) );
+    boolArray[2] = checkDate( form, date1 );
+    boolArray[3] = checkDate( form, date2 );
+    if( boolArray[2] && boolArray[3] ){
+        boolArray[4] = checkDates( form, date1, date2 );
+    }
     
     elems = document.getElementsByTagName( "input" );
     for( var i = 0; i < elems.length; i++ ){
@@ -896,6 +901,25 @@ function checkGrade( form, grade ){
             message = document.createTextNode( "" );
             grade.parentNode.replaceChild( message, grade.parentNode.lastChild );
         }
+    }
+    
+    return ok;
+}
+
+function checkDates( form, date1, date2 ){
+    var message;
+    var d1 = new Date( date1.value );
+    var d2 = new Date( date2.value );
+    var ok = false;
+    
+    if( d1 < d2 ){
+        message = document.createTextNode( "" );
+        date1.parentNode.replaceChild( message, date1.parentNode.lastChild );
+        ok = true;
+    }
+    else{
+        message = document.createTextNode( " La primera fecha es mayor que la segunda." );
+        date1.parentNode.replaceChild( message, date1.parentNode.lastChild );
     }
     
     return ok;
