@@ -629,12 +629,12 @@ function checkUrl( form, url ){
 
 function checkNrc( form, nrc ){
     var ok = true;
-    var regex = /^\d{5}$/gi;
+    var regex = /^[0-9A-Za-z]{5}$/gi;
     var str = nrc.value;
     var message;
     
     if( !regex.test( str ) ){
-        message = document.createTextNode( " Formato de NRC incorrecto." );
+        message = document.createTextNode( " Formato de clave de curso incorrecto." );
         nrc.parentNode.replaceChild( message, nrc.parentNode.lastChild );
         ok = false;
     }
@@ -1361,48 +1361,43 @@ function addFreeDay(){
     var div = document.createElement( "div" );
     var label = document.createElement( "label" );
     var input = document.createElement( "input" );
-    var otherDiv = document.getElementById( "free-days-button" );
+    var otherDiv = document.getElementById( "add-button-div" );
     var button = document.getElementById( "free-day-button" );
     
-    div.id = "free-days-" + countFreeDays.toString();
     div.className = "form-div";
-    label.HTMLfor = "new-free-day-" + countFreeDays.toString();
-    label.innerHTML = document.getElementById( "free-day-label-0" ).innerHTML;
+    label.HTMLfor = "new-free-day";
+    label.innerHTML = document.getElementById( "free-day-label1" ).innerHTML;
     div.appendChild( label );
     
-    input.name = "new-free-day-" + countFreeDays.toString();
+    input.name = "new-free-day";
     input.type = "date";
     input.required = true;
     div.appendChild( input );
     
+    div.appendChild( button );
     div.appendChild( document.createTextNode( "" ) );
     document.freeDays.insertBefore( div, otherDiv );
-    
-    countFreeDays += 1;
 }
 
 function addFreeDay2(){
     var div = document.createElement( "div" );
     var label = document.createElement( "label" );
     var input = document.createElement( "input" );
-    var otherDiv = document.getElementById( "free-days-button" );
+    var otherDiv = document.getElementById( "submit-div" );
     var button = document.getElementById( "add-free-day" );
     
-    div.id = "free-days-" + countFreeDays.toString();
     div.className = "form-div";
-    label.HTMLfor = "new-free-day-" + countFreeDays.toString();
-    label.appendChild( document.createTextNode( "Asueto: " ) );
+    label.HTMLfor = "free-day";
+    label.innerHTML = document.getElementById( "free-day-label1" ).innerHTML;
     div.appendChild( label );
     
-    input.name = "new-free-day-" + countFreeDays.toString();
+    input.name = "free-day";
     input.type = "date";
     div.appendChild( input );
     
+    div.appendChild( button );
     div.appendChild( document.createTextNode( "" ) );
-    
     document.newCycle.insertBefore( div, otherDiv );
-    
-    countFreeDays += 1;
 }
 
 function showStudentInput( checkbox, type, id, name ){

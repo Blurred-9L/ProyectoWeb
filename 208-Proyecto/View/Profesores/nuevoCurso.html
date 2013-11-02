@@ -17,29 +17,7 @@
         <link rel="stylesheet" href="../../Resources/css/normalize.css">
         <link rel="stylesheet" href="../../Resources/css/main.css">
         <script src="../../Resources/js/vendor/modernizr-2.6.2.min.js"></script>
-        <script>
-            window.onload = function(){
-                nSchedules = 1;
-                nEvals = 1;
-                addTimeButton = document.getElementById( "add-time" );
-                addEvalButton = document.getElementById( "add-eval" );
-                checkbox = document.getElementById( "eval-page0" );
-                button = document.getElementById( "submit-new-class" );
-                
-                button.onclick = checkNewClass;
-                addTimeButton.onclick = addTime;
-                addEvalButton.onclick = addEval;
-                checkbox.checked = false;
-                checkbox.onclick = function(){
-                    if( checkbox.checked ){
-                        showColumnInput( checkbox.parentNode );
-                    }
-                    else{
-                        hideColumnInput( checkbox.parentNode );
-                    }
-                }
-            }
-        </script>
+        
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -74,7 +52,7 @@
                 <p class="info-text">
                     Aqui puede crear un nuevo curso y establecer sus parametros para su evaluación.<br /><br />
                     Al estar definiendo los parametros para la evaluación del curso, cabe destacar que se estan capturando porcentajes, por lo cual es necesario que los valores provistos esten entre 1 y 100. Cada rubro de la evaluación puede una evaluación independiente, por lo cual se puede indicar si se quiere o no tener una hoja extra de evaluación.<br />
-                    El formato de un NRC especifico siempre tiene 5 digitos.
+                    El formato de la clave siempre tiene 5 letras o digitos.
                 </p>
             </div>
             <form name="newClass" method="post" action="#">
@@ -92,7 +70,7 @@
                 </div> -->
                 <div class="form-div">
                     <label for="new-class-nrc">
-                        NRC:
+                        Clave:
                     </label>
                     <input type="text" id="new-class-nrc" name="new-class-nrc" required />
                 </div>
@@ -102,9 +80,6 @@
                     </label>
                     <select name="new-class-academy" id="new-class-academy">
                         <option selected value="0">Academia...</option>
-                        <option value="1">Electronica y Computación</option>
-                        <option value="2">Ciencias básicas</option>
-                        <option value="3">Ingenierias</option>
                     </select>
                 </div>
                 <div class="form-div" id="schedule0">
@@ -116,12 +91,6 @@
                     </label>
                     <select name="new-class-day0" id="new-class-day0">
                         <option selected value="0">Dia...</option>
-                        <option value="1">Lunes</option>
-                        <option value="2">Martes</option>
-                        <option value="3">Miercoles</option>
-                        <option value="4">Jueves</option>
-                        <option value="5">Viernes</option>
-                        <option value="6">Sabado</option>
                     </select> <br /><br />
                     <label id="time-label0" for="new-class-start0">
                         Inicio:
@@ -205,6 +174,10 @@
         <script src="../../Resources/js/plugins.js"></script>
         <script src="../../Resources/js/main.js"></script>
         <script src="../../Resources/js/Schedule.js"></script>
+        <script src="../../Resources/js/onload.js"></script>
+        <script>
+            window.onload = newClassLoad;
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
