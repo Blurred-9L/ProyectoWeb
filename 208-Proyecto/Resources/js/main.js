@@ -1138,27 +1138,51 @@ function checkSelected2(){
 }
 
 function checkSelected3(){
-    var ok = false;
     var message;
     var table = document.getElementById( "cycle-table-div" );
     var form = document.allCycles;
     var inputArray = document.getElementsByTagName( "input" );
+    var count = 0;
+    var checkbox;
+    var index;
+    var newInput;
+    var cycleId;
     
-    for( var i = 0; i < inputArray.length && !ok; i++ ){
-        if( inputArray[i].type == "radio" ){
+    for( var i = 0; i < inputArray.length; i++ ){
+        if( inputArray[i].type == "checkbox" ){
             if( inputArray[i].checked ){
-                ok = true;
+                count += 1;
+                checkbox = inputArray[i];
             }
         }
     }
-    if( !ok ){
+    if( count == 0 ){
         message = document.createTextNode( "Seleccione un ciclo." );
+        table.replaceChild( message, table.lastChild );
+    }
+    else if( count > 1 ){
+        message = document.createTextNode( "Seleccione SOLO un ciclo." );
         table.replaceChild( message, table.lastChild );
     }
     else{
         message = document.createTextNode( "" );
         table.replaceChild( message, table.lastChild );
+        
+        index = checkbox.id.substring( 11 );
+        codeTd = document.getElementById( "cycle-year-" + index );
+        cycleId = codeTd.firstChild.nodeValue;
+        codeTd = document.getElementById( "cycle-half-" + index );
+        cycleId += codeTd.firstChild.nodeValue;
+        
+        // Que feo u.u
+        newInput = document.createElement( "input" );
+        newInput.type = "hidden";
+        newInput.name = "cycle";
+        newInput.value = cycleId;
+        form.appendChild( newInput );
+        
         form.submit();
+        form.removeChild( newInput );
     }
 }
 

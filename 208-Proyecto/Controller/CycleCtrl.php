@@ -19,6 +19,12 @@ class CycleCtrl{
             case 'erase':
                 $this -> eraseFreeDays();
                 break;
+            case 'all':
+                $this -> showAll();
+                break;
+            case 'show':
+                $this -> getCycle();
+                break;
         }
     }
     
@@ -151,6 +157,38 @@ class CycleCtrl{
         else{
             echo "Error";
         }
+    }
+    
+    private function showAll(){
+        $view = file_get_contents( 'View/Admin/ciclosEscolares.html' );
+        
+        $start = strrpos( $view, '<tr>' );
+        $end = strrpos( $view, '</tr>' ) + 5;
+        $tableRow = substr( $view, $start, $end - $start );
+        
+        $cycles = $this -> model -> getAll();
+        $rows = '';
+        $count = 0;
+        if( !empty( $cycles ) ){
+            foreach( $cycles as $cycle ){
+                $newTableRow = $tableRow;
+                $dict = array( '*count*' => $count, '*year*' => $cycle['anio'], '*half*' => $cycle['calendario'],
+                               '*start*' => $cycle['fechaInicio'], '*end*' => $cycle['fechaFin'] );
+                $newTableRow = strtr( $newTableRow, $dict );
+                $rows .= $newTableRow;
+                $count += 1;
+            }
+        }
+        
+        $view = str_replace( $tableRow, $rows, $view );
+        
+        echo $view;
+    }
+    
+    private function getCycle(){
+        $cycle = $_POST['cycle'];
+        $cycleRow = $this -> model -> getCycle2( $cycle );
+        $this -> showCycle( $cycleRow['anio'], $cycleRow['calendario'], $cycleRow['fechaInicio'], $cycleRow['fechaFin'] );
     }
 }
 

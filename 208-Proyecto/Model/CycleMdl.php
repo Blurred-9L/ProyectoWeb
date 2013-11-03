@@ -91,6 +91,19 @@ class CycleMdl{
         
         return $count;
     }
+    
+    public function getAll(){
+        $query = 'select * from Ciclo';
+        
+        $result = $this -> dbCon -> query( $query );
+        
+        $rows = array();
+        while( $row = $result -> fetch_assoc() ){
+            $rows[] = $row;
+        }
+        
+        return $rows;
+    }
 }
 
 ?>

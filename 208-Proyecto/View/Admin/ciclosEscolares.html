@@ -65,7 +65,7 @@
                     Estos son los ciclos escolares registrados en el sistema. Si desea modificar las fechas de asuetos relacionadas a alguno de estos ciclos, selecciones el ciclo escolar deseado y después haga clic en "Agregar asuetos".
                 </p>
             </div>
-            <form name="allCycles" method="post" action="./asuetosCiclo.html">
+            <form name="allCycles" method="post" action="./index.php?ctrl=cycle&action=show">
                 <div class="edit-button-div">
                     <button id="free-day-edit" type="button" class="edit-button">
                         Agregar asuetos
@@ -88,21 +88,12 @@
                         <tbody>
                             <tr>
                                 <td class="edit-cell">
-                                    <input type="radio" name="edit-cycle" id="edit-cycle0" checked />
+                                    <input type="checkbox" name="edit-cycle-*count*" id="edit-cycle-*count*"/>
                                 </td>
-                                <td>.</td>
-                                <td>.</td>
-                                <td>.</td>
-                                <td>.</td>
-                            </tr>
-                            <tr>
-                                <td class="edit-cell">
-                                    <input type="radio" name="edit-cycle" id="edit-cycle1" />
-                                </td>
-                                <td>.</td>
-                                <td>.</td>
-                                <td>.</td>
-                                <td>.</td>
+                                <td id="cycle-year-*count*">*year*</td>
+                                <td id="cycle-half-*count*">*half*</td>
+                                <td id="cycle-start-*count*">*start*</td>
+                                <td id="cycle-start-*count*">*end*</td>
                             </tr>
                         </tbody>
                         <tfoot>
