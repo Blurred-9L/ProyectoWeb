@@ -19,20 +19,8 @@ function newClassLoad(){
         }
     }
     
-    $.ajax({
-        url: "../../Model/DayMdl.php",
-        dataType: "json",
-        success: function( json ){
-            for( i in json ){
-                var dayName = document.createTextNode( json[i].nombreDia );
-                var option = document.createElement( "option" );
-                option.id = "day-option-" + json[i].idDia.toString();
-                option.value = json[i].idDia;
-                option.appendChild( dayName );
-                document.getElementById( "new-class-day0" ).appendChild( option );
-            }
-        }
-    });
+    fillDaySelect();
+    fillAcademySelect();
 }
 
 function newStudentLoad(){
@@ -127,4 +115,14 @@ function showAllTeachersLoad(){
     var button = document.getElementById( "to-edit-button" );
                 
     button.onclick = checkSelected4;
+}
+
+// ----------------------------------------------------------------------------
+// Teachers onload functions:
+// ----------------------------------------------------------------------------
+
+function showAllTeacherClassesLoad(){
+    var button = document.getElementById( "see-class" );
+    
+    button.onclick = checkSelected5;
 }

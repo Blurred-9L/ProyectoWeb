@@ -473,15 +473,7 @@ function checkLogin(){
     var hash = CryptoJS.SHA1( pass );
     
     document.getElementById( "login-pass" ).value = hash.toString();
-    //if( !ok ){
-    //    div.appendChild( document.createTextNode( "Codigo y contraseña incorrectos." ) );
-    //    form.replaceChild( div, form.lastChild );
-    //}
-    //else{
-    //    div.appendChild( document.createTextNode( "" ) );
-    //    form.replaceChild( div, form.lastChild );
     form.submit();
-    //}
 }
 
 function checkCode( form, code ){
@@ -1229,6 +1221,42 @@ function checkSelected4(){
         
         form.submit();
         form.removeChild( newInput );
+    }
+}
+
+function checkSelected5(){
+    var message;
+    var table = document.getElementById( "class-table-div" );
+    var form = document.allClasses;
+    var inputArray = document.getElementsByTagName( "input" );
+    var count = 0;
+    var checkbox;
+    var index;
+    var codeTd;
+    var newInput;
+    
+    for( var i = 0; i < inputArray.length; i++ ){
+        if( inputArray[i].type == "checkbox" ){
+            if( inputArray[i].checked ){
+                count += 1;
+                checkbox = inputArray[i];
+            }
+        }
+    }
+    
+    if( count == 0 ){
+        message = document.createTextNode( "Seleccione un profesor." );
+        table.replaceChild( message, table.lastChild );
+    }
+    else if( count > 1 ){
+        message = document.createTextNode( "Seleccione SOLO un profesor." );
+        table.replaceChild( message, table.lastChild );
+    }
+    else{
+        message = document.createTextNode( "" );
+        table.replaceChild( message, table.lastChild );
+        
+        form.submit();
     }
 }
 

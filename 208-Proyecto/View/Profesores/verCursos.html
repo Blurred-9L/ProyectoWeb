@@ -46,43 +46,59 @@
         </nav>
         
         <section class="main-section">
-            <div class="table-div">
-                <div class="form-div">
-                    <h2><span class="separate">Cursos</span></h2>
-                    <p class="info-text">
-                        Lista de cursos que imparte.
-                    </p>
-                </div>
-                <table>
-                    <caption>
-                        Cursos
-                    </caption>
-                    <thead>
-                        <tr>
-                            <th>NRC</th>
-                            <th>Nombre</th>
-                            <th>Seccion</th>
-                            <th class="optional">Academia</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                            <td class="optional">.</td>
-                        </tr>
-                        <tr>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                            <td class="optional">.</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                    </tfoot>
-                </table>
+            <div class="form-div">
+                <h2><span class="separate">Cursos</span></h2>
+                <p class="info-text">
+                    Lista de cursos que imparte.
+                </p>
             </div>
+            <form name="allClasses" method="post" action="#">
+                <div class="edit-button-div">
+                    <button id="see-class" type="button" class="edit-button">
+                        Ver curso
+                    </button>
+                </div>
+                <div id="class-table-div" class="table-div">
+                    <table>
+                        <caption>
+                            Cursos
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th class="edit-cell">
+                                    Editar
+                                </th>
+                                <th>Clave</th>
+                                <th>Nombre</th>
+                                <th>Seccion</th>
+                                <th class="optional">Academia</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="edit-cell">
+                                    <input type="checkbox" name="class-check-*count*" id="class-check-*count*" />
+                                </td>
+                                <td>*id*</td>
+                                <td>*name*</td>
+                                <td>*sec*</td>
+                                <td class="optional">*academy*</td>
+                            </tr>
+                            <tr>
+                                <td class="edit-cell">
+                                    <input type="checkbox" name="class-check-*count*" id="class-check-*count*" />
+                                </td>
+                                <td>*id*</td>
+                                <td>*name*</td>
+                                <td>*sec*</td>
+                                <td class="optional">*academy*</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
+            </form>
         </section>
         
         <aside class="right-aside">
@@ -120,6 +136,10 @@
         <script>window.jQuery || document.write('<script src="../../Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
         <script src="../../Resources/js/plugins.js"></script>
         <script src="../../Resources/js/main.js"></script>
+        <script src="../../Resources/js/onload.js"></script>
+        <script>
+            window.onload = showAllTeacherClassesLoad;
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
