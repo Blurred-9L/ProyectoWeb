@@ -234,6 +234,10 @@ label {
     margin-left: 4.9%;
 }
 
+.erase-button {
+    margin: 0% 43%;
+}
+
 .clear-div {
     clear: both;
 }
@@ -337,6 +341,7 @@ th, td {
 
 .date-cell {
     width: 70%;
+    text-align: center;
 }
 
 .edit-cell {

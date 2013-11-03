@@ -205,10 +205,12 @@ function checkFreeDays(){
     //AAAA-MM-DD
     freeDays = document.getElementsByTagName( "input" );
     for( var i = 0; i < freeDays.length; i++ ){
-        boolArray[i] = checkDate( form, freeDays[i] );
+        if( freeDays[i].type == "date" ){
+            boolArray[i] = checkDate( form, freeDays[i] );
+        }
     }
     ok = true;
-    for( var i = 0; i < freeDays.length; i++ ){
+    for( var i = 0; i < boolArray.length; i++ ){
         if( !boolArray[i] ){
             ok = false;
         }
@@ -1493,6 +1495,22 @@ function selectAllFunc(){
     }
 }
 
+function selectAllFunc2(){
+    var inputs = document.getElementsByTagName( "input" );
+    var selectAll = document.getElementById( "select-all" );
+    
+    for( var i = 0; i < inputs.length; i++ ){
+        if( inputs[i].id.substring( 0, 10 ) == "date-check" ){
+            if( selectAll.checked ){
+                inputs[i].checked = true;
+            }
+            else{
+                inputs[i].checked = false;
+            }
+        }
+    }
+}
+
 function addSchedule( form, schedules, curSchedule ){
     var okToAdd = true;
     var i;
@@ -1509,5 +1527,42 @@ function addSchedule( form, schedules, curSchedule ){
     }
     else{
         form.replaceChild( document.createTextNode( " Horario repetido." ), form.lastChild );
+    }
+}
+
+function eraseFreeDays(){
+    var form = document.freeDaysTable;
+    var inputs = document.getElementsByTagName( "input" );
+    var checkboxes = [];
+    var hiddens = [];
+    var id;
+    
+    for( var i = 0; i < inputs.length; i++ ){
+        if( inputs[i].type == "checkbox" && inputs[i].id != "select-all" && inputs[i].checked ){
+            checkboxes.push( inputs[i] );
+        }
+    }
+    
+    if( checkboxes.length > 0 ){
+        for( var i = 0; i < checkboxes.length; i++ ){
+            id = "date-" + i.toString();
+            hiddens.push( document.createElement( "input" ) );
+            hiddens[i].name = id;
+            hiddens[i].id = id;
+            hiddens[i].type = "hidden";
+            hiddens[i].value = document.getElementById( id ).firstChild.nodeValue;
+            form.appendChild( hiddens[i] );
+        }
+        hiddens.push( document.createElement( "input" ) );
+        hiddens[i].name = "cycle";
+        hiddens[i].type = "hidden";
+        hiddens[i].value = document.getElementById( "cycle" ).value;
+        form.appendChild( hiddens[i] );
+        
+        form.submit();
+        
+        for( var i = 0; i < checkboxes.length + 1; i++ ){
+            form.removeChild( hiddens[i] );
+        }
     }
 }

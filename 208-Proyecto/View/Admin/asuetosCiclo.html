@@ -20,10 +20,14 @@
         <script>
             window.onload = function(){
                 countFreeDays = 1;
-                addButton = document.getElementById( "free-day-button" );
-                button = document.getElementById( "add-free-days" );
+                var addButton = document.getElementById( "free-day-button" );
+                var button = document.getElementById( "add-free-days" );
+                var selectAll = document.getElementById( "select-all" );
+                var eraseButton = document.getElementById( "erase-free-days" );
                 
+                selectAll.onclick = selectAllFunc2;
                 addButton.onclick = addFreeDay;
+                eraseButton.onclick = eraseFreeDays;
                 button.onclick = checkFreeDays;
             }
         </script>
@@ -68,14 +72,44 @@
                     Especifique las fechas que deben de tomarse como días libres. Agregue las fechas escribiendolas en los campos de texto. Si necesita más fechas, presione el botón "Otro más" para agregar otro campo de texto.
                 </p>
             </div>
-            <form name="freeDays" method="post" action="#">
+            
+            <form name="freeDaysTable" method="post" action="./index.php?ctrl=cycle&action=erase">
+                <div class="table-div">
+                    <table id="free-days-table">
+                        <caption>
+                            Dias de asueto:
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th class="checkbox-cell">
+                                    <input id="select-all" type="checkbox" name="select-all" />
+                                </th>
+                                <th class="date-cell">Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="checkbox-cell">
+                                    <input type="checkbox" id="date-check-*count*" name="date-check-*count*" />
+                                </td>
+                                <td class="date-cell" id="date-*count*">*date*</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
                 <div class="form-div">
-                    <label>
+                    <button type="button" class="erase-button" id="erase-free-days">Eliminar asuetos</button>
+                </div>
+            </form>
+            
+            <form name="freeDays" method="post" action="./index.php?ctrl=cycle&action=addfd">
+                <div class="form-div">
+                    <label for='cycle'>
                         Ciclo:
                     </label>
-                    <strong id="cycle">
-                        *cycle*
-                    </strong>
+                    <input type="text" id="cycle" name="cycle" />
                 </div>
                 <div class="form-div">
                     <label>
@@ -102,31 +136,9 @@
                 <div class="form-div" id="free-days-button">
                     <button id="free-day-button" class="free-day-button2" type="button">Agregar</button>
                 </div>
-                <!-- <div class="table-div">
-                    <table id="free-days-table">
-                        <caption>
-                            Dias de asueto:
-                        </caption>
-                        <thead>
-                            <tr>
-                                <th class="date-cell">Fecha</th>
-                                <th class="checkbox-cell">Añadir</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="date-cell">.</td>
-                                <td class="checkbox-cell">
-                                    <input type="checkbox" />
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                        </tfoot>
-                    </table>
-                </div> -->
+                
                 <div id="add-button-div" class="form-div">
-                    <button id="add-free-days" class="submit-button" type="button">Registrar</button>
+                    <button id="add-free-days" class="submit-button" type="button">Registrar asuetos</button>
                 </div>
             </form>
         </section>
