@@ -17,20 +17,6 @@
         <link rel="stylesheet" href="../../Resources/css/normalize.css">
         <link rel="stylesheet" href="../../Resources/css/main.css">
         <script src="../../Resources/js/vendor/modernizr-2.6.2.min.js"></script>
-        <script>
-            window.onload = function(){
-                countFreeDays = 1;
-                var addButton = document.getElementById( "free-day-button" );
-                var button = document.getElementById( "add-free-days" );
-                var selectAll = document.getElementById( "select-all" );
-                var eraseButton = document.getElementById( "erase-free-days" );
-                
-                selectAll.onclick = selectAllFunc2;
-                addButton.onclick = addFreeDay;
-                eraseButton.onclick = eraseFreeDays;
-                button.onclick = checkFreeDays;
-            }
-        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -47,16 +33,16 @@
         <nav class="main-nav">
             <ul>
                 <li>
-                    <a href="./adminMain.html">Principal</a>
+                    <a href="#">Principal</a>
                 </li>
                 <li>
-                    <a href="./verProfesores.html">Profesores</a>
+                    <a href="./index.php?ctrl=teacher&action=all">Profesores</a>
                 </li>
                 <li>
-                    <a href="./adminVerAlumnos.html">Alumnos</a>
+                    <a href="./index.php?ctrl=student&action=all">Alumnos</a>
                 </li>
                 <li>
-                    <a href="./ciclosEscolares.html">Ciclos escolares</a>
+                    <a href="./index.php?ctrl=cycle&action=all">Ciclos escolares</a>
                 </li>
                 <li>
                     <a href="#">Salir</a>
@@ -147,10 +133,10 @@
             <nav class="aside-nav">
                 <ul>
                     <li>
-                        <a href="./nuevoCiclo.html">Nuevo ciclo</a>
+                        <a href="./index.php?ctrl=cycle&action=new">Nuevo ciclo</a>
                     </li>
                     <li>
-                        <a href="./ciclosEscolares.html">Ciclos escolares</a>
+                        <a href="./index.php?ctrl=cycle&action=all">Ciclos escolares</a>
                     </li>
                     <div class="clear-div"></div>
                 </ul>
@@ -166,6 +152,10 @@
         <script>window.jQuery || document.write('<script src="../../Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
         <script src="../../Resources/js/plugins.js"></script>
         <script src="../../Resources/js/main.js"></script>
+        <script src="../../Resources/js/onload.js"></script>
+        <script>
+            window.onload = editCycleLoad;
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

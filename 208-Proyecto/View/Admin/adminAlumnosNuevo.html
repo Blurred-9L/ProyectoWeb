@@ -17,43 +17,6 @@
         <link rel="stylesheet" href="../../Resources/css/normalize.css">
         <link rel="stylesheet" href="../../Resources/css/main.css">
         <script src="../../Resources/js/vendor/modernizr-2.6.2.min.js"></script>
-        <script>
-            window.onload = function() {
-                button = document.getElementById( "submit-new-student" );
-                var phone = document.getElementById( "checkbox-tel" );
-                var url = document.getElementById( "checkbox-url" );
-                var github = document.getElementById( "checkbox-github" );
-                
-                button.onclick = checkRegStudent2;
-                
-                phone.onclick = function(){
-                    if( phone.checked ){
-                        showStudentInput( phone, "tel", "reg-student-phone", "reg-student-phone" );
-                    }
-                    else{
-                        hideStudentInput( "reg-student-phone" );
-                    }
-                }
-                
-                url.onclick = function(){
-                    if( url.checked ){
-                        showStudentInput( url, "url", "reg-student-url", "reg-student-url" );
-                    }
-                    else{
-                        hideStudentInput( "reg-student-url" );
-                    }
-                }
-                
-                github.onclick = function(){
-                    if( github.checked ){
-                        showStudentInput( github, "url", "reg-student-github", "reg-student-github" );
-                    }
-                    else{
-                        hideStudentInput( "reg-student-github" );
-                    }
-                }
-            }
-        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -70,16 +33,16 @@
         <nav class="main-nav">
             <ul>
                 <li>
-                    <a href="./adminMain.html">Principal</a>
+                    <a href="#">Principal</a>
                 </li>
                 <li>
-                    <a href="./verProfesores.html">Profesores</a>
+                    <a href="./index.php?ctrl=teacher&action=all">Profesores</a>
                 </li>
                 <li>
-                    <a href="./adminVerAlumnos.html">Alumnos</a>
+                    <a href="./index.php?ctrl=student&action=all">Alumnos</a>
                 </li>
                 <li>
-                    <a href="./ciclosEscolares.html">Ciclos escolares</a>
+                    <a href="./index.php?ctrl=cycle&action=all">Ciclos escolares</a>
                 </li>
                 <li>
                     <a href="#">Salir</a>
@@ -176,10 +139,10 @@
             <nav class="aside-nav">
                 <ul>
                     <li>
-                        <a href="./adminAlumnosNuevo.html">Registrar alumnos</a>
+                        <a href="./index.php?ctrl=student&action=anew">Registrar alumnos</a>
                     </li>
                     <li>
-                        <a href="./adminVerAlumnos.html">Alumnos</a>
+                        <a href="./index.php?ctrl=student&action=all">Alumnos</a>
                     </li>
                     <div class="clear-div"></div>
                 </ul>
@@ -195,6 +158,10 @@
         <script>window.jQuery || document.write('<script src="../../Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
         <script src="../../Resources/js/plugins.js"></script>
         <script src="../../Resources/js/main.js"></script>
+        <script src="../../Resources/js/onload.js"></script>
+        <script>
+            window.onload = newStudentLoad;
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

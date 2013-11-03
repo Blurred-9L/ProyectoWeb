@@ -17,13 +17,6 @@
         <link rel="stylesheet" href="../../Resources/css/normalize.css">
         <link rel="stylesheet" href="../../Resources/css/main.css">
         <script src="../../Resources/js/vendor/modernizr-2.6.2.min.js"></script>
-        <script>
-            window.onload = function(){
-                button = document.getElementById( "edit-teacher-button" );
-                
-                button.onclick = checkEditTeacher;
-            }
-        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -40,16 +33,16 @@
         <nav class="main-nav">
             <ul>
                 <li>
-                    <a href="./adminMain.html">Principal</a>
+                    <a href="#">Principal</a>
                 </li>
                 <li>
-                    <a href="./verProfesores.html">Profesores</a>
+                    <a href="./index.php?ctrl=teacher&action=all">Profesores</a>
                 </li>
                 <li>
-                    <a href="./adminVerAlumnos.html">Alumnos</a>
+                    <a href="./index.php?ctrl=student&action=all">Alumnos</a>
                 </li>
                 <li>
-                    <a href="./ciclosEscolares.html">Ciclos escolares</a>
+                    <a href="./index.php?ctrl=cycle&action=all">Ciclos escolares</a>
                 </li>
                 <li>
                     <a href="#">Salir</a>
@@ -127,10 +120,10 @@
             <nav class="aside-nav">
                 <ul>
                     <li>
-                        <a href="./profesorNuevo.html">Registrar profesor</a>
+                        <a href="./index.php?ctrl=teacher&action=new">Registrar profesor</a>
                     </li>
                     <li>
-                        <a href="./verProfesores.html">Profesores</a>
+                        <a href="./index.php?ctrl=teacher&action=all">Profesores</a>
                     </li>
                     <div class="clear-div"></div>
                 </ul>
@@ -146,6 +139,10 @@
         <script>window.jQuery || document.write('<script src="../../Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
         <script src="../../Resources/js/plugins.js"></script>
         <script src="../../Resources/js/main.js"></script>
+        <script src="../../Resources/js/onload.js"></script>
+        <script>
+            window.onload = editTeacherLoad;
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
