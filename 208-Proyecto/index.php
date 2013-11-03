@@ -13,6 +13,10 @@ switch( $_GET['ctrl'] ){
         require_once( 'Controller/CycleCtrl.php' );
         $ctrl = new CycleCtrl();
         break;
+    case 'login':
+        require_once( 'Controller/LoginCtrl.php' );
+        $ctrl = new LoginCtrl();
+        break;
     default:
         echo "Error";
         break;
