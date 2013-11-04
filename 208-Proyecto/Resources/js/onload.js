@@ -20,7 +20,8 @@ function newClassLoad(){
     }
     
     fillDaySelect();
-    fillAcademySelect();
+    //fillAcademySelect();
+    fillClassSelect();
 }
 
 function newStudentLoad(){

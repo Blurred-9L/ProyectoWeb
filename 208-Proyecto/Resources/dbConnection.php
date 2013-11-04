@@ -16,6 +16,7 @@ class dbConnection{
     }
     
     public function query( $query ){
+        $this -> connection -> query( 'set character set utf8' );
         $result = $this -> connection -> query( $query );
         
         return $result;

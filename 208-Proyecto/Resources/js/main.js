@@ -177,11 +177,12 @@ function checkNewClass(){
     var boolArray = [];
     var ok;
     
-    boolArray[0] = checkName( form, document.getElementById( "new-class-name" ) );
-    boolArray[1] = checkNrc( form, document.getElementById( "new-class-nrc" ) );
-    boolArray[2] = checkAcademy( form, document.getElementById( "new-class-academy" ) );
-    boolArray[3] = checkSchedules( form );
-    boolArray[4] = checkEvals( form );
+    //boolArray[0] = checkName( form, document.getElementById( "new-class-name" ) );
+    //boolArray[1] = checkNrc( form, document.getElementById( "new-class-nrc" ) );
+    boolArray[0] = checkClassKey( form, document.getElementById( "new-class-key" ) );
+    //boolArray[1] = checkAcademy( form, document.getElementById( "new-class-academy" ) );
+    boolArray[1] = checkSchedules( form );
+    boolArray[2] = checkEvals( form );
     
     ok = true;
     for( var i = 0; i < boolArray.length && ok; i++ ){
@@ -1617,4 +1618,22 @@ function eraseFreeDays(){
             form.removeChild( hiddens[i] );
         }
     }
+}
+
+function checkClassKey( form, key ){
+    var ok = true;
+    var index = key.selectedIndex;
+    var message;
+    
+    if( index == 0 ){
+        message = document.createTextNode( " Seleccione un curso." );
+        key.parentNode.replaceChild( message, key.parentNode.lastChild );
+        ok = false;
+    }
+    else{
+        message = document.createTextNode( "" );
+        key.parentNode.replaceChild( message, key.parentNode.lastChild );
+    }
+    
+    return ok;
 }

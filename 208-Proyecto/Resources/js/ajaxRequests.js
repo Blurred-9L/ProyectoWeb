@@ -1,6 +1,6 @@
 function fillDaySelect(){
     $.ajax({
-        url: "../../Model/DayMdl.php",
+        url: "../../Model/getDays.php",
         dataType: "json",
         success: function( json ){
             for( i in json ){
@@ -17,7 +17,7 @@ function fillDaySelect(){
 
 function fillAcademySelect(){
     $.ajax({
-        url: "../../Model/AcademyMdl.php",
+        url: "../../Model/getAcademies.php",
         dataType: "json",
         success: function( json ){
             for( i in json ){
@@ -27,6 +27,23 @@ function fillAcademySelect(){
                 option.value = json[i].idAcademia;
                 option.appendChild( academyName );
                 document.getElementById( "new-class-academy" ).appendChild( option );
+            }
+        }
+    });
+}
+
+function fillClassSelect(){
+    $.ajax({
+        url: "../../Model/getClasses.php",
+        dataType: "json",
+        success: function( json ){
+            for( i in json ){
+                var className = document.createTextNode( json[i].clave + " " + json[i].nombre );
+                var option = document.createElement( "option" );
+                option.id = "class-key-option-" + json[i].idCurso.toString();
+                option.value = json[i].idCurso;
+                option.appendChild( className );
+                document.getElementById( "new-class-key" ).appendChild( option );
             }
         }
     });
