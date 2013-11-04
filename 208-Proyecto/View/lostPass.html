@@ -17,20 +17,6 @@
         <link rel="stylesheet" href="../Resources/css/normalize.css">
         <link rel="stylesheet" href="../Resources/css/main.css">
         <script src="../Resources/js/vendor/modernizr-2.6.2.min.js"></script>
-        <script>
-            window.onload = function(){
-                button = document.getElementById( "recover" );
-                
-                recover.onclick = function(){
-                    var ok;
-                    ok = checkCode( document.recoverPass, document.getElementById( "lost-pass-code" ) );
-                    
-                    if( ok ){
-                        document.recoverPass.submit();
-                    }
-                }
-            }
-        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -51,7 +37,7 @@
                     Para recuperar tu contraseña escribe tu código en el campo de texto a continuación y presiona el boton "Recuperar". Deberás recibir un correo electrónico con tu contraseña.
                 </p>
             </div>
-            <form name="recoverPass" method="post" action="#">
+            <form name="recoverPass" method="post" action="./index.php?ctrl=login&action=recover">
                 <div class="form-div">
                     <label for="lost-pass-code">
                         Código:
@@ -72,6 +58,10 @@
         <script>window.jQuery || document.write('<script src="../../Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
         <script src="../Resources/js/plugins.js"></script>
         <script src="../Resources/js/main.js"></script>
+        <script src="../Resources/js/onload.js"></script>
+        <script>
+            window.onload = lostPassLoad;
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

@@ -9,7 +9,7 @@ class LoginMdl{
     }
     
     public function getAllStudents(){
-        $query = "select codigo, password from Alumno;";
+        $query = "select * from Alumno;";
         
         $result = $this -> dbCon -> query( $query );
         $rows = array();
@@ -21,7 +21,7 @@ class LoginMdl{
     }
     
     public function getAllTeachers(){
-        $query = "select codigo, password from Profesor;";
+        $query = "select * from Profesor;";
         
         $result = $this -> dbCon -> query( $query );
         $rows = array();
@@ -42,6 +42,33 @@ class LoginMdl{
         }
         
         return $rows;
+    }
+    
+    public function updateAdminPass( $code, $pass ){
+        $storedPass = sha1( $pass );
+        $query = "update Admin set password=\"$storedPass\" where codigo=\"$code\";";
+        
+        $result = $this -> dbCon -> query( $query );
+        
+        return $result;
+    }
+    
+    public function updateStudentPass( $code, $pass ){
+        $storedPass = sha1( $pass );
+        $query = "update Alumno set password=\"$storedPass\" where codigo=\"$code\";";
+        
+        $result = $this -> dbCon -> query( $query );
+        
+        return $result;
+    }
+    
+    public function updateTeacherPass( $code, $pass ){
+        $storedPass = sha1( $pass );
+        $query = "update Profesor set password=\"$storedPass\" where codigo=\"$code\";";
+        
+        $result = $this -> dbCon -> query( $query );
+        
+        return $result;
     }
 }
 

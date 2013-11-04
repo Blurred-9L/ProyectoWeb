@@ -13,6 +13,9 @@ class LoginCtrl{
             case 'login':
                 $this -> attemptLogin();
                 break;
+            case 'recover':
+                $this -> recoverPass();
+                break;
         }
     }
     
@@ -28,10 +31,10 @@ class LoginCtrl{
                 $view = file_get_contents( 'View/Admin/adminMain.html' );
             }
             else if( ( $account = $this -> searchTeachers( $code ) ) !== FALSE ){
-                $view = file_get_contents( 'View/Alumnos/alumnosMain.html' );
+                $view = file_get_contents( 'View/Profesores/profesoresMain.html' );
             }
             else if( ( $account = $this -> searchStudents( $code ) ) !== FALSE ){
-                $view = file_get_contents( 'View/Profesores/profesoresMain.html' );
+                $view = file_get_contents( 'View/Alumnos/alumnosMain.html' );
             }
             else{
                 $view = file_get_contents( 'View/login.html' );
@@ -107,6 +110,92 @@ class LoginCtrl{
         else{
             return $found;
         }
+    }
+    
+    private function recoverPass(){
+        if( empty( $_POST ) ){
+            require_once( 'View/lostPass.html' );
+        }
+        else{
+            $code = $_POST['lost-pass-code'];
+            if( ( $account = $this -> searchAdmins( $code ) ) !== FALSE ){
+                $newPass = $this -> getAdminPassword();
+                if( $this -> model -> updateAdminPass( $code, $newPass ) === TRUE ){
+                    $view = file_get_contents( 'View/login.html' );
+                    $view = str_replace( '<div class="message-div">',
+                                         "<div class=\"message-div\"> Su nueva contraseña es $newPass.",
+                                         $view );
+                }
+                else{
+                    $view = 'Error';
+                }
+            }
+            else if( ( $account = $this -> searchTeachers( $code ) ) !== FALSE ){
+                $newPass = $this -> getTeacherPassword( $account['nombre'], $account['apellidoP'], $account['apellidoM'] );
+                if( $this -> model -> updateTeacherPass( $code, $newPass ) === TRUE ){
+                    $view = file_get_contents( 'View/login.html' );
+                    $view = str_replace( '<div class="message-div">',
+                                         "<div class=\"message-div\"> Su nueva contraseña es $newPass.",
+                                         $view );
+                }
+                else{
+                    $view = 'Error';
+                }
+            }
+            else if( ( $account = $this -> searchStudents( $code ) ) !== FALSE ){
+                $newPass = $this -> getStudentPassword( $account['nombre'], $account['apellidoP'], $account['apellidoM'] );
+                if( $this -> model -> updateStudentPass( $code, $newPass ) === TRUE ){
+                    $view = file_get_contents( 'View/login.html' );
+                    $view = str_replace( '<div class="message-div">',
+                                         "<div class=\"message-div\"> Su nueva contraseña es $newPass.",
+                                         $view );
+                }
+                else{
+                    $view = 'Error';
+                }
+            }
+            else{
+                $view = file_get_contents( 'View/login.html' );
+                $view = str_replace( '<div class="message-div">',
+                                     '<div class="message-div"> Intento de recuperar contraseña fallido.',
+                                     $view );
+            }
+            
+            echo $view;
+        }
+    }
+    
+    private function getStudentPassword( $name, $last1, $last2 ){
+        $accents = array( 'á' => 'a', 'é' => 'e', 'í' => 'i', 'ó' => 'o', 'ú' => 'u', 'ñ' => 'n' );
+        $pass = $name . $last1 . $last2;
+        $pass = strtolower( $pass );
+        $pass = strtr( $pass, $accents );
+        $pass = str_shuffle( $pass );
+        $pass = substr( $pass, 0, 8 );
+        
+        return $pass;
+    }
+    
+    private function getTeacherPassword( $name, $last1, $last2 ){
+        $accents = array( 'á' => 'a', 'é' => 'e', 'í' => 'i', 'ó' => 'o', 'ú' => 'u', 'ñ' => 'n' );
+        $pass = $name . $last1 . $last2;
+        $pass = strtolower( $pass );
+        $pass = strtr( $pass, $accents );
+        $pass = str_shuffle( $pass );
+        $pass = substr( $pass, 0, 12 );
+        
+        return $pass;
+    }
+    
+    private function getAdminPassword(){
+        $letters = range( 'a', 'z' );
+        
+        $pass = '';
+        for( $i = 0; $i < 8; $i += 1 ){
+            $pass .= $letters[array_rand( $letters )]; 
+        }
+        
+        return $pass;
     }
 }
 

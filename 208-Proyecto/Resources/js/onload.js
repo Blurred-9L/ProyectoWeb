@@ -1,28 +1,23 @@
-function newClassLoad(){
-    nSchedules = 1;
-    nEvals = 1;
-    var addTimeButton = document.getElementById( "add-time" );
-    var addEvalButton = document.getElementById( "add-eval" );
-    var checkbox = document.getElementById( "eval-page0" );
-    var button = document.getElementById( "submit-new-class" );
+// ----------------------------------------------------------------------------
+// Main onload functions:
+// ----------------------------------------------------------------------------
+
+function lostPassLoad(){
+    var button = document.getElementById( "recover" );
     
-    button.onclick = checkNewClass;
-    addTimeButton.onclick = addTime;
-    addEvalButton.onclick = addEval;
-    checkbox.checked = false;
-    checkbox.onclick = function(){
-        if( checkbox.checked ){
-            showColumnInput( checkbox.parentNode );
-        }
-        else{
-            hideColumnInput( checkbox.parentNode );
+    recover.onclick = function(){
+        var ok;
+        ok = checkCode( document.recoverPass, document.getElementById( "lost-pass-code" ) );
+        
+        if( ok ){
+            document.recoverPass.submit();
         }
     }
-    
-    fillDaySelect();
-    //fillAcademySelect();
-    fillClassSelect();
 }
+
+// ----------------------------------------------------------------------------
+// Admin onload functions:
+// ----------------------------------------------------------------------------
 
 function newStudentLoad(){
     var button = document.getElementById( "submit-new-student" );
@@ -126,4 +121,30 @@ function showAllTeacherClassesLoad(){
     var button = document.getElementById( "see-class" );
     
     button.onclick = checkSelected5;
+}
+
+function newClassLoad(){
+    nSchedules = 1;
+    nEvals = 1;
+    var addTimeButton = document.getElementById( "add-time" );
+    var addEvalButton = document.getElementById( "add-eval" );
+    var checkbox = document.getElementById( "eval-page0" );
+    var button = document.getElementById( "submit-new-class" );
+    
+    button.onclick = checkNewClass;
+    addTimeButton.onclick = addTime;
+    addEvalButton.onclick = addEval;
+    checkbox.checked = false;
+    checkbox.onclick = function(){
+        if( checkbox.checked ){
+            showColumnInput( checkbox.parentNode );
+        }
+        else{
+            hideColumnInput( checkbox.parentNode );
+        }
+    }
+    
+    fillDaySelect();
+    //fillAcademySelect();
+    fillClassSelect();
 }
