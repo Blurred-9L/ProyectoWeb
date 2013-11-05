@@ -6,12 +6,43 @@ class LoginCtrl{
     public function __construct(){
         require_once( 'Model/LoginMdl.php' );
         $this -> model = new LoginMdl();
+        session_start();
+    }
+    
+    public function checkSession(){
+        // A session will store... id and type.
+        $sessionExists = FALSE;
+        
+        if( isset( $_SESSION['user_id'] ) && isset( $_SESSION['user_type'] ) ){
+            $sessionExists = TRUE;
+        }
+        
+        return $sessionExists;
+    }
+    
+    public function redirectUser(){
+        switch( $_SESSION['user_type'] ){
+            case 'rookie': // Student
+                require_once( 'View/Alumnos/alumnosMain.html' );
+                break;
+            case 'brigadier': // Teacher
+                require_once( 'View/Profesores/profesoresMain.html' );
+                break;
+            case 'ninja': // Admin
+                require_once( 'View/Admin/adminMain.html' );
+                break;
+        }
     }
     
     public function execute(){
         switch( $_GET['action'] ){
             case 'login':
-                $this -> attemptLogin();
+                if( !$this -> checkSession() ){
+                    $this -> attemptLogin();
+                }
+                else{
+                    $this -> redirectUser();
+                }
                 break;
             case 'recover':
                 $this -> recoverPass();
@@ -29,12 +60,18 @@ class LoginCtrl{
             
             if( ( $account = $this -> searchAdmins( $code ) ) !== FALSE ){
                 $view = file_get_contents( 'View/Admin/adminMain.html' );
+                $_SESSION['user_type'] = 'ninja';
+                $_SESSION['user_id'] = $code;
             }
             else if( ( $account = $this -> searchTeachers( $code ) ) !== FALSE ){
                 $view = file_get_contents( 'View/Profesores/profesoresMain.html' );
+                $_SESSION['user_type'] = 'brigadier';
+                $_SESSION['user_id'] = $code;
             }
             else if( ( $account = $this -> searchStudents( $code ) ) !== FALSE ){
                 $view = file_get_contents( 'View/Alumnos/alumnosMain.html' );
+                $_SESSION['user_type'] = 'rookie';
+                $_SESSION['user_id'] = $code;
             }
             else{
                 $view = file_get_contents( 'View/login.html' );

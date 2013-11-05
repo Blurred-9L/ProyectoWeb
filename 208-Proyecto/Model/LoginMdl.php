@@ -33,7 +33,7 @@ class LoginMdl{
     }
     
     public function getAllAdmins(){
-        $query = "select codigo, password from Admin;";
+        $query = "select * from Admin;";
         
         $result = $this -> dbCon -> query( $query );
         $rows = array();

@@ -6,12 +6,30 @@ class StudentCtrl{
     public function __construct(){
         require_once( 'Model/StudentMdl.php' );
         $this -> model = new StudentMdl();
+        session_start();
+    }
+    
+    public function checkPermissions( $userType ){
+        $ok = FALSE;
+        
+        if( isset( $_SESSION['user_type'] ) ){
+            if( $_SESSION['user_type'] == $userType ){
+                $ok = TRUE;
+            }
+        }
+        
+        return $ok;
     }
     
     public function execute(){
         switch( $_GET['action'] ){
             case 'anew':
-                $this -> adminNewStudent();
+                if( $this -> checkPermissions( 'ninja' ) ){
+                    $this -> adminNewStudent();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
                 break;
             case 'edit':
                 $this -> edit();
