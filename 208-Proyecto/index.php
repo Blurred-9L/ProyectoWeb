@@ -17,6 +17,10 @@ switch( $_GET['ctrl'] ){
         require_once( 'Controller/LoginCtrl.php' );
         $ctrl = new LoginCtrl();
         break;
+    case 'class':
+        require_once( 'Controller/ClassCtrl.php' );
+        $ctrl = new ClassCtrl();
+        break;
     default:
         echo "Error";
         break;
