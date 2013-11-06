@@ -259,6 +259,14 @@ div.table-div {
     margin: 2% 2%;
 }
 
+div.table-div#schedules-div, div.table-div#evals-div {
+    margin: 2% 8%;
+}
+
+#schedules-table, #evals-table {
+    text-align: center;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
