@@ -34,12 +34,57 @@ class ClassCtrl{
             
             $result = $this -> setUpNewClass( $key, $prof, $cycle, $section );
             if( $result === TRUE ){
-                echo "OK";
+                $this -> processShowClassView( $key, $prof, $cycle, $section );
             }
             else{
                 echo "Not OK";
             }
         }
+    }
+    
+    public function processShowClassView( $key, $prof, $cycle, $section ){
+        $view = file_get_contents( 'View/Profesores/verCurso.html' );
+        $cycleRow = $this -> model -> getCycle( $cycle );
+        $classRow = $this -> model -> getClass( $key );
+        
+        $dict = array( '*class*' => $classRow['nombre'], '*cycle*' => $cycleRow['ciclo'], '*section*' => $section );
+        $view = strtr( $view, $dict );
+        
+        $start = strpos( $view, '<tr class="sched-tr">' );
+        $subView = substr( $view, $start );
+        $trEnd = strpos( $subView, '</tr>' ) + 5;
+        $tableRow = substr( $view, $start, $trEnd );
+        
+        $schedules = $this -> model -> getTeacherClassSchedules( $cycle, $prof, $key );
+        $rows = '';
+        if( !empty( $schedules ) ){
+            foreach( $schedules as $sched ){
+                $newTableRow = $tableRow;
+                $dict = array( '*day*' => $sched['nombreDia'], '*start*' => $sched['inicio'], '*duration*' => $sched['cantHoras'] );
+                $newTableRow = strtr( $newTableRow, $dict );
+                $rows .= $newTableRow;
+            }
+        }
+        $view = str_replace( $tableRow, $rows, $view );
+        
+        $start = strpos( $view, '<tr class="eval-tr">' );
+        $subView = substr( $view, $start );
+        $trEnd = strpos( $subView, '</tr>' ) + 5;
+        $tableRow = substr( $view, $start, $trEnd );
+        
+        $evals = $this -> model -> getTeacherClassEvals( $prof, $cycle, $key );
+        $rows = '';
+        if( !empty( $evals ) ){
+            foreach( $evals as $eval ){
+                $newTableRow = $tableRow;
+                $dict = array( '*evalname*' => $eval['descripcion'], '*value*' => $eval['valor'] );
+                $newTableRow = strtr( $newTableRow, $dict );
+                $rows .= $newTableRow;
+            }
+        }
+        $view = str_replace( $tableRow, $rows, $view );
+        
+        echo $view;
     }
     
     private function setUpNewClass( $key, $teacher, $cycle, $section ){
