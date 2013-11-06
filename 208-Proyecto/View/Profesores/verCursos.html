@@ -52,7 +52,7 @@
                     Lista de cursos que imparte.
                 </p>
             </div>
-            <form name="allClasses" method="post" action="#">
+            <form name="allClasses" method="post" action="./index.php?ctrl=class&action=show">
                 <div class="edit-button-div">
                     <button id="see-class" type="button" class="edit-button">
                         Ver curso
@@ -68,9 +68,10 @@
                                 <th class="edit-cell">
                                     Editar
                                 </th>
-                                <th>Clave</th>
-                                <th>Nombre</th>
-                                <th>Seccion</th>
+                                <th class="edit-cell">Clave</th>
+                                <th class="optional">Nombre</th>
+                                <th class="edit-cell">Seccion</th>
+                                <th class="edit-cell">Ciclo</th>
                                 <th class="optional">Academia</th>
                             </tr>
                         </thead>
@@ -79,18 +80,10 @@
                                 <td class="edit-cell">
                                     <input type="checkbox" name="class-check-*count*" id="class-check-*count*" />
                                 </td>
-                                <td>*id*</td>
-                                <td>*name*</td>
-                                <td>*sec*</td>
-                                <td class="optional">*academy*</td>
-                            </tr>
-                            <tr>
-                                <td class="edit-cell">
-                                    <input type="checkbox" name="class-check-*count*" id="class-check-*count*" />
-                                </td>
-                                <td>*id*</td>
-                                <td>*name*</td>
-                                <td>*sec*</td>
+                                <td class="edit-cell">*id*</td>
+                                <td class="optional">*name*</td>
+                                <td class="edit-cell">*sec*</td>
+                                <td class="edit-cell">*cycle*</td>
                                 <td class="optional">*academy*</td>
                             </tr>
                         </tbody>

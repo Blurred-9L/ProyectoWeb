@@ -13,6 +13,9 @@ class ClassCtrl{
             case 'new':
                 $this -> newClass();
                 break;
+            case 't-all':
+                $this -> showTeacherAll();
+                break;
         }
     }
     
@@ -170,6 +173,31 @@ class ClassCtrl{
             echo "Error al registrar Hojas de Evaluacion.";
             return FALSE;
         }
+    }
+    
+    private function showTeacherAll(){
+        $view = file_get_contents( 'View/Profesores/verCursos.html' );
+        
+        $teacherId = '1';
+        $start = strrpos( $view, '<tr>' );
+        $end = strrpos( $view, '</tr>' ) + 5;
+        $tableRow = substr( $view, $start, $end - $start );
+        
+        $classes = $this -> model -> getTeacherClasses( $teacherId );
+        $rows = '';
+        if( !empty( $classes ) ){
+            foreach( $classes as $class ){
+                $newTableRow = $tableRow;
+                $dict = array( '*id*' => $class['clave'], '*name*' => $class['nombre'], '*sec*' => $class['seccion'],
+                               '*cycle*' => $class['ciclo'], '*academy*' => $class['nombreAcademia'] );
+                $newTableRow = strtr( $newTableRow, $dict );
+                $rows .= $newTableRow;
+            }
+        }
+        
+        $view = str_replace( $tableRow, $rows, $view );
+        
+        echo $view;
     }
 }
 

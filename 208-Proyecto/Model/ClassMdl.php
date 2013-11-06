@@ -62,6 +62,20 @@ class ClassMdl{
         return $rows;
     }
     
+    public function getTeacherClasses( $teacherId ){
+        $query = "select clave, nombre, nombreAcademia, seccion, ciclo from Curso, Academia, CursoProfesor,
+                  Ciclo where Curso.idAcademia = Academia.idAcademia and Curso.idCurso = CursoProfesor.idCurso
+                  and CursoProfesor.idCiclo = Ciclo.idCiclo and CursoProfesor.idProfesor = 1;";
+                  
+        $result = $this -> dbCon -> query( $query );
+        $rows = array();
+        while( $row = $result -> fetch_assoc() ){
+            $rows[] = $row;
+        }
+        
+        return $rows;
+    }
+    
     public function getLatestCycle(){
         $query = 'select max(ciclo) as ciclo from Ciclo;';
         
