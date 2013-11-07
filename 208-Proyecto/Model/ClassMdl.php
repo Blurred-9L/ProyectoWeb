@@ -21,8 +21,26 @@ class ClassMdl{
         return $row;
     }
     
+    public function getClassByKey( $classKey ){
+        $query = "select * from Curso where clave=\"$classKey\";";
+        
+        $result = $this -> dbCon -> query( $query );
+        $row = $result -> fetch_assoc();
+        
+        return $row;
+    }
+    
     public function getCycle( $cycleId ){
         $query = "select * from Ciclo where idCiclo=$cycleId;";
+        
+        $result = $this -> dbCon -> query( $query );
+        $row = $result -> fetch_assoc();
+        
+        return $row;
+    }
+    
+    public function getCycleByStr( $cycleStr ){
+        $query = "select * from Ciclo where ciclo=\"$cycleStr\";";
         
         $result = $this -> dbCon -> query( $query );
         $row = $result -> fetch_assoc();

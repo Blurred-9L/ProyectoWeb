@@ -1233,8 +1233,10 @@ function checkSelected5(){
     var count = 0;
     var checkbox;
     var index;
-    var codeTd;
-    var newInput;
+    var elemTd;
+    var codeInput;
+    var secInput;
+    var cycleInput;
     
     for( var i = 0; i < inputArray.length; i++ ){
         if( inputArray[i].type == "checkbox" ){
@@ -1257,7 +1259,33 @@ function checkSelected5(){
         message = document.createTextNode( "" );
         table.replaceChild( message, table.lastChild );
         
+        index = checkbox.id.substring( 12 );
+        
+        elemTd = document.getElementById( "class-id-" + index );
+        codeInput = document.createElement( "input" );
+        codeInput.type = "hidden";
+        codeInput.name = "classCode";
+        codeInput.value = elemTd.firstChild.nodeValue;
+        form.appendChild( codeInput );
+        
+        elemTd = document.getElementById( "class-sec-" + index );
+        secInput = document.createElement( "input" );
+        secInput.type = "hidden";
+        secInput.name = "classSec";
+        secInput.value = elemTd.firstChild.nodeValue;
+        form.appendChild( secInput );
+        
+        elemTd = document.getElementById( "class-cycle-" + index );
+        cycleInput = document.createElement( "input" );
+        cycleInput.type = "hidden";
+        cycleInput.name = "classCycle";
+        cycleInput.value = elemTd.firstChild.nodeValue;
+        form.appendChild( cycleInput );
+        
         form.submit();
+        form.removeChild( codeInput );
+        form.removeChild( secInput );
+        form.removeChild( cycleInput );
     }
 }
 

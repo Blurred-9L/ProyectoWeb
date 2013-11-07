@@ -16,6 +16,9 @@ class ClassCtrl{
             case 't-all':
                 $this -> showTeacherAll();
                 break;
+            case 'show':
+                $this -> showClass();
+                break;
         }
     }
     
@@ -198,6 +201,21 @@ class ClassCtrl{
         $view = str_replace( $tableRow, $rows, $view );
         
         echo $view;
+    }
+    
+    private function showClass(){
+        $classKey = $_POST['classCode'];
+        $section = $_POST['classSec'];
+        $cycle = $_POST['classCycle'];
+        $teacherId = '1';   // This will change in the future.
+        
+        $classRow = $this -> model -> getClassByKey( $classKey );
+        $classId = $classRow['idCurso'];
+        
+        $cycleRow = $this -> model -> getCycleByStr( $cycle );
+        $cycleId = $cycleRow['idCiclo'];
+        
+        $this -> processShowClassView( $classId, $teacherId, $cycleId, $section );
     }
 }
 
