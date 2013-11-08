@@ -1248,11 +1248,11 @@ function checkSelected5(){
     }
     
     if( count == 0 ){
-        message = document.createTextNode( "Seleccione un profesor." );
+        message = document.createTextNode( "Seleccione un curso." );
         table.replaceChild( message, table.lastChild );
     }
     else if( count > 1 ){
-        message = document.createTextNode( "Seleccione SOLO un profesor." );
+        message = document.createTextNode( "Seleccione SOLO un curso." );
         table.replaceChild( message, table.lastChild );
     }
     else{

@@ -148,3 +148,43 @@ function newClassLoad(){
     //fillAcademySelect();
     fillClassSelect();
 }
+
+function teacherNewStudentLoad(){
+    var button = document.getElementById( "submit-reg-student" );
+    var searchButton = document.getElementById( "search-code-button" );
+    var phone = document.getElementById( "checkbox-tel" );
+    var url = document.getElementById( "checkbox-url" );
+    var github = document.getElementById( "checkbox-github" );
+    
+    fillMajorSelect( "reg-student-major" );
+    fillTeacherClassSelect( "reg-student-class" );
+    
+    button.onclick = checkRegStudent;
+    searchButton.onclick = getStudentData;
+    phone.onclick = function(){
+        if( phone.checked ){
+            showStudentInput( phone, "tel", "reg-student-phone", "reg-student-phone" );
+        }
+        else{
+            hideStudentInput( "reg-student-phone" );
+        }
+    }
+    
+    url.onclick = function(){
+        if( url.checked ){
+            showStudentInput( url, "url", "reg-student-url", "reg-student-url" );
+        }
+        else{
+            hideStudentInput( "reg-student-url" );
+        }
+    }
+    
+    github.onclick = function(){
+        if( github.checked ){
+            showStudentInput( github, "url", "reg-student-github", "reg-student-github" );
+        }
+        else{
+            hideStudentInput( "reg-student-github" );
+        }
+    }
+}
