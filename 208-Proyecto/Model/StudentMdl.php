@@ -8,6 +8,10 @@ class StudentMdl{
         $this -> dbCon = dbConnection::connect();
     }
     
+    public function insertId(){
+        return $this -> dbCon -> connection -> insert_id;
+    }
+    
     public function register( $code, $name, $last1, $last2, $mail, $major, $pass, $phone, $url, $github ){
         $newPass = sha1( $pass );
         $query = "insert into Alumno( codigo, nombre, apellidoP, apellidoM, email, idCarrera, password,
@@ -18,6 +22,15 @@ class StudentMdl{
         $query .= ( isset( $url ) )? "\"$url\", " : 'NULL, ';
         $query .= ( isset( $github ) )? "\"$github\" );" : 'NULL );';
         
+        $result = $this -> dbCon -> query( $query );
+        
+        return $result;
+    }
+    
+    public function signUpToClass( $studentId, $classId, $teacherId, $cycleId ){
+        $query = "insert into AlumnoCurso( idAlumno, idCurso, idProfesor, idCiclo ) values
+                  ( $studentId, $classId, $teacherId, $cycleId );";
+                  
         $result = $this -> dbCon -> query( $query );
         
         return $result;
@@ -43,6 +56,24 @@ class StudentMdl{
     
     public function getStudent( $code ){
         $query = "select * from Alumno join Carrera on Alumno.idCarrera=Carrera.idCarrera and codigo=\"$code\";";
+        
+        $result = $this -> dbCon -> query( $query );
+        $row = $result -> fetch_assoc();
+        
+        return $row;
+    }
+    
+    public function getClass( $classKey ){
+        $query = "select * from Curso where clave=\"$classKey\";";
+        
+        $result = $this -> dbCon -> query( $query );
+        $row = $result -> fetch_assoc();
+        
+        return $row;
+    }
+    
+    public function getCycle( $cycleStr ){
+        $query = "select * from Ciclo where ciclo=\"$cycleStr\";";
         
         $result = $this -> dbCon -> query( $query );
         $row = $result -> fetch_assoc();

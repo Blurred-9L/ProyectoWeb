@@ -39,6 +39,10 @@ class StudentCtrl{
                 break;
             case 'show':
                 $this -> show();
+                break;
+            case 'tnew':
+                $this -> teacherNewStudent();
+                break;
         }
     }
     
@@ -155,6 +159,89 @@ class StudentCtrl{
             else{
                 echo "Error";
             }
+        }
+    }
+    
+    private function teacherNewStudent(){
+        if( empty( $_POST ) ){
+            require_once( 'View/Profesores/alumnosNuevo.html' );
+        }
+        else{
+            $code = $_POST['reg-student-code'];
+            $name = $_POST['reg-student-name'];
+            $last1 = $_POST['reg-student-last1'];
+            $last2 = $_POST['reg-student-last2'];
+            $mail = $_POST['reg-student-email'];
+            $major = $_POST['reg-student-major'];
+            if( array_key_exists( 'reg-student-phone', $_POST ) ){
+                $phone = $_POST['reg-student-phone'];
+            }
+            else{
+                $phone = NULL;
+            }
+            if( array_key_exists( 'reg-student-url', $_POST ) ){
+                $url = $_POST['reg-student-url'];
+            }
+            else{
+                $url = NULL;
+            }
+            if( array_key_exists( 'reg-student-github', $_POST ) ){
+                $github = $_POST['reg-student-github'];
+            }
+            else{
+                $github = NULL;
+            }
+            $classInfo = $_POST['reg-student-class'];
+            $found = FALSE;
+            
+            if( !$this -> model -> getStudent( $code ) ){
+                // Necesito registrar el estudiante.
+                $pass = $this -> getPassword( $name, $last1, $last2 );
+                $result = $this -> model -> register( $code, $name, $last1, $last2, $mail, $major, $pass, $phone, $url, $github );
+                if( $result === FALSE ){
+                    echo "Error";
+                }
+                else{
+                    // sendMail
+                    $studentId = $this -> model -> insertId();
+                }
+            }
+            else{
+                // Ya tengo al estudiante.
+                $found = TRUE;
+                $student = $this -> model -> getStudent( $code );
+                $studentId = $student['idAlumno'];
+            }
+            
+            $classArray = explode( '-', $classInfo );
+            $classKey = $classArray[0];
+            $cycleStr = $classArray[2];
+            
+            $classRow = $this -> model -> getClass( $classKey );
+            $classId = $classRow['idCurso'];
+            
+            $cycleRow = $this -> model -> getCycle( $cycleStr );
+            $cycleId = $cycleRow['idCiclo'];
+            
+            $teacherId = '1'; // This should be taken from the session.
+            
+            $result = $this -> model -> signUpToClass( $studentId, $classId, $teacherId, $cycleId );
+            if( $result === TRUE ){
+                // sendClassMail
+                // generarAsistencias
+                // generarElemCalificacion
+                if( $found ){
+                    //$this -> listStudents();
+                }
+                else{
+                    //$this -> listStudents();
+                }
+                echo "Ok";
+            }
+            else{
+                echo "Error";
+            }
+            
         }
     }
     
