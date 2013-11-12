@@ -263,6 +263,10 @@ div.table-div#schedules-div, div.table-div#evals-div {
     margin: 2% 8%;
 }
 
+div.table-div#class-table-div {
+    font-size: .9em;
+}
+
 #schedules-table, #evals-table {
     text-align: center;
 }
@@ -355,7 +359,7 @@ th, td {
 .edit-cell {
     width: 8%;
     text-align: center;
-}
+}zzz
 
 /*320 x 480*/
 @media screen and (min-width: 0px) and ( max-width: 320px) {

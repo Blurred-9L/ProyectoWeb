@@ -86,6 +86,51 @@ function fillTeacherClassSelect( selectId ){
     });
 }
 
+function getTeacherClassList(){
+    var select = document.getElementById( "teacher-classes" );
+    var cycleInfo = select.value;
+    
+    console.log( cycleInfo );
+    if( select.selectedIndex != 0 ){
+        $.ajax({
+            type: "POST",
+            data: {info: cycleInfo},
+            url: "../../Model/getTeacherClassList.php",
+            dataType: "json",
+            success: function( json ){
+                var tableBody = document.getElementById( "table-body" );
+                while( tableBody.firstChild != null ){
+                    tableBody.removeChild( tableBody.firstChild );
+                }
+                if( json != null ){
+                    for( i in json ){
+                        var newRow = document.createElement( "tr" );
+                        var nameCell = document.createElement( "td" );
+                        var codeCell = document.createElement( "td" );
+                        var majorCell = document.createElement( "td" );
+                        var mailCell = document.createElement( "td" );
+                        
+                        majorCell.className = "optional";
+                        mailCell.className = "optional";
+                        
+                        nameCell.appendChild( document.createTextNode( json[i].nombre ) );
+                        codeCell.appendChild( document.createTextNode( json[i].codigo ) );
+                        majorCell.appendChild( document.createTextNode( json[i].nombreCarrera ) );
+                        mailCell.appendChild( document.createTextNode( json[i].email ) );
+                        
+                        newRow.appendChild( nameCell );
+                        newRow.appendChild( codeCell );
+                        newRow.appendChild( majorCell );
+                        newRow.appendChild( mailCell );
+                        
+                        tableBody.appendChild( newRow );
+                    }
+                }
+            }
+        });
+    }
+}
+
 function getStudentData(){
     var code = document.getElementById( "reg-student-code" ).value;
     var checkbox;

@@ -43,6 +43,9 @@ class StudentCtrl{
             case 'tnew':
                 $this -> teacherNewStudent();
                 break;
+            case 'list':
+                $this -> listStudents();
+                break;
         }
     }
     
@@ -231,10 +234,10 @@ class StudentCtrl{
                 // generarAsistencias
                 // generarElemCalificacion
                 if( $found ){
-                    //$this -> listStudents();
+                    $this -> listStudents();
                 }
                 else{
-                    //$this -> listStudents();
+                    $this -> listStudents();
                 }
                 echo "Ok";
             }
@@ -296,6 +299,12 @@ class StudentCtrl{
         $code = $_POST['code'];
         
         $this -> updateViewEditStudent( $code );
+    }
+    
+    private function listStudents(){
+        $view = file_get_contents( 'View/Profesores/listaAlumnos.html' );
+        
+        echo $view;
     }
 }
 

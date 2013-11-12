@@ -188,3 +188,10 @@ function teacherNewStudentLoad(){
         }
     }
 }
+
+function teacherListClasses(){
+    var select = document.getElementById( "teacher-classes" );
+    
+    fillTeacherClassSelect( "teacher-classes" );
+    select.onchange = getTeacherClassList;
+}

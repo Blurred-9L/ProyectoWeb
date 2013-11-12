@@ -53,7 +53,7 @@
                 </p>
             </div>
             <div class="select-div">
-                <select>
+                <select id="teacher-classes">
                     <option selected value="0">Seleccione un curso...</option>
                 </select>
             </div>
@@ -69,18 +69,13 @@
                             <th>Codigo</th>
                             <th class="optional">Carrera</th>
                             <th class="optional">Email</th>
-                            <th class="optional">Celular</th>
-                            <th class="optional">URL</th>
-                            <th class="optional">Github</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="table-body">
+                        <!--
                         <tr>
                             <td>.</td>
                             <td>.</td>
-                            <td class="optional">.</td>
-                            <td class="optional">.</td>
-                            <td class="optional">.</td>
                             <td class="optional">.</td>
                             <td class="optional">.</td>
                         </tr>
@@ -89,10 +84,8 @@
                             <td>.</td>
                             <td class="optional">.</td>
                             <td class="optional">.</td>
-                            <td class="optional">.</td>
-                            <td class="optional">.</td>
-                            <td class="optional">.</td>
                         </tr>
+                        -->
                     </tbody>
                     <tfoot>
                     </tfoot>
@@ -135,6 +128,11 @@
         <script>window.jQuery || document.write('<script src="../../Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
         <script src="../../Resources/js/plugins.js"></script>
         <script src="../../Resources/js/main.js"></script>
+        <script src="../../Resources/js/ajaxRequests.js"></script>
+        <script src="../../Resources/js/onload.js"></script>
+        <script>
+            window.onload = teacherListClasses;
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
