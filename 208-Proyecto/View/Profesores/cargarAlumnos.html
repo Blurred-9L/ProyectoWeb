@@ -52,7 +52,7 @@
                     Se puede cargar un archivo de alumnos. El formato del archivo es el de un archivo separado por comas (.csv), donde los valores de cada campo especifico estan separados por comas. Una vez se haya seleccionado el archivo y elegido el curso al cual se buscan agregar los alumnos, se puede hacer clic sobre el botón "Cargar" para cargar el archivo, haciendo las validaciones correspondientes.
                 </p>
             </div>
-            <form name="loadStudents" method="post" enctype="multipart/form-data" action="#">
+            <form name="loadStudents" method="post" enctype="multipart/form-data" action="./index.php?ctrl=student&action=load">
                 <div class="form-div">
                     <label>Cargar archivo:</label>
                     <input type="file" id="upload-file" name="upload-file" />

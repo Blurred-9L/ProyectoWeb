@@ -32,7 +32,7 @@ class ClassCtrl{
             $cycle = $this -> model -> getLatestCycle();
             $row = $this -> model -> getClassSectionValue( $key, $prof, $cycle );
             if( isset( $row['seccion'] ) ){
-                $section = $row['seccion'];
+                $section = $row['seccion'] + 1;
             }
             else{
                 $section = "1";

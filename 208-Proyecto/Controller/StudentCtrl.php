@@ -46,6 +46,9 @@ class StudentCtrl{
             case 'list':
                 $this -> listStudents();
                 break;
+            case 'load':
+                $this -> loadStudents();
+                break;
         }
     }
     
@@ -218,6 +221,7 @@ class StudentCtrl{
             
             $classArray = explode( '-', $classInfo );
             $classKey = $classArray[0];
+            $classSec = $classArray[1];
             $cycleStr = $classArray[2];
             
             $classRow = $this -> model -> getClass( $classKey );
@@ -228,7 +232,7 @@ class StudentCtrl{
             
             $teacherId = '1'; // This should be taken from the session.
             
-            $result = $this -> model -> signUpToClass( $studentId, $classId, $teacherId, $cycleId );
+            $result = $this -> model -> signUpToClass( $studentId, $classId, $teacherId, $cycleId, $classSec );
             if( $result === TRUE ){
                 // sendClassMail
                 // generarAsistencias
@@ -239,7 +243,6 @@ class StudentCtrl{
                 else{
                     $this -> listStudents();
                 }
-                echo "Ok";
             }
             else{
                 echo "Error";
@@ -305,6 +308,47 @@ class StudentCtrl{
         $view = file_get_contents( 'View/Profesores/listaAlumnos.html' );
         
         echo $view;
+    }
+    
+    /*THIS FUNCTION IS INCOMPLETE*/
+    private function loadStudents(){
+        if( empty( $_POST ) ){
+            require_once( 'View/Profesores/cargarAlumnos.html' );
+        }
+        else{
+            $classInfo = $_POST['load-student-class'];
+            
+            $classArray = explode( '-', $classInfo );
+            $classKey = $classArray[0];
+            $classSec = $classArray[1];
+            $cycleStr = $classArray[2];
+            
+            $classRow = $this -> model -> getClass( $classKey );
+            $classId = $classRow['idCurso'];
+            
+            $cycleRow = $this -> model -> getCycle( $cycleStr );
+            $cycleId = $cycleRow['idCiclo'];
+            
+            $teacherId = '1'; // This should be taken from the session.
+        
+            $filename = $_FILES['upload-file']['tmp_name'];
+            $file = file( $filename );
+            $students = array();
+            $lineCount = 0;
+            foreach( $file as $line ){
+                if( $lineCount > 0 ){
+                    $student = explode( ',', $line );
+                    $students[] = $student;
+                }
+                $lineCount += 1;
+            }
+            echo "<pre>";
+            var_dump( $students );
+            echo "</pre>";
+        }
+    }
+    
+    private function processStudentRow( $studentRow, $teacherId, $classId, $cycleId ){
     }
 }
 

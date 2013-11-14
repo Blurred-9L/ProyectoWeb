@@ -27,9 +27,9 @@ class StudentMdl{
         return $result;
     }
     
-    public function signUpToClass( $studentId, $classId, $teacherId, $cycleId ){
-        $query = "insert into AlumnoCurso( idAlumno, idCurso, idProfesor, idCiclo ) values
-                  ( $studentId, $classId, $teacherId, $cycleId );";
+    public function signUpToClass( $studentId, $classId, $teacherId, $cycleId, $classSec ){
+        $query = "insert into AlumnoCurso( idAlumno, idCurso, idProfesor, idCiclo, seccion ) values
+                  ( $studentId, $classId, $teacherId, $cycleId, $classSec );";
                   
         $result = $this -> dbCon -> query( $query );
         
