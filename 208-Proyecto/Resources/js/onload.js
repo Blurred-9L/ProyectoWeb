@@ -189,6 +189,19 @@ function teacherNewStudentLoad(){
     }
 }
 
+function teacherUploadFileLoad(){
+    var loadButton = document.getElementById( "file-load-button" );
+    
+    fillTeacherClassSelect( "load-student-class" );
+    loadButton.onclick = checkLoadFile;
+}
+
+function teacherUploadStudentsLoad(){
+    var selectAll = document.getElementById( "select-all" );
+    
+    selectAll.onclick = selectAllFunc;
+}
+
 function teacherListClasses(){
     var select = document.getElementById( "teacher-classes" );
     

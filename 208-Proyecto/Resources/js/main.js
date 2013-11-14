@@ -129,11 +129,13 @@ function checkStudent(){
 }
 
 function checkLoadFile(){
+    var form = document.loadStudents;
     var fileElem = document.getElementById( "upload-file" );
     var submitButton = document.getElementById( "submit-load-students" );
     var str = fileElem.value;
     var message;
     var ok = true;
+    var ok2 = true;
     
     if( !str.endsWith( ".csv" ) ){
         message = document.createTextNode( " Elija un archivo .csv." );
@@ -145,9 +147,10 @@ function checkLoadFile(){
         fileElem.parentNode.replaceChild( message, fileElem.parentNode.lastChild );
     }
     
-    if( ok ){
-        submitButton.disabled = false;
-        //loadCSV;
+    ok2 = checkClass( form, document.getElementById( "load-student-class" ) );
+    
+    if( ok && ok2 ){
+        form.submit();
     }
 }
 

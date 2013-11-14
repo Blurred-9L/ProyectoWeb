@@ -49,24 +49,43 @@
             <div class="form-div">
                 <h2><span class="separate">Cargar alumnos</span></h2>
                 <p class="info-text">
-                    Se puede cargar un archivo de alumnos. El formato del archivo es el de un archivo separado por comas (.csv), donde los valores de cada campo especifico estan separados por comas. Una vez se haya seleccionado el archivo y elegido el curso al cual se buscan agregar los alumnos, se puede hacer clic sobre el botón "Cargar" para cargar el archivo, haciendo las validaciones correspondientes.
+                    Se mostrarán la información de los alumnos que se busca añadir, donde será posible seleccionar aquellos que se quieran agregar, de ser el caso. Una vez se haya elegido, se puede presionar el botón "Registrar" para ingresar toda la información de los alumnos al sistema.
                 </p>
             </div>
-            <form name="loadStudents" method="post" enctype="multipart/form-data" action="#">
-                <div class="form-div">
-                    <label>Cargar archivo:</label>
-                    <input type="file" id="upload-file" name="upload-file" />
+            <form name="loadStudents2" method="post" action="#">
+                <div class="table-div">
+                    <table class="load-student-table">
+                        <caption>
+                            Alumnos:
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th class="checkbox-cell">
+                                    <input id="select-all" type="checkbox" name="select-all" />
+                                </th>
+                                <th>Nombre</th>
+                                <th>Codigo</th>
+                                <th class="optional">Carrera</th>
+                                <th class="optional">Email</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <tr>
+                                <td class="checkbox-cell">
+                                    <input id="add-student-checkbox-*count*" type="checkbox" name="add-student-checkbox-*count*" />
+                                </td>
+                                <td id="student-name-*count*">*name*</td>
+                                <td id="student-code-*count*">*code*</td>
+                                <td id="student-major-*count*" class="optional">*major*</td>
+                                <td id="student-mail-*count*" class="optional">*mail*</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
                 </div>
                 <div class="form-div">
-                    <label for="load-student-class">
-                        Curso:
-                    </label>
-                    <select id="load-student-class" name="load-student-class">
-                        <option selected value="0">Seleccione un curso...</option>
-                    </select>
-                </div>
-                <div class="form-div">
-                    <button id="file-load-button" class="load-button" type="button">Cargar</button>
+                    <button id="submit-load-students" class="submit-button" type="submit">Registrar</button>
                 </div>
             </form>
         </section>
@@ -97,10 +116,9 @@
         <script>window.jQuery || document.write('<script src="../../Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
         <script src="../../Resources/js/plugins.js"></script>
         <script src="../../Resources/js/main.js"></script>
-        <script src="../../Resources/js/ajaxRequests.js"></script>
         <script src="../../Resources/js/onload.js"></script>
         <script>
-            window.onload = teacherUploadFileLoad;
+            window.onload = teacherUploadStudentsLoad();
         </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
