@@ -14,16 +14,9 @@
         
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <link rel="stylesheet" href="../Resources/css/normalize.css">
-        <link rel="stylesheet" href="../Resources/css/main.css">
-        <script src="../Resources/js/vendor/modernizr-2.6.2.min.js"></script>
-        <script>
-            window.onload = function(){
-                button = document.getElementById( "login" );
-                
-                button.onclick = checkLogin;
-            }
-        </script>
+        <link rel="stylesheet" href="./Resources/css/normalize.css">
+        <link rel="stylesheet" href="./Resources/css/main.css">
+        <script src="./Resources/js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -32,7 +25,7 @@
 
         <!-- Add your site or application content here -->
         <header>
-            <img alt="udg.png" class="header-img" src="../Resources/img/logoUdg.png" width="50" height="68" />
+            <img alt="udg.png" class="header-img" src="./Resources/img/logoUdg.png" width="50" height="68" />
             <h1>Universidad de Guadalajara - Calificaciones</h1>
             <div class="clear-div"></div>
         </header>
@@ -68,11 +61,15 @@
         </footer>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="../../Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script>window.jQuery || document.write('<script src="./Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
         <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
-        <script>window.CryptoJS || document.write('<cript src="../../Resources/js/vendor/sha1.js"><\/script>')</script>
-        <script src="../Resources/js/plugins.js"></script>
-        <script src="../Resources/js/main.js"></script>
+        <script>window.CryptoJS || document.write('<cript src="./Resources/js/vendor/sha1.js"><\/script>')</script>
+        <script src="./Resources/js/plugins.js"></script>
+        <script src="./Resources/js/main.js"></script>
+        <script src="./Resources/js/onload.js"></script>
+        <script>
+            window.onload = loginLoad;
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

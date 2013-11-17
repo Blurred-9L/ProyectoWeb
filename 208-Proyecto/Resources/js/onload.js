@@ -2,6 +2,12 @@
 // Main onload functions:
 // ----------------------------------------------------------------------------
 
+function loginLoad(){
+    var button = document.getElementById( "login" );
+                
+    button.onclick = checkLogin;
+}
+
 function lostPassLoad(){
     var button = document.getElementById( "recover" );
     
