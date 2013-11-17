@@ -6,6 +6,7 @@ class LoginCtrl extends DefaultCtrl{
     private $model;
     
     public function __construct(){
+        parent::__construct();
         require_once( 'Model/LoginMdl.php' );
         $this -> model = new LoginMdl();
     }

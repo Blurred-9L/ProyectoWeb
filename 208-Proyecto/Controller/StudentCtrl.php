@@ -1,24 +1,14 @@
 <?php
 
-class StudentCtrl{
+require_once( 'Controller/DefaultCtrl.php' );
+
+class StudentCtrl extends DefaultCtrl{
     private $model;
     
     public function __construct(){
+        parent::__construct();
         require_once( 'Model/StudentMdl.php' );
         $this -> model = new StudentMdl();
-        session_start();
-    }
-    
-    public function checkPermissions( $userType ){
-        $ok = FALSE;
-        
-        if( isset( $_SESSION['user_type'] ) ){
-            if( $_SESSION['user_type'] == $userType ){
-                $ok = TRUE;
-            }
-        }
-        
-        return $ok;
     }
     
     public function execute(){
@@ -32,13 +22,28 @@ class StudentCtrl{
                 }
                 break;
             case 'edit':
-                $this -> edit();
+                if( $this -> checkPermissions( 'ninja' ) ){
+                    $this -> edit();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
                 break;
             case 'all':
-                $this -> showAll();
+                if( $this -> checkPermissions( 'ninja' ) ){
+                    $this -> showAll();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
                 break;
             case 'show':
-                $this -> show();
+                if( $this -> checkPermissions( 'ninja' ) ){
+                    $this -> show();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
                 break;
             case 'tnew':
                 $this -> teacherNewStudent();

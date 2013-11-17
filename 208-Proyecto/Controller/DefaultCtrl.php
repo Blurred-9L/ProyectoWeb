@@ -37,6 +37,18 @@ class DefaultCtrl{
         header( 'Location: ./index.php?ctrl=login&action=login' );
     }
     
+    public function checkPermissions( $userType ){
+        $ok = FALSE;
+        
+        if( isset( $_SESSION['user_type'] ) ){
+            if( $_SESSION['user_type'] == $userType ){
+                $ok = TRUE;
+            }
+        }
+        
+        return $ok;
+    }
+    
     public function execute(){
         switch( $_GET['action'] ){
             case 'exit':
