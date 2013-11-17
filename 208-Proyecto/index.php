@@ -21,6 +21,10 @@ switch( $_GET['ctrl'] ){
         require_once( 'Controller/ClassCtrl.php' );
         $ctrl = new ClassCtrl();
         break;
+    case 'default':
+        require_once( 'Controller/DefaultCtrl.php' );
+        $ctrl = new DefaultCtrl();
+        break;
     default:
         echo "Error";
         break;
