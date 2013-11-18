@@ -1,9 +1,12 @@
 <?php
 
-class TeacherCtrl{
+require_once( 'Controller/DefaultCtrl.php' );
+
+class TeacherCtrl extends DefaultCtrl{
     private $model;
     
     public function __construct(){
+        parent::__construct();
         require_once( 'Model/TeacherMdl.php' );
         $this -> model = new TeacherMdl();
     }
@@ -11,16 +14,36 @@ class TeacherCtrl{
     public function execute(){
         switch( $_GET['action'] ){
             case 'new':
-                $this -> newTeacher();
+                if( $this -> checkPermissions( 'ninja' ) ){
+                    $this -> newTeacher();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
                 break;
             case 'edit':
-                $this -> editTeacher();
+                if( $this -> checkPermissions( 'ninja' ) ){
+                    $this -> editTeacher();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
                 break;
             case 'all':
-                $this -> showAllTeachers();
+                if( $this -> checkPermissions( 'ninja' ) ){
+                    $this -> showAllTeachers();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
                 break;
             case 'show':
-                $this -> showTeacher();
+                if( $this -> checkPermissions( 'ninja' ) ){
+                    $this -> showTeacher();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
                 break;
         }
     }
