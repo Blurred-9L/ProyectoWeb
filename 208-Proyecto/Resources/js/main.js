@@ -1620,32 +1620,37 @@ function eraseFreeDays(){
     var checkboxes = [];
     var hiddens = [];
     var id;
+    var count;
     
     for( var i = 0; i < inputs.length; i++ ){
-        if( inputs[i].type == "checkbox" && inputs[i].id != "select-all" && inputs[i].checked ){
+        if( inputs[i].type == "checkbox" && inputs[i].id != "select-all" ){
             checkboxes.push( inputs[i] );
         }
     }
     
     if( checkboxes.length > 0 ){
+        count = 0;
         for( var i = 0; i < checkboxes.length; i++ ){
             id = "date-" + i.toString();
-            hiddens.push( document.createElement( "input" ) );
-            hiddens[i].name = id;
-            hiddens[i].id = id;
-            hiddens[i].type = "hidden";
-            hiddens[i].value = document.getElementById( id ).firstChild.nodeValue;
-            form.appendChild( hiddens[i] );
+            if( checkboxes[i].checked ){
+                hiddens.push( document.createElement( "input" ) );
+                hiddens[count].name = "date-" + count.toString();
+                hiddens[count].id = "date-" + count.toString();
+                hiddens[count].type = "hidden";
+                hiddens[count].value = document.getElementById( id ).firstChild.nodeValue;
+                form.appendChild( hiddens[count] );
+                count++;
+            }
         }
         hiddens.push( document.createElement( "input" ) );
-        hiddens[i].name = "cycle";
-        hiddens[i].type = "hidden";
-        hiddens[i].value = document.getElementById( "cycle" ).value;
-        form.appendChild( hiddens[i] );
+        hiddens[count].name = "cycle";
+        hiddens[count].type = "hidden";
+        hiddens[count].value = document.getElementById( "cycle" ).value;
+        form.appendChild( hiddens[count] );
         
         form.submit();
         
-        for( var i = 0; i < checkboxes.length + 1; i++ ){
+        for( var i = 0; i < count + 1; i++ ){
             form.removeChild( hiddens[i] );
         }
     }
