@@ -32,6 +32,7 @@ function newStudentLoad(){
     var github = document.getElementById( "checkbox-github" );
     
     button.onclick = checkRegStudent2;
+    fillMajorSelect( "reg-student-major" );
     
     phone.onclick = function(){
         if( phone.checked ){
