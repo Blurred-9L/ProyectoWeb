@@ -48,13 +48,22 @@ class ClassMdl{
         return $row;
     }
     
-    public function getTeacherClassSchedules( $cycleId, $teacherId, $classId ){
-        $query = "select nombreDia, cantHoras, inicio from Horario, CursoProfesorHorario, CursoProfesor,
-                  Dia where Horario.idHorario = CursoProfesorHorario.idHorario and 
-                  CursoProfesorHorario.idProfesor = CursoProfesor.idProfesor and 
-                  CursoProfesor.idCurso = CursoProfesorHorario.idCurso and
-                  CursoProfesor.idCiclo = $cycleId and CursoProfesor.idProfesor = $teacherId
-                  and CursoProfesor.idCurso = $classId and Dia.idDia = Horario.dia;";
+    public function getTeacherClass( $teacherId, $cycleId, $classId, $section ){
+        $query = "select * from CursoProfesor where idCurso = $classId and idProfesor = $teacherId
+                  and idCiclo = $cycleId and seccion = $section;";
+                  
+        $result = $this -> dbCon -> query( $query );
+        $row = $result -> fetch_assoc();
+        
+        return $row;
+    }
+    
+    public function getTeacherClassSchedules( $cycleId, $teacherId, $classId, $teacherClassId ){
+        $query = "select nombreDia, cantHoras, inicio from Horario inner join Dia on Horario.dia = Dia.idDia
+                  inner join CursoProfesorHorario on Horario.idHorario = CursoProfesorHorario.idHorario
+                  inner join CursoProfesor on CursoProfesorHorario.idCursoProfesor = CursoProfesor.idCursoProfesor
+                  where CursoProfesor.idCiclo = $cycleId and CursoProfesor.idProfesor = $teacherId and
+                  CursoProfesor.idCurso = $classId and CursoProfesor.idCursoProfesor = $teacherClassId;";
                   
         $result = $this -> dbCon -> query( $query );
         $rows = array();
@@ -65,11 +74,11 @@ class ClassMdl{
         return $rows;
     }
     
-    public function getTeacherClassEvals( $teacherId, $cycleId, $classId ){
-        $query = "select descripcion, valor from HojaEvaluacion, CursoProfesor where CursoProfesor.idProfesor =
-                  HojaEvaluacion.idProfesor and CursoProfesor.idCurso = HojaEvaluacion.idCurso and
-                  CursoProfesor.idCiclo = HojaEvaluacion.idCiclo and CursoProfesor.idProfesor = $teacherId and
-                  CursoProfesor.idCiclo = $cycleId and CursoProfesor.idCurso = $classId;";
+    public function getTeacherClassEvals( $teacherId, $cycleId, $classId, $teacherClassId ){
+        $query = "select descripcion, valor from HojaEvaluacion inner join CursoProfesor on
+                  CursoProfesor.idCursoProfesor = HojaEvaluacion.idCursoProfesor where
+                  CursoProfesor.idProfesor = $teacherId and CursoProfesor.idCiclo = $cycleId and
+                  CursoProfesor.idCurso = $classId and CursoProfesor.idCursoProfesor = $teacherClassId;";
                   
         $result = $this -> dbCon -> query( $query );
         $rows = array();
@@ -83,7 +92,7 @@ class ClassMdl{
     public function getTeacherClasses( $teacherId ){
         $query = "select clave, nombre, nombreAcademia, seccion, ciclo from Curso, Academia, CursoProfesor,
                   Ciclo where Curso.idAcademia = Academia.idAcademia and Curso.idCurso = CursoProfesor.idCurso
-                  and CursoProfesor.idCiclo = Ciclo.idCiclo and CursoProfesor.idProfesor = 1;";
+                  and CursoProfesor.idCiclo = Ciclo.idCiclo and CursoProfesor.idProfesor = $teacherId;";
                   
         $result = $this -> dbCon -> query( $query );
         $rows = array();
@@ -119,7 +128,8 @@ class ClassMdl{
     }
     
     public function registerNewClass( $key, $teacher, $cycle, $section ){
-        $query = "insert into CursoProfesor values( $key, $teacher, $section, $cycle );";
+        $query = "insert into CursoProfesor( idCurso, idProfesor, idCiclo, seccion )
+                  values( $key, $teacher, $cycle, $section );";
         
         $result = $this -> dbCon -> query( $query );
         
@@ -148,17 +158,17 @@ class ClassMdl{
         return $result;
     }
     
-    public function registerClassSchedule( $key, $teacher, $schedule ){
-        $query = "insert into CursoProfesorHorario values( $key, $teacher, $schedule );";
+    public function registerClassSchedule( $teacherClassId, $schedule ){
+        $query = "insert into CursoProfesorHorario( idHorario, idCursoProfesor ) values( $schedule, $teacherClassId );";
         
         $result = $this -> dbCon -> query( $query );
         
         return $result;
     }
     
-    public function registerEvaluation( $act, $val, $nElems, $key, $teacher, $cycle ){
-        $query = "insert into HojaEvaluacion( descripcion, valor, nElems, idCurso, idProfesor, idCiclo ) values
-                  ( \"$act\", $val, $nElems, $key, $teacher, $cycle );";
+    public function registerEvaluation( $act, $val, $nElems, $teacherClassId ){
+        $query = "insert into HojaEvaluacion( descripcion, valor, nElems, idCursoProfesor ) values
+                  ( \"$act\", $val, $nElems, $teacherClassId );";
                   
         $result = $this -> dbCon -> query( $query );
         

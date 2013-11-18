@@ -1,9 +1,12 @@
 <?php
 
-class ClassCtrl{
+require_once( 'Controller/DefaultCtrl.php' );
+
+class ClassCtrl extends DefaultCtrl{
     private $model;
     
     public function __construct(){
+        parent::__construct();
         require_once( 'Model/ClassMdl.php' );
         $this -> model = new ClassMdl();
     }
@@ -28,7 +31,7 @@ class ClassCtrl{
         }
         else{
             $key = $_POST['new-class-key'];
-            $prof = '1'; // This will change in the future to the prof's info.
+            $prof = $_SESSION['user_id'];
             $cycle = $this -> model -> getLatestCycle();
             $row = $this -> model -> getClassSectionValue( $key, $prof, $cycle );
             if( isset( $row['seccion'] ) ){
@@ -52,6 +55,7 @@ class ClassCtrl{
         $view = file_get_contents( 'View/Profesores/verCurso.html' );
         $cycleRow = $this -> model -> getCycle( $cycle );
         $classRow = $this -> model -> getClass( $key );
+        $teacherClassRow = $this -> model -> getTeacherClass( $prof, $cycle, $key, $section );
         
         $dict = array( '*class*' => $classRow['nombre'], '*cycle*' => $cycleRow['ciclo'], '*section*' => $section );
         $view = strtr( $view, $dict );
@@ -61,7 +65,7 @@ class ClassCtrl{
         $trEnd = strpos( $subView, '</tr>' ) + 5;
         $tableRow = substr( $view, $start, $trEnd );
         
-        $schedules = $this -> model -> getTeacherClassSchedules( $cycle, $prof, $key );
+        $schedules = $this -> model -> getTeacherClassSchedules( $cycle, $prof, $key, $teacherClassRow['idCursoProfesor'] );
         $rows = '';
         if( !empty( $schedules ) ){
             foreach( $schedules as $sched ){
@@ -78,7 +82,7 @@ class ClassCtrl{
         $trEnd = strpos( $subView, '</tr>' ) + 5;
         $tableRow = substr( $view, $start, $trEnd );
         
-        $evals = $this -> model -> getTeacherClassEvals( $prof, $cycle, $key );
+        $evals = $this -> model -> getTeacherClassEvals( $prof, $cycle, $key, $teacherClassRow['idCursoProfesor'] );
         $rows = '';
         if( !empty( $evals ) ){
             foreach( $evals as $eval ){
@@ -97,7 +101,7 @@ class ClassCtrl{
         $result = $this -> model -> registerNewClass( $key, $teacher, $cycle, $section );
         
         if( $result === TRUE ){
-            return $this -> setUpSchedules( $key, $teacher, $cycle );
+            return $this -> setUpSchedules();
         }
         else{
             echo "Error al registrar Curso.";
@@ -105,10 +109,11 @@ class ClassCtrl{
         }
     }
     
-    private function setUpSchedules( $key, $teacher, $cycle ){
+    private function setUpSchedules(){
         $count = 0;
         $indexKey = 'new-class-day' . $count;
         $fail = FALSE;
+        $teacherClassId = $this -> model -> insertId();
         
         while( array_key_exists( $indexKey, $_POST ) ){
             $day = $_POST['new-class-day' . $count];
@@ -128,7 +133,7 @@ class ClassCtrl{
             else{
                 $schedule = $scheduleRow['idHorario'];
             }
-            $result = $this -> model -> registerClassSchedule( $key, $teacher, $schedule );
+            $result = $this -> model -> registerClassSchedule( $teacherClassId, $schedule );
             if( $result === FALSE ){
                 $fail = TRUE;
                 break;
@@ -138,7 +143,7 @@ class ClassCtrl{
         }
         
         if( !$fail ){
-            return $this -> setUpEvaluations( $key, $teacher, $cycle );
+            return $this -> setUpEvaluations( $teacherClassId );
         }
         else{
             echo "Error al registrar Horarios.";
@@ -146,7 +151,7 @@ class ClassCtrl{
         }
     }
     
-    private function setUpEvaluations( $key, $teacher, $cycle ){
+    private function setUpEvaluations( $teacherClassId ){
         $count = 0;
         $indexKey = 'new-class-act' . $count;
         $fail = FALSE;
@@ -160,7 +165,7 @@ class ClassCtrl{
             else{
                 $nElems = '1';
             }
-            $result = $this -> model -> registerEvaluation( $act, $val, $nElems, $key, $teacher, $cycle );
+            $result = $this -> model -> registerEvaluation( $act, $val, $nElems, $teacherClassId );
             if( $result === FALSE ){
                 $fail = TRUE;
                 break;
@@ -181,7 +186,7 @@ class ClassCtrl{
     private function showTeacherAll(){
         $view = file_get_contents( 'View/Profesores/verCursos.html' );
         
-        $teacherId = '1';
+        $teacherId = $_SESSION['user_id'];
         $start = strrpos( $view, '<tr>' );
         $end = strrpos( $view, '</tr>' ) + 5;
         $tableRow = substr( $view, $start, $end - $start );
@@ -189,12 +194,14 @@ class ClassCtrl{
         $classes = $this -> model -> getTeacherClasses( $teacherId );
         $rows = '';
         if( !empty( $classes ) ){
+            $count = 0;
             foreach( $classes as $class ){
                 $newTableRow = $tableRow;
                 $dict = array( '*id*' => $class['clave'], '*name*' => $class['nombre'], '*sec*' => $class['seccion'],
-                               '*cycle*' => $class['ciclo'], '*academy*' => $class['nombreAcademia'] );
+                               '*cycle*' => $class['ciclo'], '*academy*' => $class['nombreAcademia'], '*count*' => $count );
                 $newTableRow = strtr( $newTableRow, $dict );
                 $rows .= $newTableRow;
+                $count += 1;
             }
         }
         
@@ -207,7 +214,7 @@ class ClassCtrl{
         $classKey = $_POST['classCode'];
         $section = $_POST['classSec'];
         $cycle = $_POST['classCycle'];
-        $teacherId = '1';   // This will change in the future.
+        $teacherId = $_SESSION['user_id'];
         
         $classRow = $this -> model -> getClassByKey( $classKey );
         $classId = $classRow['idCurso'];
