@@ -14,13 +14,28 @@ class ClassCtrl extends DefaultCtrl{
     public function execute(){
         switch( $_GET['action'] ){
             case 'new':
-                $this -> newClass();
+                if( $this -> checkPermissions( 'brigadier' ) ){
+                    $this -> newClass();
+                }
+                else{
+                    $this -> redirectUser();
+                }
                 break;
             case 't-all':
-                $this -> showTeacherAll();
+                if( $this -> checkPermissions( 'brigadier' ) ){
+                    $this -> showTeacherAll();
+                }
+                else{
+                    $this -> redirectUser();
+                }
                 break;
             case 'show':
-                $this -> showClass();
+                if( $this -> checkPermissions( 'brigadier' ) ){
+                    $this -> showClass();
+                }
+                else{
+                    $this -> redirectUser();
+                }
                 break;
         }
     }
