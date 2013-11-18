@@ -1,9 +1,12 @@
 <?php
 
-class CycleCtrl{
+require_once( 'Controller/DefaultCtrl.php' );
+
+class CycleCtrl extends DefaultCtrl{
     private $model;
     
     public function __construct(){
+        parent::__construct();
         require_once( 'Model/CycleMdl.php' );
         $this -> model = new CycleMdl();
     }
@@ -11,19 +14,44 @@ class CycleCtrl{
     public function execute(){
         switch( $_GET['action'] ){
             case 'new':
-                $this -> newCycle();
+                if( $this -> checkPermissions( 'ninja' ) ){
+                    $this -> newCycle();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
                 break;
             case 'addfd':
-                $this -> moreFreeDays();
+                if( $this -> checkPermissions( 'ninja' ) ){
+                    $this -> moreFreeDays();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
                 break;
             case 'erase':
-                $this -> eraseFreeDays();
+                if( $this -> checkPermissions( 'ninja' ) ){
+                    $this -> eraseFreeDays();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
                 break;
             case 'all':
-                $this -> showAll();
+                if( $this -> checkPermissions( 'ninja' ) ){
+                    $this -> showAll();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
                 break;
             case 'show':
-                $this -> getCycle();
+                if( $this -> checkPermissions( 'ninja' ) ){
+                    $this -> getCycle();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
                 break;
         }
     }
