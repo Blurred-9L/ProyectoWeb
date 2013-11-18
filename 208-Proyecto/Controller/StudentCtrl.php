@@ -165,12 +165,31 @@ class StudentCtrl extends DefaultCtrl{
             $result = $this -> model -> register( $code, $name, $last1, $last2, $mail, $major, $pass, $phone, $url, $github );
             if( $result === TRUE ){
                 $this -> processViewEditStudent( $code, $name, $last1, $last2, $mail, $major, $pass, $phone, $url, $github );
-                // sendMail
+                $this -> sendMail( $code, $name . ' ' . $last1 . ' ' . $last2, $pass, $mail );
             }
             else{
                 echo "Error";
             }
         }
+    }
+    
+    private function sendMail( $code, $name, $pass, $mail ){
+        $to = $mail;
+        $subject = 'Alta en sistema de calificaciones';
+        
+        $header = 'MIME-Version: 1.0' . "\r\n";
+        $header .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+        $header .= 'From: user208@alanturing.cucei.udg.mx' . "\r\n";
+        
+        $content = "<p><strong>$name</strong>, bienvenido al sistema de calificaciones universitario.<br />" . PHP_EOL;
+        $content .= 'Ahora podra revisar sus calificaciones para los cursos en los que sea registrado por ';
+        $content .= 'sus profesores.<br />' . PHP_EOL;
+        $content .= 'Usted puede acceder al sistema accediendo a la siguiente direccion:<br />' . PHP_EOL;
+        $content .= '<a href="alanturing.cucei.udg.mx/cc409/user208/index.php?ctrl=login&action=login">Sistema de calificaciones</a>' . PHP_EOL;
+        $content .= "Su cuenta es la siguiente:</p><ul><li><strong>Codigo</strong>: $code</li>" . PHP_EOL;
+        $content .= "<li><strong>Contraseña</strong>: $pass</li></ul>" . PHP_EOL;
+        
+        $result = mail( $to, $subject, $content, $header );
     }
     
     private function teacherNewStudent(){
