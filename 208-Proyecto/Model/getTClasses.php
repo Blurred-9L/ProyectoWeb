@@ -4,7 +4,8 @@ require_once( '../Resources/dbConnection.php' );
 
 $dbCon = dbConnection::connect();
 
-$teacherId = '1'; // This will be taken from the SESSION... hopefully.
+session_start();
+$teacherId = $_SESSION['user_id']; // This will be taken from the SESSION... hopefully.
 $query = "select clave, nombre, nombreAcademia, seccion, ciclo from Curso, Academia, CursoProfesor,
                   Ciclo where Curso.idAcademia = Academia.idAcademia and Curso.idCurso = CursoProfesor.idCurso
                   and CursoProfesor.idCiclo = Ciclo.idCiclo and CursoProfesor.idProfesor = $teacherId;";

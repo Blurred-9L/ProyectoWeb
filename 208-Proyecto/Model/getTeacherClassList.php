@@ -10,7 +10,7 @@ $classKey = $classArray[0];
 $classSec = $classArray[1];
 $cycleStr = $classArray[2];
 
-$teacherId = '1';
+$teacherId = $_SESSION['user_id'];
 
 $classQuery = "select * from Curso where clave = \"$classKey\";";
 $result = $dbCon -> query( $classQuery );
