@@ -6,9 +6,10 @@ $dbCon = dbConnection::connect();
 
 session_start();
 $teacherId = $_SESSION['user_id']; // This will be taken from the SESSION... hopefully.
-$query = "select clave, nombre, nombreAcademia, seccion, ciclo from Curso, Academia, CursoProfesor,
-                  Ciclo where Curso.idAcademia = Academia.idAcademia and Curso.idCurso = CursoProfesor.idCurso
-                  and CursoProfesor.idCiclo = Ciclo.idCiclo and CursoProfesor.idProfesor = $teacherId;";
+$query = "select clave, nombre, nombreAcademia, seccion, ciclo from Curso inner join Academia on
+          Curso.idAcademia = Academia.idAcademia inner join CursoProfesor on 
+          Curso.idCurso = CursoProfesor.idCurso inner join Ciclo on 
+          CursoProfesor.idCiclo = Ciclo.idCiclo where CursoProfesor.idProfesor = 1;";
 
 $result = $dbCon -> query( $query );
 $rows = array();
