@@ -3,6 +3,7 @@
 require_once( '../Resources/dbConnection.php' );
 
 $dbCon = dbConnection::connect();
+session_start();
 
 $classInfo = $_POST['info'];
 $classArray = explode( '-', $classInfo );
@@ -22,15 +23,14 @@ $result = $dbCon -> query( $cycleQuery );
 $cycleRow = $result -> fetch_assoc();
 $cycleId = $cycleRow['idCiclo'];
 
-$query = "select concat( nombre, \" \", apellidoP, \" \", apellidoM ) as nombre, codigo, 
-          nombreCarrera, email from Alumno inner join AlumnoCurso on 
-          Alumno.idAlumno = AlumnoCurso.idAlumno inner join Carrera on 
-          Alumno.idCarrera = Carrera.idCarrera inner join CursoProfesor on 
-          AlumnoCurso.idCurso = CursoProfesor.idCurso and 
-          AlumnoCurso.idCiclo = CursoProfesor.idCiclo and 
-          AlumnoCurso.idProfesor = CursoProfesor.idProfesor where 
-          AlumnoCurso.idCurso = $classId and AlumnoCurso.idProfesor = $teacherId and 
-          AlumnoCurso.idCiclo = $cycleId and CursoProfesor.seccion = $classSec;";
+$query = "select concat( nombre, \" \", apellidoP, \" \", apellidoM ) as nombre, codigo,
+          nombreCarrera, email from Alumno inner join AlumnoCurso on
+          Alumno.idAlumno = AlumnoCurso.idAlumno inner join Carrera on
+          Alumno.idCarrera = Carrera.idCarrera inner join CursoProfesor on
+          AlumnoCurso.idCursoProfesor = CursoProfesor.idCursoProfesor inner join Ciclo on
+          CursoProfesor.idCiclo = Ciclo.idCiclo where CursoProfesor.idCurso = $classId and
+          CursoProfesor.idProfesor = $teacherId and CursoProfesor.idCiclo = $cycleId and
+          CursoProfesor.seccion = $classSec;";
   
 $result = $dbCon -> query( $query );
 $rows = array();

@@ -46,7 +46,12 @@ class StudentCtrl extends DefaultCtrl{
                 }
                 break;
             case 'tnew':
-                $this -> teacherNewStudent();
+                if( $this -> checkPermissions( 'brigadier' ) ){
+                    $this -> teacherNewStudent();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
                 break;
             case 'list':
                 $this -> listStudents();
@@ -192,6 +197,21 @@ class StudentCtrl extends DefaultCtrl{
         $result = mail( $to, $subject, $content, $header );
     }
     
+    private function sendClassMail( $name, $mail, $className, $classSec ){
+        $to = $mail;
+        $subject = "Inscripcion a $className seccion $classSec";
+        
+        $header = 'MIME-Version: 1.0' . "\r\n";
+        $header .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+        $header .= 'From: user208@alanturing.cucei.udg.mx' . "\r\n";
+        
+        $content = "<p><strong>$name</strong>, bienvenido al curso <em>$className</em>" . PHP_EOL;
+        $content .= 'Usted puede acceder al sistema accediendo a la siguiente direccion:<br />' . PHP_EOL;
+        $content .= '<a href="alanturing.cucei.udg.mx/cc409/user208/index.php?ctrl=login&action=login">Sistema de calificaciones</a>' . PHP_EOL;
+        
+        $result = mail( $to, $subject, $content, $header );
+    }
+    
     private function teacherNewStudent(){
         if( empty( $_POST ) ){
             require_once( 'View/Profesores/alumnosNuevo.html' );
@@ -232,7 +252,7 @@ class StudentCtrl extends DefaultCtrl{
                     echo "Error";
                 }
                 else{
-                    // sendMail
+                    $this -> sendMail( $code, $name . ' ' . $last1 . ' ' . $last2, $pass, $mail );
                     $studentId = $this -> model -> insertId();
                 }
             }
@@ -254,11 +274,13 @@ class StudentCtrl extends DefaultCtrl{
             $cycleRow = $this -> model -> getCycle( $cycleStr );
             $cycleId = $cycleRow['idCiclo'];
             
-            $teacherId = '1'; // This should be taken from the session.
+            $teacherId = $_SESSION['user_id'];
+            $teacherClassRow = $this -> model -> getTeacherClass( $classId, $teacherId, $cycleId, $classSec );
+            $teacherClassId = $teacherClassRow['idCursoProfesor'];
             
-            $result = $this -> model -> signUpToClass( $studentId, $classId, $teacherId, $cycleId, $classSec );
+            $result = $this -> model -> signUpToClass( $studentId, $teacherClassId );
             if( $result === TRUE ){
-                // sendClassMail
+                $this -> sendClassMail( $name, $mail, $classRow['nombre'], $classSec );
                 // generarAsistencias
                 // generarElemCalificacion
                 if( $found ){

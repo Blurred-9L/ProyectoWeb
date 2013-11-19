@@ -27,9 +27,9 @@ class StudentMdl{
         return $result;
     }
     
-    public function signUpToClass( $studentId, $classId, $teacherId, $cycleId, $classSec ){
-        $query = "insert into AlumnoCurso( idAlumno, idCurso, idProfesor, idCiclo, seccion ) values
-                  ( $studentId, $classId, $teacherId, $cycleId, $classSec );";
+    public function signUpToClass( $studentId, $teacherClassId ){
+        $query = "insert into AlumnoCurso( idAlumno, idCursoProfesor ) values
+                  ( $studentId, $teacherClassId );";
                   
         $result = $this -> dbCon -> query( $query );
         
@@ -92,6 +92,16 @@ class StudentMdl{
         }
         
         return $rows;
+    }
+    
+    public function getTeacherClass( $classId, $teacherId, $cycleId, $classSec ){
+        $query = "select * from CursoProfesor where idCurso = $classId and idProfesor = $teacherId
+                  and idCiclo = $cycleId and seccion = $classSec;";
+                  
+        $result = $this -> dbCon -> query( $query );
+        $row = $result -> fetch_assoc();
+        
+        return $row;
     }
 }
 

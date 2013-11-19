@@ -90,7 +90,6 @@ function getTeacherClassList(){
     var select = document.getElementById( "teacher-classes" );
     var cycleInfo = select.value;
     
-    console.log( cycleInfo );
     if( select.selectedIndex != 0 ){
         $.ajax({
             type: "POST",
