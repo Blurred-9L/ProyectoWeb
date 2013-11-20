@@ -281,8 +281,11 @@ class StudentCtrl extends DefaultCtrl{
             $result = $this -> model -> signUpToClass( $studentId, $teacherClassId );
             if( $result === TRUE ){
                 $this -> sendClassMail( $name, $mail, $classRow['nombre'], $classSec );
+                $studentClassId = $this -> model -> insertId();
                 // generarAsistencias
+                $this -> createClassDays( $cycleId, $teacherClassId, $studentClassId );
                 // generarElemCalificacion
+                $this -> createEvalElems( $teacherClassId, $studentClassId );
                 if( $found ){
                     $this -> listStudents();
                 }
@@ -294,6 +297,54 @@ class StudentCtrl extends DefaultCtrl{
                 echo "Error";
             }
             
+        }
+    }
+    
+    private function createClassDays( $cycleId, $teacherClassId, $studentClassId ){
+        $cycle = $this -> model -> getCycleRange( $cycleId );
+
+        $dayRow = $this -> model -> getStartDayNum( $cycleId );
+        $startDay = $dayRow['nDia'];
+        $interval = new DateInterval( "P1D" );
+
+        $freeDays = $this -> model -> getCycleFreeDays( $cycleId );
+        $classes = $this -> model -> getClassDayNums( $teacherClassId );
+
+        $startDate = new DateTime( $cycle['fechaInicio'], new DateTimeZone( "America/Mexico_City" ) );
+        $endDate = new DateTime( $cycle['fechaFin'], new DateTimeZone( "America/Mexico_City" ) );
+
+        $curDate = $startDate;
+        $day = $startDay;
+        $classDays = array();
+        $auxInterval = $endDate -> diff( $curDate );
+        while( $auxInterval -> days > 0 ){
+            $dateStr = $curDate -> format( 'Y-m-d' );
+            // Si no es domingo y no es dia libre, pero es dia de clases...
+            if( $day != 0 && ( array_search( $dateStr, $freeDays, TRUE ) === FALSE ) &&
+                ( array_search( $day, $classes ) !== FALSE ) ){
+                $addDate = new DateTime( $dateStr, new DateTimeZone( "America/Mexico_City" ) );
+                $classDays[] = $addDate;
+            }
+            $day = ( $day + 1 ) % 7;
+            $curDate -> add( $interval );
+            $auxInterval = $endDate -> diff( $curDate );
+        }
+        
+        $result = $this -> model -> registerClassDays( $classDays, $studentClassId );
+        if( $result < count( $classDays ) ){
+            echo "Error";
+        } 
+    }
+    
+    private function createEvalElems( $teacherClassId, $studentClassId ){
+        $evalPages = $this -> model -> getEvalPages( $teacherClassId );
+        foreach( $evalPages as $eval ){
+            $times = $eval['nElems'];
+            $evalPageId = $eval['idHojaEvaluacion'];
+            $result = $this -> model -> createEvalElem( $studentClassId, $evalPageId, $times );
+            if( $result < $times ){
+                echo "Error";
+            }
         }
     }
     

@@ -36,6 +36,37 @@ class StudentMdl{
         return $result;
     }
     
+    public function createEvalElem( $studentClassId, $evalPageId, $numElems ){
+        $correctQueries = 0;
+        $query = "insert into ElemCalificacion( idHojaEvaluacion, idAlumnoCurso )
+                  values( $evalPageId, $studentClassId );";
+        
+        for( $i = 0; $i < $numElems; $i += 1 ){
+            $result = $this -> dbCon -> query( $query );
+            if( $result === TRUE ){
+                $correctQueries += 1;
+            }
+        }
+        
+        return $correctQueries;
+    }
+    
+    public function registerClassDays( $classDays, $studentClassId ){
+        $correctQueries = 0;
+        
+        foreach( $classDays as $class ){
+            $dateStr = $class -> format( 'Y-m-d' );
+            $query = "insert into Asistencia( idAlumnoCurso, fecha, estado )
+                      values( $studentClassId, \"$dateStr\", FALSE );";
+            $result = $this -> dbCon -> query( $query );
+            if( $result === TRUE ){
+                $correctQueries += 1;
+            }
+        }
+        
+        return $correctQueries;
+    }
+    
     public function update( $code, $mail, $phone, $url, $github ){
         $query = "update Alumno set email=\"$mail\", celular=\"$phone\", paginaWeb=\"$url\", github=\"$github\" 
                   where codigo=\"$code\";";
@@ -102,6 +133,63 @@ class StudentMdl{
         $row = $result -> fetch_assoc();
         
         return $row;
+    }
+    
+    public function getEvalPages( $teacherClassId ){
+        $query = "select * from HojaEvaluacion where idCursoProfesor = $teacherClassId;";
+        
+        $result = $this -> dbCon -> query( $query );
+        $rows = array();
+        while( $row = $result -> fetch_assoc() ){
+            $rows[] = $row;
+        }
+        
+        return $rows;
+    }
+    
+    public function getCycleRange( $cycleId ){
+        $query = "select fechaInicio, fechaFin from Ciclo where idCiclo = $cycleId;";
+        
+        $result = $this -> dbCon -> query( $query );
+        $row = $result -> fetch_assoc();
+        
+        return $row;
+    }
+    
+    public function getStartDayNum( $cycleId ){
+        $query = "select date_format( fechaInicio, \"%w\" ) as nDia from Ciclo where idCiclo = $cycleId;";
+        
+        $result = $this -> dbCon -> query( $query );
+        $row = $result -> fetch_assoc();
+        
+        return $row;
+    }
+    
+    public function getCycleFreeDays( $cycleId ){
+        $query = "select fecha from Asueto inner join Ciclo on Asueto.idCiclo = Ciclo.idCiclo and
+                  Ciclo.idCiclo = $cycleId;";
+                  
+        $result = $this -> dbCon -> query( $query );
+        $rows = array();
+        while( $row = $result -> fetch_assoc() ){
+            $rows[] = $row['fecha'];
+        }
+        
+        return $rows;
+    }
+    
+    public function getClassDayNums( $teacherClassId ){
+        $query = "select dia from Horario inner join CursoProfesorHorario on
+                  Horario.idHorario = CursoProfesorHorario.idHorario where
+                  CursoProfesorHorario.idCursoProfesor = $teacherClassId";
+                  
+        $result = $this -> dbCon -> query( $query );
+        $rows = array();
+        while( $row = $result -> fetch_assoc() ){
+            $rows[] = $row['dia'];
+        }
+        
+        return $rows;
     }
 }
 
