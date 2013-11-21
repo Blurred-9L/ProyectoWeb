@@ -205,8 +205,14 @@ function teacherUploadFileLoad(){
 
 function teacherUploadStudentsLoad(){
     var selectAll = document.getElementById( "select-all" );
+    var button = document.getElementById( "submit-load-students" );
     
     selectAll.onclick = selectAllFunc;
+    button.onclick = function(){
+        var form = document.loadStudents2;
+        
+        form.submit();
+    };
 }
 
 function teacherListClasses(){

@@ -62,8 +62,20 @@ class StudentCtrl extends DefaultCtrl{
                 }
                 break;
             case 'load':
-                $this -> loadStudents();
+                if( $this -> checkPermissions( 'brigadier' ) ){
+                    $this -> loadStudents();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
                 break;
+            case 'regload':
+                if( $this -> checkPermissions( 'brigadier' ) ){
+                    $this -> regLoadStudents();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
         }
     }
     
@@ -412,7 +424,6 @@ class StudentCtrl extends DefaultCtrl{
         echo $view;
     }
     
-    /*THIS FUNCTION IS INCOMPLETE*/
     private function loadStudents(){
         if( empty( $_POST ) ){
             require_once( 'View/Profesores/cargarAlumnos.html' );
@@ -476,6 +487,109 @@ class StudentCtrl extends DefaultCtrl{
         $_SESSION['temp-students'] = $loadedStudents;
         
         echo $view;
+    }
+    
+    private function regLoadStudents(){
+        if( empty( $_POST ) ){
+            require_once( 'View/Profesores/cargarAlumnos.html' );
+        }
+        else{
+            $students = $_SESSION['temp-students'];
+            $classInfo = $_SESSION['temp-class-info'];
+            $ok = 0;
+            foreach( $_POST as $key => $value ){
+                $indexPos = strrpos( $key, '-' ) + 1;
+                $index = substr( $key, $indexPos );
+                $result = $this -> processRegStudent( $students[$index], $classInfo );
+                if( $result === TRUE ){
+                    $ok += 1;
+                }
+            }
+            
+            if( $ok == count( $_POST ) ){
+                $this -> listStudents();
+            }
+            else{
+                echo "Error al insertar algun estudiante.";
+            }
+        }
+    }
+    
+    private function processRegStudent( $studentInfo, $classInfo ){
+        $classArray = explode( '-', $classInfo );
+        $classKey = $classArray[0];
+        $classSec = $classArray[1];
+        $cycleStr = $classArray[2];
+        
+        $code = $studentInfo[0];
+        $name = $studentInfo[1];
+        $last1 = $studentInfo[2];
+        $last2 = $studentInfo[3];
+        $mail = $studentInfo[4];
+        $major = $studentInfo[5];
+        if( array_key_exists( 6, $studentInfo ) ){
+            $phone = $studentInfo[6];
+        }
+        else{
+            $phone = NULL;
+        }
+        if( array_key_exists( 7, $studentInfo ) ){
+            $url = $studentInfo[7];
+        }
+        else{
+            $url = NULL;
+        }
+        if( array_key_exists( 8, $studentInfo ) ){
+            $github = $studentInfo[8];
+        }
+        else{
+            $github = NULL;
+        }
+        $found = FALSE;
+        
+        if( !$this -> model -> getStudent( $code ) ){
+            // Necesito registrar el estudiante.
+            $pass = $this -> getPassword( $name, $last1, $last2 );
+            $result = $this -> model -> register( $code, $name, $last1, $last2, $mail, $major, $pass, $phone, $url, $github );
+            if( $result === FALSE ){
+                echo "Error";
+            }
+            else{
+                $this -> sendMail( $code, $name . ' ' . $last1 . ' ' . $last2, $pass, $mail );
+                $studentId = $this -> model -> insertId();
+            }
+        }
+        else{
+            // Ya tengo al estudiante.
+            $found = TRUE;
+            $student = $this -> model -> getStudent( $code );
+            $studentId = $student['idAlumno'];
+        }
+        
+        $classRow = $this -> model -> getClass( $classKey );
+        $classId = $classRow['idCurso'];
+        
+        $cycleRow = $this -> model -> getCycle( $cycleStr );
+        $cycleId = $cycleRow['idCiclo'];
+        
+        $teacherId = $_SESSION['user_id'];
+        $teacherClassRow = $this -> model -> getTeacherClass( $classId, $teacherId, $cycleId, $classSec );
+        $teacherClassId = $teacherClassRow['idCursoProfesor'];
+        
+        $result = $this -> model -> signUpToClass( $studentId, $teacherClassId );
+        if( $result === TRUE ){
+            $this -> sendClassMail( $name, $mail, $classRow['nombre'], $classSec );
+            $studentClassId = $this -> model -> insertId();
+            // generarAsistencias
+            $this -> createClassDays( $cycleId, $teacherClassId, $studentClassId );
+            // generarElemCalificacion
+            $this -> createEvalElems( $teacherClassId, $studentClassId );
+        }
+        else{
+            echo "Error";
+        }
+        
+        return $result;
     }
 }
 
