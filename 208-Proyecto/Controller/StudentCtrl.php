@@ -527,19 +527,19 @@ class StudentCtrl extends DefaultCtrl{
         $last2 = $studentInfo[3];
         $mail = $studentInfo[4];
         $major = $studentInfo[5];
-        if( array_key_exists( 6, $studentInfo ) ){
+        if( array_key_exists( 6, $studentInfo ) && !empty( $studentInfo[6] ) ){
             $phone = $studentInfo[6];
         }
         else{
             $phone = NULL;
         }
-        if( array_key_exists( 7, $studentInfo ) ){
+        if( array_key_exists( 7, $studentInfo ) && !empty( $studentInfo[7] ) ){
             $url = $studentInfo[7];
         }
         else{
             $url = NULL;
         }
-        if( array_key_exists( 8, $studentInfo ) ){
+        if( array_key_exists( 8, $studentInfo ) && !empty( $studentInfo[8] ) ){
             $github = $studentInfo[8];
         }
         else{
