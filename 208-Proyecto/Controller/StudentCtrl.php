@@ -54,7 +54,12 @@ class StudentCtrl extends DefaultCtrl{
                 }
                 break;
             case 'list':
-                $this -> listStudents();
+                if( $this -> checkPermissions( 'brigadier' ) ){
+                    $this -> listStudents();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
                 break;
             case 'load':
                 $this -> loadStudents();
@@ -414,6 +419,7 @@ class StudentCtrl extends DefaultCtrl{
         }
         else{
             $classInfo = $_POST['load-student-class'];
+            $_SESSION['temp-class-info'] = $classInfo;
             
             $classArray = explode( '-', $classInfo );
             $classKey = $classArray[0];
@@ -426,7 +432,7 @@ class StudentCtrl extends DefaultCtrl{
             $cycleRow = $this -> model -> getCycle( $cycleStr );
             $cycleId = $cycleRow['idCiclo'];
             
-            $teacherId = '1'; // This should be taken from the session.
+            $teacherId = $_SESSION['user_id'];
         
             $filename = $_FILES['upload-file']['tmp_name'];
             $file = file( $filename );
@@ -439,13 +445,37 @@ class StudentCtrl extends DefaultCtrl{
                 }
                 $lineCount += 1;
             }
-            echo "<pre>";
-            var_dump( $students );
-            echo "</pre>";
+            
+            $this -> showStudentsToLoad( $students );
         }
     }
     
-    private function processStudentRow( $studentRow, $teacherId, $classId, $cycleId ){
+    private function showStudentsToLoad( $loadedStudents ){
+        $view = file_get_contents( 'View/Profesores/cargarAlumnos2.html' );
+        
+        $start = strrpos( $view, '<tr>' );
+        $end = strrpos( $view, '</tr>' ) + 5;
+        $tableRow = substr( $view, $start, $end - $start );
+        
+        $rows = '';
+        $count = 0;
+        foreach( $loadedStudents as $student ){
+            $newTableRow = $tableRow;
+            $name = $student[1] . ' ' . $student[2] . ' ' . $student[3];
+            $major = $student[5];
+            $majorRow = $this -> model -> getMajorStr( $major );
+            $majorStr = $majorRow['nombreCarrera'];
+            $dict = array( '*name*' => $name, '*code*' => $student[0], '*major*' => $majorStr, '*mail*' => $student[4],
+                           '*count*' => $count );
+            $newTableRow = strtr( $newTableRow, $dict );
+            $rows .= $newTableRow;
+            $count += 1;
+        }
+        
+        $view = str_replace( $tableRow, $rows, $view );
+        $_SESSION['temp-students'] = $loadedStudents;
+        
+        echo $view;
     }
 }
 
