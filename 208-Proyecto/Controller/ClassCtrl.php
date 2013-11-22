@@ -37,6 +37,14 @@ class ClassCtrl extends DefaultCtrl{
                     $this -> redirectUser();
                 }
                 break;
+            case 'see-roll':
+                if( $this -> checkPermissions( 'brigadier' ) ){
+                    $this -> getClassRollView();
+                }
+                else{
+                    $this -> redirectUser();
+                }
+                break;
         }
     }
     
@@ -238,6 +246,12 @@ class ClassCtrl extends DefaultCtrl{
         $cycleId = $cycleRow['idCiclo'];
         
         $this -> processShowClassView( $classId, $teacherId, $cycleId, $section );
+    }
+    
+    private function getClassRollView(){
+        $view = file_get_contents( 'View/Profesores/verAsistencias.html' );
+        
+        echo $view;
     }
 }
 

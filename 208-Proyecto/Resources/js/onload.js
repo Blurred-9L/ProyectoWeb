@@ -221,3 +221,12 @@ function teacherListClasses(){
     fillTeacherClassSelect( "teacher-classes" );
     select.onchange = getTeacherClassList;
 }
+
+function teacherSeeClassRollLoad(){
+    var classSelect = document.getElementById( "class-select" );
+    var studentSelect = document.getElementById( "student-select" );
+    
+    fillTeacherClassSelect( "class-select" );
+    classSelect.onchange = getTeacherClassStudents;
+    studentSelect.onchange = seeStudentRollCall;
+}

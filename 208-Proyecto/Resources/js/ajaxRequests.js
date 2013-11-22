@@ -171,3 +171,43 @@ function getStudentData(){
         }
     });
 }
+
+function getTeacherClassStudents(){
+    var studentSelect = document.getElementById( "student-select" );
+    var classSelect = document.getElementById( "class-select" );
+    var classInfoStr = classSelect.value;
+    
+    if( classSelect.selectedIndex != 0 ){
+        $.ajax({
+            type: "POST",
+            data: {classInfo: classInfoStr},
+            url: "../../Model/getTeacherClassStudents.php",
+            dataType: "json",
+            success: function( json ){
+                while( studentSelect.lastChild.value != 0 ){
+                    studentSelect.removeChild( studentSelect.lastChild );
+                }
+                if( json != null ){
+                    var count = 0;
+                    for( i in json ){
+                        var option = document.createElement( "option" );
+                        var text = document.createTextNode( json[i].nombre + "-" + json[i].codigo );
+                        option.id = "student-" + count.toString();
+                        option.value = json[i].nombre + "-" + json[i].codigo;
+                        option.appendChild( text );
+                        studentSelect.appendChild( option );
+                        count += 1;
+                    }
+                }
+            }
+        });
+    }
+}
+
+function seeStudentRollCall(){
+    var studentSelect = document.getElementById( "student-select" );
+    
+    if( studentSelect.selectedIndex != 0 ){
+        //$.ajax({});
+    }
+}

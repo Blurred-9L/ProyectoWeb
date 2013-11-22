@@ -52,11 +52,38 @@
                     Puede seleccionar un curso de entre los posibles para poder visualizar en la tabla inferior la lista de asistencias del curso en particular. Se mostrarán las asistencias para los días de clases, así como el total de asistencias de cada alumno y su porcentaje de asistencias. Una asistencia sera marcada como un 1 si el alumno atendió a clase y como un 0 en caso contrario.
                 </p>
             </div>
-            <div class="select-div">
-                <select>
+            <div class="form-div">
+                <label for="class-select">
+                    Curso:
+                </label>
+                <select id="class-select" name="class-select">
                     <option selected value="0">Seleccione un curso...</option>
                 </select>
             </div>
+            <div class="form-div">
+                <label for="student-select">
+                    Alumno:
+                </label>
+                <select id="student-select" name="student-select">
+                    <option selected value="0">Seleccion un alumno...</option>
+                </select>
+            </div>
+            <div class="table-div">
+                <table class="student-roll-table">
+                    <caption>
+                        Asistencias
+                    </caption>
+                    <thead>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            </div>
+            <!--
             <div class="table-div">
                 <table class="roll-call-table">
                     <caption>
@@ -72,7 +99,7 @@
                             <th class="roll-cell">%</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbodyz>
                         <tr>
                             <td class="name-cell">Alumno Apellido Apellido</td>
                             <td class="code-cell">000000000</td>
@@ -102,6 +129,7 @@
                     </tfoot>
                 </table>
             </div>
+            -->
         </section>
         
         <aside class="right-aside">
@@ -130,6 +158,11 @@
         <script>window.jQuery || document.write('<script src="../../Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
         <script src="../../Resources/js/plugins.js"></script>
         <script src="../../Resources/js/main.js"></script>
+        <script src="../../Resources/js/onload.js"></script>
+        <script src="../../Resources/js/ajaxRequests.js"></script>
+        <script>
+            window.onload = teacherSeeClassRollLoad;
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
