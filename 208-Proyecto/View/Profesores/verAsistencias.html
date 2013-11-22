@@ -14,9 +14,9 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <link rel="stylesheet" href="../../Resources/css/normalize.css">
-        <link rel="stylesheet" href="../../Resources/css/main.css">
-        <script src="../../Resources/js/vendor/modernizr-2.6.2.min.js"></script>
+        <link rel="stylesheet" href="./Resources/css/normalize.css">
+        <link rel="stylesheet" href="./Resources/css/main.css">
+        <script src="./Resources/js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -25,7 +25,7 @@
 
         <!-- Add your site or application content here -->
         <header>
-            <img alt="udg.png" class="header-img" src="../../Resources/img/logoUdg.png" width="50" height="68" />
+            <img alt="udg.png" class="header-img" src="./Resources/img/logoUdg.png" width="50" height="68" />
             <h1>Universidad de Guadalajara - Calificaciones</h1>
             <div class="clear-div"></div>
         </header>
@@ -33,13 +33,13 @@
         <nav class="main-nav">
             <ul>
                 <li>
-                    <a href="./profesoresMain.html">Principal</a>
+                    <a href="./index.php?ctrl=default&action=main">Principal</a>
                 </li>
                 <li>
-                    <a href="./verCursos.html">Cursos</a>
+                    <a href="./index.php?ctrl=class&action=t-all">Cursos</a>
                 </li>
                 <li>
-                    <a href="#">Salir</a>
+                    <a href="./index.php?ctrl=default&action=exit">Salir</a>
                 </li>
                 <div class="clear-div"></div>
             </ul>
@@ -49,7 +49,7 @@
             <div class="form-div">
                 <h2><span class="separate">Cursos</span></h2>
                 <p class="info-text">
-                    Puede seleccionar un curso de entre los posibles para poder visualizar en la tabla inferior la lista de asistencias del curso en particular. Se mostrarán las asistencias para los días de clases, así como el total de asistencias de cada alumno y su porcentaje de asistencias. Una asistencia sera marcada como un 1 si el alumno atendió a clase y como un 0 en caso contrario.
+                    Puede seleccionar un curso de entre los posibles y después puede seleccionar un alumno de dicho curso. Usted podra visualizar en la tabla inferior las asistencias a todas las clases de este alumno en particular.
                 </p>
             </div>
             <div class="form-div">
@@ -70,79 +70,34 @@
             </div>
             <div class="table-div">
                 <table class="student-roll-table">
-                    <caption>
-                        Asistencias
-                    </caption>
-                    <thead>
-                        <th>Fecha</th>
-                        <th>Estado</th>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                    <tfoot>
-                    </tfoot>
-                </table>
-            </div>
-            <!--
-            <div class="table-div">
-                <table class="roll-call-table">
-                    <caption>
-                        Asistencias
+                    <caption id="student-roll-caption">
+                        Asistencias de 
                     </caption>
                     <thead>
                         <tr>
-                            <th class="name-cell">Alumno</th>
-                            <th class="code-cell">Codigo</th>
-                            <th class="roll-cell optional">C1</th>
-                            <th class="roll-cell optional">C2</th>
-                            <th class="total-cell">Total</th>
-                            <th class="roll-cell">%</th>
+                            <th class="roll-date-cell">Fecha</th>
+                            <th class="roll-date-state">Estado</th>
                         </tr>
                     </thead>
-                    <tbodyz>
-                        <tr>
-                            <td class="name-cell">Alumno Apellido Apellido</td>
-                            <td class="code-cell">000000000</td>
-                            <td class="roll-cell optional">0</td>
-                            <td class="roll-cell optional">0</td>
-                            <td class="total-cell">0</td>
-                            <td class="roll-cell">0</td>
-                        </tr>
-                        <tr>
-                            <td class="name-cell">Alumno Apellido Apellido</td>
-                            <td class="code-cell">000000000</td>
-                            <td class="roll-cell optional">0</td>
-                            <td class="roll-cell optional">0</td>
-                            <td class="total-cell">0</td>
-                            <td class="roll-cell">0</td>
-                        </tr>
-                        <tr>
-                            <td class="name-cell">Alumno Apellido Apellido</td>
-                            <td class="code-cell">000000000</td>
-                            <td class="roll-cell optional">0</td>
-                            <td class="roll-cell optional">0</td>
-                            <td class="total-cell">0</td>
-                            <td class="roll-cell">0</td>
-                        </tr>
+                    <tbody id="student-roll-body">
                     </tbody>
-                    <tfoot>
+                    <tfoot id="student-roll-foot">
                     </tfoot>
                 </table>
             </div>
-            -->
         </section>
         
         <aside class="right-aside">
             <nav class="aside-nav">
                 <ul>
                     <li>
-                        <a href="./verAsistencias.html">Ver asistencias</a>
+                        <a href="./index.php?ctrl=class&action=see-roll">Ver asistencias</a>
                     </li>
                     <li>
                         <a href="./tomarAsistencias.html">Tomar lista</a>
                     </li>
                     <li>
-                        <a href="./verCursos.html">Cursos</a>
+                        <a href="./index.php?ctrl=class&action=t-all">Cursos</a>
                     </li>
                     <div class="clear-div"></div>
                 </ul>
@@ -155,11 +110,11 @@
         </footer>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="../../Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-        <script src="../../Resources/js/plugins.js"></script>
-        <script src="../../Resources/js/main.js"></script>
-        <script src="../../Resources/js/onload.js"></script>
-        <script src="../../Resources/js/ajaxRequests.js"></script>
+        <script>window.jQuery || document.write('<script src="./Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="./Resources/js/plugins.js"></script>
+        <script src="./Resources/js/main.js"></script>
+        <script src="./Resources/js/onload.js"></script>
+        <script src="./Resources/js/ajaxRequests.js"></script>
         <script>
             window.onload = teacherSeeClassRollLoad;
         </script>

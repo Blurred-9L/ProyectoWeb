@@ -297,6 +297,13 @@ table.roll-call-table caption {
     margin-bottom: 2%;
 }
 
+table.student-roll-table {
+    width: 50%;
+    margin: 0% 25%;
+    text-align: center;
+    table-layout: fixed;
+}
+
 tr:nth-child(odd) {
     background-color: #539DC0;
 }
@@ -323,6 +330,10 @@ th, td {
     border-right: 2px solid #000000;
     border-left: 2px solid #000000;
     padding: 0.3% 0%;
+}
+
+tfoot td {
+    border-top: 2px solid #000000;
 }
 
 .name-cell {
@@ -359,7 +370,7 @@ th, td {
 .edit-cell {
     width: 8%;
     text-align: center;
-}zzz
+}
 
 /*320 x 480*/
 @media screen and (min-width: 0px) and ( max-width: 320px) {

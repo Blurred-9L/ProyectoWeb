@@ -193,7 +193,7 @@ function getTeacherClassStudents(){
                         var option = document.createElement( "option" );
                         var text = document.createTextNode( json[i].nombre + "-" + json[i].codigo );
                         option.id = "student-" + count.toString();
-                        option.value = json[i].nombre + "-" + json[i].codigo;
+                        option.value = json[i].codigo;
                         option.appendChild( text );
                         studentSelect.appendChild( option );
                         count += 1;
@@ -206,8 +206,58 @@ function getTeacherClassStudents(){
 
 function seeStudentRollCall(){
     var studentSelect = document.getElementById( "student-select" );
+    var code = studentSelect.value;
     
     if( studentSelect.selectedIndex != 0 ){
-        //$.ajax({});
+        $.ajax({
+            type: "POST",
+            data: {studentCode: code},
+            url: "../../Model/getStudentRollCall.php",
+            dataType: "json",
+            success: function( json ){
+                var caption = document.getElementById( "student-roll-caption" );
+                var tableBody = document.getElementById( "student-roll-body" );
+                var tableFoot = document.getElementById( "student-roll-foot" );
+                
+                caption.replaceChild( document.createTextNode( "Asistencias de " + code ), caption.firstChild );
+                while( tableBody.firstChild != null ){
+                    tableBody.removeChild( tableBody.firstChild );
+                }
+                while( tableFoot.firstChild != null ){
+                    tableFoot.removeChild( tableFoot.firstChild );
+                }
+                if( json != null ){
+                    var count = 0;
+                    var total = 0;
+                    for( i in json ){
+                        var newRow = document.createElement( "tr" );
+                        var dateCell = document.createElement( "td" );
+                        var stateCell = document.createElement( "td" );
+                        
+                        dateCell.appendChild( document.createTextNode( json[i].fecha ) );
+                        stateCell.appendChild( document.createTextNode( ( json[i].estado == 0 )? "Falta" : "Asistencia" ) );
+                        
+                        newRow.appendChild( dateCell );
+                        newRow.appendChild( stateCell );
+                        
+                        tableBody.appendChild( newRow );
+                        
+                        count += ( json[i].estado == 0 )? 0 : 1;
+                        total += 1;
+                    }
+                    
+                    var footRow = document.createElement( "tr" );
+                    var totalCell = document.createElement( "td" );
+                    var percCell = document.createElement( "td" );
+                    
+                    totalCell.appendChild( document.createTextNode( count.toString() + " asistencias" ) );
+                    percCell.appendChild( document.createTextNode( ( count / total * 100 ) + "%" ) );
+                    
+                    footRow.appendChild( totalCell );
+                    footRow.appendChild( percCell );
+                    tableFoot.appendChild( footRow );
+                }
+            }
+        });
     }
 }
