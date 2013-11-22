@@ -230,3 +230,12 @@ function teacherSeeClassRollLoad(){
     classSelect.onchange = getTeacherClassStudents;
     studentSelect.onchange = seeStudentRollCall;
 }
+
+function teacherTakeClassRollLoad(){
+    var selectAll = document.getElementById( "select-all" );
+    var classSelect = document.getElementById( "class-select" );
+    
+    fillTeacherClassSelect( "class-select" );
+    selectAll.onclick = selectAllFunc3;
+    classSelect.onchange = getTeacherClassDates;
+}

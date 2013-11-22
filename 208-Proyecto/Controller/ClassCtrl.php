@@ -18,7 +18,7 @@ class ClassCtrl extends DefaultCtrl{
                     $this -> newClass();
                 }
                 else{
-                    $this -> redirectUser();
+                    header( 'Location: index.php?ctrl=login&action=login' );
                 }
                 break;
             case 't-all':
@@ -26,7 +26,7 @@ class ClassCtrl extends DefaultCtrl{
                     $this -> showTeacherAll();
                 }
                 else{
-                    $this -> redirectUser();
+                    header( 'Location: index.php?ctrl=login&action=login' );
                 }
                 break;
             case 'show':
@@ -34,7 +34,7 @@ class ClassCtrl extends DefaultCtrl{
                     $this -> showClass();
                 }
                 else{
-                    $this -> redirectUser();
+                    header( 'Location: index.php?ctrl=login&action=login' );
                 }
                 break;
             case 'see-roll':
@@ -42,7 +42,15 @@ class ClassCtrl extends DefaultCtrl{
                     $this -> getClassRollView();
                 }
                 else{
-                    $this -> redirectUser();
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
+                break;
+            case 'take-roll':
+                if( $this -> checkPermissions( 'brigadier' ) ){
+                    $this -> takeClassRoll();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
                 }
                 break;
         }
@@ -252,6 +260,14 @@ class ClassCtrl extends DefaultCtrl{
         $view = file_get_contents( 'View/Profesores/verAsistencias.html' );
         
         echo $view;
+    }
+    
+    private function takeClassRoll(){
+        if( empty( $_POST ) ){
+            require_once( 'View/Profesores/tomarAsistencias.html' );
+        }
+        else{
+        }
     }
 }
 

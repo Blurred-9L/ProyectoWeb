@@ -1595,6 +1595,22 @@ function selectAllFunc2(){
     }
 }
 
+function selectAllFunc3(){
+    var inputs = document.getElementsByTagName( "input" );
+    var selectAll = document.getElementById( "select-all" );
+    
+    for( var i = 0; i < inputs.length; i++ ){
+        if( inputs[i].id.substring( 0, 19 ) == "roll-call-checkbox-" ){
+            if( selectAll.checked ){
+                inputs[i].checked = true;
+            }
+            else{
+                inputs[i].checked = false;
+            }
+        }
+    }
+}
+
 function addSchedule( form, schedules, curSchedule ){
     var okToAdd = true;
     var i;

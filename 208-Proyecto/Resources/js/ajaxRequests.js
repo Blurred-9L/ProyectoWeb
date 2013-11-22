@@ -261,3 +261,73 @@ function seeStudentRollCall(){
         });
     }
 }
+
+function getTeacherClassDates(){
+    var datesSelect = document.getElementById( "date-select" );
+    var classSelect = document.getElementById( "class-select" );
+    var classInfoStr = classSelect.value;
+    
+    if( classSelect.selectedIndex != 0 ){
+        $.ajax({
+            type: "POST",
+            data: {classInfo: classInfoStr},
+            url: "../../Model/getTeacherClassStudents.php",
+            dataType: "json",
+            success: function( json ){
+                var tableBody = document.getElementById( "students-names-body" );
+                while( tableBody.firstChild != null ){
+                    tableBody.removeChild( tableBody.firstChild );
+                }
+                if( json != null ){
+                    var count = 0;
+                    for( i in json ){
+                        var newRow = document.createElement( "tr" );
+                        var checkboxCell = document.createElement( "td" );
+                        var nameCell = document.createElement( "td" );
+                        var checkbox = document.createElement( "input" );
+                        
+                        checkbox.type = "checkbox";
+                        checkbox.name = "roll-call-checkbox-" + count.toString();
+                        checkbox.id = "roll-call-checkbox-" + count.toString();
+                        checkboxCell.className = "checkbox-cell";
+                        checkboxCell.appendChild( checkbox );
+                        
+                        nameCell.id = "student-" + count.toString();
+                        nameCell.className = "roll-name-cell";
+                        nameCell.appendChild( document.createTextNode( json[i].nombre + "-" + json[i].codigo ) );
+                        
+                        newRow.appendChild( checkboxCell );
+                        newRow.appendChild( nameCell );
+                        
+                        tableBody.appendChild( newRow );
+                        count += 1;
+                    }
+                }
+            }
+        });
+    
+        $.ajax({
+            type: "POST",
+            data: {classInfo: classInfoStr},
+            url: "../../Model/getTeacherClassDates.php",
+            dataType: "json",
+            success: function( json ){
+                while( datesSelect.lastChild.value != 0 ){
+                    datesSelect.removeChild( datesSelect.lastChild );
+                }
+                var count = 0;
+                if( json != null ){
+                    for( i in json ){
+                        var option = document.createElement( "option" );
+                        var text = document.createTextNode( json[i].fecha );
+                        option.id = "date-" + count.toString();
+                        option.value = json[i].fecha;
+                        option.appendChild( text );
+                        datesSelect.appendChild( option );
+                        count += 1;
+                    }
+                }
+            }
+        });
+    }
+}
