@@ -267,6 +267,7 @@ class ClassCtrl extends DefaultCtrl{
             require_once( 'View/Profesores/tomarAsistencias.html' );
         }
         else{
+            var_dump( $_POST );
         }
     }
 }

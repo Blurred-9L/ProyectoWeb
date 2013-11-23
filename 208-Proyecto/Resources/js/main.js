@@ -1711,6 +1711,10 @@ function checkClassKey( form, key ){
 function checkClassAssistance(){
     var form = document.takeAssistance;
     var boolArray = [];
+    var inputs = [];
+    var checkboxes = [];
+    var hiddens = [];
+    var hiddenInput;
     var ok;
     
     boolArray[0] = checkClass( form, document.getElementById( "class-select" ) );
@@ -1725,7 +1729,28 @@ function checkClassAssistance(){
     
     if( ok ){
         // Add hidden inputs.
+        inputs = document.getElementsByTagName( "input" );
+        for( var i = 0; i < inputs.length; i++ ){
+            if( inputs[i].type == "checkbox" && inputs[i].id != "select-all" ){
+                checkboxes.push( inputs[i] );
+            }
+        }
+        var count = 0;
+        for( var i = 0; i < checkboxes.length; i++ ){
+            if( checkboxes[i].checked ){
+                hiddenInput = document.createElement( "input" );
+                hiddenInput.type = "hidden";
+                hiddenInput.name = "code-" + count.toString();
+                hiddenInput.value = document.getElementById( "student-code-" + i.toString() ).firstChild.nodeValue;
+                form.appendChild( hiddenInput );
+                hiddens.push( hiddenInput );
+                count += 1;
+            }
+        }
         form.submit();
         // Remove hidden inputs.
+        for( var i = 0; i < hiddens.length; i++ ){
+            form.removeChild( hiddens[i] );
+        }
     }
 }

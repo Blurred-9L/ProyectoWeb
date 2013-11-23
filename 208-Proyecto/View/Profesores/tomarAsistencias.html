@@ -52,23 +52,23 @@
                     Puede seleccionar un curso para poder tomar la asistencia del siguiente día de clase.
                 </p>
             </div>
-            <div class="form-div">
-                <label for="class-select">
-                    Curso:
-                </label>
-                <select name="class-select" id="class-select">
-                    <option selected value="0">Seleccione un curso...</option>
-                </select>
-            </div>
-            <div class="form-div">
-                <label for="date-select">
-                    Fecha:
-                </label>
-                <select name="date-select" id="date-select">
-                    <option selected value="0">Seleccione una fecha...</option>
-                </select>
-            </div>
             <form name="takeAssistance" method="post" action="./index.php?ctrl=class&action=take-roll">
+                <div class="form-div">
+                    <label for="class-select">
+                        Curso:
+                    </label>
+                    <select name="class-select" id="class-select">
+                        <option selected value="0">Seleccione un curso...</option>
+                    </select>
+                </div>
+                <div class="form-div">
+                    <label for="date-select">
+                        Fecha:
+                    </label>
+                    <select name="date-select" id="date-select">
+                        <option selected value="0">Seleccione una fecha...</option>
+                    </select>
+                </div>
                 <div class="table-div">
                     <table class="take-roll-table">
                         <caption>
