@@ -247,3 +247,9 @@ function teacherDataLoad(){
                 
     button.onclick = checkTeacherData;
 }
+
+function teacherPassLoad(){
+    var button = document.getElementById( "pass-submit" );
+                
+    button.onclick = checkTeacherPass;
+}

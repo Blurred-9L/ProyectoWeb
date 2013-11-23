@@ -366,7 +366,15 @@ function checkTeacherPass(){
     }
     
     if( ok ){
+        var hash = CryptoJS.SHA1( teacherPass.value );
+        var hiddenPass = document.createElement( "input" );
+        hiddenPass.value = hash.toString();
+        hiddenPass.name = "teacher-password";
+        form.appendChild( hiddenPass );
+        
         form.submit();
+        
+        form.removeChild( hiddenPass );
     }
 }
 

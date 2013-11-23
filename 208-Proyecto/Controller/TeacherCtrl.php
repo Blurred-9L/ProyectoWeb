@@ -53,6 +53,14 @@ class TeacherCtrl extends DefaultCtrl{
                     header( 'Location: index.php?ctrl=login&action=login' );
                 }
                 break;
+            case 'pass-ch':
+                if( $this -> checkPermissions( 'brigadier' ) ){
+                    $this -> changePassword();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
+                break;
         }
     }
     
@@ -238,6 +246,15 @@ class TeacherCtrl extends DefaultCtrl{
             else{
                 echo "Error";
             }
+        }
+    }
+    
+    private function changePassword(){
+        if( empty( $_POST ) ){
+            require_once( 'View/Profesores/passProfesor.html' );
+        }
+        else{
+            var_dump( $_POST );
         }
     }
 }
