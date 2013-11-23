@@ -14,16 +14,9 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <link rel="stylesheet" href="../../Resources/css/normalize.css">
-        <link rel="stylesheet" href="../../Resources/css/main.css">
-        <script src="../../Resources/js/vendor/modernizr-2.6.2.min.js"></script>
-        <script>
-            window.onload = function(){
-                button = document.getElementById( "eval-button" );
-                
-                button.onclick = checkEvalParams;
-            }
-        </script>
+        <link rel="stylesheet" href="./Resources/css/normalize.css">
+        <link rel="stylesheet" href="./Resources/css/main.css">
+        <script src="./Resources/js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -32,7 +25,7 @@
 
         <!-- Add your site or application content here -->
         <header>
-            <img alt="udg.png" class="header-img" src="../../Resources/img/logoUdg.png" width="50" height="68" />
+            <img alt="udg.png" class="header-img" src="./Resources/img/logoUdg.png" width="50" height="68" />
             <h1>Universidad de Guadalajara - Calificaciones</h1>
             <div class="clear-div"></div>
         </header>
@@ -40,13 +33,13 @@
         <nav class="main-nav">
             <ul>
                 <li>
-                    <a href="./profesoresMain.html">Principal</a>
+                    <a href="./index.php?ctrl=default&action=main">Principal</a>
                 </li>
                 <li>
-                    <a href="./verCursos.html">Cursos</a>
+                    <a href="./index.php?ctrl=class&action=t-all">Cursos</a>
                 </li>
                 <li>
-                    <a href="#">Salir</a>
+                    <a href="./index.php?ctrl=default&action=exit">Salir</a>
                 </li>
                 <div class="clear-div"></div>
             </ul>
@@ -131,22 +124,22 @@
             <nav class="aside-nav">
                 <ul>
                     <li>
-                        <a href="./nuevoCurso.html">Nuevo curso</a>
+                        <a href="./index.php?ctrl=class&action=new">Nuevo curso</a>
                     </li>
                     <li>
-                        <a href="./listaAlumnos.html">Listas</a>
+                        <a href="./index.php?ctrl=student&action=list">Listas</a>
                     </li>
                     <li>
-                        <a href="./alumnosNuevo.html">Alumnos</a>
+                        <a href="./index.php?ctrl=student&action=tnew">Alumnos</a>
                     </li>
                     <li>
-                        <a href="./verAsistencias.html">Asistencias</a>
+                        <a href="./index.php?ctrl=class&action=see-roll">Asistencias</a>
                     </li>
                     <li>
                         <a href="./evaluacion.html">Evaluacion</a>
                     </li>
                     <li>
-                        <a href="./verCursos.html">Cursos</a>
+                        <a href="./index.php?ctrl=class&action=t-all">Cursos</a>
                     </li>
                     <div class="clear-div"></div>
                 </ul>
@@ -162,6 +155,14 @@
         <script>window.jQuery || document.write('<script src="../../Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
         <script src="../../Resources/js/plugins.js"></script>
         <script src="../../Resources/js/main.js"></script>
+        <script src="./Resources/js/onload.js"></script>
+        <script>
+            window.onload = function(){
+                button = document.getElementById( "eval-button" );
+                
+                button.onclick = checkEvalParams;
+            }
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
