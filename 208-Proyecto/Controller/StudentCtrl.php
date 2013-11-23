@@ -76,6 +76,15 @@ class StudentCtrl extends DefaultCtrl{
                 else{
                     header( 'Location: index.php?ctrl=login&action=login' );
                 }
+                break;
+            case 'eval':
+                if( $this -> checkPermissions( 'brigadier' ) ){
+                    $this -> evalStudent();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
+                break;
         }
     }
     
@@ -590,6 +599,15 @@ class StudentCtrl extends DefaultCtrl{
         }
         
         return $result;
+    }
+    
+    private function evalStudent(){
+        if( empty( $_POST ) ){
+            require_once( 'View/Profesores/evaluacion.html' );
+        }
+        else{
+            var_dump( $_POST );
+        }
     }
 }
 

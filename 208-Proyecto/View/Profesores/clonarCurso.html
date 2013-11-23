@@ -49,31 +49,17 @@
             <div class="form-div">
                 <h2><span class="separate">Clonar curso</span></h2>
                 <p class="info-text">
-                    Aqui puede crear un nuevo curso a partir de un curso existente. Al clonar un curso se copiaran las configuraciones establecidas previamente en el curso elegido, a excepción de los alumnos inscritos en él. <br /><br />Por favor escriba el NRC, año y calendario del curso a clonar:
+                    Aqui puede crear un nuevo curso a partir de un curso existente. Al clonar un curso se copiaran las configuraciones establecidas previamente en el curso elegido, a excepción de los alumnos inscritos en él. <br /><br />Seleccione un curso a clonar:
                 </p>
             </div>
-            <form name="cloneClassCourse" method="post" action="#">
+            <form name="cloneClassCourse" method="post" action="./index.php?ctrl=class&action=clone">
                 <div class="form-div">
-                    <label for="new-class-nrc">
-                        NRC:
+                    <label for="class-select">
+                        Curso:
                     </label>
-                    <input type="text" id="new-class-nrc" name="new-class-nrc" required />
-                </div>
-                <div class="form-div">
-                    <label for="new-class-year">
-                        Año:
-                    </label>
-                    <input type="text" id="new-class-year" name="new-class-year" required />
-                </div>
-                <div class="form-div">
-                    <label for="new-class-half">
-                        Calendario:
-                    </label>
-                    <select id="new-class-half" name="new-class-half">
-                        <option selected value="0">--</option>
-                        <option>A</option>
-                        <option>B</option>
-                    </select>
+                    <select name="class-select" id="class-select">
+                        <option selected value="0">Seleccione un curso...</option>
+                    <select>
                 </div>
                 <div class="form-div">
                     <button id="clone-submit" class="submit-button" type="button">Clonar</button>
@@ -89,7 +75,7 @@
                         <a href="./index.php?ctrl=class&action=new">Nuevo curso</a>
                     </li>
                     <li>
-                        <a href="./clonarCurso.html">Clonar curso</a>
+                        <a href="./index.php?ctrl=class&action=clone">Clonar curso</a>
                     </li>
                     <li>
                         <a href="./index.php?ctrl=class&action=t-all">Cursos</a>
@@ -105,16 +91,12 @@
         </footer>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="../../Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-        <script src="../../Resources/js/plugins.js"></script>
-        <script src="../../Resources/js/main.js"></script>
+        <script>window.jQuery || document.write('<script src="./Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="./Resources/js/plugins.js"></script>
+        <script src="./Resources/js/main.js"></script>
         <script src="./Resources/js/onload.js"></script>
         <script>
-            window.onload = function(){
-                var button = document.getElementById( "clone-submit" );
-                
-                button.onclick = checkCloneClass;
-            }
+            window.onload = teacherCloneClassLoad;
         </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

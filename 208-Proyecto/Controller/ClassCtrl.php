@@ -53,6 +53,14 @@ class ClassCtrl extends DefaultCtrl{
                     header( 'Location: index.php?ctrl=login&action=login' );
                 }
                 break;
+            case 'clone':
+                if( $this -> checkPermissions( 'brigadier' ) ){
+                    $this -> cloneClass();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
+                break;
         }
     }
     
@@ -308,6 +316,15 @@ class ClassCtrl extends DefaultCtrl{
             else{
                 $this -> getClassRollView();
             }
+        }
+    }
+    
+    private function cloneClass(){
+        if( empty( $_POST ) ){
+            require_once( 'View/Profesores/clonarCurso.html' );
+        }
+        else{
+            var_dump( $_POST );
         }
     }
 }

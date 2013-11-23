@@ -52,7 +52,7 @@
                     Elija un curso, un rubro y un alumno y después introduzca la calificación de 0 a 10. Se aceptan tambien un decimal de precisión, así como los valores NP (No presento) y SD (Sin derecho) para los rubros en que apliquen estos valores. En el caso de que un rubro se haya definido con un subrubro, entonces aparecera un cuadro de texto para escribir el número de elemento (practica, examen, tarea) a calificar.
                 </p>
             </div>
-            <form name="evalStudent" method="post" action="#">
+            <form name="evalStudent" method="post" action="./index.php?ctrl=student&action=eval">
                 <div class="form-div">
                     <label for="select-class">
                         Curso:
@@ -136,7 +136,7 @@
                         <a href="./index.php?ctrl=class&action=see-roll">Asistencias</a>
                     </li>
                     <li>
-                        <a href="./evaluacion.html">Evaluacion</a>
+                        <a href="./index.php?ctrl=student&action=eval">Evaluacion</a>
                     </li>
                     <li>
                         <a href="./index.php?ctrl=class&action=t-all">Cursos</a>
@@ -152,16 +152,12 @@
         </footer>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="../../Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-        <script src="../../Resources/js/plugins.js"></script>
-        <script src="../../Resources/js/main.js"></script>
+        <script>window.jQuery || document.write('<script src="./Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="./Resources/js/plugins.js"></script>
+        <script src="./Resources/js/main.js"></script>
         <script src="./Resources/js/onload.js"></script>
         <script>
-            window.onload = function(){
-                button = document.getElementById( "eval-button" );
-                
-                button.onclick = checkEvalParams;
-            }
+            window.onload = teacherEvalStudentLoad;
         </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

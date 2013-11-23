@@ -159,9 +159,7 @@ function checkCloneClass(){
     var boolArray = [];
     var ok;
     
-    boolArray[0] = checkNrc( form, document.getElementById( "new-class-nrc" ) );
-    boolArray[1] = checkYear( form, document.getElementById( "new-class-year" ) );
-    boolArray[2] = checkHalfYear( form, document.getElementById( "new-class-half" ) );
+    boolArray[0] = checkClass( form, document.getElementById( "class-select" ) );
     
     ok = true;
     for( var i = 0; i < boolArray.length && ok; i++ ){

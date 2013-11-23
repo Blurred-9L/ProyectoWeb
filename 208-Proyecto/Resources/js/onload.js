@@ -253,3 +253,15 @@ function teacherPassLoad(){
                 
     button.onclick = checkTeacherPass;
 }
+
+function teacherCloneClassLoad(){
+    var button = document.getElementById( "clone-submit" );
+                
+    button.onclick = checkCloneClass;
+}
+
+function teacherEvalStudentLoad(){
+    var button = document.getElementById( "eval-button" );
+                
+    button.onclick = checkEvalParams;
+}
