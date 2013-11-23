@@ -249,12 +249,40 @@ class TeacherCtrl extends DefaultCtrl{
         }
     }
     
+    private function teacherPassGetView( $msg ){
+        $view = file_get_contents( 'View/Profesores/passProfesor.html' );
+        
+        $dict = array( '*msg*' => $msg );
+        $view = strtr( $view, $dict );
+        
+        echo $view;
+    }
+    
     private function changePassword(){
         if( empty( $_POST ) ){
-            require_once( 'View/Profesores/passProfesor.html' );
+            $this -> teacherPassGetView( '' );
         }
         else{
-            var_dump( $_POST );
+            $shaTeacherPass = $_POST['teacher-password'];
+            $newPass = $_POST['teacher-new-pass'];
+            $newPass2 = $_POST['teacher-new-pass2'];
+        
+            $code = $_SESSION['user_code'];
+            $teacherRow = $this -> model -> getTeacher( $code );
+            $dbTeacherPass = $teacherRow['password'];
+            
+            if( $dbTeacherPass != $shaTeacherPass || $newPass != $newPass2 ){
+                $this -> teacherPassGetView( 'Contraseña incorrecta.' );
+            }
+            else{
+                $result = $this -> model -> updatePassword( $code, $shaTeacherPass );
+                if( $result === TRUE ){
+                    $this -> teacherPassGetView( 'Contraseña actualizada.' );
+                }
+                else{
+                    $this -> teacherPassGetView( 'Hubo un fallo al intentar actualizar la contraseña.' );
+                }
+            }
         }
     }
 }

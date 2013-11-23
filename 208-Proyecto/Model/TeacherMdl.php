@@ -26,6 +26,14 @@ class TeacherMdl{
         return $result;
     }
     
+    public function updatePassword( $code, $pass ){
+        $query = "update Profesor set password=\"$pass\" where codigo=\"$code\";";
+        
+        $result = $this -> dbCon -> query( $query );
+        
+        return $result;
+    }
+    
     public function getTeacher( $code ){
         $query = "select * from Profesor where codigo=\"$code\";";
         
