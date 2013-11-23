@@ -267,7 +267,47 @@ class ClassCtrl extends DefaultCtrl{
             require_once( 'View/Profesores/tomarAsistencias.html' );
         }
         else{
-            var_dump( $_POST );
+            $classInfo = $_POST['class-select'];
+            $classArray = explode( '-', $classInfo );
+            $classKey = $classArray[0];
+            $classSec = $classArray[1];
+            $cycleStr = $classArray[2];
+            
+            $date = $_POST['date-select'];
+            $teacherId = $_SESSION['user_id'];
+            
+            $cycleRow = $this -> model -> getCycleByStr( $cycleStr );
+            $cycleId = $cycleRow['idCiclo'];
+            
+            $classRow = $this -> model -> getClassByKey( $classKey );
+            $classId = $classRow['idCurso'];
+            
+            $teacherClassRow = $this -> model -> getTeacherClass( $teacherId, $cycleId, $classId, $classSec );
+            $teacherClassId = $teacherClassRow['idCursoProfesor'];
+            
+            $count = 0;
+            $okUpdates = 0;
+            $key = "code-$count";
+            while( array_key_exists( $key, $_POST ) ){
+                $code = $_POST[$key];
+                $studentRow = $this -> model -> getStudentByCode( $code );
+                $studentId = $studentRow['idAlumno'];
+                $studentClassRow = $this -> model -> getStudentInClass( $studentId, $teacherClassId );
+                $studentClassId = $studentClassRow['idAlumnoCurso'];
+                $result = $this -> model -> registerAssistance( $studentClassId, $date );
+                if( $result === TRUE ){
+                    $okUpdates += 1;
+                }
+                
+                $count += 1;
+                $key = "code-$count";
+            }
+            if( $okUpdates < $count ){
+                echo "Error";
+            }
+            else{
+                $this -> getClassRollView();
+            }
         }
     }
 }

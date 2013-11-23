@@ -12,6 +12,24 @@ class ClassMdl{
         return $this -> dbCon -> connection -> insert_id;
     }
     
+    public function getStudentByCode( $code ){
+        $query = "select * from Alumno where codigo=\"$code\";";
+        
+        $result = $this -> dbCon -> query( $query );
+        $row = $result -> fetch_assoc();
+        
+        return $row;
+    }
+    
+    public function getStudentInClass( $studentId, $teacherClassId ){
+        $query = "select * from AlumnoCurso where idAlumno = $studentId and idCursoProfesor = $teacherClassId;";
+        
+        $result = $this -> dbCon -> query( $query );
+        $row = $result -> fetch_assoc();
+        
+        return $row;
+    }
+    
     public function getClass( $classId ){
         $query = "select * from Curso where idCurso=$classId;";
         
@@ -169,6 +187,15 @@ class ClassMdl{
     public function registerEvaluation( $act, $val, $nElems, $teacherClassId ){
         $query = "insert into HojaEvaluacion( descripcion, valor, nElems, idCursoProfesor ) values
                   ( \"$act\", $val, $nElems, $teacherClassId );";
+                  
+        $result = $this -> dbCon -> query( $query );
+        
+        return $result;
+    }
+    
+    public function registerAssistance( $studentClassId, $date ){
+        $query = "update Asistencia set estado = TRUE where
+                  idAlumnoCurso = $studentClassId and fecha = \"$date\";";
                   
         $result = $this -> dbCon -> query( $query );
         

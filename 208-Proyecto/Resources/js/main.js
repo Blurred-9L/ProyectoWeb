@@ -1747,7 +1747,9 @@ function checkClassAssistance(){
                 count += 1;
             }
         }
-        form.submit();
+        if( hiddens.length > 0 ){
+            form.submit();
+        }
         // Remove hidden inputs.
         for( var i = 0; i < hiddens.length; i++ ){
             form.removeChild( hiddens[i] );
