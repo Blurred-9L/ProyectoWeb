@@ -234,8 +234,10 @@ function teacherSeeClassRollLoad(){
 function teacherTakeClassRollLoad(){
     var selectAll = document.getElementById( "select-all" );
     var classSelect = document.getElementById( "class-select" );
+    var button = document.getElementById( "class-assistance-button" );
     
     fillTeacherClassSelect( "class-select" );
     selectAll.onclick = selectAllFunc3;
     classSelect.onchange = getTeacherClassDates;
+    button.onclick = checkClassAssistance;
 }

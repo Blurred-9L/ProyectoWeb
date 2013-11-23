@@ -68,7 +68,7 @@
                     <option selected value="0">Seleccione una fecha...</option>
                 </select>
             </div>
-            <form method="post" action="./index.php?ctrl=class&action=take-roll">
+            <form name="takeAssistance" method="post" action="./index.php?ctrl=class&action=take-roll">
                 <div class="table-div">
                     <table class="take-roll-table">
                         <caption>
@@ -77,7 +77,8 @@
                         <thead>
                             <tr>
                                 <th class="checkbox-cell"><input type="checkbox" name="select-all" id="select-all" /></th>
-                                <th>Datos</th>
+                                <th>Nombre</th>
+                                <th>Codigo</th>
                             </tr>
                         </thead>
                         <tbody id="students-names-body">
@@ -87,7 +88,7 @@
                     </table>
                 </div>
                 <div class="form-div">
-                    <button class="submit-button" type="submit">Registrar</button>
+                    <button id="class-assistance-button" class="submit-button" type="button">Registrar</button>
                     <button type="reset">Reestablecer</button>
                 </div>
             </form>

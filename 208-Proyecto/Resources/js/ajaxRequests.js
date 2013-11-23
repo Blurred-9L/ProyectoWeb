@@ -284,6 +284,7 @@ function getTeacherClassDates(){
                         var newRow = document.createElement( "tr" );
                         var checkboxCell = document.createElement( "td" );
                         var nameCell = document.createElement( "td" );
+                        var codeCell = document.createElement( "td" );
                         var checkbox = document.createElement( "input" );
                         
                         checkbox.type = "checkbox";
@@ -292,12 +293,15 @@ function getTeacherClassDates(){
                         checkboxCell.className = "checkbox-cell";
                         checkboxCell.appendChild( checkbox );
                         
-                        nameCell.id = "student-" + count.toString();
-                        nameCell.className = "roll-name-cell";
-                        nameCell.appendChild( document.createTextNode( json[i].nombre + "-" + json[i].codigo ) );
+                        nameCell.id = "student-name-" + count.toString();
+                        nameCell.appendChild( document.createTextNode( json[i].nombre ) );
+                        
+                        codeCell.id = "student-code-" + count.toString();
+                        codeCell.appendChild( document.createTextNode( json[i].codigo ) );
                         
                         newRow.appendChild( checkboxCell );
                         newRow.appendChild( nameCell );
+                        newRow.appendChild( codeCell );
                         
                         tableBody.appendChild( newRow );
                         count += 1;

@@ -580,13 +580,31 @@ function checkClass( form, classCourse ){
     var message;
     
     if( index == 0 ){
-        message = document.createTextNode( " Seleccion un curso." );
+        message = document.createTextNode( " Seleccione un curso." );
         classCourse.parentNode.replaceChild( message, classCourse.parentNode.lastChild );
         ok = false;
     }
     else{
         message = document.createTextNode( "" );
         classCourse.parentNode.replaceChild( message, classCourse.parentNode.lastChild );
+    }
+    
+    return ok;
+}
+
+function checkDateSelect( form, dateSelect ){
+    var ok = true;
+    var index = dateSelect.selectedIndex;
+    var message;
+    
+    if( index == 0 ){
+        message = document.createTextNode( " Seleccione una fecha de clase." );
+        dateSelect.parentNode.replaceChild( message, dateSelect.parentNode.lastChild );
+        ok = false;
+    }
+    else{
+        message = document.createTextNode( "" );
+        dateSelect.parentNode.replaceChild( message, dateSelect.parentNode.lastChild );
     }
     
     return ok;
@@ -1688,4 +1706,26 @@ function checkClassKey( form, key ){
     }
     
     return ok;
+}
+
+function checkClassAssistance(){
+    var form = document.takeAssistance;
+    var boolArray = [];
+    var ok;
+    
+    boolArray[0] = checkClass( form, document.getElementById( "class-select" ) );
+    boolArray[1] = checkDateSelect( form, document.getElementById( "date-select" ) );
+    
+    ok = true;
+    for( var i = 0; i < boolArray.length && ok; i++ ){
+        if( !boolArray[i] ){
+            ok = false;
+        }
+    }
+    
+    if( ok ){
+        // Add hidden inputs.
+        form.submit();
+        // Remove hidden inputs.
+    }
 }
