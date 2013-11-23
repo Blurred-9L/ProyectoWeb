@@ -241,3 +241,9 @@ function teacherTakeClassRollLoad(){
     classSelect.onchange = getTeacherClassDates;
     button.onclick = checkClassAssistance;
 }
+
+function teacherDataLoad(){
+    var button = document.getElementById( "submit-teacher-data" );
+                
+    button.onclick = checkTeacherData;
+}

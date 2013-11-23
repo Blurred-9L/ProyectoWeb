@@ -45,6 +45,14 @@ class TeacherCtrl extends DefaultCtrl{
                     header( 'Location: index.php?ctrl=login&action=login' );
                 }
                 break;
+            case 'data':
+                if( $this -> checkPermissions( 'brigadier' ) ){
+                    $this -> teacherData();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
+                break;
         }
     }
     
@@ -192,6 +200,45 @@ class TeacherCtrl extends DefaultCtrl{
         $code = $_POST['code'];
         
         $this -> updateEditView( $code );
+    }
+    
+    private function teacherDataGetView(){
+        $view = file_get_contents( 'View/Profesores/datosProfesor.html' );
+        $teacherCode = $_SESSION['user_code'];
+        $row = $this -> model -> getTeacher( $teacherCode );
+        
+        $code = $row['codigo'];
+        $mail = $row['email'];
+        $phone = $row['celular'];
+        $dict = array( '*code*' => $code, '*name*' => $row['nombre'], '*last1*' => $row['apellidoP'], '*last2*' => $row['apellidoM'] );
+        $view = strtr( $view, $dict );
+        $view = str_replace( '<input type="email" id="teacher-email" name="teacher-email" />',
+                             "<input type=\"email\" id=\"teacher-email\" name=\"teacher-email\" value=\"$mail\" />",
+                             $view );
+        $view = str_replace( '<input type="tel" id="teacher-phone" name="teacher-phone" />',
+                             "<input type=\"tel\" id=\"teacher-phone\" name=\"teacher-phone\" value=\"$phone\" />",
+                             $view );
+        
+        echo $view;
+    }
+    
+    private function teacherData(){
+        if( empty( $_POST ) ){
+            $this -> teacherDataGetView();
+        }
+        else{
+            $mail = $_POST['teacher-email'];
+            $phone = $_POST['teacher-phone'];
+            $teacherCode = $_SESSION['user_code'];
+            
+            $result = $this -> model -> update( $teacherCode, $mail, $phone );
+            if( $result === TRUE ){
+                $this -> teacherDataGetView();
+            }
+            else{
+                echo "Error";
+            }
+        }
     }
 }
 
