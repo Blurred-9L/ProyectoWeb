@@ -417,7 +417,7 @@ function checkStudentPass(){
 function checkEvalParams(){
     var form = document.evalStudent;
     var boolArray = [];
-    var ok;
+    var ok = true;
     
     boolArray[0] = checkClass( form, document.getElementById( "select-class" ) );
     boolArray[1] = checkSelected( form, document.getElementsByTagName( "input" ) );
@@ -430,7 +430,7 @@ function checkEvalParams(){
             ok = false;
         }
     }
-    
+
     if( ok ){
         form.submit();
     }
@@ -812,12 +812,11 @@ function checkEvalParam( form, evalParam ){
 
 function checkEvalElem( form, evalNo ){
     var ok = true;
-    var regex = /^\d+$/gi;
     var message;
-    var str = evalNo.value;
+    var index = evalNo.selectedIndex;
     
-    if( !regex.test( str ) ){
-        message = document.createTextNode( " Escriba un numero." );
+    if( index == 0 ){
+        message = document.createTextNode( " Seleccione un elemento a calificar." );
         evalNo.parentNode.replaceChild( message, evalNo.parentNode.lastChild );
         ok = false;
     }
@@ -1093,21 +1092,27 @@ function checkSelected( form, inputArray ){
     var message;
     var i;
     var table = document.getElementById( "evalTable" );
+    var count = 0;
     
     for( i = 0; i < inputArray.length && !ok; i++ ){
-        if( inputArray[i].type == "radio" ){
+        if( inputArray[i].type == "checkbox" ){
             if( inputArray[i].checked ){
-                ok = true;
+                count += 1;
             }
         }
     }
-    if( !ok ){
+    if( count == 0 ){
         message = document.createTextNode( "Seleccione un alumno." );
+        table.replaceChild( message, table.lastChild );
+    }
+    else if( count > 1 ){
+        message = document.createTextNode( "Seleccione solo UN alumno." );
         table.replaceChild( message, table.lastChild );
     }
     else{
         message = document.createTextNode( "" );
         table.replaceChild( message, table.lastChild );
+        ok = true;
     }
     
     return ok;

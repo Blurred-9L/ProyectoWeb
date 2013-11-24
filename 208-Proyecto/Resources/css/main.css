@@ -310,6 +310,13 @@ table.take-roll-table {
     text-align: center;
 }
 
+table.eval-table {
+    width: 80%;
+    margin: 0% 10%;
+    table-layout: fixed;
+    text-align: center;
+}
+
 tr:nth-child(odd) {
     background-color: #539DC0;
 }

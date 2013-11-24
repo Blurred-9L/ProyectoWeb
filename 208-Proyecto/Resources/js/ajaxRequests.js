@@ -335,3 +335,122 @@ function getTeacherClassDates(){
         });
     }
 }
+
+function getTeacherClassEvalInfo(){
+    var classSelect = document.getElementById( "select-class" );
+    var evalSelect = document.getElementById( "select-eval" );
+    var elemSelect = document.getElementById( "select-sub-eval" );
+    var classInfoStr = classSelect.value;
+    var tableBody = document.getElementById( "eval-table-body" );
+    
+    while( tableBody.firstChild != null ){
+        tableBody.removeChild( tableBody.firstChild );
+    }
+    if( classSelect.selectedIndex != 0 ){
+        // Gets all students.
+        $.ajax({
+            type: "POST",
+            data: {classInfo: classInfoStr},
+            url: "../../Model/getTeacherClassStudents.php",
+            dataType: "json",
+            success: function( json ){
+                if( json != null ){
+                    while( evalSelect.lastChild.value != 0 ){
+                        evalSelect.removeChild( evalSelect.lastChild );
+                    }
+                
+                    var count = 0;
+                    for( i in json ){
+                        var newRow = document.createElement( "tr" );
+                        var checkboxCell = document.createElement( "td" );
+                        var nameCell = document.createElement( "td" );
+                        var codeCell = document.createElement( "td" );
+                        var checkbox = document.createElement( "input" );
+                        
+                        checkbox.type = "checkbox";
+                        checkbox.name = "eval-checkbox-" + count.toString();
+                        checkbox.id = "eval-checkbox-" + count.toString();
+                        checkboxCell.className = "checkbox-cell2";
+                        checkboxCell.appendChild( checkbox );
+                        
+                        nameCell.id = "student-name-" + count.toString();
+                        nameCell.appendChild( document.createTextNode( json[i].nombre ) );
+                        
+                        codeCell.id = "student-code-" + count.toString();
+                        codeCell.appendChild( document.createTextNode( json[i].codigo ) );
+                        
+                        newRow.appendChild( checkboxCell );
+                        newRow.appendChild( nameCell );
+                        newRow.appendChild( codeCell );
+                        
+                        tableBody.appendChild( newRow );
+                        count += 1;
+                    }
+                }
+            }
+        });
+        
+        // Gets all eval pages.
+        $.ajax({
+            type: "POST",
+            data: {classInfo: classInfoStr},
+            url: "../../Model/getTeacherClassEvalParams.php",
+            dataType: "json",
+            success: function( json ){
+                if( json != null ){
+                    var count = 0;
+                    for( i in json ){
+                        var option = document.createElement( "option" );
+                        var text = document.createTextNode( json[i].descripcion );
+                        
+                        option.id = "eval-" + count.toString();
+                        option.value = json[i].idHojaEvaluacion;
+                        option.appendChild( text );
+                        evalSelect.appendChild( option );
+                        count += 1;
+                    }
+                }
+            }
+        });
+        
+        evalSelect.selectedIndex = 0;
+        elemSelect.selectedIndex = 0;
+    }
+}
+
+function getTeacherClassEvalElems(){
+    var evalSelect = document.getElementById( "select-eval" );
+    var elemSelect = document.getElementById( "select-sub-eval" );
+    var evalId = evalSelect.value;
+    
+    if( evalSelect.selectedIndex != 0 ){
+        $.ajax({
+            type: "POST",
+            data: {id: evalId},
+            url: "../../Model/getEvalParam.php",
+            dataType: "json",
+            success: function( json ){
+                while( elemSelect.lastChild.value != 0 ){
+                    elemSelect.removeChild( elemSelect.lastChild );
+                }
+                if( json != null ){
+                    var times = json.nElems;
+                    var description = json.descripcion;
+                    
+                    for( var i = 0; i < times; i++ ){
+                        var value = i + 1;
+                        var option = document.createElement( "option" );
+                        var text = document.createTextNode( description + " " + value.toString() );
+                        
+                        option.id = "eval-elem-" + i.toString();
+                        option.value = value;
+                        option.appendChild( text );
+                        elemSelect.appendChild( option );
+                    }
+                }
+            }
+        });
+        
+        elemSelect.selectedIndex = 0;
+    }
+}

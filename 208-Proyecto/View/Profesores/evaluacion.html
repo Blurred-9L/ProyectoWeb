@@ -53,6 +53,24 @@
                 </p>
             </div>
             <form name="evalStudent" method="post" action="./index.php?ctrl=student&action=eval">
+                <div id="evalTable" class="table-div">
+                    <table class="eval-table">
+                        <caption>
+                            Alumnos
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th class="checkbox-cell2">Elegir</th>
+                                <th>Nombre</th>
+                                <th>Codigo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="eval-table-body">
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
                 <div class="form-div">
                     <label for="select-class">
                         Curso:
@@ -60,38 +78,6 @@
                     <select name="select-class" id="select-class">
                         <option selected value="0">Elija un curso...</option>
                     </select>
-                </div>
-                <div id="evalTable" class="table-div">
-                    <table>
-                        <caption>
-                            Alumnos
-                        </caption>
-                        <thead>
-                            <tr>
-                                <th class="edit-cell">Elegir</th>
-                                <th>Nombre</th>
-                                <th>Codigo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="edit-cell">
-                                    <input type="radio" name="poor-soul" />
-                                </td>
-                                <td>.</td>
-                                <td>.</td>
-                            </tr>
-                            <tr>
-                                <td class="edit-cell">
-                                    <input type="radio" name="poor-soul" />
-                                </td>
-                                <td>.</td>
-                                <td>.</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                        </tfoot>
-                    </table>
                 </div>
                 <div class="form-div">
                     <label for="select-eval">
@@ -105,7 +91,9 @@
                     <label for="select-sub-eval">
                         No. Elemento:
                     </label>
-                    <input type="number" name="select-sub-eval" id="select-sub-eval" required />
+                    <select name="select-sub-eval" id="select-sub-eval">
+                        <option selected value="0">Elija el elemento...</option>
+                    </select>
                 </div>
                 <div class="form-div">
                     <label for="grade">
@@ -155,6 +143,7 @@
         <script>window.jQuery || document.write('<script src="./Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
         <script src="./Resources/js/plugins.js"></script>
         <script src="./Resources/js/main.js"></script>
+        <script src="./Resources/js/ajaxRequests.js"></script>
         <script src="./Resources/js/onload.js"></script>
         <script>
             window.onload = teacherEvalStudentLoad;

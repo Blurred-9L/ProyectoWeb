@@ -262,6 +262,11 @@ function teacherCloneClassLoad(){
 
 function teacherEvalStudentLoad(){
     var button = document.getElementById( "eval-button" );
-                
+    var classSelect = document.getElementById( "select-class" );
+    var evalSelect = document.getElementById( "select-eval" );
+    
+    fillTeacherClassSelect( "select-class" );
     button.onclick = checkEvalParams;
+    classSelect.onchange = getTeacherClassEvalInfo;
+    evalSelect.onchange = getTeacherClassEvalElems;
 }
