@@ -310,6 +310,10 @@ table.take-roll-table {
     text-align: center;
 }
 
+table.report-card-table {
+    text-align: center;
+}
+
 table.eval-table {
     width: 80%;
     margin: 0% 10%;
@@ -383,6 +387,22 @@ tfoot td {
 .edit-cell {
     width: 8%;
     text-align: center;
+}
+
+.class-key-cell {
+    width: 7%;
+}
+
+.class-name-cell {
+    width: 60%;
+}
+
+.grade-cell {
+    width: 10%;
+}
+
+.assist-cell {
+    width: 7%;
 }
 
 /*320 x 480*/

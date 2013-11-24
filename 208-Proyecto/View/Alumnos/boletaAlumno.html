@@ -14,9 +14,9 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <link rel="stylesheet" href="../../Resources/css/normalize.css">
-        <link rel="stylesheet" href="../../Resources/css/main.css">
-        <script src="../../Resources/js/vendor/modernizr-2.6.2.min.js"></script>
+        <link rel="stylesheet" href="./Resources/css/normalize.css">
+        <link rel="stylesheet" href="./Resources/css/main.css">
+        <script src="./Resources/js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -25,7 +25,7 @@
 
         <!-- Add your site or application content here -->
         <header>
-            <img alt="udg.png" class="header-img" src="../../Resources/img/logoUdg.png" width="50" height="68" />
+            <img alt="udg.png" class="header-img" src="./Resources/img/logoUdg.png" width="50" height="68" />
             <h1>Universidad de Guadalajara - Calificaciones</h1>
             <div class="clear-div"></div>
         </header>
@@ -33,42 +33,39 @@
         <nav class="main-nav">
             <ul>
                 <li>
-                    <a href="./alumnosMain.html">Principal</a>
+                    <a href="./index.php?ctrl=default&action=main">Principal</a>
                 </li>
                 <li>
-                    <a href="./boletaAlumno.html">Boleta</a>
+                    <a href="./index.php?ctrl=student&action=grade">Boleta</a>
                 </li>
                 <li>
-                    <a href="#">Salir</a>
+                    <a href="./index.php?ctrl=default&action=exit">Salir</a>
                 </li>
                 <div class="clear-div"></div>
             </ul>
         </nav>
         
         <section class="main-section">
+            <div class="form-div">
+                <h2><span class="separate">Boleta</span></h2>
+            </div>
+            <div class="select-div">
+                <select id="cycle-select" name="cycle-select">
+                    <option selected value="0">Seleccione un ciclo...</option>
+                </select>
+            </div>
             <div class="table-div"> 
-                <table>
-                    <caption>
-                        Boleta
-                    </caption>
+                <table class="report-card-table">
                     <thead>
                         <tr>
-                            <th>Curso</th>
-                            <th>Promedio</th>
-                            <th>% asistencias</th>
+                            <th class="checkbox-cell2">Elegir</th>
+                            <th class="grade-cell">Promedio</th>
+                            <th class="assist-cell">%</th>
+                            <th class="class-key-cell">Clave</th>
+                            <th class="class-name-cell optional">Curso</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                        </tr>
-                        <tr>
-                            <td>.</td>
-                            <td>.</td>
-                            <td>.</td>
-                        </tr>
+                    <tbody id="report-card-body">
                     </tbody>
                     <tfoot>
                     </tfoot>
@@ -80,10 +77,10 @@
             <nav class="aside-nav">
                 <ul>
                     <li>
-                        <a href="./datosAlumno.html">Mis datos</a>
+                        <a href="./index.php?ctrl=student&action=data">Mis datos</a>
                     </li>
                     <li>
-                        <a href="./passAlumno.html">Contraseña</a>
+                        <a href="./index.php?ctrl=student&action=pass-ch">Contraseña</a>
                     </li>
                     <div class="clear-div"></div>
                 </ul>
@@ -96,9 +93,14 @@
         </footer>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="../../Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-        <script src="../../Resources/js/plugins.js"></script>
-        <script src="../../Resources/js/main.js"></script>
+        <script>window.jQuery || document.write('<script src="./Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="./Resources/js/plugins.js"></script>
+        <script src="./Resources/js/main.js"></script>
+        <script src="./Resources/js/ajaxRequests.js"></script>
+        <script src="./Resources/js/onload.js"></script>
+        <script>
+            window.onload = studentReportCardLoad;
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

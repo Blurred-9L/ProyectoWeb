@@ -87,6 +87,7 @@ class StudentCtrl extends DefaultCtrl{
                 break;
             case 'grade':
                 if( $this -> checkPermissions( 'rookie' ) ){
+                    $this -> getReportCard();
                 }
                 else{
                     header( 'Location: index.php?ctrl=login&action=login' );
@@ -759,6 +760,12 @@ class StudentCtrl extends DefaultCtrl{
                 }
             }
         }
+    }
+    
+    private function getReportCard(){
+        $view = file_get_contents( 'View/Alumnos/boletaAlumno.html' );
+        
+        echo $view;
     }
 }
 

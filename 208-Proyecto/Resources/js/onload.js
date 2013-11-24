@@ -287,3 +287,10 @@ function studentPassLoad(){
                 
     button.onclick = checkStudentPass;
 }
+
+function studentReportCardLoad(){
+    var cycleSelect = document.getElementById( "cycle-select" );
+    
+    fillCycleSelect( "cycle-select" );
+    cycleSelect.onchange = getStudentClassReportCard;
+}

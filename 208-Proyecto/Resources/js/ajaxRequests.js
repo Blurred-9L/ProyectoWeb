@@ -66,6 +66,23 @@ function fillMajorSelect( selectId ){
     });
 }
 
+function fillCycleSelect( selectId ){
+    $.ajax({
+        url: "../../Model/getCycles.php",
+        dataType: "json",
+        success: function( json ){
+            for( i in json ){
+                var cycle = document.createTextNode( json[i].ciclo );
+                var option = document.createElement( "option" );
+                option.id = "cycle-" + json[i].idCiclo;
+                option.value = json[i].idCiclo;
+                option.appendChild( cycle );
+                document.getElementById( selectId ).appendChild( option );
+            }
+        }
+    });
+}
+
 function fillTeacherClassSelect( selectId ){
     $.ajax({
         url: "../../Model/getTClasses.php",
@@ -452,5 +469,65 @@ function getTeacherClassEvalElems(){
         });
         
         elemSelect.selectedIndex = 0;
+    }
+}
+
+function getStudentClassReportCard(){
+    var cycleSelect = document.getElementById( "cycle-select" );
+    var cycleValue = cycleSelect.value;
+    var tableBody = document.getElementById( "report-card-body" );
+    
+    while( tableBody.firstChild != null ){
+        tableBody.removeChild( tableBody.firstChild );
+    }
+    if( cycleSelect.selectedIndex != 0 ){
+        $.ajax({
+            type: "POST",
+            data: {cycle: cycleValue},
+            url: "../../Model/getStudentClassReport.php",
+            dataType: "json",
+            success: function( json ){
+                var count = 0;
+                if( json != null ){
+                    for( i in json ){
+                        var newRow = document.createElement( "tr" );
+                        var gradeCell = document.createElement( "td" );
+                        var assistCell = document.createElement( "td" );
+                        var classKeyCell = document.createElement( "td" );
+                        var classNameCell = document.createElement( "td" );
+                        var checkboxCell = document.createElement( "td" );
+                        var checkbox = document.createElement( "input" );
+                        
+                        checkbox.type = "checkbox";
+                        checkbox.id = "checkbox-" + count.toString();
+                        checkbox.name = "checkbox-" + json[i].idAlumnoCurso;
+                        checkboxCell.appendChild( checkbox );
+                        checkboxCell.className = "checkbox-cell2";
+                        
+                        gradeCell.className = "grade-cell";
+                        gradeCell.appendChild( document.createTextNode( json[i].calificacion ) );
+                        
+                        assistCell.className = "assist-cell";
+                        assistCell.appendChild( document.createTextNode( json[i].porcentajeAsistencia ) );
+                        
+                        classKeyCell.className = "class-key-cell";
+                        classKeyCell.id = "student-class-" + count.toString();
+                        classKeyCell.appendChild( document.createTextNode( json[i].clave ) );
+                        
+                        classNameCell.className = "class-name-cell";
+                        classNameCell.appendChild( document.createTextNode( json[i].nombre ) );
+                        
+                        newRow.appendChild( checkboxCell );
+                        newRow.appendChild( gradeCell );
+                        newRow.appendChild( assistCell );
+                        newRow.appendChild( classKeyCell );
+                        newRow.appendChild( classNameCell );
+                        
+                        tableBody.appendChild( newRow );
+                        count += 1;
+                    }
+                }
+            }
+        });
     }
 }
