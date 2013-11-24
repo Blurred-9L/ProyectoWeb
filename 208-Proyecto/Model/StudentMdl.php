@@ -76,6 +76,14 @@ class StudentMdl{
         return $result;
     }
     
+    public function updateEvalElem( $evalElemId, $grade ){
+        $query = "update ElemCalificacion set calificacion = $grade where idElemCalificacion = $evalElemId;";
+        
+        $result = $this -> dbCon -> query( $query );
+        
+        return $result;
+    }
+    
     public function getMajorStr( $major ){
         $query = "select nombreCarrera from Carrera where idCarrera = $major;";
         
@@ -187,6 +195,31 @@ class StudentMdl{
         $rows = array();
         while( $row = $result -> fetch_assoc() ){
             $rows[] = $row['dia'];
+        }
+        
+        return $rows;
+    }
+    
+    public function getStudentFromClass( $studentCode, $teacherClassId ){
+        $query = "select idAlumnoCurso, calificacion, porcentajeAsistencia from AlumnoCurso
+                  inner join Alumno on AlumnoCurso.idAlumno = Alumno.idAlumno inner join
+                  CursoProfesor on CursoProfesor.idCursoProfesor = AlumnoCurso.idCursoProfesor
+                  where CursoProfesor.idCursoProfesor = $teacherClassId and Alumno.codigo = \"$studentCode\";";
+        
+        $result = $this -> dbCon -> query( $query );
+        $row = $result -> fetch_assoc();
+        
+        return $row;
+    }
+    
+    public function getStudentEvalElems( $evalPageId, $studentClassId ){
+        $query = "select * from ElemCalificacion where idHojaEvaluacion = $evalPageId and
+                  idAlumnoCurso = $studentClassId;";
+                  
+        $result = $this -> dbCon -> query( $query );
+        $rows = array();
+        while( $row = $result -> fetch_assoc() ){
+            $rows[] = $row;
         }
         
         return $rows;

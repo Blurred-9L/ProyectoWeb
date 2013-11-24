@@ -602,11 +602,50 @@ class StudentCtrl extends DefaultCtrl{
     }
     
     private function evalStudent(){
-        if( empty( $_POST ) ){
-            require_once( 'View/Profesores/evaluacion.html' );
+        $ok = true;
+        if( !empty( $_POST ) ){
+            $classInfo = $_POST['select-class'];
+            $classArray = explode( '-', $classInfo );
+            $classKey = $classArray[0];
+            $classSec = $classArray[1];
+            $cycleStr = $classArray[2];
+            
+            $evalId = $_POST['select-eval'];
+            $subEvalOffset = $_POST['select-sub-eval'] - 1;
+            $grade = $_POST['grade'];
+            $code = $_POST['student-code'];
+            
+            if( $grade == 'SD' || $grade == 'NP' ){
+                $grade = 0.0;
+            }
+            
+            $classRow = $this -> model -> getClass( $classKey );
+            $classId = $classRow['idCurso'];
+            
+            $cycleRow = $this -> model -> getCycle( $cycleStr );
+            $cycleId = $cycleRow['idCiclo'];
+            
+            $teacherId = $_SESSION['user_id'];
+            $teacherClassRow = $this -> model -> getTeacherClass( $classId, $teacherId, $cycleId, $classSec );
+            $teacherClassId = $teacherClassRow['idCursoProfesor'];
+            
+            $studentClassRow = $this -> model -> getStudentFromClass( $code, $teacherClassId );
+            $studentClassId = $studentClassRow['idAlumnoCurso'];
+            
+            $studentEvalElems = $this -> model -> getStudentEvalElems( $evalId, $studentClassId );
+            $subEvalId = $studentEvalElems[$subEvalOffset]['idElemCalificacion'];
+            $result = $this -> model -> updateEvalElem( $subEvalId, $grade );
+            if( $result === FALSE ){
+                $ok = false;
+            }
+        }
+        if( $ok ){
+            $view = file_get_contents( 'View/Profesores/evaluacion.html' );
+            
+            echo $view;
         }
         else{
-            var_dump( $_POST );
+            echo "Error";
         }
     }
 }

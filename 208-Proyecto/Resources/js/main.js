@@ -417,7 +417,10 @@ function checkStudentPass(){
 function checkEvalParams(){
     var form = document.evalStudent;
     var boolArray = [];
+    var inputs = [];
+    var index;
     var ok = true;
+    var hiddenInput;
     
     boolArray[0] = checkClass( form, document.getElementById( "select-class" ) );
     boolArray[1] = checkSelected( form, document.getElementsByTagName( "input" ) );
@@ -432,7 +435,20 @@ function checkEvalParams(){
     }
 
     if( ok ){
+        inputs = document.getElementsByTagName( "input" );
+        index = -1;
+        for( var i = 0; i < inputs.length && index < 0; i++ ){
+            if( inputs[i].type == "checkbox" && inputs[i].checked ){
+                index = i;
+            }
+        }
+        hiddenInput = document.createElement( "input" );
+        hiddenInput.type = "hidden";
+        hiddenInput.name = "student-code";
+        hiddenInput.value = document.getElementById( "student-code-" + index.toString() ).firstChild.nodeValue;
+        form.appendChild( hiddenInput );
         form.submit();
+        form.removeChild( hiddenInput );
     }
 }
 
