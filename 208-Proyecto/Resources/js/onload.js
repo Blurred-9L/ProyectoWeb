@@ -257,6 +257,7 @@ function teacherPassLoad(){
 function teacherCloneClassLoad(){
     var button = document.getElementById( "clone-submit" );
                 
+    fillTeacherClassSelect( "class-select" );
     button.onclick = checkCloneClass;
 }
 

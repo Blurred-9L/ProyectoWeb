@@ -77,7 +77,7 @@ class ClassMdl{
     }
     
     public function getTeacherClassSchedules( $cycleId, $teacherId, $classId, $teacherClassId ){
-        $query = "select nombreDia, cantHoras, inicio from Horario inner join Dia on Horario.dia = Dia.idDia
+        $query = "select Horario.idHorario, nombreDia, cantHoras, inicio from Horario inner join Dia on Horario.dia = Dia.idDia
                   inner join CursoProfesorHorario on Horario.idHorario = CursoProfesorHorario.idHorario
                   inner join CursoProfesor on CursoProfesorHorario.idCursoProfesor = CursoProfesor.idCursoProfesor
                   where CursoProfesor.idCiclo = $cycleId and CursoProfesor.idProfesor = $teacherId and
@@ -93,7 +93,7 @@ class ClassMdl{
     }
     
     public function getTeacherClassEvals( $teacherId, $cycleId, $classId, $teacherClassId ){
-        $query = "select descripcion, valor from HojaEvaluacion inner join CursoProfesor on
+        $query = "select idHojaEvaluacion, descripcion, valor, nElems from HojaEvaluacion inner join CursoProfesor on
                   CursoProfesor.idCursoProfesor = HojaEvaluacion.idCursoProfesor where
                   CursoProfesor.idProfesor = $teacherId and CursoProfesor.idCiclo = $cycleId and
                   CursoProfesor.idCurso = $classId and CursoProfesor.idCursoProfesor = $teacherClassId;";

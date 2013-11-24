@@ -324,7 +324,70 @@ class ClassCtrl extends DefaultCtrl{
             require_once( 'View/Profesores/clonarCurso.html' );
         }
         else{
-            var_dump( $_POST );
+            $classInfo = $_POST['class-select'];
+            $classArray = explode( '-', $classInfo );
+            $classKey = $classArray[0];
+            $classSec = $classArray[1];
+            $cycleStr = $classArray[2];
+            
+            $cycleRow = $this -> model -> getCycleByStr( $cycleStr );
+            $cycleId = $cycleRow['idCiclo'];
+            
+            $classRow = $this -> model -> getClassByKey( $classKey );
+            $classId = $classRow['idCurso'];
+            
+            $teacherId = $_SESSION['user_id'];
+            $teacherClassRow = $this -> model -> getTeacherClass( $teacherId, $cycleId, $classId, $classSec );
+            $teacherClassId = $teacherClassRow['idCursoProfesor'];
+            
+            $curCycleId = $this -> model -> getLatestCycle();
+            $maxSectionRow = $this -> model -> getClassSectionValue( $classId, $teacherId, $curCycleId );
+            if( isset( $row['seccion'] ) ){
+                $newSection = $row['seccion'] + 1;
+            }
+            else{
+                $newSection = "1";
+            }
+            
+            $classSchedules = $this -> model -> getTeacherClassSchedules( $cycleId, $teacherId, $classId, $teacherClassId );
+            $classEvalPages = $this -> model -> getTeacherClassEvals( $teacherId, $cycleId, $classId, $teacherClassId );
+            
+            $result = $this -> model -> registerNewClass( $classId, $teacherId, $curCycleId, $newSection );
+            if( $result === TRUE ){
+                $ok = true;
+                $newTeacherClassId = $this -> model -> insertId();
+                foreach( $classSchedules as $schedule ){
+                    if( $ok ){
+                        $result = $this -> model -> registerClassSchedule( $newTeacherClassId, $schedule['idHorario'] );
+                        if( $result === FALSE ){
+                            $ok = false;
+                        }
+                    }
+                }
+                if( $ok ){
+                    foreach( $classEvalPages as $evalPage ){
+                        if( $ok ){
+                            $result = $this -> model -> registerEvaluation( $evalPage['descripcion'], $evalPage['valor'],
+                                                                            $evalPage['nElems'], $newTeacherClassId );
+                            if( $result === FALSE ){
+                                $ok = false;
+                            }
+                        }
+                    }
+                    if( $ok ){
+                        $this -> showTeacherAll();
+                    }
+                    else{
+                        echo "Error al clonar hojas de evaluacion.";
+                    }
+                }
+                else{
+                    echo "Error al clonar horarios.";
+                }
+            }
+            else{
+                echo "Error al clonar el curso.";
+            }
         }
     }
 }
