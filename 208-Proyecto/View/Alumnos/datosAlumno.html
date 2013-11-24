@@ -14,16 +14,9 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <link rel="stylesheet" href="../../Resources/css/normalize.css">
-        <link rel="stylesheet" href="../../Resources/css/main.css">
-        <script src="../../Resources/js/vendor/modernizr-2.6.2.min.js"></script>
-        <script>
-            window.onload = function(){
-                button = document.getElementById( "change-button" );
-                
-                button.onclick = checkStudentData;
-            }
-        </script>
+        <link rel="stylesheet" href="./Resources/css/normalize.css">
+        <link rel="stylesheet" href="./Resources/css/main.css">
+        <script src="./Resources/js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -32,7 +25,7 @@
 
         <!-- Add your site or application content here -->
         <header>
-            <img alt="udg.png" class="header-img" src="../../Resources/img/logoUdg.png" width="50" height="68" />
+            <img alt="udg.png" class="header-img" src="./Resources/img/logoUdg.png" width="50" height="68" />
             <h1>Universidad de Guadalajara - Calificaciones</h1>
             <div class="clear-div"></div>
         </header>
@@ -40,13 +33,13 @@
         <nav class="main-nav">
             <ul>
                 <li>
-                    <a href="./alumnosMain.html">Principal</a>
+                    <a href="./index.php?ctrl=default&action=main">Principal</a>
                 </li>
                 <li>
-                    <a href="./boletaAlumno.html">Boleta</a>
+                    <a href="./index.php?ctrl=student&action=grade">Boleta</a>
                 </li>
                 <li>
-                    <a href="#">Salir</a>
+                    <a href="./index.php?ctrl=default&action=exit">Salir</a>
                 </li>
                 <div class="clear-div"></div>
             </ul>
@@ -59,13 +52,13 @@
                     Aquí puede ver su información en el sistema. Puede actualizar algunos de estos campos.
                 </p>
             </div>
-            <form name="studentData" method="post" action="#">
+            <form name="studentData" method="post" action="./index.php?ctrl=student&action=data">
                 <div class="form-div">
                     <label for="student-code">
                         Código:
                     </label>
                     <strong>
-                        Código
+                        *code*
                     </strong>
                 </div>
                 <div class="form-div">
@@ -73,7 +66,7 @@
                         Nombre:
                     </label>
                     <strong>
-                        Nombre
+                        *name*
                     </strong>
                 </div>
                 <div class="form-div">
@@ -81,7 +74,7 @@
                         Apellido paterno:
                     </label>
                     <strong>
-                        Apellido paterno
+                        *last1*
                     </strong>
                 </div>
                 <div class="form-div">
@@ -89,7 +82,7 @@
                         Apellido materno:
                     </label>
                     <strong>
-                        Apellido materno
+                        *last2*
                     </strong>
                 </div>
                 <div class="form-div">
@@ -103,7 +96,7 @@
                         Carrera:
                     </label>
                     <strong>
-                        Carrera
+                        *major*
                     </strong>
                 </div>
                 <div class="form-div">
@@ -135,10 +128,10 @@
             <nav class="aside-nav">
                 <ul>
                     <li>
-                        <a href="./datosAlumno.html">Mis datos</a>
+                        <a href="./index.php?ctrl=student&action=data">Mis datos</a>
                     </li>
                     <li>
-                        <a href="./passAlumno.html">Contraseña</a>
+                        <a href="./index.php?ctrl=student&action=pass-ch">Contraseña</a>
                     </li>
                     <div class="clear-div"></div>
                 </ul>
@@ -151,9 +144,13 @@
         </footer>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="../../Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-        <script src="../../Resources/js/plugins.js"></script>
-        <script src="../../Resources/js/main.js"></script>
+        <script>window.jQuery || document.write('<script src="./Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="./Resources/js/plugins.js"></script>
+        <script src="./Resources/js/main.js"></script>
+        <script src="./Resources/js/onload.js"></script>
+        <script>
+            window.onload = studentDataLoad;
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

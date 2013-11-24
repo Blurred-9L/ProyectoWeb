@@ -271,3 +271,19 @@ function teacherEvalStudentLoad(){
     classSelect.onchange = getTeacherClassEvalInfo;
     evalSelect.onchange = getTeacherClassEvalElems;
 }
+
+// ----------------------------------------------------------------------------
+// Students onload functions:
+// ----------------------------------------------------------------------------
+
+function studentDataLoad(){
+    var button = document.getElementById( "change-button" );
+                
+    button.onclick = checkStudentData;
+}
+
+function studentPassLoad(){
+    var button = document.getElementById( "pass-submit" );
+                
+    button.onclick = checkStudentPass;
+}

@@ -14,16 +14,9 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <link rel="stylesheet" href="../../Resources/css/normalize.css">
-        <link rel="stylesheet" href="../../Resources/css/main.css">
-        <script src="../../Resources/js/vendor/modernizr-2.6.2.min.js"></script>
-        <script>
-            window.onload = function(){
-                button = document.getElementById( "pass-submit" );
-                
-                button.onclick = checkStudentPass;
-            }
-        </script>
+        <link rel="stylesheet" href="./Resources/css/normalize.css">
+        <link rel="stylesheet" href="./Resources/css/main.css">
+        <script src="./Resources/js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -32,7 +25,7 @@
 
         <!-- Add your site or application content here -->
         <header>
-            <img alt="udg.png" class="header-img" src="../../Resources/img/logoUdg.png" width="50" height="68" />
+            <img alt="udg.png" class="header-img" src="./Resources/img/logoUdg.png" width="50" height="68" />
             <h1>Universidad de Guadalajara - Calificaciones</h1>
             <div class="clear-div"></div>
         </header>
@@ -40,42 +33,45 @@
         <nav class="main-nav">
             <ul>
                 <li>
-                    <a href="./alumnosMain.html">Principal</a>
+                    <a href="./index.php?ctrl=default&action=main">Principal</a>
                 </li>
                 <li>
-                    <a href="./boletaAlumno.html">Boleta</a>
+                    <a href="./index.php?ctrl=student&action=grade">Boleta</a>
                 </li>
                 <li>
-                    <a href="#">Salir</a>
+                    <a href="./index.php?ctrl=default&action=exit">Salir</a>
                 </li>
                 <div class="clear-div"></div>
             </ul>
         </nav>
         
         <section class="main-section">
-            <form name="studentPassCh" method="post" action="#">
+            <form name="studentPassCh" method="post" action="./index.php?ctrl=student&action=pass-ch">
                 <div>
                     <fieldset>
                         <div class="form-div">
                             <h2><span class="separate">Cambiar contraseña</span></h2>
+                            <p class="info-text">
+                                *msg*
+                            </p>
                         </div>
                         <div class="form-div">
                             <label class="pass-label" for="student-old-pass">
                                 Vieja contraseña:
                             </label>
-                            <input type="password" id="student-old-pass" name="student-old-pass" required />
+                            <input type="password" id="student-old-pass" name="student-old-pass" />
                         </div>
                         <div class="form-div">
                             <label class="pass-label" for="student-new-pass">
                                 Nueva contraseña:
                             </label>
-                            <input type="password" id="student-new-pass" name="student-new-pass" required />
+                            <input type="password" id="student-new-pass" name="student-new-pass" />
                         </div>
                         <div class="form-div">
                             <label class="pass-label" for="student-new-pass2">
                                 Verificar contraseña:
                             </label>
-                            <input type="password" id="student-new-pass2" name="student-new-pass2" required />
+                            <input type="password" id="student-new-pass2" name="student-new-pass2" />
                         </div>
                     </fieldset>
                 </div>
@@ -89,10 +85,10 @@
             <nav class="aside-nav">
                 <ul>
                     <li>
-                        <a href="./datosAlumno.html">Mis datos</a>
+                        <a href="./index.php?ctrl=student&action=data">Mis datos</a>
                     </li>
                     <li>
-                        <a href="./passAlumno.html">Contraseña</a>
+                        <a href="./index.php?ctrl=student&action=pass-ch">Contraseña</a>
                     </li>
                     <div class="clear-div"></div>
                 </ul>
@@ -105,9 +101,15 @@
         </footer>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="../../Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-        <script src="../../Resources/js/plugins.js"></script>
-        <script src="../../Resources/js/main.js"></script>
+        <script>window.jQuery || document.write('<script src="./Resources/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
+        <script>window.CryptoJS || document.write('<script src="./Resources/js/vendor/sha1.js"><\/script>')</script>
+        <script src="./Resources/js/plugins.js"></script>
+        <script src="./Resources/js/main.js"></script>
+        <script src="./Resources/js/onload.js"></script>
+        <script>
+            window.onload = studentPassLoad;
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

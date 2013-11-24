@@ -410,7 +410,15 @@ function checkStudentPass(){
     }
     
     if( ok ){
+        var hash = CryptoJS.SHA1( studentPass.value );
+        var hiddenPass = document.createElement( "input" );
+        hiddenPass.value = hash.toString();
+        hiddenPass.name = "student-password";
+        form.appendChild( hiddenPass );
+        
         form.submit();
+        
+        form.removeChild( hiddenPass );
     }
 }
 

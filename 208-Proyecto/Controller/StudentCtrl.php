@@ -85,6 +85,29 @@ class StudentCtrl extends DefaultCtrl{
                     header( 'Location: index.php?ctrl=login&action=login' );
                 }
                 break;
+            case 'grade':
+                if( $this -> checkPermissions( 'rookie' ) ){
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
+                break;
+            case 'data':
+                if( $this -> checkPermissions( 'rookie' ) ){
+                    $this -> studentData();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
+                break;
+            case 'pass-ch':
+                if( $this -> checkPermissions( 'rookie' ) ){
+                    $this -> changePassword();
+                }
+                else{
+                    header( 'Location: index.php?ctrl=login&action=login' );
+                }
+                break;
         }
     }
     
@@ -646,6 +669,95 @@ class StudentCtrl extends DefaultCtrl{
         }
         else{
             echo "Error";
+        }
+    }
+    
+    private function studentDataGetView(){
+        $view = file_get_contents( 'View/Alumnos/datosAlumno.html' );
+        $studentCode = $_SESSION['user_code'];
+        $studentRow = $this -> model -> getStudent( $studentCode );
+        
+        $code = $studentRow['codigo'];
+        $mail = $studentRow['email'];
+        $phone = $studentRow['celular'];
+        $url = $studentRow['paginaWeb'];
+        $github = $studentRow['github'];
+        
+        $dict = array( '*code*' => $code, '*name*' => $studentRow['nombre'], '*last1*' => $studentRow['apellidoP'],
+                       '*last2*' => $studentRow['apellidoM'], '*major*' => $studentRow['nombreCarrera'] );
+        $view = strtr( $view, $dict );
+        $view = str_replace( '<input type="email" id="student-email" name="student-email" />',
+                             "<input type=\"email\" id=\"student-email\" name=\"student-email\" value=\"$mail\" />",
+                             $view );
+        $view = str_replace( '<input type="tel" id="student-phone" name="student-phone" />',
+                             "<input type=\"tel\" id=\"student-phone\" name=\"student-phone\" value=\"$phone\" />",
+                             $view );
+        $view = str_replace( '<input type="url" id="student-url" name="student-url" />',
+                             "<input type=\"url\" id=\"student-url\" name=\"student-url\" value=\"$url\" />",
+                             $view );
+        $view = str_replace( '<input type="url" id="student-github" name="student-github" />',
+                             "<input type=\"url\" id=\"student-github\" name=\"student-github\" value=\"$github\" />",
+                             $view );
+        
+        echo $view;
+    }
+    
+    private function studentData(){
+        if( empty( $_POST ) ){
+            $this -> studentDataGetView();
+        }
+        else{
+            $code = $_SESSION['user_code'];
+            $mail = $_POST['student-email'];
+            $phone = $_POST['student-phone'];
+            $url = $_POST['student-url'];
+            $github = $_POST['student-github'];
+            
+            $result = $this -> model -> update( $code, $mail, $phone, $url, $github );
+            
+            if( $result === TRUE ){
+                $this -> studentDataGetView();
+            }
+            else{
+                echo "Error";
+            }
+        }
+    }
+    
+    private function studentPassGetView( $msg ){
+        $view = file_get_contents( 'View/Alumnos/passAlumno.html' );
+        $dict = array( '*msg*' => $msg );
+        
+        $view = strtr( $view, $dict );
+        
+        echo $view;
+    }
+    
+    private function changePassword(){
+        if( empty( $_POST ) ){
+            $this -> studentPassGetView( '' );
+        }
+        else{
+            $shaStudentPass = $_POST['student-password'];
+            $newPass = $_POST['student-new-pass'];
+            $newPass2 = $_POST['student-new-pass2'];
+        
+            $code = $_SESSION['user_code'];
+            $studentRow = $this -> model -> getStudent( $code );
+            $dbStudentPass = $studentRow['password'];
+            
+            if( $dbStudentPass != $shaStudentPass || $newPass != $newPass2 ){
+                $this -> studentPassGetView( 'Contraseña incorrecta.' );
+            }
+            else{
+                $result = $this -> model -> updatePassword( $code, $shaStudentPass );
+                if( $result === TRUE ){
+                    $this -> studentPassGetView( 'Contraseña actualizada.' );
+                }
+                else{
+                    $this -> studentPassGetView( 'Hubo un fallo al intentar actualizar la contraseña.' );
+                }
+            }
         }
     }
 }

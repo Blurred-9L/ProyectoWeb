@@ -84,6 +84,14 @@ class StudentMdl{
         return $result;
     }
     
+    public function updatePassword( $code, $storedPass ){
+        $query = "update Alumno set password = \"$storedPass\" where codigo = \"$code\";";
+        
+        $result = $this -> dbCon -> query( $query );
+        
+        return $result;
+    }
+    
     public function getMajorStr( $major ){
         $query = "select nombreCarrera from Carrera where idCarrera = $major;";
         
