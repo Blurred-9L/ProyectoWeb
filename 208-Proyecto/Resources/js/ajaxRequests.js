@@ -192,8 +192,19 @@ function getStudentData(){
 function getTeacherClassStudents(){
     var studentSelect = document.getElementById( "student-select" );
     var classSelect = document.getElementById( "class-select" );
+    var tableBody = document.getElementById( "student-roll-body" );
+    var tableFoot = document.getElementById( "student-roll-foot" );
     var classInfoStr = classSelect.value;
     
+    while( studentSelect.lastChild.value != 0 ){
+        studentSelect.removeChild( studentSelect.lastChild );
+    }
+    while( tableBody.firstChild != null ){
+        tableBody.removeChild( tableBody.firstChild );
+    }
+    while( tableFoot.firstChild != null ){
+        tableFoot.removeChild( tableFoot.firstChild );
+    }
     if( classSelect.selectedIndex != 0 ){
         $.ajax({
             type: "POST",
@@ -201,9 +212,6 @@ function getTeacherClassStudents(){
             url: "../../Model/getTeacherClassStudents.php",
             dataType: "json",
             success: function( json ){
-                while( studentSelect.lastChild.value != 0 ){
-                    studentSelect.removeChild( studentSelect.lastChild );
-                }
                 if( json != null ){
                     var count = 0;
                     for( i in json ){
@@ -223,26 +231,28 @@ function getTeacherClassStudents(){
 
 function seeStudentRollCall(){
     var studentSelect = document.getElementById( "student-select" );
+    var classSelect = document.getElementById( "class-select" );
+    var tableBody = document.getElementById( "student-roll-body" );
+    var tableFoot = document.getElementById( "student-roll-foot" );
+    var classInfoStr = classSelect.value;
     var code = studentSelect.value;
     
+    while( tableBody.firstChild != null ){
+        tableBody.removeChild( tableBody.firstChild );
+    }
+    while( tableFoot.firstChild != null ){
+        tableFoot.removeChild( tableFoot.firstChild );
+    }
     if( studentSelect.selectedIndex != 0 ){
         $.ajax({
             type: "POST",
-            data: {studentCode: code},
+            data: {studentCode: code, classInfo: classInfoStr},
             url: "../../Model/getStudentRollCall.php",
             dataType: "json",
             success: function( json ){
                 var caption = document.getElementById( "student-roll-caption" );
-                var tableBody = document.getElementById( "student-roll-body" );
-                var tableFoot = document.getElementById( "student-roll-foot" );
                 
                 caption.replaceChild( document.createTextNode( "Asistencias de " + code ), caption.firstChild );
-                while( tableBody.firstChild != null ){
-                    tableBody.removeChild( tableBody.firstChild );
-                }
-                while( tableFoot.firstChild != null ){
-                    tableFoot.removeChild( tableFoot.firstChild );
-                }
                 if( json != null ){
                     var count = 0;
                     var total = 0;

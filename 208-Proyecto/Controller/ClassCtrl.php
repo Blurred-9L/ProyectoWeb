@@ -304,7 +304,9 @@ class ClassCtrl extends DefaultCtrl{
                 $studentClassId = $studentClassRow['idAlumnoCurso'];
                 $result = $this -> model -> registerAssistance( $studentClassId, $date );
                 if( $result === TRUE ){
-                    $okUpdates += 1;
+                    if( $this -> updateTotalAssistance( $studentClassId ) === TRUE ){
+                        $okUpdates += 1;
+                    }
                 }
                 
                 $count += 1;
@@ -317,6 +319,21 @@ class ClassCtrl extends DefaultCtrl{
                 $this -> getClassRollView();
             }
         }
+    }
+    
+    private function updateTotalAssistance( $studentClassId ){
+        $assistances = $this -> model -> getStudentAssistances( $studentClassId );
+        $nAssistances = count( $assistances );
+        $total = 0;
+        foreach( $assistances as $assist ){
+            if( $assist['estado'] == 1 ){
+                $total += 1;
+            }
+        }
+        $percentage = $total / $nAssistances * 100;
+        $result = $this -> model -> updateStudentClassAssistances( $studentClassId, $percentage );
+        
+        return $result;
     }
     
     private function cloneClass(){

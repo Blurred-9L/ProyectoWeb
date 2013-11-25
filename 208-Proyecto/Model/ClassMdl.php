@@ -30,6 +30,18 @@ class ClassMdl{
         return $row;
     }
     
+    public function getStudentAssistances( $studentClassId ){
+        $query = "select * from Asistencia where idAlumnoCurso = $studentClassId;";
+        
+        $result = $this -> dbCon -> query( $query );
+        $rows = array();
+        while( $row = $result -> fetch_assoc() ){
+            $rows[] = $row;
+        }
+        
+        return $rows;
+    }
+    
     public function getClass( $classId ){
         $query = "select * from Curso where idCurso=$classId;";
         
@@ -197,6 +209,14 @@ class ClassMdl{
         $query = "update Asistencia set estado = TRUE where
                   idAlumnoCurso = $studentClassId and fecha = \"$date\";";
                   
+        $result = $this -> dbCon -> query( $query );
+        
+        return $result;
+    }
+    
+    public function updateStudentClassAssistances( $studentClassId, $percentage ){
+        $query = "update AlumnoCurso set porcentajeAsistencia = $percentage where idAlumnoCurso = $studentClassId;";
+        
         $result = $this -> dbCon -> query( $query );
         
         return $result;
