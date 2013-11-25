@@ -92,6 +92,14 @@ class StudentMdl{
         return $result;
     }
     
+    public function updateGrade( $studentClassId, $grade ){
+        $query = "update AlumnoCurso set calificacion = $grade where idAlumnoCurso = $studentClassId;";
+        
+        $result = $this -> dbCon -> query( $query );
+        
+        return $result;
+    }
+    
     public function getMajorStr( $major ){
         $query = "select nombreCarrera from Carrera where idCarrera = $major;";
         

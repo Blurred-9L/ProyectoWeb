@@ -662,6 +662,9 @@ class StudentCtrl extends DefaultCtrl{
             if( $result === FALSE ){
                 $ok = false;
             }
+            else if( $this -> updateStudentEval( $teacherClassId, $studentClassId ) === FALSE ){
+                $ok = false;
+            }
         }
         if( $ok ){
             $view = file_get_contents( 'View/Profesores/evaluacion.html' );
@@ -671,6 +674,25 @@ class StudentCtrl extends DefaultCtrl{
         else{
             echo "Error";
         }
+    }
+    
+    private function updateStudentEval( $teacherClassId, $studentClassId ){
+        $evalPages = $this -> model -> getEvalPages( $teacherClassId );
+        
+        $totalEval = 0;
+        foreach( $evalPages as $evalPage ){
+            $evalElems = $this -> model -> getStudentEvalElems( $evalPage['idHojaEvaluacion'], $studentClassId );
+            $total = 0;
+            foreach( $evalElems as $evalElem ){
+                $total += $evalElem['calificacion'];
+            }
+            $average = $total / $evalPage['nElems'];
+            $realValue = $evalPage['valor'] * $average / 10;
+            $totalEval += $realValue;
+        }
+        $result = $this -> model -> updateGrade( $studentClassId, $totalEval );
+        
+        return $result;
     }
     
     private function studentDataGetView(){
