@@ -290,7 +290,9 @@ function studentPassLoad(){
 
 function studentReportCardLoad(){
     var cycleSelect = document.getElementById( "cycle-select" );
+    var button = document.getElementById( "see-report" );
     
     fillCycleSelect( "cycle-select" );
     cycleSelect.onchange = getStudentClassReportCard;
+    button.onclick = checkSelected6;
 }

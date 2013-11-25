@@ -763,9 +763,14 @@ class StudentCtrl extends DefaultCtrl{
     }
     
     private function getReportCard(){
-        $view = file_get_contents( 'View/Alumnos/boletaAlumno.html' );
-        
-        echo $view;
+        if( empty( $_POST ) ){
+            $view = file_get_contents( 'View/Alumnos/boletaAlumno.html' );
+            
+            echo $view;
+        }
+        else{
+            var_dump( $_POST );
+        }
     }
 }
 

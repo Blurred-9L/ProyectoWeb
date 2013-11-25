@@ -1345,6 +1345,55 @@ function checkSelected5(){
     }
 }
 
+function checkSelected6(){
+    var message;
+    var form = document.reportForm;
+    var count;
+    var index;
+    var inputs = document.getElementsByTagName( "input" );
+    var table = document.getElementById( "report-card-table-div" );
+    var checkbox;
+    var hiddenInput;
+    var studentClassId;
+    
+    count = 0;
+    for( var i = 0; i < inputs.length; i++ ){
+        if( inputs[i].type == "checkbox" ){
+            if( inputs[i].checked ){
+                count += 1;
+                index = i;
+            }
+        }
+    }
+    
+    if( count == 0 ){
+        message = document.createTextNode( "Seleccione un curso." );
+        table.replaceChild( message, table.lastChild );
+    }
+    else if( count > 1 ){
+        message = document.createTextNode( "Seleccione SOLO UN curso." );
+        table.replaceChild( message, table.lastChild );
+    }
+    else{
+        message = document.createTextNode( "" );
+        table.replaceChild( message, table.lastChild );
+        
+        checkbox = document.getElementById( "checkbox-" + index.toString() );
+        studentClassId = checkbox.name.substr( 9 );
+        console.log( studentClassId );
+        
+        hiddenInput = document.createElement( "input" );
+        hiddenInput.type = "hidden";
+        hiddenInput.name = "student-class-id";
+        hiddenInput.value = studentClassId;
+        form.appendChild( hiddenInput );
+        
+        form.submit();
+        
+        form.removeChild( hiddenInput );
+    }
+}
+
 function checkPass( form, pass ){
     var ok = true;
     var regex = /^.+$/gi;

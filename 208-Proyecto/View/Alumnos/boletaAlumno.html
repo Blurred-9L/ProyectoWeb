@@ -49,28 +49,35 @@
             <div class="form-div">
                 <h2><span class="separate">Boleta</span></h2>
             </div>
-            <div class="select-div">
-                <select id="cycle-select" name="cycle-select">
-                    <option selected value="0">Seleccione un ciclo...</option>
-                </select>
-            </div>
-            <div class="table-div"> 
-                <table class="report-card-table">
-                    <thead>
-                        <tr>
-                            <th class="checkbox-cell2">Elegir</th>
-                            <th class="grade-cell">Promedio</th>
-                            <th class="assist-cell">%</th>
-                            <th class="class-key-cell">Clave</th>
-                            <th class="class-name-cell optional">Curso</th>
-                        </tr>
-                    </thead>
-                    <tbody id="report-card-body">
-                    </tbody>
-                    <tfoot>
-                    </tfoot>
-                </table>
-            </div>
+            <form name="reportForm" method="post" action="index.php?ctrl=student&action=grade">
+                <div class="select-div">
+                    <select id="cycle-select" name="cycle-select">
+                        <option selected value="0">Seleccione un ciclo...</option>
+                    </select>
+                </div>
+                <div class="edit-button-div">
+                    <button id="see-report" type="button" class="edit-button">
+                        Detalles
+                    </button>
+                </div>
+                <div id="report-card-table-div" class="table-div"> 
+                    <table class="report-card-table">
+                        <thead>
+                            <tr>
+                                <th class="checkbox-cell2">Elegir</th>
+                                <th class="grade-cell">Promedio</th>
+                                <th class="assist-cell">%</th>
+                                <th class="class-key-cell">Clave</th>
+                                <th class="class-name-cell optional">Curso</th>
+                            </tr>
+                        </thead>
+                        <tbody id="report-card-body">
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
+            </form>
         </section>
         
         <aside class="right-aside">

@@ -510,7 +510,7 @@ function getStudentClassReportCard(){
                         assistCell.className = "assist-cell";
                         assistCell.appendChild( document.createTextNode( json[i].porcentajeAsistencia ) );
                         
-                        classKeyCell.className = "class-key-cell";
+                        classKeyCell.className = "class-key-cell optional";
                         classKeyCell.id = "student-class-" + count.toString();
                         classKeyCell.appendChild( document.createTextNode( json[i].clave ) );
                         
