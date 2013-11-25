@@ -127,6 +127,17 @@ class StudentMdl{
         return $row;
     }
     
+    public function getClassName( $studentClassId ){
+        $query = "select nombre, clave from Curso inner join CursoProfesor on
+                  CursoProfesor.idCurso = Curso.idCurso inner join AlumnoCurso on
+                  AlumnoCurso.idCursoProfesor = CursoProfesor.idCursoProfesor
+                  where idAlumnoCurso = $studentClassId;";
+        $result = $this -> dbCon -> query( $query );
+        $row = $result -> fetch_assoc();
+        
+        return $row['clave'] . ' ' . $row['nombre'];
+    }
+    
     public function getCycle( $cycleStr ){
         $query = "select * from Ciclo where ciclo=\"$cycleStr\";";
         
@@ -226,6 +237,27 @@ class StudentMdl{
         $row = $result -> fetch_assoc();
         
         return $row;
+    }
+    
+    public function getStudentClass( $studentClassId ){
+        $query = "select * from AlumnoCurso where idAlumnoCurso = $studentClassId;";
+        
+        $result = $this -> dbCon -> query( $query );
+        $row = $result -> fetch_assoc();
+        
+        return $row;
+    }
+    
+    public function getStudentClassAssistances( $studentClassId ){
+        $query = "select * from Asistencia where idAlumnoCurso = $studentClassId;";
+        
+        $result = $this -> dbCon -> query( $query );
+        $rows = array();
+        while( $row = $result -> fetch_assoc() ){
+            $rows[] = $row;
+        }
+        
+        return $rows;
     }
     
     public function getStudentEvalElems( $evalPageId, $studentClassId ){

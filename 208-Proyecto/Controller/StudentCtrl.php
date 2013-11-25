@@ -784,6 +784,112 @@ class StudentCtrl extends DefaultCtrl{
         }
     }
     
+    private function createAssistTable( $assistances, $studentClassRow ){
+        $assistTable = '
+        <table class="student-roll-table">
+            <caption>
+                Asistencias
+            </caption>
+            <thead>
+                <tr>
+                    <th class="roll-date-cell">Fecha</th>
+                    <th class="roll-date-state">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+        
+        foreach( $assistances as $assist ){
+            $assistRow = '
+            <tr>
+                <td class="roll-date-cell">' . $assist['fecha'] . '</td>
+                <td class="roll-date-state">' . ( ($assist['estado'] == 1)? 'Asistencia' : 'Falta' ) . '</td>
+            </tr>
+            ';
+            $assistTable .= $assistRow;
+        }
+        $assistTable .= '
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">' . $studentClassRow['porcentajeAsistencia'] . '% de asistencias</td>
+                </tr>
+            </tfoot>
+        </table>
+        ';
+        
+        return $assistTable;
+    }
+    
+    private function createEvalTables( $evalPages, $studentClassRow ){
+        $evalTables = '';
+        
+        foreach( $evalPages as $evalPage ){
+            $evalTables .= '
+            <div class="table-div">
+            ';
+            
+            $table = '
+            <table class="student-roll-table">
+                <caption>' . $evalPage['descripcion'] . '</caption>
+                <thead>
+                    <tr>
+                        <th class="roll-date-cell">Elemento</th>
+                        <th class="roll-state-cell">Calificacion</th>
+                    </tr>
+                </thead>
+                <tbody>
+            ';
+            
+            $evalElems = $this -> model -> getStudentEvalElems( $evalPage['idHojaEvaluacion'], $studentClassRow['idAlumnoCurso'] );
+            $count = 1;
+            $total = 0;
+            foreach( $evalElems as $elem ){
+                $table .= '
+                    <tr>
+                        <td class="roll-date-cell">' . $evalPage['descripcion'] . ' ' . "$count" . '</td>
+                        <td class="roll-state-cell">' . $elem['calificacion'] . '</td>
+                    </tr>
+                ';
+                $count += 1;
+                $total += $elem['calificacion'];
+            }
+            $points = $total / $evalPage['nElems'];
+            $realValue = $points * $evalPage['valor'] / 10;
+            
+            $table .= '
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2">' . $realValue . ' puntos de ' . $evalPage['valor'] . '</td>
+                    </tr>
+                </tfoot>
+            </table>
+            ';
+            $evalTables .= $table;
+            
+            $evalTables .= '
+            </div>
+            ';
+            
+            $count += 1;
+        }
+        
+        return $evalTables;
+    }
+    
+    private function displayDetails( $className, $studentClassRow, $assistances, $evalPages ){
+        $view = file_get_contents( 'View/Alumnos/detallesBoleta.html' );
+        $assistTable = $this -> createAssistTable( $assistances, $studentClassRow );
+        $evalTables = $this -> createEvalTables( $evalPages, $studentClassRow );
+        
+        $dict = array( '*class*' => $className, '*assist*' => $assistTable, '*evals*' => $evalTables );
+        
+        $view = strtr( $view, $dict );
+        
+        echo $view;
+    }
+    
     private function getReportCard(){
         if( empty( $_POST ) ){
             $view = file_get_contents( 'View/Alumnos/boletaAlumno.html' );
@@ -791,7 +897,17 @@ class StudentCtrl extends DefaultCtrl{
             echo $view;
         }
         else{
-            var_dump( $_POST );
+            $studentClassId = $_POST['student-class-id'];
+            
+            $studentClassRow = $this -> model -> getStudentClass( $studentClassId );
+            $teacherClassId = $studentClassRow['idCursoProfesor'];
+            
+            $evalPages = $this -> model -> getEvalPages( $teacherClassId );
+            $assistances = $this -> model -> getStudentClassAssistances( $studentClassId );
+            
+            $className = $this -> model -> getClassName( $studentClassId );
+            
+            $this -> displayDetails( $className, $studentClassRow, $assistances, $evalPages );
         }
     }
 }
