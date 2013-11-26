@@ -505,9 +505,16 @@ function checkLogin(){
     var pass = document.getElementById( "login-pass" ).value;
     var div = document.createElement( "div" );
     var hash = CryptoJS.SHA1( pass );
+    var hidden = document.createElement( "input" );
     
-    document.getElementById( "login-pass" ).value = hash.toString();
+    hidden.type = "hidden";
+    hidden.name = "password";
+    hidden.value = hash.toString();
+    form.appendChild( hidden );
+    
     form.submit();
+    
+    form.removeChild( hidden );
 }
 
 function checkCode( form, code ){

@@ -33,7 +33,7 @@ class LoginCtrl extends DefaultCtrl{
         }
         else{
             $code = $_POST['login-code'];
-            $pass = $_POST['login-pass'];
+            $pass = $_POST['password'];
             
             if( ( $account = $this -> searchAdmins( $code ) ) !== FALSE ){
                 $view = file_get_contents( 'View/Admin/adminMain.html' );
