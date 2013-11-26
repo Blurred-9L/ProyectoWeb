@@ -180,14 +180,14 @@ class LoginCtrl extends DefaultCtrl{
                 $ok = FALSE;
             }
             if( $ok ){
-                $this -> sendPassChangeMail( $account );
+                $this -> sendPassChangeMail( $account, $newPass );
             }
             
             echo $view;
         }
     }
     
-    private function sendPassChangeMail( $account ){
+    private function sendPassChangeMail( $account, $newPass ){
         $mail = $account['email'];
         
         $to = $mail;
@@ -199,7 +199,7 @@ class LoginCtrl extends DefaultCtrl{
         
         $content = '<em>Se ha reestablecido la contraseña de su cuenta. Su codigo y contraseña son los siguientes:</em><br />' . PHP_EOL;
         $content .= '<strong>Codigo</strong>: ' . $account['codigo'] . '<br />' . PHP_EOL;
-        $content .= '<strong>Contraseña</strong>: ' . $account['password'] . '<br />' . PHP_EOL;
+        $content .= '<strong>Contraseña</strong>: ' . $newPass . '<br />' . PHP_EOL;
         
         $result = mail( $to, $subject, $content, $header );
     }
