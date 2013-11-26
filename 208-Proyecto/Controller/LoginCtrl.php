@@ -134,6 +134,7 @@ class LoginCtrl extends DefaultCtrl{
             require_once( 'View/lostPass.html' );
         }
         else{
+            $ok = TRUE;
             $code = $_POST['lost-pass-code'];
             if( ( $account = $this -> searchAdmins( $code ) ) !== FALSE ){
                 $newPass = $this -> getAdminPassword();
@@ -176,10 +177,31 @@ class LoginCtrl extends DefaultCtrl{
                 $view = str_replace( '<div class="message-div">',
                                      '<div class="message-div"> Intento de recuperar contraseña fallido.',
                                      $view );
+                $ok = FALSE;
+            }
+            if( $ok ){
+                $this -> sendPassChangeMail( $account );
             }
             
             echo $view;
         }
+    }
+    
+    private function sendPassChangeMail( $account ){
+        $mail = $account['email'];
+        
+        $to = $mail;
+        $subject = 'Recuperacion de contraseña (Sistema de calificaciones)';
+        
+        $header = 'MIME-Version: 1.0' . "\r\n";
+        $header .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+        $header .= 'From: user208@alanturing.cucei.udg.mx' . "\r\n";
+        
+        $content = '<em>Se ha reestablecido la contraseña de su cuenta. Su codigo y contraseña son los siguientes:</em><br />' . PHP_EOL;
+        $content .= '<strong>Codigo</strong>: ' . $account['codigo'] . '<br />' . PHP_EOL;
+        $content .= '<strong>Contraseña</strong>: ' . $account['password'] . '<br />' . PHP_EOL;
+        
+        $result = mail( $to, $subject, $content, $header );
     }
     
     private function getStudentPassword( $name, $last1, $last2 ){

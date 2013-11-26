@@ -1,6 +1,6 @@
 function fillDaySelect(){
     $.ajax({
-        url: "../../Model/getDays.php",
+        url: "./Model/getDays.php",
         dataType: "json",
         success: function( json ){
             for( i in json ){
@@ -17,7 +17,7 @@ function fillDaySelect(){
 
 function fillAcademySelect(){
     $.ajax({
-        url: "../../Model/getAcademies.php",
+        url: "./Model/getAcademies.php",
         dataType: "json",
         success: function( json ){
             for( i in json ){
@@ -34,7 +34,7 @@ function fillAcademySelect(){
 
 function fillClassSelect(){
     $.ajax({
-        url: "../../Model/getClasses.php",
+        url: "./Model/getClasses.php",
         dataType: "json",
         success: function( json ){
             for( i in json ){
@@ -51,7 +51,7 @@ function fillClassSelect(){
 
 function fillMajorSelect( selectId ){
     $.ajax({
-        url: "../../Model/getMajors.php",
+        url: "./Model/getMajors.php",
         dataType: "json",
         success: function( json ){
             for( i in json ){
@@ -68,7 +68,7 @@ function fillMajorSelect( selectId ){
 
 function fillCycleSelect( selectId ){
     $.ajax({
-        url: "../../Model/getCycles.php",
+        url: "./Model/getCycles.php",
         dataType: "json",
         success: function( json ){
             for( i in json ){
@@ -85,7 +85,7 @@ function fillCycleSelect( selectId ){
 
 function fillTeacherClassSelect( selectId ){
     $.ajax({
-        url: "../../Model/getTClasses.php",
+        url: "./Model/getTClasses.php",
         dataType: "json",
         success: function( json ){
             var count = 1;
@@ -111,7 +111,7 @@ function getTeacherClassList(){
         $.ajax({
             type: "POST",
             data: {info: cycleInfo},
-            url: "../../Model/getTeacherClassList.php",
+            url: "./Model/getTeacherClassList.php",
             dataType: "json",
             success: function( json ){
                 var tableBody = document.getElementById( "table-body" );
@@ -154,7 +154,7 @@ function getStudentData(){
     $.ajax({
         type: "POST",
         data: {studentCode: code},
-        url: "../../Model/getStudentData.php",
+        url: "./Model/getStudentData.php",
         dataType: "json",
         success: function( json ){
             if( json != null ){
@@ -209,7 +209,7 @@ function getTeacherClassStudents(){
         $.ajax({
             type: "POST",
             data: {classInfo: classInfoStr},
-            url: "../../Model/getTeacherClassStudents.php",
+            url: "./Model/getTeacherClassStudents.php",
             dataType: "json",
             success: function( json ){
                 if( json != null ){
@@ -247,7 +247,7 @@ function seeStudentRollCall(){
         $.ajax({
             type: "POST",
             data: {studentCode: code, classInfo: classInfoStr},
-            url: "../../Model/getStudentRollCall.php",
+            url: "./Model/getStudentRollCall.php",
             dataType: "json",
             success: function( json ){
                 var caption = document.getElementById( "student-roll-caption" );
@@ -298,7 +298,7 @@ function getTeacherClassDates(){
         $.ajax({
             type: "POST",
             data: {classInfo: classInfoStr},
-            url: "../../Model/getTeacherClassStudents.php",
+            url: "./Model/getTeacherClassStudents.php",
             dataType: "json",
             success: function( json ){
                 var tableBody = document.getElementById( "students-names-body" );
@@ -340,7 +340,7 @@ function getTeacherClassDates(){
         $.ajax({
             type: "POST",
             data: {classInfo: classInfoStr},
-            url: "../../Model/getTeacherClassDates.php",
+            url: "./Model/getTeacherClassDates.php",
             dataType: "json",
             success: function( json ){
                 while( datesSelect.lastChild.value != 0 ){
@@ -378,7 +378,7 @@ function getTeacherClassEvalInfo(){
         $.ajax({
             type: "POST",
             data: {classInfo: classInfoStr},
-            url: "../../Model/getTeacherClassStudents.php",
+            url: "./Model/getTeacherClassStudents.php",
             dataType: "json",
             success: function( json ){
                 if( json != null ){
@@ -421,7 +421,7 @@ function getTeacherClassEvalInfo(){
         $.ajax({
             type: "POST",
             data: {classInfo: classInfoStr},
-            url: "../../Model/getTeacherClassEvalParams.php",
+            url: "./Model/getTeacherClassEvalParams.php",
             dataType: "json",
             success: function( json ){
                 if( json != null ){
@@ -454,7 +454,7 @@ function getTeacherClassEvalElems(){
         $.ajax({
             type: "POST",
             data: {id: evalId},
-            url: "../../Model/getEvalParam.php",
+            url: "./Model/getEvalParam.php",
             dataType: "json",
             success: function( json ){
                 while( elemSelect.lastChild.value != 0 ){
@@ -494,7 +494,7 @@ function getStudentClassReportCard(){
         $.ajax({
             type: "POST",
             data: {cycle: cycleValue},
-            url: "../../Model/getStudentClassReport.php",
+            url: "./Model/getStudentClassReport.php",
             dataType: "json",
             success: function( json ){
                 var count = 0;
