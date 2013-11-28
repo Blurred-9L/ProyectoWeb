@@ -78,11 +78,8 @@ class TeacherCtrl extends DefaultCtrl{
     public function showEditView( $code, $name, $last1, $last2, $mail, $phone ){
         $view = file_get_contents( 'View/Admin/editarProfesor.html' );
         
-        $dict = array( '*name*' => $name, '*last1*' => $last1, '*last2*' => $last2 );
+        $dict = array( '*code*' => $code, '*name*' => $name, '*last1*' => $last1, '*last2*' => $last2 );
         $view = strtr( $view, $dict );
-        $view = str_replace( '<input type="text" id="edit-teacher-code" name="edit-teacher-code" />',
-                             "<input type=\"text\" id=\"edit-teacher-code\" name=\"edit-teacher-code\" value=\"$code\" />",
-                             $view );
         $view = str_replace( '<input type="email" id="edit-teacher-email" name="edit-teacher-email" />',
                              "<input type=\"email\" id=\"edit-teacher-email\" name=\"edit-teacher-email\" value=\"$mail\" />",
                              $view );
@@ -100,11 +97,8 @@ class TeacherCtrl extends DefaultCtrl{
         $code = $row['codigo'];
         $mail = $row['email'];
         $phone = $row['celular'];
-        $dict = array( '*name*' => $row['nombre'], '*last1*' => $row['apellidoP'], '*last2*' => $row['apellidoM'] );
+        $dict = array( '*code*' => $code, '*name*' => $row['nombre'], '*last1*' => $row['apellidoP'], '*last2*' => $row['apellidoM'] );
         $view = strtr( $view, $dict );
-        $view = str_replace( '<input type="text" id="edit-teacher-code" name="edit-teacher-code" />',
-                             "<input type=\"text\" id=\"edit-teacher-code\" name=\"edit-teacher-code\" value=\"$code\" />",
-                             $view );
         $view = str_replace( '<input type="email" id="edit-teacher-email" name="edit-teacher-email" />',
                              "<input type=\"email\" id=\"edit-teacher-email\" name=\"edit-teacher-email\" value=\"$mail\" />",
                              $view );

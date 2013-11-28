@@ -279,10 +279,11 @@ function checkEditTeacher(){
     var form = document.editTeacher;
     var boolArray = [];
     var ok;
+    var hidden;
     
     boolArray[0] = checkMail( form, document.getElementById( "edit-teacher-email" ) );
     boolArray[1] = checkCellPhone( form, document.getElementById( "edit-teacher-phone" ) );
-    boolArray[2] = checkCode( form, document.getElementById( "edit-teacher-code" ) );
+    //boolArray[2] = checkCode( form, document.getElementById( "edit-teacher-code" ) );
     
     ok = true;
     for( var i = 0; i < boolArray.length && ok; i++ ){
@@ -292,7 +293,15 @@ function checkEditTeacher(){
     }
     
     if( ok ){
+        hidden = document.createElement( "input" );
+        hidden.type = "hidden";
+        hidden.name = "edit-teacher-code";
+        hidden.value = document.getElementById( "teacher-code" ).firstChild.nodeValue.trim();
+        form.appendChild( hidden );
+        
         form.submit();
+        
+        form.removeChild( hidden );
     }
 }
 
