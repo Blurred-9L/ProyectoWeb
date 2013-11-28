@@ -128,11 +128,8 @@ class StudentCtrl extends DefaultCtrl{
         $majorStr = $row['nombreCarrera'];
         $view = file_get_contents( 'View/Admin/editarAlumno.html' );
         
-        $dict = array( '*name*' => $name, '*last1*' => $last1, '*last2*' => $last2, '*major*' => $majorStr );
+        $dict = array( '*code*' => $code, '*name*' => $name, '*last1*' => $last1, '*last2*' => $last2, '*major*' => $majorStr );
         $view = strtr( $view, $dict );
-        $view = str_replace( '<input type="text" id="edit-student-code" name="edit-student-code" required />',
-                             "<input type=\"text\" id=\"edit-student-code\" name=\"edit-student-code\" value=\"$code\" required />",
-                             $view );
         $view = str_replace( '<input type="email" id="edit-student-email" name="edit-student-email" />',
                              "<input type=\"email\" id=\"edit-student-email\" name=\"edit-student-email\" value=\"$mail\" />",
                              $view );
@@ -164,12 +161,9 @@ class StudentCtrl extends DefaultCtrl{
         $url = $row['paginaWeb'];
         $github = $row['github'];
         
-        $dict = array( '*name*' => $row['nombre'], '*last1*' => $row['apellidoP'],
+        $dict = array( '*code*' => $code, '*name*' => $row['nombre'], '*last1*' => $row['apellidoP'],
                        '*last2*' => $row['apellidoM'], '*major*' => $row['nombreCarrera'] );
         $view = strtr( $view, $dict );
-        $view = str_replace( '<input type="text" id="edit-student-code" name="edit-student-code" required />',
-                             "<input type=\"text\" id=\"edit-student-code\" name=\"edit-student-code\" value=\"$code\" required />",
-                             $view );
         $view = str_replace( '<input type="email" id="edit-student-email" name="edit-student-email" />',
                              "<input type=\"email\" id=\"edit-student-email\" name=\"edit-student-email\" value=\"$mail\" />",
                              $view );
@@ -402,7 +396,7 @@ class StudentCtrl extends DefaultCtrl{
         if( empty( $_POST ) ){
         }
         else{
-            $code = $_POST['edit-student-code'];
+            $code = $_POST['code'];
             $mail = $_POST['edit-student-email'];
             $phone = $_POST['edit-student-phone'];
             $url = $_POST['edit-student-url'];

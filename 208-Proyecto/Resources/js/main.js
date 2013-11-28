@@ -90,6 +90,7 @@ function checkStudent(){
     var cell = document.getElementById( "edit-student-phone" );
     var url = document.getElementById( "edit-student-url" );
     var github = document.getElementById( "edit-student-github" );
+    var hidden;
     
     boolArray[0] = checkMail( form, document.getElementById( "edit-student-email" ) );
     if( cell.value != "" ){
@@ -113,8 +114,8 @@ function checkStudent(){
         boolArray[3] = true;
         github.parentNode.replaceChild( document.createTextNode( "" ), github.parentNode.lastChild );
     }
-    boolArray[4] = checkCode( form, document.getElementById( "edit-student-code" ) );
-    /*boolArray[4] = checkPass( form, document.getElementById( "edit-student-pass" ) );*/
+    // boolArray[4] = checkCode( form, document.getElementById( "edit-student-code" ) );
+    // boolArray[4] = checkPass( form, document.getElementById( "edit-student-pass" ) );*/
     
     ok = true;
     for( var i = 0; i < boolArray.length; i++ ){
@@ -124,7 +125,15 @@ function checkStudent(){
     }
     
     if( ok ){
+        hidden = document.createElement( "input" );
+        hidden.type = "hidden";
+        hidden.name = "code";
+        hidden.value = document.getElementById( "student-code" ).firstChild.nodeValue.trim();
+        form.appendChild( hidden );
+        
         form.submit();
+        
+        form.removeChild( hidden );
     }
 }
 
