@@ -11,7 +11,7 @@ function loginLoad(){
 function lostPassLoad(){
     var button = document.getElementById( "recover" );
     
-    recover.onclick = function(){
+    button.onclick = function(){
         var ok;
         ok = checkCode( document.recoverPass, document.getElementById( "lost-pass-code" ) );
         
