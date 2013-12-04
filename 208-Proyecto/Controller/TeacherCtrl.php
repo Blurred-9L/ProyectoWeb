@@ -1,16 +1,50 @@
 <?php
 
+/** @file TeacherCtrl.php
+    @author Rodrigo Fuentes Hernandez <earthjenei@gmail.com>
+    
+    The TeacherCtrl file contains the implementation of the
+    TeacherCtrl class, a controller for teacher related
+    operations.
+*/
+
 require_once( 'Controller/DefaultCtrl.php' );
 
-class TeacherCtrl extends DefaultCtrl{
-    private $model;
+/** @brief The TeacherCtrl class serves as an mediator between
+    user teacher related operations and views.
     
+    The TeacherCtrl class is a direct child class of the
+    DefaultCtrl class, inheriting basic controller functionality
+    from it. The TeacherCtrl class is in charge of mediating all
+    teacher related operation, including adding a new teacher,
+    editing a teacher, changing password or showing data of a
+    teacher.
+*/
+class TeacherCtrl extends DefaultCtrl{
+    private $model;                     ///< This controller's model.
+    
+    /** @brief The TeacherCtrl class' constructor.
+        
+        The TeacherCtrl class constructor is in charge of initializing
+        the session variables by calling its parent constructor as
+        well as instantiating its related model.
+    */
     public function __construct(){
         parent::__construct();
         require_once( 'Model/TeacherMdl.php' );
         $this -> model = new TeacherMdl();
     }
     
+    /** @brief Selects the action to do depending on the
+        received GET action.
+        
+        The execute() method is in charge of selecting the
+        correct action according the value given during
+        a GET request to this controller. Included operations
+        are inserting teachers, modifying teachers, showing
+        data about all of a specific teacher or changing the
+        teacher's user password.
+    */
     public function execute(){
         switch( $_GET['action'] ){
             case 'new':
@@ -64,6 +98,18 @@ class TeacherCtrl extends DefaultCtrl{
         }
     }
     
+    /** @brief Creates a teacher's password.
+    
+        The getPassword() method will create a new password for
+        a teacher based on its name and last names. All strings are
+        concatenated and stripped off of weird characters. This string
+        is shuffled and then the first 12 characters are selected as the
+        user's password.
+        @param name : The teacher's name.
+        @param last1 : The teacher's first last name.
+        @param last2 : The teacher's second last name.
+        @return Returns the user's new password string.
+    */
     public function getPassword( $name, $last1, $last2 ){
         $accents = array( 'á' => 'a', 'é' => 'e', 'í' => 'i', 'ó' => 'o', 'ú' => 'u', 'ñ' => 'n' );
         $pass = $name . $last1 . $last2;
@@ -75,7 +121,19 @@ class TeacherCtrl extends DefaultCtrl{
         return $pass;
     }
     
-    public function showEditView( $code, $name, $last1, $last2, $mail, $phone ){
+    /** @brief Manipulates the edit view and shows it to the user.
+    
+        The showEditView() method will manipulate a template HTML file
+        in order to show editable and not-editable information about
+        a teacher.
+        @param code : The teacher's code.
+        @param name : The teacher's names.
+        @param last1 : The teacher's first last name.
+        @param last2 : The teacher's second last name.
+        @param mail : The teacher's email account.
+        @oaram phone : The teacher's cell phone.
+    */
+    protected function showEditView( $code, $name, $last1, $last2, $mail, $phone ){
         $view = file_get_contents( 'View/Admin/editarProfesor.html' );
         
         $dict = array( '*code*' => $code, '*name*' => $name, '*last1*' => $last1, '*last2*' => $last2 );
@@ -90,7 +148,15 @@ class TeacherCtrl extends DefaultCtrl{
         echo $view;
     }
     
-    public function updateEditView( $code ){
+    /** @brief Manipulates the edit view and shows it to the user.
+        
+        The updateEditView() method will manipulate a template HTML file
+        in order to show editable and not-editable information about
+        a teacher. Information about the teacher is recovered by knowing
+        the specific teacher's code.
+        @param $code : The teacher's code.
+    */
+    protected function updateEditView( $code ){
         $row = $this -> model -> getTeacher( $code );
         $view = file_get_contents( 'View/Admin/editarProfesor.html' );
         
@@ -109,7 +175,15 @@ class TeacherCtrl extends DefaultCtrl{
         echo $view;
     }
     
-    private function newTeacher(){
+    /** @brief Handles the insertion operation of a teacher.
+    
+        The newTeacher() method receives the information of the new teacher
+        to insert via POST request and tries to insert it into the database.
+        Once the teacher has been inserted, an email is sent to the teacher's
+        email account notifying him or her that he or she is now part of
+        the grading system.
+    */
+    protected function newTeacher(){
         if( empty( $_POST ) ){
             require_once( 'View/Admin/profesorNuevo.html' );
         }
@@ -134,6 +208,16 @@ class TeacherCtrl extends DefaultCtrl{
         }
     }
     
+    /** @brief Sends a notification email to a newly added teacher.
+    
+        The sendMail function notifies a teacher his inclusion on the
+        grading system database, by sending him his code and password
+        and a link to the system.
+        @param code : The teacher's code.
+        @param name : The teacher's full name.
+        @param pass : The teacher's password.
+        @param mail : The teacher's email account.
+    */
     private function sendMail( $code, $name, $pass, $mail ){
         $to = $mail;
         $subject = 'Alta en sistema de calificaciones';
@@ -152,7 +236,14 @@ class TeacherCtrl extends DefaultCtrl{
         $result = mail( $to, $subject, $content, $header );
     }
     
-    private function editTeacher(){
+    /** @brief Updates editable teacher info.
+    
+        The editTeacher() method receives the editable information of
+        a teacher (email and cell phone) via POST request and tries to
+        update the information on the database to match the provided
+        information.
+    */
+    protected function editTeacher(){
         if( empty( $_POST ) ){
         }
         else{
@@ -171,7 +262,14 @@ class TeacherCtrl extends DefaultCtrl{
         }
     }
     
-    private function showAllTeachers(){
+    /** @brief Shows information about all teachers.
+    
+        The showAllTeachers() method manipulates a template HTML file
+        in order to show basic information about registered teachers.
+        This information includes: full name, code, cell phone and
+        email account. The information is shown in an HTML table.
+    */
+    protected function showAllTeachers(){
         $view = file_get_contents( 'View/Admin/verProfesores.html' );
         
         $start = strrpos( $view, '<tr>' );
@@ -198,13 +296,27 @@ class TeacherCtrl extends DefaultCtrl{
         echo $view;
     }
     
-    private function showTeacher(){
+    /** @brief Receives a teacher's code and delegates the display of
+        its information.
+        
+        The showTeacher() method receives the teacher's code by
+        checking the information on the POST request and calls the
+        updateEditView() method in order to show the teacher's information.
+        @sa updateEditView().
+    */
+    protected function showTeacher(){
         $code = $_POST['code'];
         
         $this -> updateEditView( $code );
     }
     
-    private function teacherDataGetView(){
+    /** @brief Gets template view to show a teacher user's information.
+    
+        The teacherDataGetView() method also manipulates a view, in order
+        to show the teacher's respective information. The teacher's code
+        is obtained from the SESSION variables.
+    */
+    protected function teacherDataGetView(){
         $view = file_get_contents( 'View/Profesores/datosProfesor.html' );
         $teacherCode = $_SESSION['user_code'];
         $row = $this -> model -> getTeacher( $teacherCode );
@@ -224,7 +336,13 @@ class TeacherCtrl extends DefaultCtrl{
         echo $view;
     }
     
-    private function teacherData(){
+    /** @brief Updates data on teacher's request.
+    
+        The teacherData() method gets the necessary editable
+        information about a teacher an updates it due to the own
+        teacher's request.
+    */
+    protected function teacherData(){
         if( empty( $_POST ) ){
             $this -> teacherDataGetView();
         }
@@ -243,6 +361,15 @@ class TeacherCtrl extends DefaultCtrl{
         }
     }
     
+    /** @brief Shows the change password view for a teacher.
+    
+        The teacherPassGetView() gets the change password template for
+        a teacher and optionally adds a message to show the status
+        regarding a password update. If this is the first time the
+        view is being needed, an empty string should be given.
+        @param msg : A string representing a message to append to the
+        template.
+    */
     private function teacherPassGetView( $msg ){
         $view = file_get_contents( 'View/Profesores/passProfesor.html' );
         
@@ -252,6 +379,15 @@ class TeacherCtrl extends DefaultCtrl{
         echo $view;
     }
     
+    /** @brief Chagnes the teacher's password.
+    
+        The changePassword() method is in charge of receiving via
+        POST request, the new password information, as well as
+        trying to update the teacher's password, finally showing
+        the teacher's change password view again, sending the
+        status of the operation as the message.
+        @sa teacherPassGetView().
+    */
     private function changePassword(){
         if( empty( $_POST ) ){
             $this -> teacherPassGetView( '' );
