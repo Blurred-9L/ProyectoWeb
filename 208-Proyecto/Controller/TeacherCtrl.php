@@ -258,8 +258,8 @@ class TeacherCtrl extends DefaultCtrl{
         }
         else{
             $shaTeacherPass = $_POST['teacher-password'];
-            $newPass = $_POST['teacher-new-pass'];
-            $newPass2 = $_POST['teacher-new-pass2'];
+            $newPass = $_POST['new-password1'];
+            $newPass2 = $_POST['new-password2'];
         
             $code = $_SESSION['user_code'];
             $teacherRow = $this -> model -> getTeacher( $code );
@@ -269,7 +269,7 @@ class TeacherCtrl extends DefaultCtrl{
                 $this -> teacherPassGetView( 'Contraseña incorrecta.' );
             }
             else{
-                $result = $this -> model -> updatePassword( $code, $shaTeacherPass );
+                $result = $this -> model -> updatePassword( $code, $newPass );
                 if( $result === TRUE ){
                     $this -> teacherPassGetView( 'Contraseña actualizada.' );
                 }

@@ -110,12 +110,16 @@ class DefaultCtrl{
         correct action according the value given during
         a GET request to this controller. Since this is the
         default controller, the only possible action is
-        exiting the system.
+        exiting the system or returning to the main page or
+        log in page.
     */
     public function execute(){
         switch( $_GET['action'] ){
             case 'exit':
                 $this -> killSession();
+                break;
+            case 'main':
+                $this -> redirectUser();
                 break;
         }
     }

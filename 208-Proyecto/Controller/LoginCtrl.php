@@ -81,21 +81,21 @@ class LoginCtrl extends DefaultCtrl{
             $pass = $_POST['password'];
             
             /// If user is an admin...
-            if( ( $account = $this -> searchAdmins( $code ) ) !== FALSE ){
+            if( ( $account = $this -> searchAdmins( $code, $pass, TRUE ) ) !== FALSE ){
                 $view = file_get_contents( 'View/Admin/adminMain.html' );
                 $_SESSION['user_id'] = $account['idAdmin'];
                 $_SESSION['user_type'] = 'ninja';
                 $_SESSION['user_code'] = $code;
             }
             /// If user is a teacher...
-            else if( ( $account = $this -> searchTeachers( $code ) ) !== FALSE ){
+            else if( ( $account = $this -> searchTeachers( $code, $pass, TRUE ) ) !== FALSE ){
                 $view = file_get_contents( 'View/Profesores/profesoresMain.html' );
                 $_SESSION['user_id'] = $account['idProfesor'];
                 $_SESSION['user_type'] = 'brigadier';
                 $_SESSION['user_code'] = $code;
             }
             /// If user is a student...
-            else if( ( $account = $this -> searchStudents( $code ) ) !== FALSE ){
+            else if( ( $account = $this -> searchStudents( $code, $pass, TRUE ) ) !== FALSE ){
                 $view = file_get_contents( 'View/Alumnos/alumnosMain.html' );
                 $_SESSION['user_id'] = $account['idAlumno'];
                 $_SESSION['user_type'] = 'rookie';
@@ -126,14 +126,20 @@ class LoginCtrl extends DefaultCtrl{
         provided. If a match was found, returns the info row of the found
         admin.
     */
-    private function searchAdmins( $code ){
+    private function searchAdmins( $code, $pass, $auth ){
         $admins = $this -> model -> getAllAdmins();
         $found = FALSE;
         $myAdmin = NULL;
         
         foreach( $admins as $admin ){
             if( !$found ){
-                if( $admin['codigo'] == $code ){
+                if( $auth === TRUE ){
+                    $check = ( $admin['codigo'] == $code && $admin['password'] == $pass );
+                }
+                else{
+                    $check = ( $admin['codigo'] == $code );
+                }
+                if( $check ){
                     $found = TRUE;
                     $myAdmin = $admin;
                 }
@@ -162,14 +168,20 @@ class LoginCtrl extends DefaultCtrl{
         provided. If a match was found, returns the info row of the found
         teacher.
     */
-    private function searchTeachers( $code ){
+    private function searchTeachers( $code, $pass, $auth ){
         $teachers = $this -> model -> getAllTeachers();
         $found = FALSE;
         $myTeacher = NULL;
         
         foreach( $teachers as $teacher ){
             if( !$found ){
-                if( $teacher['codigo'] == $code ){
+                if( $auth === TRUE ){
+                    $check = ( $teacher['codigo'] == $code && $teacher['password'] == $pass );
+                }
+                else{
+                    $check = ( $teacher['codigo'] == $code );
+                }
+                if( $check ){
                     $found = TRUE;
                     $myTeacher = $teacher;
                 }
@@ -198,14 +210,20 @@ class LoginCtrl extends DefaultCtrl{
         provided. If a match was found, returns the info row of the found
         student.
     */
-    private function searchStudents( $code ){
+    private function searchStudents( $code, $pass, $auth ){
         $students = $this ->  model -> getAllStudents();
         $found = FALSE;
         $myStudent = NULL;
         
         foreach( $students as $student ){
             if( !$found ){
-                if( $student['codigo'] == $code ){
+                if( $auth === TRUE ){
+                    $check = ( $student['codigo'] == $code && $student['password'] == $pass );
+                }
+                else{
+                    $check = ( $student['codigo'] == $code );
+                }
+                if( $check ){
                     $found = TRUE;
                     $myStudent = $student;
                 }
@@ -234,7 +252,7 @@ class LoginCtrl extends DefaultCtrl{
         else{
             $ok = TRUE;
             $code = $_POST['lost-pass-code'];
-            if( ( $account = $this -> searchAdmins( $code ) ) !== FALSE ){
+            if( ( $account = $this -> searchAdmins( $code, '', FALSE ) ) !== FALSE ){
                 $newPass = $this -> getAdminPassword();
                 if( $this -> model -> updateAdminPass( $code, $newPass ) === TRUE ){
                     $view = file_get_contents( 'View/login.html' );
@@ -246,7 +264,7 @@ class LoginCtrl extends DefaultCtrl{
                     $view = 'Error';
                 }
             }
-            else if( ( $account = $this -> searchTeachers( $code ) ) !== FALSE ){
+            else if( ( $account = $this -> searchTeachers( $code, '', FALSE ) ) !== FALSE ){
                 $newPass = $this -> getTeacherPassword( $account['nombre'], $account['apellidoP'], $account['apellidoM'] );
                 if( $this -> model -> updateTeacherPass( $code, $newPass ) === TRUE ){
                     $view = file_get_contents( 'View/login.html' );
@@ -258,7 +276,7 @@ class LoginCtrl extends DefaultCtrl{
                     $view = 'Error';
                 }
             }
-            else if( ( $account = $this -> searchStudents( $code ) ) !== FALSE ){
+            else if( ( $account = $this -> searchStudents( $code, '', FALSE ) ) !== FALSE ){
                 $newPass = $this -> getStudentPassword( $account['nombre'], $account['apellidoP'], $account['apellidoM'] );
                 if( $this -> model -> updateStudentPass( $code, $newPass ) === TRUE ){
                     $view = file_get_contents( 'View/login.html' );

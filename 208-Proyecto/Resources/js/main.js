@@ -384,13 +384,30 @@ function checkTeacherPass(){
     if( ok ){
         var hash = CryptoJS.SHA1( teacherPass.value );
         var hiddenPass = document.createElement( "input" );
+        hiddenPass.type = "hidden";
         hiddenPass.value = hash.toString();
         hiddenPass.name = "teacher-password";
         form.appendChild( hiddenPass );
         
+        hash = CryptoJS.SHA1( newPass.value );
+        var hiddenNewPass1 = document.createElement( "input" );
+        hiddenNewPass1.type = "hidden";
+        hiddenNewPass1.value = hash.toString();
+        hiddenNewPass1.name = "new-password1";
+        form.appendChild( hiddenNewPass1 );
+        
+        hash = CryptoJS.SHA1( newPass2.value );
+        var hiddenNewPass2 = document.createElement( "input" );
+        hiddenNewPass2.type = "hidden";
+        hiddenNewPass2.value = hash.toString();
+        hiddenNewPass2.name = "new-password2";
+        form.appendChild( hiddenNewPass2 );
+        
         form.submit();
         
         form.removeChild( hiddenPass );
+        form.removeChild( hiddenNewPass1 );
+        form.removeChild( hiddenNewPass2 );
     }
 }
 
@@ -429,14 +446,32 @@ function checkStudentPass(){
     
     if( ok ){
         var hash = CryptoJS.SHA1( studentPass.value );
+        
         var hiddenPass = document.createElement( "input" );
+        hiddenPass.type = "hidden";
         hiddenPass.value = hash.toString();
         hiddenPass.name = "student-password";
         form.appendChild( hiddenPass );
         
+        hash = CryptoJS.SHA1( newPass1.value );
+        var hiddenNewPass1 = document.createElement( "input" );
+        hiddenNewPass1.type = "hidden";
+        hiddenNewPass1.value = hash.toString();
+        hiddenNewPass1.name = "new-password1";
+        form.appendChild( hiddenNewPass1 );
+        
+        hash = CryptoJS.SHA1( newPass2.value );
+        var hiddenNewPass2 = document.createElement( "input" );
+        hiddenNewPass2.type = "hidden";
+        hiddenNewPass2.value = hash.toString();
+        hiddenNewPass2.name = "new-password2";
+        form.appendChild( hiddenNewPass2 );
+        
         form.submit();
         
         form.removeChild( hiddenPass );
+        form.removeChild( hiddenNewPass1 );
+        form.removeChild( hiddenNewPass2 );
     }
 }
 
